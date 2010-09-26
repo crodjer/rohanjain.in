@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Yeban's Weblog - </title>
+        <meta name="author" content="Anurag Priyam" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+        <!-- Favicon -->
+        <link href="/images/favicon.jpg" rel="shortcut icon">
+
+        <!--Stylesheets-->
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/screen.css">
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/ap.css">
+        <!--[if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    </head>
+    <body>
+        <div class="container header">
+    <div class="banner span-24"><a href="/">yeban's weblog</a></div>
+<div class="menu span-24">
+    <ul>
+        <li><a href="http://github.com/yeban">Projects</a></li>
+        <li><a href="http://yeban.in/about">About</a></li>
+        <li><a href="http://yeban.in">Weblog</a></li>
+    </ul>
+</div>
+
+</div>
+
+<div class="container page">
+    <div class="content span-24">
+        <div class="posts span-24">
+    
+    <div class="post span-24">
+        <div class="meta span-3">
+            <div class="date span-3">
+                Jul 31, 2009
+            </div>
+        </div>
+        <div class="content span-21 last">
+            <h2 class='post-title'><a href="/base64-encoding-decoding-a-zip-file-in-ruby.html">Base64 encoding-decoding a zip file in Ruby</a></h2>
+            <div class="tags">
+                
+                    tags: ruby, programming, web
+                
+            </div>
+            <div class='post-text'>Zip file is a binary file. First of all you need to read the content of the binary file as a string. So you do:<br /><br /><code>content_string = File.open('path_to_zip_file.zip', 'rb') {|file| file.read}</code><br /><br />The value of the content variable is assigned with the return value of the block. To the block the file which we are opening is passed as a parameter. The 'read' method returns the content of the file as a String. The block form of open automatically takes care of closing the file.<br /><br />Now we use, the <a href="http://ruby-doc.org/core/classes/Array.html#M002222">pack</a> method of the Array  class to encode the given string to the base64 format (you can also use the <a href="http://ruby-doc.org/stdlib/libdoc/base64/rdoc/index.html">base64</a> standard library, if you want to). Here is the code:<br /><br /><code>base64string = [content].pack('m')</code><br /><br />Now you can store the base64string in any other file for later use.<br /><br /><code>File.open('path_to_base64_encoded_file', 'w') {|file| file << base64string } </code><br /><br />When we want our real file back, we use the unpack method of the string.<br /><br /><code>base64sting = File.open('path_to_base64_encoded_file', 'r') {|file| file.read }<br />File.open('file_name.zip', 'wb') {|file| file << (base64string.unpack('m')).first }  This will recreate our original zip file. Since the unpack function returns an array, we have used the first function to return the first element.<br /><br />Note: I have used the above code on a Debian GNU/Linux system. The code should work on Windows environment as well. </code></code>
+ <br /></div>
+            <br/>
+        </div>
+    </div>
+    
+    <div class="post span-24">
+        <div class="meta span-3">
+            <div class="date span-3">
+                Jul 30, 2009
+            </div>
+        </div>
+        <div class="content span-21 last">
+            <h2 class='post-title'><a href="/it-was-made-by-hand-and-then-it-was-snapped-by-the-.html">it was made by hand and then it was snapped by the...</a></h2>
+            <div class="tags">
+                
+                    tags: nil
+                
+            </div>
+            <div class='post-text'>it was made by hand and then it was snapped by the laptop&#39;s camera
+ <br /></div>
+            <br/>
+        </div>
+    </div>
+    
+    <div class="post span-24">
+        <div class="meta span-3">
+            <div class="date span-3">
+                Jun 30, 2009
+            </div>
+        </div>
+        <div class="content span-21 last">
+            <h2 class='post-title'><a href="/creating-tabs-using-jquery.html">Creating Tabs using jQuery</a></h2>
+            <div class="tags">
+                
+                    tags: jquery, programming, web
+                
+            </div>
+            <div class='post-text'>This is the piece of jQuery code I wrote to create tabs. I will explain the code in detail and put in the html and css also as soon as I get more time.<br /><br /><script src="http://gist.github.com/138042.js"></script>
+ <br /></div>
+            <br/>
+        </div>
+    </div>
+    
+    <div class="post span-24">
+        <div class="meta span-3">
+            <div class="date span-3">
+                Jun 25, 2009
+            </div>
+        </div>
+        <div class="content span-21 last">
+            <h2 class='post-title'><a href="/tabs-are-nice-i-think-splitting-the-window-and-cr-.html">Tabs are nice. I think splitting the window and cr...</a></h2>
+            <div class="tags">
+                
+                    tags: nil
+                
+            </div>
+            <div class='post-text'>Tabs are nice. I think splitting the window and creating a tab, both serve two different purpose.
+ <br /></div>
+            <br/>
+        </div>
+    </div>
+    
+    <div class="post span-24">
+        <div class="meta span-3">
+            <div class="date span-3">
+                Jun 24, 2009
+            </div>
+        </div>
+        <div class="content span-21 last">
+            <h2 class='post-title'><a href="/nice-i-find-tabs-more-useful-intuitive-thoug-.html">Nice!
+
+I find tabs more useful/intuitive     thoug...</a></h2>
+            <div class="tags">
+                
+                    tags: nil
+                
+            </div>
+            <div class='post-text'>Nice!<br /><br />I find tabs more useful/intuitive     though ... :)
+ <br /></div>
+            <br/>
+        </div>
+    </div>
+    
+</div>
+
+<div class="paginator">
+    <a href="/page4/">Previous</a>
+    <a href="/page6/">Next</a>
+</div>
+
+    </div>
+    <div class="footer span-24">
+        
+    </div>
+</div>
+
+    </body>
+</html>

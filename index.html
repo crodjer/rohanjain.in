@@ -1,0 +1,32 @@
+---
+layout: main
+---
+
+<div class="posts span-24">
+    {% for post in paginator.posts %}
+    <div class="post span-24">
+        <div class="meta span-3">
+            <div class="date span-3">
+                {{ post.date | date: "%h %d, %Y" }}
+            </div>
+        </div>
+        <div class="content span-21 last">
+            <h2 class='post-title'><a href="{{ post.id }}.html">{{ post.title }}</a></h2>
+            <div class="tags">
+                {% unless post.tags == empty %}
+                    tags: {{ post.tags | limit: 2 | join: ", " }}
+                {% else %}
+                    tags: nil
+                {% endunless %}
+            </div>
+            <div class='post-text'>{{ post.content }} <br /></div>
+            <br/>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="paginator">
+    <a href="/page{{ paginator.previous_page }}/">Previous</a>
+    <a href="/page{{ paginator.next_page }}/">Next</a>
+</div>

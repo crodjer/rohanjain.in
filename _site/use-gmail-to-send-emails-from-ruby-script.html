@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Yeban's Weblog - Use Gmail to send emails from Ruby script</title>
+        <meta name="author" content="Anurag Priyam" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+        <!-- Favicon -->
+        <link href="/images/favicon.jpg" rel="shortcut icon">
+
+        <!--Stylesheets-->
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/screen.css">
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/ap.css">
+        <!--[if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    </head>
+    <body>
+        <div class="container header">
+    <div class="banner span-24"><a href="/">yeban's weblog</a></div>
+<div class="menu span-24">
+    <ul>
+        <li><a href="http://github.com/yeban">Projects</a></li>
+        <li><a href="http://yeban.in/about">About</a></li>
+        <li><a href="http://yeban.in">Weblog</a></li>
+    </ul>
+</div>
+
+</div>
+
+<div class="container page">
+    <div class="content span-24">
+            <div class="post span-24">
+        <div class="published">
+            Apr 11, 2010
+        </div>
+        <div class="content">
+            <h2 class='post-title'>Use Gmail to send emails from Ruby script</h2>
+            <div class='post-text'>Here is a very simple script to send emails from a Ruby script with your Gmail account. <script src="http://gist.github.com/362842.js?file=gmail.rb"></script><br />Feel free to add your own modifications and use it as you like. I used a modified version of the script to send mail to all the people registered to one of my college clubs.<br /><br />Observations:<br /><ol><li>Ruby 1.8.7 lacks the support for TLS; used 'tlsmail' gem to remedy this.</li><li>The <code>msg</code> local variable holds both: the email header and the email body, separated by a <code>LF('\n')</code><br /></li><li>The SMTP library automatically converts a single occurrence of a <code>CR('\r')</code> or <code>LF('\n')</code> to a <code>CRLF</code> pair.</li><li>If you miss out on the header, Gmail won't show much details when you click on "show details"<br /></li><li>The message will be send even if the <code>from_email</code> part is missing in the <code>sendmail</code> fucntion.</li></ol>Links:<br /><ol><li><a href="http://github.com/dcparker/ruby-gmail">A Rubyesque interface to Gmail</a> - I have not tried it yet, but the features look promising.</li><li><a href="http://ruby-doc.org/stdlib/libdoc/net/smtp/rdoc/index.html">Rdoc</a> for Ruby net/smtp library.<br /></li></ol>
+ <br /></div>
+            <br/>
+        </div>
+    </div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  /**
+    * var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread] 
+    */
+  (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = 'http://yeban-weblog.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=yeban-weblog">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </div>
+    <div class="footer span-24">
+        
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,11 @@
+--- 
+name: zsh-and-tilda
+layout: post
+title: ZSH and Tilda
+time: 2009-06-05 01:07:00.005000 +05:30
+tags: 
+- zsh
+- tilda
+- linux
+---
+Tilda does not work on Ubuntu if your default shell is ZSH. There is a way round this problem. After you have installed Tilda, run the command:<br />&nbsp&nbsp&nbsp<code>tilda -c bash</code><br />This will start Tilda with the Bash Shell and also opens its Config Manager. Go to the <code>Title and Command</code> tab and check the box that reads <code>Run a custom command instead of shell</code>. In the <code>Custom Command</code> text box, type <code>zsh</code>. <br /><a onblur="try {parent.deselectBloggerImageGracefully();} catch(e) {}" href="http://4.bp.blogspot.com/_uEnvaxJViA4/SignqlUnC5I/AAAAAAAAAE8/pXmhplf6_kY/s1600-h/tilda-config.png"><img style="margin: 0px auto 10px; display: block; text-align: center; cursor: pointer; width: 200px; height: 125px;" src="http://4.bp.blogspot.com/_uEnvaxJViA4/SignqlUnC5I/AAAAAAAAAE8/pXmhplf6_kY/s200/tilda-config.png" alt="" id="BLOGGER_PHOTO_ID_5343564570401639314" border="0" /></a><br />Close the Config Manager and exit Tilda. The next time you start Tilda it will start with the ZSH shell.

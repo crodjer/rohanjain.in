@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Yeban's Weblog - Beautiful Font Rendering on Debian</title>
+        <meta name="author" content="Anurag Priyam" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+        <!-- Favicon -->
+        <link href="/images/favicon.jpg" rel="shortcut icon">
+
+        <!--Stylesheets-->
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/screen.css">
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/ap.css">
+        <!--[if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    </head>
+    <body>
+        <div class="container header">
+    <div class="banner span-24"><a href="/">yeban's weblog</a></div>
+<div class="menu span-24">
+    <ul>
+        <li><a href="http://github.com/yeban">Projects</a></li>
+        <li><a href="http://yeban.in/about">About</a></li>
+        <li><a href="http://yeban.in">Weblog</a></li>
+    </ul>
+</div>
+
+</div>
+
+<div class="container page">
+    <div class="content span-24">
+            <div class="post span-24">
+        <div class="published">
+            May 16, 2010
+        </div>
+        <div class="content">
+            <h2 class='post-title'>Beautiful Font Rendering on Debian</h2>
+            <div class='post-text'>When I switched over from Ubuntu to Debian, I often used to wonder why the fonts were not rendered by Debian as beautifully as Ubuntu did. Still it was usable, so I did not bother much. The question haunted me again when I ditched the Gnome Dekstop Environment in favor of <a href="http://awesome.naquadah.org/">Awesome Window Manager</a>. Font rendering had deteriorated so much that long sessions had become totally impossible. Then I discovered this ".fonts.conf" file which made the font rendering on my Debian box as good as that of Ubuntu.<br /><br /><script src="http://gist.github.com/402984.js?file=fonts.conf"></script><br /><br />The contents of this gist goes in a ".fonts.conf" file in your home directory. You will probably have to restart your X server for the effects to take place.<br /><br />I had actually read up this trick on someone else's blog, and I  am unable to find the link again. So the credit goes to that author :).
+ <br /></div>
+            <br/>
+        </div>
+    </div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  /**
+    * var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread] 
+    */
+  (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = 'http://yeban-weblog.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=yeban-weblog">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </div>
+    <div class="footer span-24">
+        
+    </div>
+</div>
+
+    </body>
+</html>

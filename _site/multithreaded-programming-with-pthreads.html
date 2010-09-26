@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Yeban's Weblog - Multithreaded Programming with Pthreads</title>
+        <meta name="author" content="Anurag Priyam" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+        <!-- Favicon -->
+        <link href="/images/favicon.jpg" rel="shortcut icon">
+
+        <!--Stylesheets-->
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/screen.css">
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/ap.css">
+        <!--[if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    </head>
+    <body>
+        <div class="container header">
+    <div class="banner span-24"><a href="/">yeban's weblog</a></div>
+<div class="menu span-24">
+    <ul>
+        <li><a href="http://github.com/yeban">Projects</a></li>
+        <li><a href="http://yeban.in/about">About</a></li>
+        <li><a href="http://yeban.in">Weblog</a></li>
+    </ul>
+</div>
+
+</div>
+
+<div class="container page">
+    <div class="content span-24">
+            <div class="post span-24">
+        <div class="published">
+            Mar 12, 2010
+        </div>
+        <div class="content">
+            <h2 class='post-title'>Multithreaded Programming with Pthreads</h2>
+            <div class='post-text'>Consider this as the "Hello World - 2" of multithreaded programming. The aim of this post is to demonstrate( with a question and an answer ) how to:<ol><li>create new threads</li><li>set thread attributes</li><li>pass arguments to threads</li><li>wait for the threads to finish ( join the threads to the main thread )</li></ol><h4>Here is the question:</h4>Populate an array with <code>n</code>( generated randomly ) with random numbers. Input a factor of <code>n</code>, and call it <code>p</code>. Consider the array to be divided into <code>p</code> logical segments with <code>n/p</code> elements each. Create p threads such that the <code>i<sup>th</sup></code> thread sorts the <code>i<sup>th</sup></code> segment of the array. In the main thread print the array, sorted segment wise.<h4>Now the solution:</h4><script src="http://gist.github.com/330502.js?file=threads.c"></script><h4>And the discussion:</h4><dl><dt>The macros?</dt><dd> First one puts a limit on the number of elements in the array and the second one on the numbers in the array. Obviously you can use any limits unconditionally.</dd><dt>The struct?</dt><dd>You can pass only one pointer to the thread callback. Yes, you could have used global variables. I think using the struct makes the intent more clear.</dd><dt>Why bubble sort?</dt><dd>Well, that comes to my mind first</dd><dt>Compilation</dt><dd>Add <code>-pthread</code> option to <code>gcc</code></dd><dt>Walk through?</dt><dd>Unnecessary. The code is small and commented</dd><dt>Want to learn the pthreads API?</dt><dd><a href="https://computing.llnl.gov/tutorials/pthreads/">https://computing.llnl.gov/tutorials/pthreads</a><br/>You will find an explanation of all the concepts I have used here in Section 5.<br /></dd></dl>
+ <br /></div>
+            <br/>
+        </div>
+    </div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  /**
+    * var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread] 
+    */
+  (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = 'http://yeban-weblog.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=yeban-weblog">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </div>
+    <div class="footer span-24">
+        
+    </div>
+</div>
+
+    </body>
+</html>

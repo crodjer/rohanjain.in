@@ -1,0 +1,11 @@
+--- 
+name: base64-encoding-decoding-a-zip-file-in-ruby
+layout: post
+title: Base64 encoding-decoding a zip file in Ruby
+time: 2009-07-31 00:00:00.005000 +05:30
+tags: 
+- ruby
+- programming
+- web
+---
+Zip file is a binary file. First of all you need to read the content of the binary file as a string. So you do:<br /><br /><code>content_string = File.open('path_to_zip_file.zip', 'rb') {|file| file.read}</code><br /><br />The value of the content variable is assigned with the return value of the block. To the block the file which we are opening is passed as a parameter. The 'read' method returns the content of the file as a String. The block form of open automatically takes care of closing the file.<br /><br />Now we use, the <a href="http://ruby-doc.org/core/classes/Array.html#M002222">pack</a> method of the Array  class to encode the given string to the base64 format (you can also use the <a href="http://ruby-doc.org/stdlib/libdoc/base64/rdoc/index.html">base64</a> standard library, if you want to). Here is the code:<br /><br /><code>base64string = [content].pack('m')</code><br /><br />Now you can store the base64string in any other file for later use.<br /><br /><code>File.open('path_to_base64_encoded_file', 'w') {|file| file << base64string } </code><br /><br />When we want our real file back, we use the unpack method of the string.<br /><br /><code>base64sting = File.open('path_to_base64_encoded_file', 'r') {|file| file.read }<br />File.open('file_name.zip', 'wb') {|file| file << (base64string.unpack('m')).first }  This will recreate our original zip file. Since the unpack function returns an array, we have used the first function to return the first element.<br /><br />Note: I have used the above code on a Debian GNU/Linux system. The code should work on Windows environment as well. </code></code>

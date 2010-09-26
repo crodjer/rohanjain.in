@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Yeban's Weblog - </title>
+        <meta name="author" content="Anurag Priyam" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+        <!-- Favicon -->
+        <link href="/images/favicon.jpg" rel="shortcut icon">
+
+        <!--Stylesheets-->
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/screen.css">
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/ap.css">
+        <!--[if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    </head>
+    <body>
+        <div class="container header">
+    <div class="banner span-24"><a href="/">yeban's weblog</a></div>
+<div class="menu span-24">
+    <ul>
+        <li><a href="http://github.com/yeban">Projects</a></li>
+        <li><a href="http://yeban.in/about">About</a></li>
+        <li><a href="http://yeban.in">Weblog</a></li>
+    </ul>
+</div>
+
+</div>
+
+<div class="container page">
+    <div class="content span-24">
+        <div class="posts span-24">
+    
+    <div class="post span-24">
+        <div class="meta span-3">
+            <div class="date span-3">
+                May 16, 2010
+            </div>
+        </div>
+        <div class="content span-21 last">
+            <h2 class='post-title'><a href="/beautiful-font-rendering-on-debian.html">Beautiful Font Rendering on Debian</a></h2>
+            <div class="tags">
+                
+                    tags: linux, debian, fonts
+                
+            </div>
+            <div class='post-text'>When I switched over from Ubuntu to Debian, I often used to wonder why the fonts were not rendered by Debian as beautifully as Ubuntu did. Still it was usable, so I did not bother much. The question haunted me again when I ditched the Gnome Dekstop Environment in favor of <a href="http://awesome.naquadah.org/">Awesome Window Manager</a>. Font rendering had deteriorated so much that long sessions had become totally impossible. Then I discovered this ".fonts.conf" file which made the font rendering on my Debian box as good as that of Ubuntu.<br /><br /><script src="http://gist.github.com/402984.js?file=fonts.conf"></script><br /><br />The contents of this gist goes in a ".fonts.conf" file in your home directory. You will probably have to restart your X server for the effects to take place.<br /><br />I had actually read up this trick on someone else's blog, and I  am unable to find the link again. So the credit goes to that author :).
+ <br /></div>
+            <br/>
+        </div>
+    </div>
+    
+    <div class="post span-24">
+        <div class="meta span-3">
+            <div class="date span-3">
+                May 15, 2010
+            </div>
+        </div>
+        <div class="content span-21 last">
+            <h2 class='post-title'><a href="/nexml-i-o-and-rdf-triples-api-for-bioruby.html">NeXML I/O, and, RDF triples API for BioRuby</a></h2>
+            <div class="tags">
+                
+                    tags: ruby, rdf, nexml, phylosoc, gsoc2010
+                
+            </div>
+            <div class='post-text'>Ruby and Google Summer of Code. Pure fun. My job is to add NeXML parsing and serializing support, and an RDF triples API to <a href="http://bioruby.org/">BioRuby</a>.<br /><br /><a href="https://www.nescent.org/wg_evoinfo/NeXML">NeXML</a> is a file format, based on XML, to express Phylogenetic data. Phylogenetics is the study of <span style="font-style: italic;">evolutionary relatedness</span> among various groups of organisms. Evolution is a branching process wherein a new species evolves from the existing populace. Evolutionary relatedness between such species can be studied by DNA sequence analysis( and some other methods ). This can be visualized as a tree, the phylogenetic tree. Naturally, phylogenetic data will involve working with a set of species, a tree to depict their evolutionary relatedness and how such relations have been inferred.<br /><br /><a href="http://en.wikipedia.org/wiki/Resource_Description_Framework">RDF</a>( or, Resource Description Framework ) is a meta data model. Conceptually, you use RDF to assert relation between, a subject and an object using a predicate. Say, the colour of my car is black. RDF breaks the previous assertion into (subject, predicate, object) => (car, color, black), also called <span style="font-style: italic;">triples</span>. Phylogenetic database by nature is huge and complex. To find the relevant information efficiently, it is necessary to index phylogenetic data with descriptive information( or, meta data ).<br /><br />The project has been offered under <a href="http://www.nescent.org/index.php">National Evolutionary Synthesis Center</a>( NESCENT ). I will be mentored by <a href="http://rutgervos.blogspot.com/">Dr. Rutger Vos</a> (primary), and <a href="http://saaientist.blogspot.com/">Dr. Jan Aerts</a>.<br /><br />Coding starts from 24th May. Interested souls might find the "phylosoc" label on this blog and the project wiki[1] interesting.<br /><br />Links:-<br /><ol><li><a href="https://www.nescent.org/wg_phyloinformatics/Category:NeXML_and_RDF_API_for_BioRuby">Project Wiki</a></li><li><a href="http://github.com/yeban/bioruby">Source Code</a><br /></li><li>Other accepted projects from <a href="https://www.nescent.org/wg_phyloinformatics/Phyloinformatics_Summer_of_Code_2010#Accepted_Projects">NESCENT</a><br /></li></ol>
+ <br /></div>
+            <br/>
+        </div>
+    </div>
+    
+    <div class="post span-24">
+        <div class="meta span-3">
+            <div class="date span-3">
+                Apr 14, 2010
+            </div>
+        </div>
+        <div class="content span-21 last">
+            <h2 class='post-title'><a href="/seamlessly-use-github-behind-http-proxy-on-port-443.html">Seamlessly use Github behind http proxy on port 443</a></h2>
+            <div class="tags">
+                
+                    tags: linux, debian, git, github, proxy
+                
+            </div>
+            <div class='post-text'>This works if you proxy allows connection on port 443( used for https ). Open up ~/.ssh/config and enter the following lines( appropriately filling in values for proxy_host and proxy_port ):<br /><br /><code>Host gitproxy<br />User git<br />HostName ssh.github.com<br />Port 443<br />ProxyCommand corkscrew proxy_host proxy_port %h %p<br />IdentityFile /home/yeban/.ssh/id_rsa</code><br /><br />Now, if your repository URL is <code>git@github.com:username/test.git</code>, you would use it as <code>git@gitproxy:username/test.git</code><br /><br />Courtsey: <a href="http://blog.codeslower.com/2008/8/Using-PuTTY-and-SSL-to-securely-access-GitHub-repositories-via-SSH">http://blog.codeslower.com/2008/8/Using-PuTTY-and-SSL-to-securely-access-GitHub-repositories-via-SSH</a><br /><br />Update:<br />In the <code>Host</code> section, if you put <code>github.com</code> instead of <code>gitproxy</code>, then you can use your repository's git url unaltered.
+ <br /></div>
+            <br/>
+        </div>
+    </div>
+    
+    <div class="post span-24">
+        <div class="meta span-3">
+            <div class="date span-3">
+                Apr 11, 2010
+            </div>
+        </div>
+        <div class="content span-21 last">
+            <h2 class='post-title'><a href="/use-gmail-to-send-emails-from-ruby-script.html">Use Gmail to send emails from Ruby script</a></h2>
+            <div class="tags">
+                
+                    tags: ruby, gmail, programming
+                
+            </div>
+            <div class='post-text'>Here is a very simple script to send emails from a Ruby script with your Gmail account. <script src="http://gist.github.com/362842.js?file=gmail.rb"></script><br />Feel free to add your own modifications and use it as you like. I used a modified version of the script to send mail to all the people registered to one of my college clubs.<br /><br />Observations:<br /><ol><li>Ruby 1.8.7 lacks the support for TLS; used 'tlsmail' gem to remedy this.</li><li>The <code>msg</code> local variable holds both: the email header and the email body, separated by a <code>LF('\n')</code><br /></li><li>The SMTP library automatically converts a single occurrence of a <code>CR('\r')</code> or <code>LF('\n')</code> to a <code>CRLF</code> pair.</li><li>If you miss out on the header, Gmail won't show much details when you click on "show details"<br /></li><li>The message will be send even if the <code>from_email</code> part is missing in the <code>sendmail</code> fucntion.</li></ol>Links:<br /><ol><li><a href="http://github.com/dcparker/ruby-gmail">A Rubyesque interface to Gmail</a> - I have not tried it yet, but the features look promising.</li><li><a href="http://ruby-doc.org/stdlib/libdoc/net/smtp/rdoc/index.html">Rdoc</a> for Ruby net/smtp library.<br /></li></ol>
+ <br /></div>
+            <br/>
+        </div>
+    </div>
+    
+    <div class="post span-24">
+        <div class="meta span-3">
+            <div class="date span-3">
+                Mar 13, 2010
+            </div>
+        </div>
+        <div class="content span-21 last">
+            <h2 class='post-title'><a href="/today-i-saw-in-the-internet-an-especial-movie-for-.html">Today I saw in the Internet an especial movie for ...</a></h2>
+            <div class="tags">
+                
+                    tags: nil
+                
+            </div>
+            <div class='post-text'>Today I saw in the Internet an especial movie for me and downloaded it. But I was discouraged by reason of it was corrupted,exactly was corrupted zip archive with movie inside. But by good fortune I found in the Google a next software - <a href="http://www.recoverytoolbox.com/repair_zip.html" rel="nofollow">zip repairing</a>. To my surprise the software solved my issues for seconds and free of charge as far as I kept in mind.
+ <br /></div>
+            <br/>
+        </div>
+    </div>
+    
+</div>
+
+<div class="paginator">
+    <a href="/page1/">Previous</a>
+    <a href="/page3/">Next</a>
+</div>
+
+    </div>
+    <div class="footer span-24">
+        
+    </div>
+</div>
+
+    </body>
+</html>

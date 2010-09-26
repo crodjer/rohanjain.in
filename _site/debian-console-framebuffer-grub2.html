@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Yeban's Weblog - Debian Console, Framebuffer, Grub2</title>
+        <meta name="author" content="Anurag Priyam" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+        <!-- Favicon -->
+        <link href="/images/favicon.jpg" rel="shortcut icon">
+
+        <!--Stylesheets-->
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/screen.css">
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/ap.css">
+        <!--[if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    </head>
+    <body>
+        <div class="container header">
+    <div class="banner span-24"><a href="/">yeban's weblog</a></div>
+<div class="menu span-24">
+    <ul>
+        <li><a href="http://github.com/yeban">Projects</a></li>
+        <li><a href="http://yeban.in/about">About</a></li>
+        <li><a href="http://yeban.in">Weblog</a></li>
+    </ul>
+</div>
+
+</div>
+
+<div class="container page">
+    <div class="content span-24">
+            <div class="post span-24">
+        <div class="published">
+            Feb 21, 2010
+        </div>
+        <div class="content">
+            <h2 class='post-title'>Debian Console, Framebuffer, Grub2</h2>
+            <div class='post-text'>After a fresh install of Debian the boot up screen looks really ugly. Here are few things you can do to beautify it up. These apply if you use Grub2.<br /><br />First step is to enable framebuffer. Passing the <code>"vga="</code> option to the kernel has been deprecated. To enable framebuffer, open the file <code> /etc/default/grub </code> and change the value of <code> GRUB_GFXMODE </code> variable to the resolution you want. For example:<br /><br /><code> GRUB_GFXMODE=1280x800 </code><br /><br />Now open the file <code> /etc/grub.d/00_header </code> and find the lines:<br /><br /><code>if loadfont `make_system_path_relative_to_its_root ${GRUB_FONT_PATH}` ; then<br />set gfxmode=${GRUB_GFXMODE}<br />insmod gfxterm</code><br /><br />Between the second and the third line (of the above snippet) add:<br /><br /><code>   set gfxpayload=keep</code><br /><br />so that it finallly looks like this<br /><br /><code>if loadfont `make_system_path_relative_to_its_root ${GRUB_FONT_PATH}` ; then<br />set gfxmode=${GRUB_GFXMODE}<br /></code><code>set gfxpayload=keep</code><br /><code>insmod gfxterm</code><br /><br />Now run, <code>update-grub</code> as root. Do remember to change the default wallpaper with another of the resolution you specified above.<br /><br />Coming to the fonts part. You need to install the <code>console-setup</code> package in order to be able to customize the console. If you already have it installed run <code>dpkg-reconfigure console-setup</code> as root. You will be presented with terminal based dialogs to chose from various configuration options for the console. On the third screen is the option to choose the font. For me the option "Do not change the boot/kernel font" works(read, looks) the best. Choose the options that is best for you.<br /><br />Links:-<br /><a href="http://wiki.debian.org/GrubTransition">http://wiki.debian.org/GrubTransition</a><br /><a href="https://help.ubuntu.com/community/Grub2">https://help.ubuntu.com/community/Grub2</a>
+ <br /></div>
+            <br/>
+        </div>
+    </div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  /**
+    * var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread] 
+    */
+  (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = 'http://yeban-weblog.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=yeban-weblog">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </div>
+    <div class="footer span-24">
+        
+    </div>
+</div>
+
+    </body>
+</html>

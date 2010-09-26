@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Yeban's Weblog - Generating MD5 hash of a file in Ruby</title>
+        <meta name="author" content="Anurag Priyam" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+        <!-- Favicon -->
+        <link href="/images/favicon.jpg" rel="shortcut icon">
+
+        <!--Stylesheets-->
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/screen.css">
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/ap.css">
+        <!--[if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    </head>
+    <body>
+        <div class="container header">
+    <div class="banner span-24"><a href="/">yeban's weblog</a></div>
+<div class="menu span-24">
+    <ul>
+        <li><a href="http://github.com/yeban">Projects</a></li>
+        <li><a href="http://yeban.in/about">About</a></li>
+        <li><a href="http://yeban.in">Weblog</a></li>
+    </ul>
+</div>
+
+</div>
+
+<div class="container page">
+    <div class="content span-24">
+            <div class="post span-24">
+        <div class="published">
+            Aug 04, 2009
+        </div>
+        <div class="content">
+            <h2 class='post-title'>Generating MD5 hash of a file in Ruby</h2>
+            <div class='post-text'>The 'md5' library can be used to hash the 'string' using the MD5 algorithm. The 'new' or 'md5' function can be used to create a new md5 object. The string to be hashed can be passed as an argument to these functions.<br /><code><br />require 'md5' #include the library<br />hash = MD5.new('Hello World') #or MD5.md5('Hello World')<br /><br /></code>Using 'update' you can add more string to the md5 object. The step 2 could have been accomplished in the following way as well :<br /><br /><code>hash = MD5.new #create a new md5 object<br />hash.update('Hello') #add the string 'Hello' to the object<br />hash.update(' World') </code><code>#add the string ' World' to the object</code><br /><br />To return the hash value the 'hexdigest' function is used<br /><br /><code>puts hash.hexdigest #display the md5 hash of 'Hello World'</code><br /><br />Now, to generate the md5 hash of a file we need to read the content of the file as a string, then use the string to generate the MD5 hash. So in short you can do the following:<br /><code><br />md5hash = MD5.new(File.read('path_to_file')).hexdigest<br /></code><br />Note: My sample file was a simple text file. You may have to add the 'b' flag for binary files.<br /><br /><code>md5hash = MD5.new(File.read('path_to_file', 'b')).hexdigest<br /></code>
+ <br /></div>
+            <br/>
+        </div>
+    </div>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  /**
+    * var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread] 
+    */
+  (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = 'http://yeban-weblog.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=yeban-weblog">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+    </div>
+    <div class="footer span-24">
+        
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,12 @@
+--- 
+name: multithreaded-programming-with-pthreads
+layout: post
+title: Multithreaded Programming with Pthreads
+time: 2010-03-12 22:24:00.007000 +05:30
+tags: 
+- multithreading
+- programming
+- c
+- pthreads
+---
+Consider this as the "Hello World - 2" of multithreaded programming. The aim of this post is to demonstrate( with a question and an answer ) how to:<ol><li>create new threads</li><li>set thread attributes</li><li>pass arguments to threads</li><li>wait for the threads to finish ( join the threads to the main thread )</li></ol><h4>Here is the question:</h4>Populate an array with <code>n</code>( generated randomly ) with random numbers. Input a factor of <code>n</code>, and call it <code>p</code>. Consider the array to be divided into <code>p</code> logical segments with <code>n/p</code> elements each. Create p threads such that the <code>i<sup>th</sup></code> thread sorts the <code>i<sup>th</sup></code> segment of the array. In the main thread print the array, sorted segment wise.<h4>Now the solution:</h4><script src="http://gist.github.com/330502.js?file=threads.c"></script><h4>And the discussion:</h4><dl><dt>The macros?</dt><dd> First one puts a limit on the number of elements in the array and the second one on the numbers in the array. Obviously you can use any limits unconditionally.</dd><dt>The struct?</dt><dd>You can pass only one pointer to the thread callback. Yes, you could have used global variables. I think using the struct makes the intent more clear.</dd><dt>Why bubble sort?</dt><dd>Well, that comes to my mind first</dd><dt>Compilation</dt><dd>Add <code>-pthread</code> option to <code>gcc</code></dd><dt>Walk through?</dt><dd>Unnecessary. The code is small and commented</dd><dt>Want to learn the pthreads API?</dt><dd><a href="https://computing.llnl.gov/tutorials/pthreads/">https://computing.llnl.gov/tutorials/pthreads</a><br/>You will find an explanation of all the concepts I have used here in Section 5.<br /></dd></dl>
