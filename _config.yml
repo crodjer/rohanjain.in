@@ -1,6 +1,4 @@
-auto: true
-server: true
+lsi:      true
+exclude:  README.markdown, scripts/*
 pygments: true
-permalink: none
-exclude: README.markdown
 paginate: 5

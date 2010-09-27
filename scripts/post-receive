@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+GIT=$HOME/weblog/git
+TMP=$HOME/weblog/tmp
+SITE=$HOME/weblog/site
+
+source $HOME/.zshrc # to load rvm environment
+
+git clone $GIT $TMP
+jekyll --no-auto $TMP $SITE
+rm -Rf $TMP
+exit
