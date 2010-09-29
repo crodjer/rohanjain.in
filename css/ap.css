@@ -78,33 +78,16 @@ a {
 
 .meta {
     color:#BEAA99;
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-right: 0px;
-}
-
-.date {
-    background:transparent url(/images/icon-calendar.png) no-repeat scroll 0 0.3em;
-    font-weight:bold;
-    padding:0 0 0 17px;
-    text-transform:uppercase;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-style: italic;
 }
 
 .post-text {
     font-size: 1.2em;
+    margin-bottom: 15px;
 }
 
 .post-title {
     margin-bottom: 0em;
-}
-
-.posts {
-    background-color: white;
-}
-
-.tags {
-    /*background:transparent url(/images/tag.png) no-repeat scroll 0 0.3em;*/
-    padding:0 0 0 17px;
-    color:#BEAA99;
-    font-style: italic;
 }

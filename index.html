@@ -5,22 +5,21 @@ layout: main
 <div class="posts span-24">
     {% for post in paginator.posts %}
     <div class="post span-24">
-        <div class="meta span-3">
-            <div class="date span-3">
-                {{ post.date | date: "%h %d, %Y" }}
-            </div>
-        </div>
-        <div class="content span-21 last">
-            <h2 class='post-title'><a href="{{ post.id }}.html">{{ post.title }}</a></h2>
-            <div class="tags">
-                {% unless post.tags == empty %}
+        <div class="content span-24 last">
+            <h2 class='post-title span-24'><a href="{{ post.id }}.html">{{ post.title }}</a></h2>
+            <div class="meta span-24">
+                <div class="date span-5">
+                    published: {{ post.date | date: "%h %d, %Y" }}
+                </div>
+                <div class="tags span-18 last" >
+                    {% unless post.tags == empty %}
                     tags: {{ post.tags | limit: 2 | join: ", " }}
-                {% else %}
+                    {% else %}
                     tags: nil
-                {% endunless %}
+                    {% endunless %}
+                </div>
             </div>
-            <div class='post-text'>{{ post.content }} <br /></div>
-            <br/>
+            <div class='post-text span-24'>{{ post.content }} <br/></div>
         </div>
     </div>
     {% endfor %}
