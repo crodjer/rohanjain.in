@@ -1,26 +1,32 @@
 ---
 layout: main
 ---
-    <div class="post span-24">
-        <div class="published">
-            {{ page.date | date: "%h %d, %Y" }}
+<div class="post span-24">
+    <h2 class='post-title span-24'>{{ page.title }}</h2>
+    <div class="meta span-24">
+        <div class="date span-5">
+            published: {{ page.date | date: "%h %d, %Y" }}
         </div>
-        <div class="content">
-            <h2 class='post-title'>{{ page.title }}</h2>
-            <div class='post-text'>{{ content }} <br /></div>
-            <br/>
+        <div class="tags span-18 last" >
+            {% unless page.tags == empty %}
+            tags: {{ page.tags | limit: 2 | join: ", " }}
+            {% else %}
+            tags: nil
+            {% endunless %}
         </div>
     </div>
-<div id="disqus_thread"></div>
+    <div class='post-text span-24'>{{ content }} <br/></div>
+</div>
+<div class="disqus_thread span-24"></div>
 <script type="text/javascript">
-  /**
-    * var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread] 
-    */
-  (function() {
-   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-   dsq.src = 'http://yeban-weblog.disqus.com/embed.js';
-   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
+    /**
+     * var disqus_identifier; [Optional but recommended: Define a unique identifier (e.g. post id or slug) for this thread] 
+     */
+(function() {
+ var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+ dsq.src = 'http://yeban-weblog.disqus.com/embed.js';
+ (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=yeban-weblog">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
