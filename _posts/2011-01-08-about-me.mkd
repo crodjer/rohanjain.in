@@ -1,0 +1,10 @@
+--- 
+layout: post
+title: About.me
+categories: misc
+author: yeban
+---
+
+I recently fell in love with this new web service called [about.me](http://about.me "about.me") that allows you to create *profile mashups*. What struck me the most was the simplicity, and the usefulness of the idea - a single point access to all your content from over the web. [Here](http://about.me/yeban "about.me/yeban"), check out my profile. Try clicking on one of those big Facebook, or Linkedin buttons. Get the idea? Basically, you hook up your profile to various services from which about.me fetches and presents data beautifully. Currently the number of services that you can add is limited - Facebook, Twitter, Linkedin, and Flickr to name a few. Naturally, you can add a static link to the websites that are currently not supported. Last.fm, and Github are on my wishlist. Another nifty feature of about.me is the analytics dashboard where you can find out stuff like - the number of views your profile had, how many people clicked through to learn more about you, links to your profile, and your activity on various services you have added.
+
+Impressed? Get yourself an [about.me](http://about.me "about.me") profile, or [check out](http://about.me/directory "about.me/directory") check out how others are using it.
