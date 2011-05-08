@@ -1,0 +1,21 @@
+<div class="post">
+  <h3 class="post-title"><a href="{{ post.id }}.html">{{ post.title }}</a></h3>
+  <div class="meta">
+    <div class="date">
+      <img src="/images/calendar.png"/> {{ post.date | date: "%h %d, %Y" }}
+    </div>
+    <div class="tags last" >
+      {% unless post.tags == empty %}
+        <img src="/images/tag.png"/>
+        {{ post.tags | limit: 2 | join: ", " }}
+      {% endunless %}
+    </div>
+  </div>
+  <div class='post-text'>
+    {% if content %}
+      {{ content }}
+    {% else %}
+      {{ post.content }}
+    {% endif %}
+  </div>
+</div>
