@@ -1,0 +1,23 @@
+--- 
+name: swapping-the-esc-and-caps-lock-key
+layout: post
+title: Swapping the 'esc' and 'caps lock' key
+time: 2009-02-11 01:52:00.011000 +05:30
+tags: 
+- vim
+- linux
+---
+
+Well, the first question that comes to mind after getting a hang of the 'almighty VIM' is "Is there a way to swap 'esc' key with something near the home row?".Aye! there is. Swap the 'esc' and 'caps lock' key. Here is how:
+
+* Fire up Vim to create an (say 'keymap') ASCII plain text file (`vim keymap`) with the content:
+  {% highlight sh %}
+    remove Lock = Caps_Lock
+    keysym Escape = Caps_Lock
+    keysym Caps_Lock = Escape
+    add Lock = Caps_Lock
+  {% endhighlight %}
+
+* Now execute the command: `xmodmap "filename"`, obviously without the quotes, and you are done.
+
+It should work on all Linux distributions. Personally I have tested it on Debian. The change is global, and works only for X.
