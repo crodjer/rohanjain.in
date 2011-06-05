@@ -20,6 +20,9 @@ layout: nil
       <link href="http://yeban.in{{ post.url }}"/>
       <updated>{{ post.date | date_to_xmlschema }}</updated>
       <id>http://yeban.in{{ post.id }}</id>
+      {% for category in post.categories %}
+        <category term="{{ category | downcase }}" />
+      {% endfor %}
       <content type="html">{{ post.content | xml_escape }}</content>
     </entry>
   {% endfor %}
