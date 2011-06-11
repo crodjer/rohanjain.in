@@ -1,0 +1,26 @@
+--- 
+layout: post
+title: Moving to Jekyll
+categories: misc
+author: yeban
+---
+
+I discovered Jekyll last year, around September. Blogging with Vim, and Git
+immediately appealed to me; it was neat. My blogging was on an all time low at
+that time, and I was convinced that Jekyll would change it for me. For some
+reason, I never hit a sweet spot with any of those blogging engines. Maybe it
+was the interface. I used Blogspot earlier. I had tried Wordpress too.
+
+I migrated to Jekyll around last September. But I still didn't start writing.
+The last post I wrote was last January, almost three months after the
+migration. I think it was because of the design. The new blog was ugly. It
+lacked all those _fancy blogger stuff_: a drill-down archives menu, tag clouds,
+etc. I wanted to take some time off to make the design better, and add the
+missing pieces.
+
+Last month I did a bit of re-designing. I am still not very fond of the design,
+but I find it much more presentable. Grayscale rocks. I still haven't added the
+_fancy blogger stuff_, but I will. There are more important things on my todo
+list for now. Much more important than making my (scarcely read) site more
+functional, or beautiful. And one of them is to start writing. Hope this post
+marks that.
