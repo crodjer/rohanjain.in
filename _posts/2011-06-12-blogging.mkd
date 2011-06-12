@@ -1,0 +1,26 @@
+---
+layout: post
+title: Blogging
+tags: random
+published: true
+author: yeban
+---
+
+I started blogging in February, 2009. I think I started mostly because I
+fancied the idea of having some kind of an online presence.
+
+I wrote some thirty posts in a period of two years. Not bad. Going through them
+is like flipping through the pages of a diary. Its far from complete though. A
+lot of pages are missing.
+
+Last year, around August, I kind of stopped blogging altogether. Basically, I
+had nothing to write about. I had no work either. It was this period that I
+migrated my blog to Jekyll.
+
+I have started blogging again. Its a good habit to write regularly. Writing
+slows you down and helps you think clearly. You tend to reason better. The
+_whys_ become more apparent.
+
+I am not sure what I am going to write about though. The usual stuff maybe -
+college, hacking, trips, work, friends, myself. Anything. I just don't want to
+limit the possibilities.
