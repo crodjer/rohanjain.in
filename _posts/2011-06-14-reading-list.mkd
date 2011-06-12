@@ -1,0 +1,29 @@
+---
+layout: post
+title: Reading List
+published: true
+author: yeban
+---
+
+I recently discovered the [Kindle web service][1]. Its sweet. I am using it to
+maintain a reading [list][2] - books that I have read, books that I am
+currently reading, and the books that I want to read.
+
+The number of books I have read is embarrassingly low. Most of it was in my
+high school days - Goosebumps, Doctor Who, the Famous Five, the Secret Seven,
+Harry Potter, and David Copperfield and the likes. As far as I remember, I read
+only one book in my Senior Secondary School days - The Deathly Hallows. It was
+[JEE][3] time then, and I was super busy _mugging_. Once in a while I would
+re-read one of the Harry Potter books though. I resumed reading after getting
+into college. I think I read some fifteen books in the last three years. Not
+_that_ bad. I mean there is so much more stuff to do in college. For me,
+coding, or simply geeking out on anything, and everything takes up most of the
+time.
+
+Anyways, I have a huge reading list ahead. Its a mixed bag. Novels, books on
+history, and science, and politics, and computers. And, I want to finish up
+most of it while I am still at college. Lets see how far I go with that.
+
+[1]: https://kindle.amazon.com/
+[2]: https://kindle.amazon.com/profile/Anurag-Priyam/1400612
+[3]: http://en.wikipedia.org/wiki/Indian_Institute_of_Technology_Joint_Entrance_Examination
