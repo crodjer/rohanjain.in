@@ -3,21 +3,34 @@ layout: main
 ---
 
 <div class="posts">
-  {% for post in paginator.posts %}
+    {% for post in paginator.posts %}
     {% include post.html %}
-  {% endfor %}
+    {% endfor %}
 </div>
 
 <div class="paginator">
-  {% if paginator.previous_page %}
-  <a href="{{ site.baseurl }}/{% if paginator.previous_page == 1 %}{% else %}page{{paginator.previous_page}}{% endif %}" class="previous">Previous</a>
-  {% else %}
+    {% if paginator.previous_page %}
+    <a href="{{ site.baseurl }}/{% if paginator.previous_page == 1 %}{% else %}page{{paginator.previous_page}}{% endif %}" class="previous">Previous</a>
+    {% else %}
     <span class="previous">Previous</span>
-  {% endif %}
+    {% endif %}
     <span class="page_number ">Page: {{paginator.page}} of {{paginator.total_pages}}</span>
-  {% if paginator.next_page %}
+    {% if paginator.next_page %}
     <a href="{{ site.baseurl }}/page{{paginator.next_page}}" class="next ">Next</a>
-  {% else %}
+    {% else %}
     <span class="next ">Next</span>
-  {% endif %}
+    {% endif %}
 </div>
+
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'rohanjain'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+     var s = document.createElement('script'); s.async = true;
+     s.type = 'text/javascript';
+     s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+     (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+     }());
+</script>

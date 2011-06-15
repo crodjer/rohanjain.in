@@ -10,7 +10,7 @@
             {{ post.tags | limit: 2 | join: ", " }}
             {% endunless %}
         </div>
-        <a href="{{ site.baseurl }}{{ post.id }}.html#disqus_thread">Comment</a>
+        <a href="{{ site.baseurl }}{{ post.id }}.html#disqus_thread" data-disqus-identifier="{{ post.name }}">Comment</a>
     </div>
     <div class='post-text'>
         {% if content %}

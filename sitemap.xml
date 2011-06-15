@@ -12,7 +12,7 @@ layout: nil
     {% for post in site.posts %}
     <url>
         <loc>http://{{ site.domain }}{{ site.baseurl }}/{{ post.id }}</loc>
-        <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+        <lastmod>{{ post.date }}</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>

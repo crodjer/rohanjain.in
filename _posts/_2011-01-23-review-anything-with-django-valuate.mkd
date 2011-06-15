@@ -1,0 +1,37 @@
+---
+layout: post
+title: Review anything with django-valuate 
+tags:
+    - django
+    - ratings
+author: crodjer
+---
+
+A user likes a simpler way to express their views about things, can be visualized from the growing popularity of like buttons and rating-system.  
+Also there is one thing I like of django, (with most of the other things): **django comments framework**. The best feature is that it can be used on any object without any change in object models as it is based on the *contenttype framework*.  
+
+Now integrating comments easily is a great feature for developers but doesn't makes any difference to users (it doesn't matter to them how the thing is implemented). So as like buttons/ratings systems is a comfort for users and comment frameworks for developers, I thought why don't integrate these both - let the users **valuate** things on web easily. So I built an app: [**django-valuate**](http://django-valuate.googlecode.com).
+
+##[django-valuate](http://django-valuate.googlecode.com/)
+It is a generic app that allows developers to easily integrate user valuation system. The name is a bit confusing and is *open for suggestion*. I chose this because the app was not for ratings exactly and not for like buttons either.  
+Valuate is based on the *contenttypes* framework. A minimal configuration may be done for customizing the choices for valuation. There is no need to configure any python files (at the most you may use the settings file). It can be easily implemented through the *templatetags* provided. From the tags one can:  
+
+ - Directly Render or get the form for valuation
+ - Directly Render or get the stats of valuation for an objects
+ - Get the fields required to enable form submissions by ajax. 
+ - Get the counts for individual choices. 
+
+This app is built with *django-svn* version, promising future django support. Also the management of valuation objects is pretty easy through the admin site. 
+
+###To do
+
+ - Find a better way to initiate session cookie (when not logged in) then the use of [test_cookie](http://code.google.com/p/django-valuate/source/browse/valuate/forms.py) (line 73). 
+ - <s>Get rid of the weird [management.py](http://code.google.com/p/django-valuate/source/browse/valuate/management.py) which provides required settings to valuation model based on the project settings.</strike>
+ - <strike>Currently the configuration is based on a settings file, hence whole django project shall have the same settings. So *settings based configuration* is to be got rid of.</strike>
+ - <strike>Provide more interactive template tags</strike> Using conventional nodes based template tags now. 
+ - <strike>Support older django versions; Currently works with django 1.3 beta or django-dev only</strike>. Now support there with conventional template tags.
+
+##Updates: 
+Multiple valuations type support now in a single django project. A complete and better redesign of the app, with more features.
+
+I have posted this app at stackexchange's code review site for solving the problems: [Link](http://codereview.stackexchange.com/q/298/773)
