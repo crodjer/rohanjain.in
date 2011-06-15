@@ -1,24 +1,28 @@
 ---
 layout: base
 ---
-<div class="container">
-    <div class="header">
-        <div class="banner">
-            <a href="{{ site.baseurl }}/">crodjer's blogRoll</a>
-        </div>
-    </div>
-
-    <div class="content">
-        {{ content }}
-    </div>
-
-    <div class="sidebar">
-        <ul>
-            <li><a href="{{ site.baseurl }}/">Blog</a></li>
-            <li><a href="{{ site.baseurl }}/about">About Rohan</a></li>
-        </ul>
-    </div>
-
-    <div class="footer">
+<div class="header">
+    <div class="banner">
+        <a href="{{ site.baseurl }}/">crodjer's blogRoll</a>
     </div>
 </div>
+
+<div class="content">
+    {{ content }}
+</div>
+
+<div class="sidebar">
+    <ul>
+        <li><a href="{{ site.baseurl }}/">Blog</a></li>
+        <li><a href="{{ site.baseurl }}/about">About Rohan</a></li>
+    </ul>
+</div>
+
+<footer>
+    <p>
+        <a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/80x15.png" /></a>
+        Using <a href="http://jekyllrb.com/">Jekyll</a>,
+        <a href="http://pygments.org/">Pygments</a>
+        | <a href="{{ site.baseurl }}/sitemap.xml">Sitemap</a>, <a href="{{ site.baseurl }}/feed.xml">Feed</a>
+    </p>
+</footer>

@@ -2,14 +2,15 @@
     <h3 class="post-title"><a href="{{ site.baseurl }}{{ post.id }}.html">{{ post.title }}</a></h3>
     <div class="meta">
         <div class="date">
-            <img src="{{ site.baseurl }}/images/calendar.png"/> {{ post.date | date: "%h %d, %Y" }}
+            <img alt="Posted on" src="{{ site.baseurl }}/images/calendar.png"/> {{ post.date | date: "%h %d, %Y" }}
         </div>
-        <div class="tags last" >
+        <div class="tags" >
             {% unless post.tags == empty %}
-            <img src="{{ site.baseurl }}/images/tag.png"/>
+            <img alt="Tags" src="{{ site.baseurl }}/images/tag.png"/>
             {{ post.tags | limit: 2 | join: ", " }}
             {% endunless %}
         </div>
+        <a href="{{ site.baseurl }}{{ post.id }}.html#disqus_thread">Comment</a>
     </div>
     <div class='post-text'>
         {% if content %}
