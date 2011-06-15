@@ -2,3 +2,4 @@ lsi: false
 pygments: true
 exclude: README.markdown, scripts/*
 paginate: 5
+baseurl: /blog/
