@@ -40,7 +40,7 @@ My **to know** list for the summers:
   - Java
   - Algorithm Design
 
-Work Environment:
-
-  - Debian, Gnome
-  - Vim, Tmux, Google Chrome, Irssi, Rhythmbox and rest lots of GNU
+Work Environment: 
+  - Debian
+  - Gnome
+  - Vim, Tmux, Google Chrome, Irssi, Rhythmbox
