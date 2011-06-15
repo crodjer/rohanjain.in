@@ -3,4 +3,5 @@ pygments: true
 exclude: README.markdown, scripts/*
 paginate: 5
 baseurl:
+markdown: rdiscount
 domain: www.rohanjain.in

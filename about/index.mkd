@@ -5,9 +5,8 @@ title: Rohan Jain
 author: crodjer
 ---
 I am a 3rd year B. Tech Undergraduate student from IIT Kharagpur. I am a
-*software* and *web developer* by passion and an opensource admirer
-promoter. I like to do fun tweaks and frequently damage my system (GitHub
-is always there for rescue).
+*software* and *web developer* by passion and an opensource admirer and
+promoter.
 
 I mostly engage in web back-ends, mobile applications development. I have
 recently started to look for ways to contribute to the awesome opensource
