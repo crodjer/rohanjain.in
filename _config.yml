@@ -1,7 +1,8 @@
 lsi: false
 pygments: true
 exclude: README.markdown, scripts/*
-paginate: 5
+paginate: 4
 baseurl:
 markdown: rdiscount
 domain: www.rohanjain.in
+lst: true

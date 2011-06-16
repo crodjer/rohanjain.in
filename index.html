@@ -4,7 +4,10 @@ layout: main
 
 <div class="posts">
     {% for post in paginator.posts %}
+    {% if post.draft %}
+    {% else %}
     {% include post.html %}
+    {% endif %}
     {% endfor %}
 </div>
 
@@ -23,10 +26,8 @@ layout: main
 </div>
 
 <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'rohanjain'; // required: replace example with your forum shortname
+    var disqus_shortname = 'rohanjain'; 
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
     (function () {
      var s = document.createElement('script'); s.async = true;
      s.type = 'text/javascript';

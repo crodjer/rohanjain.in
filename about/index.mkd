@@ -14,12 +14,12 @@ community as thank you's for the awesome software and maybe soon my patches
 will be flying around the web asking to be reviewed.
 
 Apart from coding I like to play cricket, table-tennis, badminton. Before
-my venture into the coding and engineering field I was (still am when at
-home) a huge fan of *Discovery* and *Nat Geo* documentries. In the free
-time I like to think and discuss about random stuff, surf and answer on
-*stackoverflow*, stumble again and again  and watching TV series as if they
-were one movie (seriously, I have watched most of the serieses my friends
-can suggest).
+my venture into the coding and engineering field I was (still am, when
+given the time ) a huge fan of *Discovery* and *Nat Geo* documentries. In
+the free time I like to think and discuss about random stuff, surf and
+answer on *stackoverflow*, stumble again and again  and watching TV series
+as if they were one movie (seriously, I have watched most of the serieses
+my friends can suggest).
 
 Find me at:
 [Google](http://www.google.com/profiles/rohanjain.kgp),
@@ -40,7 +40,8 @@ My **to know** list for the summers:
   - Java
   - Algorithm Design
 
-Work Environment: 
+Work Environment:
+
   - Debian
   - Gnome
   - Vim, Tmux, Google Chrome, Irssi, Rhythmbox

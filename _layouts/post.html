@@ -9,7 +9,7 @@ layout: main
 <div class="comments">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
-        var disqus_developer = 1;
+        var disqus_developer = {% if site.auto %}1{% else %}0{% endif %};
         var disqus_shortname = 'rohanjain';
         var disqus_identifier = '{{ post.name }}';
 
