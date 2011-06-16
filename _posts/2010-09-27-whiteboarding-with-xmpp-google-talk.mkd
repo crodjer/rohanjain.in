@@ -37,7 +37,7 @@ Work resumed after a brief pause. The target now is to integrate <a href="http:/
 
 *10 Nov 2010*  
 Our Proof of concept is ready. All the basic features of whiteboard are now incorporated. A usable implementation now exists. You may fetch and compile the code from the git repository (Address mentioned above). This is how it looks:  
-<object width="480" height="385"><param name="movie" value="http://www.youtube.com/v/sYKutp4I4Zs?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/sYKutp4I4Zs?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="385"></embed></object>  
+<iframe width="425" height="349" src="http://www.youtube.com/embed/sYKutp4I4Zs"></iframe>
 A [Snapshot](http://img577.imageshack.us/img577/7910/screenshot1kg.png).  
 
 *9 Nov 2010*
