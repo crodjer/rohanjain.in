@@ -132,6 +132,18 @@ pre{
     margin: 4px 0;
 }
 
+.archive-year{
+    font-weight:700;
+}
+
+.archive-month{
+    margin-left:15px;
+}
+
+.archive-title{
+    margin-left:20px;
+}
+
 .date {
     width: 150px;
     float: left;
