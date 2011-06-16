@@ -5,7 +5,7 @@
             <img alt="Posted on" src="{{ site.baseurl }}/images/calendar.png"/> {{ post.date | date: "%h %d, %Y" }}
         </div>
         <div class="share">
-            <g:plusone size="small"></g:plusone>
+            <g:plusone size="small" href="http://{{ site.domain }}{{ site.baseurl }}{{ post.id }}.html"></g:plusone>&nbsp;
         </div>
         <div class="tags" >
             {% unless post.tags == empty %}
