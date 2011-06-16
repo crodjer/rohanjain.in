@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Dynamic to Static"
+slug: dynamic-to-static
 byline: crodjer's new site
 tags:
     - static

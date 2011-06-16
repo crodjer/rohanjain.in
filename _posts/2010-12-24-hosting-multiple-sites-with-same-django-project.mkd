@@ -2,6 +2,7 @@
 layout: post
 title: Hosting multiple sites with same django project
 published: true
+slug: hosting-multiple-sites-with-same-django-project
 tags:
     - django
     - hosting

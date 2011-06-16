@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Whiteboarding with XMPP (Google Talk)
+slug: whiteboarding-with-xmpp-google-talk
 tags:
     - xmpp
     - pidgin

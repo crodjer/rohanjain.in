@@ -160,8 +160,13 @@ pre{
 }
 
 .date {
-    width: 150px;
+    width: 120px;
     float: left;
+}
+
+.share{
+    width:80px;
+    float:left;
 }
 
 .tags {

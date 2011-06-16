@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Review anything with django-valuate
+slug: review-anything-with-django-valuate
 published: false
 tags:
     - django

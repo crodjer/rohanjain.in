@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Building my power computer
+slug: building-my-power-computer
 byline: crodjer's dream computer
 tags:
     - computer

@@ -1,8 +1,11 @@
 <div class="post">
-    <h3 class="post-title"><a href="{{ site.baseurl }}{{ post.id }}.html">{{ post.title }}</a></h3>
+    <h3 class="post-title" id="{{ post.slug }}"><a href="{{ site.baseurl }}{{ post.id }}.html">{{ post.title }}</a></h3>
     <div class="meta">
         <div class="date">
             <img alt="Posted on" src="{{ site.baseurl }}/images/calendar.png"/> {{ post.date | date: "%h %d, %Y" }}
+        </div>
+        <div class="share">
+            <g:plusone size="small"></g:plusone>
         </div>
         <div class="tags" >
             {% unless post.tags == empty %}
@@ -10,6 +13,7 @@
             {{ post.tags | limit: 2 | join: ", " }}
             {% endunless %}
         </div>
+
         <a href="{{ site.baseurl }}{{ post.id }}.html#disqus_thread" data-disqus-identifier="{{ post.name }}">Comment</a>
     </div>
     <div class='post-text'>
