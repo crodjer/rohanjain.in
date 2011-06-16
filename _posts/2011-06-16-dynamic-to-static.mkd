@@ -1,0 +1,22 @@
+---
+layout: post
+title: "Dynamic to Static"
+tags:
+    - hosting
+author: crodjer
+---
+
+I just shifted my website to Jekyll static pages, from the completely
+dynamic *django* based and database oriented [old one](http://old.rohanjain.in).
+The factor which drove this decision: **VIM** period.
+
+I did not post much on the old site because I couldn't post directly from
+VIM to posts there. The functionalities that were present over there
+were to much overkill and completely invisible to the public, so better
+save the processing power.
+
+Now that I can post over my blog easily form offline editor, I expect that
+there will be a considerable increase in my posting frequesncy. Since the
+hosting is based on github pages, I can edit the pages from a web browser
+when I do not have my personal computer around. Thanks to disqus comments
+it also has a nice comment functionality.
