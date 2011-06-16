@@ -1,13 +1,12 @@
 ---
+title: Blogroll
+byline: what crodjer has to say
 layout: main
 ---
 
 <div class="posts">
     {% for post in paginator.posts %}
-    {% if post.draft %}
-    {% else %}
     {% include post.html %}
-    {% endif %}
     {% endfor %}
 </div>
 

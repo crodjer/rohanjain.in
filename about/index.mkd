@@ -1,7 +1,8 @@
 ---
 layout: static
 disable-comments: true
-title: Rohan Jain
+byline: crodjer tells about himself
+title: About Me
 author: crodjer
 ---
 I am a 3rd year B. Tech Undergraduate student from IIT Kharagpur. I am a
@@ -33,7 +34,7 @@ Find me at:
 Current projects:
 
  - **[Google Summer of Code](http://www.google-melange.com/gsoc/project/google/gsoc2011/crodjer/10001)**: Summer of code project with universal subtitles
- - An internship with policy innovations
+ - An internship with **Policy Innovations**
 
 My **to know** list for the summers:
 

@@ -12,7 +12,7 @@ header = <<-END
 ---
 layout: post
 title: "#{ARGV[0]}"
-draft: true
+published: false
 tags:
     - tag 1
     - tag 2

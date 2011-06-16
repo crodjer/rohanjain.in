@@ -18,6 +18,10 @@ h3 a{
     text-decoration:none;
 }
 
+hr{
+    clear:both;
+}
+
 html{
     min-height:101%;
 }
@@ -39,7 +43,6 @@ pre{
 }
 
 .header {
-    margin-bottom: 10px;
     margin-top: 15px;
 }
 
@@ -77,16 +80,22 @@ pre{
     color: #eaeaea;
 }
 
-.banner {
-    font-size: 35px;
-    font-weight: bold;
-    opacity: 0.4;
+.header {
+    color: #777;
 }
 
-.banner a, .banner a:visited {
-    color: #444444;
+.header a, .header a:visited {
     text-decoration: none;
-    text-shadow: 2px 2px 2px #777777;
+}
+
+.header h1{
+    font-size: 1.0em;
+    opacity: 0.6;
+    display:inline;
+}
+
+.header span{
+    font-size:0.7em;
 }
 
 .posts {
@@ -132,16 +141,22 @@ pre{
     margin: 4px 0;
 }
 
-.archive-year{
-    font-weight:700;
+.ayear{
+    display:inline;
+    margin:0;
 }
 
-.archive-month{
-    margin-left:15px;
+.amonth{
+    position:relative;
+    left: 3.5em;
+    top: -1.3em;
+    margin:0;
 }
 
-.archive-title{
-    margin-left:20px;
+.atitle{
+    position:relative;
+    left: 6em;
+    top:-3.1em;
 }
 
 .date {
