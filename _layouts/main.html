@@ -2,7 +2,7 @@
 layout: base
 ---
 <div id="header">
-    {% if page.byline %}<span class="byline">{{ page.byline }}...</span>{% endif %}
+    <span class="byline">{% if page.byline %}{{ page.byline }}{% else %}what crodjer has to say{% endif %}...</span>
     <h1><a href="{{ site.baseurl }}/">Rohan Jain</a></h1>
 </div>
 
