@@ -26,8 +26,8 @@
                 "https://apis.google.com/js/plusone.js",
             );
             {% endif %}
-            {% if page.comments %}head.js("http://crodjer.disqus.com/embed.js");{% endif %}
-            {% if page.comments-count %}head.js("http://crodjer.disqus.com/count.js");{% endif %}
+            {% if page.comments %}head.js("http://crodjer-blog.disqus.com/embed.js");{% endif %}
+            {% if page.comments-count %}head.js("http://crodjer-blog.disqus.com/count.js");{% endif %}
 
             //Google analytics
             var _gaq = _gaq || [];
@@ -36,7 +36,7 @@
 
             //Disqus
             var disqus_developer = {% if site.auto %}1{% else %}0{% endif %};
-            var disqus_shortname = 'crodjer';
+            var disqus_shortname = 'crodjer-blog';
             dsq.type = 'text/javascript';
             dsq.async = true;
         </script>
