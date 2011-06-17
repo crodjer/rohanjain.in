@@ -175,6 +175,10 @@ pre{
     font-size: 0.9em;
 }
 
+.dsq-brlink{
+    font-size: 10px;
+}
+
 #footer {
     border-top:3px solid #CCC;
     position:relative;
