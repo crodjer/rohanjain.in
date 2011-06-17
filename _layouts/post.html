@@ -1,15 +1,18 @@
 ---
+comments: true
+comments-count: true
 layout: main
 ---
 {% assign post = page %}
 {% include post.html %}
 
-{% if post.disable-comments %}
-{% else %}
+{% if page.comments %}
 <div class="comments">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_identifier = '{{ post.slug }}';
+        var disqus_title = '{{ post.title }}';
+        var disqus_url = '{{ post.id }}';
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
