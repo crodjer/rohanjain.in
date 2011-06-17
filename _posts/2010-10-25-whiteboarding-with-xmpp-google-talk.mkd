@@ -7,7 +7,7 @@ tags:
     - pidgin
     - whiteboarding
 category:
-    - project
+    - hacking
 author: crodjer
 ---
 

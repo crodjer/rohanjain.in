@@ -8,7 +8,7 @@ tags:
     - laptop
     - configuration
 categories:
-    - computer
+    - general
 author: crodjer
 ---
 

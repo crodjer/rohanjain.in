@@ -8,7 +8,7 @@ tags:
     - blog
     - VIM
 category:
-    - about-blog
+    - general
 author: crodjer
 ---
 

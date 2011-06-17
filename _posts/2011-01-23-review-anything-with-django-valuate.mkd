@@ -7,7 +7,7 @@ tags:
     - django
     - ratings
 categories:
-    - project
+    - hacking
 draft: true
 author: crodjer
 ---
