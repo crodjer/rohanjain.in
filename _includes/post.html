@@ -1,18 +1,18 @@
 <div class="post">
     <h3 class="post-title" id="{{ post.slug }}"><a href="{{ site.baseurl }}{{ post.id }}.html">{{ post.title }}</a></h3>
     <div class="meta">
-        <div class="date">
-            <img alt="Posted on" src="{{ site.baseurl }}/images/calendar.png"/> {{ post.date | date: "%h %d, %Y" }}
-        </div>
-        <div class="share">
+        <span class="date">
+            <img alt="Posted on" src="{{ site.baseurl }}/images/calendar.png"/> {{ post.date | date: "%d %h, %Y" }}
+        </span>
+        <span class="share">
             <g:plusone size="small" href="http://{{ site.domain }}{{ site.baseurl }}{{ post.id }}.html"></g:plusone>&nbsp;
-        </div>
-        <div class="tags" >
+        </span>
+        <span class="tags" >
             {% unless post.tags == empty %}
             <img alt="Tags" src="{{ site.baseurl }}/images/tag.png"/>
-            {{ post.tags | limit: 2 | join: ", " }}
+            {{ post.tags | join: ", " }}
             {% endunless %}
-        </div>
+        </span>
 
         <a href="{{ site.baseurl }}{{ post.id }}.html#disqus_thread" data-disqus-identifier="{{ post.slug }}">Comments and Reactions</a>
     </div>

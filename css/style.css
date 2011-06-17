@@ -130,10 +130,8 @@ pre{
 .meta {
     color: #9c8877;
     width: 660px;
-    padding: 0 15px;
     font-style: italic;
     font-size: 0.8em;
-    float: left;
     margin-bottom: 5px;
 }
 
@@ -158,17 +156,15 @@ pre{
 
 .date {
     width: 120px;
-    float: left;
 }
 
 .share{
+    margin: 0 5px;
     width:80px;
-    float:left;
 }
 
 .tags {
-    width: 250px;
-    float: left;
+    min-width: 200px;
 }
 
 .meta a{
