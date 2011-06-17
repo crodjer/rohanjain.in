@@ -2,8 +2,8 @@
 layout: base
 ---
 <div id="header">
+    {% if page.byline %}<span class="byline">{{ page.byline }}...</span>{% endif %}
     <h1><a href="{{ site.baseurl }}/">Rohan Jain</a></h1>
-    {% if page.byline %}<span class="byline">..{{ page.byline }}</span>{% endif %}
 </div>
 
 <div id="content">
@@ -13,7 +13,7 @@ layout: base
 <div id="sidebar">
     <ul>
         <li><a href="{{ site.baseurl }}/">Blog</a></li>
-        <li><a href="{{ site.baseurl }}/about">About Rohan</a></li>
+        <li><a href="{{ site.baseurl }}/about">About Me</a></li>
         <li><a href="{{ site.baseurl }}/archive">Archive</a></li>
     </ul>
 </div>
