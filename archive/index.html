@@ -9,21 +9,24 @@ layout: main
     <div class="post-text">
         {% for post in site.posts %}
         {% capture cyear %}{{ post.date | date: "%Y" %}}{% endcapture %}
-        {% capture cmonth %}{{ post.date | date: "%m" %}}{% endcapture %}
+        {% capture cmonth %}{{ post.date | date: "%b" %}}{% endcapture %}
         {% capture cdate %}{{ post.date | date: "%d" %}}{% endcapture %}
         {% if cyear != year %}
         {% assign year = cyear %}
-        <h2 class="ayear">
+        <h3 class="aryear">
             {{ year }}
-        </h2>
-        {% endif %}
-        {% if cmonth != month %}
-        <h3 class="amonth">
-        {% assign month = cmonth %}
-        {{ cmonth }}
         </h3>
         {% endif %}
-        <div class="atitle"><b>{{ cdate }}</b> - <a href="{{ post.id }}.html">{{ post.title }}</a></div>
+        {% if cmonth != month %}
+        <h4 class="armonth">
+        {% assign month = cmonth %}
+        {{ cmonth }}
+        </h4>
+        {% endif %}
+        <div class="artitle">
+        <b class="ardate">{{ cdate }}</b>
+        <a href="{{ site.baseurl }}{{ post.id }}.html">{{ post.title }}</a>
+        </div>
         {% endfor %}
     </div>
 </div>

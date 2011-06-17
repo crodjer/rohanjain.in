@@ -137,22 +137,23 @@ pre{
     margin-bottom: 5px;
 }
 
-.ayear{
+.aryear{
     display:inline;
     margin:0;
 }
 
-.amonth{
+.armonth{
     position:relative;
-    left: 4em;
-    top: -1.3em;
+    left: 3.5em;
+    top: -1.5em;
     margin:0;
 }
 
-.atitle{
+.artitle{
     position:relative;
     left: 6.8em;
-    top:-3.1em;
+    top:-3.2em;
+    font-size:0.9em;
 }
 
 .date {
