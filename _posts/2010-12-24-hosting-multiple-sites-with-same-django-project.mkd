@@ -7,7 +7,7 @@ tags:
     - django
     - hosting
 category:
-    - django
+    - hacking
 author: crodjer
 ---
 
