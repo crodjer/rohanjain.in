@@ -29,9 +29,10 @@ html{
 body {
     width: 950px;
     margin: 0 auto;
-    font-family: serif;
-    font-size: 1.2em;
-    line-height: 1.2em;
+    font-family: sans-serif;
+    font-size: 1em;
+    line-height: 150%;
+    background-color: #FBFBFB;
 }
 
 pre{
@@ -42,31 +43,32 @@ pre{
     display: block;
 }
 
-.header {
+#header {
     margin-top: 15px;
+    color: #777;
 }
 
-.content {
+#content {
     float: left;
     margin-top: 10px;
     width: 710px;
 }
 
-.sidebar {
+#sidebar {
     float: left;
 }
 
-.sidebar ul {
+#sidebar ul {
     list-style: none;
     margin: 10px 0 0;
     padding: 0;
 }
 
-.sidebar ul li a {
+#sidebar ul li a {
     background-color: #CCCCCC;
     color: #000000;
     font-weight: bold;
-    font-size: 0.8em;
+    font-size: 0.9em;
     padding: 5px 10px;
     margin-top: 5px;
     text-decoration:none;
@@ -75,27 +77,23 @@ pre{
     width:220px;
 }
 
-.sidebar ul li a:hover {
+#sidebar ul li a:hover {
     background-color: #555;
     color: #eaeaea;
 }
 
-.header {
-    color: #777;
-}
-
-.header a, .header a:visited {
+#header a, #header a:visited {
     text-decoration: none;
 }
 
-.header h1{
-    font-size: 1.0em;
+#header h1{
+    font-size: 1.2em;
     opacity: 0.6;
     display:inline;
 }
 
-.header span{
-    font-size:0.7em;
+#header span{
+    font-size:0.8em;
 }
 
 .posts {
@@ -106,10 +104,11 @@ pre{
 }
 
 .post {
-    background-color: #F5F5F5;
+    background-color: #FFF;
     border: 1px solid #CCC;
-    padding: 10px;
-    width: 690px;
+    color: #333;
+    padding: 10px 15px;
+    width: 680px;
     margin-bottom: 10px;
     min-height:100px;
 }
@@ -128,17 +127,13 @@ pre{
 }
 
 .meta {
-    color: #BEAA99;
+    color: #9c8877;
     width: 660px;
     padding: 0 15px;
     font-style: italic;
-    font-size: 0.7em;
-    float: left;
-}
-
-.post-text {
     font-size: 0.8em;
-    margin: 4px 0;
+    float: left;
+    margin-bottom: 5px;
 }
 
 .ayear{
@@ -148,14 +143,14 @@ pre{
 
 .amonth{
     position:relative;
-    left: 3.5em;
+    left: 4em;
     top: -1.3em;
     margin:0;
 }
 
 .atitle{
     position:relative;
-    left: 6em;
+    left: 6.8em;
     top:-3.1em;
 }
 
@@ -178,7 +173,11 @@ pre{
     float:right;
 }
 
-footer {
+#disqus_thread{
+    font-size: 0.9em;
+}
+
+#footer {
     border-top:3px solid #CCC;
     position:relative;
     top:10px;
@@ -188,6 +187,6 @@ footer {
     font-size:0.8em;
 }
 
-footer img{
+#footer img{
     float:left;
 }
