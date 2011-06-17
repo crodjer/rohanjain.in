@@ -6,6 +6,8 @@ tags:
     - xmpp
     - pidgin
     - whiteboarding
+category:
+    - projects
 author: crodjer
 ---
 

@@ -6,6 +6,8 @@ published: false
 tags:
     - django
     - ratings
+categories:
+    - django
 draft: true
 author: crodjer
 ---

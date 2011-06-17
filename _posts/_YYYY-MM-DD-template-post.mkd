@@ -5,6 +5,9 @@ published: false
 tags:
     - tag 1
     - tag 2
+categories:
+    - category 1
+    - category 2
 author: crodjer
 ---
 

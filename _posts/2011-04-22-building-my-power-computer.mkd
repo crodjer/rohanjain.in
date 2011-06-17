@@ -4,9 +4,11 @@ title: Building my power computer
 slug: building-my-power-computer
 byline: crodjer's dream computer
 tags:
-    - computer
     - desktop
+    - laptop
     - configuration
+categories:
+    - computer
 author: crodjer
 ---
 

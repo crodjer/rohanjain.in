@@ -4,8 +4,11 @@ title: "Dynamic to Static"
 slug: dynamic-to-static
 byline: crodjer's new site
 tags:
-    - static
-    - website
+    - jekyll
+    - blog
+    - VIM
+category:
+    - about-blog
 author: crodjer
 ---
 
