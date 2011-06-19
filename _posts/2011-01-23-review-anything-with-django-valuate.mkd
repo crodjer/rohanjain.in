@@ -6,8 +6,7 @@ published: false
 tags:
     - django
     - ratings
-categories:
-    - hacking
+category: coding
 draft: true
 author: crodjer
 ---

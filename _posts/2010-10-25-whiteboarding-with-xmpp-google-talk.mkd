@@ -6,8 +6,7 @@ tags:
     - xmpp
     - pidgin
     - whiteboarding
-category:
-    - hacking
+category: coding
 author: crodjer
 ---
 
