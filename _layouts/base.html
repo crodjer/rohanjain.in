@@ -18,6 +18,13 @@
         <!-- Scripts-->
         <script type="text/javascript" src="{{ site.baseurl }}/js/head.min.js"></script>
         <script type="text/javascript">
+            //Google analytics
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-15806710-5']);
+            _gaq.push(['_trackPageview']);
+
+            //Disqus
+            var disqus_shortname = 'crodjer';
             {% if site.auto %}
             var disqus_developer = 1;
             {% else %}
@@ -26,19 +33,9 @@
                 "https://apis.google.com/js/plusone.js"
             );
             {% endif %}
-            {% if page.comments %}head.js("http://crodjer.disqus.com/embed.js");{% endif %}
             {% if page.comments-count %}head.js("http://crodjer.disqus.com/count.js");{% endif %}
+            {% if page.comments %}head.js("http://crodjer.disqus.com/embed.js");{% endif %}
 
-            //Google analytics
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-15806710-5']);
-            _gaq.push(['_trackPageview']);
-
-            //Disqus
-            var disqus_developer = {% if site.auto %}1{% else %}0{% endif %};
-            var disqus_shortname = 'crodjer';
-            dsq.type = 'text/javascript';
-            dsq.async = true;
         </script>
 
         <!--Google Analytics-->

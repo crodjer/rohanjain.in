@@ -7,8 +7,7 @@ tags:
     - desktop
     - laptop
     - configuration
-categories:
-    - personal
+category: personal
 author: crodjer
 ---
 

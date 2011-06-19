@@ -7,8 +7,7 @@ tags:
     - jekyll
     - blog
     - VIM
-category:
-    - personal
+category: personal
 author: crodjer
 ---
 
