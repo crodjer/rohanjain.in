@@ -1,0 +1,207 @@
+a {
+    color: #888;
+}
+
+a:hover {
+    color: #00E;
+}
+
+a:visited{
+    color:#555;
+}
+
+p {
+    margin: 10px 0;
+}
+
+h1, h2, h3, h4, h5{
+    margin: 1px 0 5px;
+}
+
+hr{
+    clear:both;
+}
+
+html{
+    min-height:101%;
+}
+
+body {
+    width: 950px;
+    margin: 0 auto;
+    font-family: sans-serif;
+    font-size: 1em;
+    line-height: 150%;
+    background-color: #FBFBFB;
+}
+
+.highlight pre{
+    position:relative;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    background: #E0FFB8;
+    border: 1px solid #94DA3A;
+    border-left: none;
+    border-right: none;
+}
+
+.container {
+    display: block;
+}
+
+#header {
+    margin-top: 15px;
+    color: #777;
+}
+
+#content {
+    float: left;
+    margin-top: 10px;
+    width: 710px;
+}
+
+#sidebar {
+    float: left;
+}
+
+#sidebar ul {
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+}
+
+#sidebar ul li a {
+    background-color: #CCCCCC;
+    color: #000000;
+    font-weight: bold;
+    font-size: 0.9em;
+    padding: 5px 10px;
+    margin-top: 5px;
+    text-decoration:none;
+    display:block;
+    text-transform: uppercase;
+    width:220px;
+}
+
+#sidebar ul li a:hover {
+    background-color: #555;
+    color: #eaeaea;
+}
+
+#header a, #header a:visited {
+    text-decoration: none;
+}
+
+#header h1{
+    font-size: 1em;
+    opacity: 0.6;
+    float:right;
+    display:inline;
+}
+
+#header span{
+    font-size:0.8em;
+}
+
+.posts {
+    width: 710px;
+}
+
+.paginator {
+}
+
+.post {
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    color: #333;
+    padding: 10px 15px;
+    width: 680px;
+    margin-bottom: 10px;
+    min-height:100px;
+}
+
+.post-title {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size:1.2em;
+    text-decoration:none;
+}
+
+.post-title a, .post-title:visited {
+    color: #444444;
+    text-decoration:none;
+}
+
+.post-title a:hover {
+    color: #0000EE;
+}
+
+.meta {
+    color: #9c8877;
+    width: 660px;
+    font-style: italic;
+    font-size: 0.8em;
+    margin-bottom: 5px;
+}
+
+.aryear{
+    display:inline;
+    margin:0;
+}
+
+.armonth{
+    position:relative;
+    left: 3.5em;
+    top: -1.5em;
+    margin:0;
+}
+
+.artitle{
+    position:relative;
+    left: 6.8em;
+    top:-3.2em;
+    font-size:0.9em;
+}
+
+.date {
+    width: 120px;
+}
+
+.share{
+    margin: 0 5px;
+    width:80px;
+}
+
+.tags {
+    min-width: 200px;
+}
+
+a.comments{
+    float:right;
+}
+
+.tag-cloud{
+    width: 250px;
+}
+
+#disqus_thread{
+    font-size: 0.9em;
+}
+
+.dsq-brlink{
+    font-size: 10px;
+}
+
+#footer {
+    border-top:3px solid #CCC;
+    position:relative;
+    top:10px;
+    margin: 10px 0;
+    clear:both;
+    text-align:right;
+    font-size:0.8em;
+}
+
+#footer img{
+    float:left;
+}
