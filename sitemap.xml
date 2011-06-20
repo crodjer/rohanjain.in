@@ -1,21 +1,46 @@
----
-layout: nil
----
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>http://{{ site.domain }}{{ site.baseurl }}/about/</loc>
-        <lastmod>{% if page.lastmod %}{{ post.lastmod }}{% else %}{{ site.time|date:"%Y-%m-%d" }}{% endif %}</lastmod>
+        <loc>http://www.rohanjain.in/about/</loc>
+        <lastmod>2011-06-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1</priority>
     </url>
 
-    {% for post in site.posts %}
+    
     <url>
-        <loc>http://{{ site.domain }}{{ site.baseurl }}{{ post.url }}</loc>
-        <lastmod>{% if post.lastmod %}{{ post.lastmod }}{% else %}{{ post.date|date: "%Y-%m-%d" }}{% endif %}</lastmod>
+        <loc>http://www.rohanjain.in/coding/2011/06/20/django-using-admin-horizontal-filter-in-forms/</loc>
+        <lastmod>2011-06-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    {% endfor %}
+    
+    <url>
+        <loc>http://www.rohanjain.in/personal/2011/06/16/dynamic-to-static/</loc>
+        <lastmod>2011-06-16</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>http://www.rohanjain.in/personal/2011/04/22/building-my-power-computer/</loc>
+        <lastmod>2011-04-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>http://www.rohanjain.in/coding/2010/12/24/hosting-multiple-sites-with-same-django-project/</loc>
+        <lastmod>2010-12-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>http://www.rohanjain.in/coding/2010/10/25/whiteboarding-with-xmpp-google-talk/</loc>
+        <lastmod>2010-10-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
 </urlset>
