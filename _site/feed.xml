@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+    <title>crodjer's blogRoll</title>
+    <link href="http://www.rohanjain.in/atom.xml" rel="self"/>
+    <link href="http://www.rohanjain.in/"/>
+    <updated>2011-06-21T01:31:34+05:30</updated>
+    <id>http://www.rohanjain.in/</id>
+    <author>
+        <name>Rohan Jain</name>
+        <email>crodjer@gmail.com</email>
+    </author>
+
+    
+    <entry>
+        <title>Django using admin horizontal filter in forms</title>
+        <link href="http://www.rohanjain.in/coding/2011/06/20/django-using-admin-horizontal-filter-in-forms"/>
+        <updated>2011-06-20T00:00:00+05:30</updated>
+        <id>http://www.rohanjain.in/coding/2011/06/20/django-using-admin-horizontal-filter-in-forms</id>
+        
+        <category term="coding" />
+        
+        <content type="html">&lt;p&gt;The django admin filter horizontal/vertical widgets are a really cool
+replacement of the inconvenient and ugly default multiple select elements.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/posts/hor_filter_dj.png&quot; alt=&quot;Django admin filter used in auth&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;But how do I get these in my normal forms?&lt;/em&gt;&lt;br /&gt;
+This is how:&lt;/p&gt;
+
+&lt;p&gt;First create a django form with &lt;code&gt;ModelMultipleChoiceField&lt;/code&gt; and &lt;code&gt;FilterSelectMultiple&lt;/code&gt;
+as widget. To get this to work you need to add some extra media files. Here
+is the snipet:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;forms.py&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;django&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forms&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;django.contrib.admin.widgets&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FilteredSelectMultiple&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TagForm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;forms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Form&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;tags&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ModelMultipleChoiceField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;queryset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tag&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+                                          &lt;span class=&quot;n&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;Select tags&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+                                          &lt;span class=&quot;n&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                          &lt;span class=&quot;n&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FilteredSelectMultiple&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+                                                    &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;tags&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+                                                    &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                                 &lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Media&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;css&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;&amp;#39;all&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;admin/css/widgets.css&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                   &lt;span class=&quot;s&quot;&gt;&amp;#39;css/uid-manage-form.css&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;js&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;/admin/jsi18n/&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Add form media and form in the template.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;django&quot;&gt;&lt;span class=&quot;x&quot;&gt;&amp;lt;!--HEAD --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;{{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;form.media&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;x&quot; /&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;!--BODY--&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;{{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;form&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;x&quot; /&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This extra css fixes some layout problems&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.selector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;330px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;.selector&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;submit&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;clear&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;both&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;.selector&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;15px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.selector&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;font-weight&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;270px&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;!important&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;17.2em&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;textarea&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;450px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Refrences: &lt;a href=&quot;http://j.mp/mAzALa&quot;&gt;http://j.mp/mAzALa&lt;/a&gt;, &lt;a href=&quot;http://j.mp/lIG2Fl&quot;&gt;http://j.mp/lIG2Fl&lt;/a&gt;&lt;br /&gt;
+I decided to create another post for this because, none of these suggests
+the use of admin widget directly.&lt;/p&gt;
+</content>
+    </entry>
+    
+    <entry>
+        <title>Dynamic to Static</title>
+        <link href="http://www.rohanjain.in/personal/2011/06/16/dynamic-to-static"/>
+        <updated>2011-06-16T00:00:00+05:30</updated>
+        <id>http://www.rohanjain.in/personal/2011/06/16/dynamic-to-static</id>
+        
+        <category term="personal" />
+        
+        <content type="html">&lt;p&gt;I just shifted my website to Jekyll static pages, from the completely
+dynamic &lt;em&gt;django&lt;/em&gt; based and database oriented &lt;a href=&quot;http://old.rohanjain.in&quot;&gt;old one&lt;/a&gt;.
+The factor which drove this decision: &lt;strong&gt;VIM&lt;/strong&gt; period.&lt;/p&gt;
+
+&lt;p&gt;I did not put up much on the old site because I couldn’t post directly from
+my offline editor to posts there. The functionalities that were present over
+there were to much overkill and completely invisible to the public, so better
+save the processing power required to render the content every time the
+page is accessed.&lt;/p&gt;
+
+&lt;p&gt;After the setting up of this, I expect a considerable increase in my
+blogging frequency.&lt;/p&gt;
+</content>
+    </entry>
+    
+    <entry>
+        <title>Building my power computer</title>
+        <link href="http://www.rohanjain.in/personal/2011/04/22/building-my-power-computer"/>
+        <updated>2011-04-22T00:00:00+05:30</updated>
+        <id>http://www.rohanjain.in/personal/2011/04/22/building-my-power-computer</id>
+        
+        <category term="personal" />
+        
+        <content type="html">&lt;p&gt;I have been using laptops as working machines for 3 years now. With my ancient
+C2D 2GHz, I can’t play games (I don’t anyways but still), use powerfull
+applications and am able to &lt;strong&gt;blink my eyes&lt;/strong&gt; (much more than once sometimes)
+for most of the executions. This asks for system upgrades. But wait! upgrade
+and laptop seem to be mutually exclusive. Now this is bad. I think &lt;em&gt;What is
+the reason to buy laptops?&lt;/em&gt;. I find only one: &lt;strong&gt;Portablity&lt;/strong&gt;. But is it really
+worth spending &lt;strong&gt;lots&lt;/strong&gt; of extra bucks just to achieve portability, which too
+come at price of way lower configuration? Aren’t tablets the one for portability?  &lt;/p&gt;
+
+&lt;p&gt;Looking for a good laptop around, I found to get one with i7 drains around
+90k-100k Rs and still the configuration will be way low end against the one
+I can get according to below one of a desktop. So I get a really powerfull
+desktop and save up enough to get a good Tablet for portability.&lt;/p&gt;
+
+&lt;p&gt;Complete configuration details at my old website &lt;a href=&quot;http://old.rohanjain.in/&quot;&gt;http://old.rohanjain.in/&lt;/a&gt;&lt;/p&gt;
+</content>
+    </entry>
+    
+    <entry>
+        <title>Hosting multiple sites with same django project</title>
+        <link href="http://www.rohanjain.in/coding/2010/12/24/hosting-multiple-sites-with-same-django-project"/>
+        <updated>2010-12-24T00:00:00+05:30</updated>
+        <id>http://www.rohanjain.in/coding/2010/12/24/hosting-multiple-sites-with-same-django-project</id>
+        
+        <category term="coding" />
+        
+        <content type="html">&lt;p&gt;The first thing the title triggers in the mind is the django &lt;a href=&quot;http://docs.djangoproject.com/en/dev/ref/contrib/sites/&quot;&gt;sites framework&lt;/a&gt;. Well this post is mostly related to that but suggests its utilization in slight different way. As we can get from the docs in every implementation of the sites framework you have to hardcode the SITE_ID in your settings.py file. So it assumes that you have multiple django projects or at least multiple settings.py files which will be used as the django settings module for the process. So basically it provides us to share database between multiple sites which is a nice feature.  &lt;/p&gt;
+
+&lt;p&gt;For our case which is, we want to use a single django project to across multiple domains while presenting altered versions of content dependant on the originating domain (the domain names cannot be hardcoded as the number of domains is dynamic too.), we have to do something different to get this level of dynamicity. I did sone research about this on the &lt;strong&gt;#django&lt;/strong&gt; IRC, &lt;strong&gt;stackoverflow&lt;/strong&gt; and &lt;strong&gt;google&lt;/strong&gt;. Here are some complete/incomplete ways I found out to achieve this.&lt;/p&gt;
+
+&lt;h3 id=&quot;using-custom-apps-and-modules&quot;&gt;Using custom apps and modules&lt;/h3&gt;
+&lt;p&gt;These ways would need us to define many custom models and middleware, hence a lot of work. The domain management would be done by the django project itself through middleware which use the HTTP_REQUST header and hence every request will be processed to obtain the information required to do database queries and render the views. So these methods looks like bit safer but would cause a performance decrease. &lt;/p&gt;
+
+&lt;h4 id=&quot;modify-contrib&quot;&gt;Modify contrib&lt;/h4&gt;
+&lt;p&gt;This is the rather easier way which involves modifications of code of some django contrib apps here and there. 
+Just copy the apps from django-&amp;gt;contrib folder to the project directory and modify them to accept request as argument give out results according to the HTTP_HOST and Sites database. Also change all the imo reference of these apps from &lt;em&gt;django.contrib.app&lt;/em&gt; to &lt;em&gt;app&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;forget-contrib&quot;&gt;Forget contrib&lt;/h4&gt;
+&lt;p&gt;Another way would be to forget the contrib apps and write your own custom similar ones from scratch. This may be a better way for long term projects which require highly customized and special functionalities. But it will require us to write a lot of code, though the existing modules can be used for reference. &lt;/p&gt;
+
+&lt;h3 id=&quot;using-unaltered-django-modules&quot;&gt;Using unaltered django modules&lt;/h3&gt;
+&lt;p&gt;If we are successful in doing this it will probably let us build our project in much less lines of code and using the already existent django contribs as is. So if we don’t modify django modules then what do we modify to achieve the dynamicity. &lt;/p&gt;
+
+&lt;h4 id=&quot;wsgi&quot;&gt;.wsgi&lt;/h4&gt;
+&lt;p&gt;This is what we could do: First define multiple settings files in some pattern so that they can be matched according to the domain name, say &lt;em&gt;settings_domain.py&lt;/em&gt;. Now if the deployment is done using wsgi script (generally in &lt;a href=&quot;http://docs.djangoproject.com/en/dev/howto/deployment/modwsgi/&quot;&gt;this&lt;/a&gt;) format. In the wsgi script we have to call the respective settings_domain.py according to the accessing domain name. So this seems pretty good but it can be dangerous. As we are setting a global variable (&lt;code&gt;os.environ['DJANGO_SETTINGS_MODULE']&lt;/code&gt;) it is not at all a &lt;strong&gt;thread safe&lt;/strong&gt; method. If there are two requests close enough this may pose dangerous effects. Unless we are not able to make sure that a new fork / new wsgi demon will be created per domain. So maybe one could suggest to write a good wsgi script which could handle this.&lt;/p&gt;
+
+&lt;h4 id=&quot;htaccess&quot;&gt;.htaccess&lt;/h4&gt;
+&lt;p&gt;Yet another way would be to make the .htaccess file dynamic, if it is possible. I don’t have any idea if I could write an apache config file that would trigger the correct wsgi file (which triggers the correct settings one). Maybe one could suggest a way of doing this (through regex?). To me thiss seems the best way which would trigger a corresponding process for each domain.&lt;/p&gt;
+
+&lt;h4 id=&quot;django-multisite&quot;&gt;django-multisite&lt;/h4&gt;
+&lt;p&gt;This is a django application I found (Source: https://github.com/shestera/django-multisite) which utilize &lt;strong&gt;thread locals&lt;/strong&gt; to dynamically define the SITE_ID setting according to the request domain. I have tried this and is actually working but as the django documentation has &lt;a href=&quot;http://code.djangoproject.com/wiki/CookBookThreadlocalsAndUser&quot;&gt;pretty clearly&lt;/a&gt; warned against its use, I am in doubt if it is a safe way. &lt;/p&gt;
+
+&lt;p&gt;Till now I am still unclear of what method to implement among the above or some other one. There are some pros and cons of all the methods.  &lt;/p&gt;
+
+&lt;p&gt;I apologise if I have written something wrong, these all are only some methods I have found out while searching the web and discussing on the groups, so please specify if there is any mistake or you can suggest something related to this.&lt;/p&gt;
+</content>
+    </entry>
+    
+    <entry>
+        <title>Whiteboarding with XMPP (Google Talk)</title>
+        <link href="http://www.rohanjain.in/coding/2010/10/25/whiteboarding-with-xmpp-google-talk"/>
+        <updated>2010-10-25T00:00:00+05:30</updated>
+        <id>http://www.rohanjain.in/coding/2010/10/25/whiteboarding-with-xmpp-google-talk</id>
+        
+        <category term="coding" />
+        
+        <content type="html">&lt;p&gt;Sometimes, being too lazy to use the type, you might wish for some other way to interact with others. Well there is one and quit an interactive and entertaining one, a whiteboarding interface, i.e. the people involved in chat can do collaborative drawings, play games, convey emotions not possible by typing etc. It can have some bigger implementations like teaching, presentations many more utilities can be innovated.  &lt;/p&gt;
+
+&lt;p&gt;There is already a small implementation of this feature in yahoo by name doodle. Seeing its utility one might wonder why this brilliant feature is not implemented with the widely used chat protocol, XMPP (Google Talk is based on XMPP)? Well I cant find out why not.  &lt;/p&gt;
+
+&lt;p&gt;So, we have taken an initiative. Our group (&lt;a href=&quot;http://github.com/crodjer&quot; title=&quot;&quot; target=&quot;_blank&quot;&gt;Me&lt;/a&gt;, &lt;a href=&quot;http://github.com/snktagarwal&quot; title=&quot;&quot; target=&quot;_blank&quot;&gt;Sanket Agarwal&lt;/a&gt; and &lt;a href=&quot;http://github.com/psjinx&quot; title=&quot;&quot; target=&quot;_blank&quot;&gt;Pankaj Singh&lt;/a&gt;) is working for implementing this feature with the XMPP protocol, at least for pidgin users.  &lt;/p&gt;
+
+&lt;h4 id=&quot;technical-info&quot;&gt;Technical Info:&lt;/h4&gt;
+&lt;p&gt;Project Repository: &lt;a href=&quot;http://github.com/crodjer/pidgin_whiteboard&quot;&gt;http://github.com/crodjer/pidgin_whiteboard&lt;/a&gt;&lt;br /&gt;
+Updates: &lt;a href=&quot;#updates&quot;&gt;Project updates&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This project involves building a basic implementation of the protocol specified in,  &lt;a href=&quot;http://xmpp.org/extensions/xep-0284.html&quot;&gt;http://xmpp.org/extensions/xep-0284.html&lt;/a&gt;, using the SVG graphics specified in, &lt;a href=&quot;http://www.w3.org/2000/svg&quot;&gt;http://www.w3.org/2000/svg&lt;/a&gt;. Both together define the standards for our work.  &lt;/p&gt;
+
+&lt;p&gt;We hope to provide the following features:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Simple whiteboarding drawing Lines, Polygons, Circles and Free Curves.&lt;/li&gt;
+  &lt;li&gt;Fancy Texting&lt;/li&gt;
+  &lt;li&gt;Image Sending&lt;/li&gt;
+  &lt;li&gt;This will provide users with a more enriching experience.  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I am really excited about this project as it would be one of my initial contributions to the great open-source community. Till now it have been a fine ride of purpling, jingling and jabbering with pidgin.  &lt;/p&gt;
+
+&lt;h4 id=&quot;updates&quot;&gt;Updates:&lt;/h4&gt;
+&lt;p&gt;&lt;em&gt;29 Nov 2010&lt;/em&gt;&lt;br /&gt;
+Work resumed after a brief pause. The target now is to integrate &lt;a href=&quot;http://xmpp.org/extensions/xep-0284.html&quot; target=&quot;_blank&quot;&gt;shared XML editing&lt;/a&gt; with jingle and add more features to the whiteboard graphical gui.  &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;10 Nov 2010&lt;/em&gt;&lt;br /&gt;
+Our Proof of concept is ready. All the basic features of whiteboard are now incorporated. A usable implementation now exists. You may fetch and compile the code from the git repository (Address mentioned above). This is how it looks:&lt;br /&gt;
+&amp;lt;iframe width=&quot;425&quot; height=&quot;349&quot; src=&quot;http://www.youtube.com/embed/sYKutp4I4Zs&quot;&amp;gt;&amp;lt;/iframe&amp;gt;
+A &lt;a href=&quot;http://img577.imageshack.us/img577/7910/screenshot1kg.png&quot;&gt;Snapshot&lt;/a&gt;.  &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;9 Nov 2010&lt;/em&gt;
+Syncing of whiteboards is up. The whiteboards are updated as the two users draw using their brushes. So a responsive interface is present. Just some small bug fix and feature additions remain now.  &lt;br /&gt;
+&lt;a href=&quot;http://img259.imageshack.us/img259/7980/screenshotrd.png&quot; target=&quot;_blank&quot;&gt;Screenshot&lt;/a&gt;  &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;6 Nov 2010&lt;/em&gt;&lt;br /&gt;
+Now session initiate and accept integrated (popping up of whiteboard on both ends). Slight change in way of implementation, use of libjingle is now on a hold, creating a custom whiteboard message format for session management for now. Code in &lt;strong&gt;dcrodjer&lt;/strong&gt; branch of the above git repository. 
+A screenshot of the code working: &lt;a href=&quot;http://img837.imageshack.us/img837/8250/screenshot1gb.png&quot; target=&quot;_blank&quot;&gt;Image for session implementation&lt;/a&gt;  &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;24 Oct 2010&lt;/em&gt;&lt;br /&gt;
+A whiteboard interface initiates. This is how it look like:&lt;br /&gt;
+&lt;a href=&quot;http://img841.imageshack.us/img841/5516/59586846.png&quot; target=&quot;_blank&quot;&gt;Image 1&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://img221.imageshack.us/img221/4198/65357038.png&quot; target=&quot;_blank&quot;&gt;Image 2&lt;/a&gt;&lt;/p&gt;
+</content>
+    </entry>
+    
+
+</feed>
