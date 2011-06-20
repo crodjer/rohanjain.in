@@ -18,10 +18,6 @@ h1, h2, h3, h4, h5{
     margin: 1px 0 5px;
 }
 
-h3 a{
-    text-decoration:none;
-}
-
 hr{
     clear:both;
 }
@@ -127,10 +123,13 @@ body {
 .post-title {
     margin-top: 10px;
     margin-bottom: 5px;
+    font-size:1.2em;
+    text-decoration:none;
 }
 
 .post-title a, .post-title:visited {
     color: #444444;
+    text-decoration:none;
 }
 
 .post-title a:hover {
@@ -177,7 +176,7 @@ body {
     min-width: 200px;
 }
 
-.meta a{
+a.comments{
     float:right;
 }
 

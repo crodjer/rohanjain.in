@@ -1,9 +1,12 @@
 ---
 layout: main
+comments-count: true
 ---
 
 <div class="posts">
     {% for post in site.tags[page.tag] %}
-    {% include post.html %}
+    <div class="post">
+        {% include post-header.html %}
+    </div>
     {% endfor %}
 </div>
