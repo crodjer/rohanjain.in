@@ -18,7 +18,7 @@ replacement of the inconvenient and ugly default multiple select elements.
 *But how do I get these in my normal forms?*  
 This is how:
 
-First create a django form with `ModalMultipleChoiceField` and `FilterSelectMultiple`
+First create a django form with `ModelMultipleChoiceField` and `FilterSelectMultiple`
 as widget. To get this to work you need to add some extra media files. Here
 is the snipet:
 
