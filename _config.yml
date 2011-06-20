@@ -1,8 +1,0 @@
-lsi: true
-pygments: true
-exclude: README.markdown, scripts/*
-permalink: pretty
-paginate: 4
-baseurl:
-markdown: rdiscount
-domain: www.rohanjain.in
