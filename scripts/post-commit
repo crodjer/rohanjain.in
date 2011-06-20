@@ -21,8 +21,6 @@ _currbranch="$(grep "^*" < <("$_git" branch) | cut -d' ' -f2)"
 if [[ $_currbranch == $_origbranch ]]; then # we should generate the site
     # go to root dir of the repo
     cd "$("$_git" rev-parse --show-toplevel)"
-    # copy 404.html generated from markdown to root directory
-    cp _site/404/index.html 404.html
     # generate the site
     "$_generate" ${_opts[@]} . "$_site"
     # switch to branch the site will be stored
@@ -36,7 +34,7 @@ if [[ $_currbranch == $_origbranch ]]; then # we should generate the site
     # commit all changes with a default message
     "$_git" commit -a -m "updated site @ $(date +"%F %T")"
     # cleanup
-    rm -rfv "$_site"
+    rm -rf "$_site"
     # return
     "$_git" checkout "$_origbranch"
 fi
