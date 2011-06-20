@@ -1,0 +1,12 @@
+---
+layout: main
+title: Categories
+---
+
+
+<div class="post">
+    <h3>Categories</h3>
+    {% for category in page.categories %}
+    <li><a href="{{ baseurl }}/categories/{{ category | replace:' ', '-' | downcase  }}">{{ category|capitalize }}</a></li>
+    {% endfor %}
+</div>

@@ -1,0 +1,9 @@
+---
+layout: main
+---
+
+<div class="posts">
+    {% for post in site.tags[page.tag] %}
+    {% include post.html %}
+    {% endfor %}
+</div>
