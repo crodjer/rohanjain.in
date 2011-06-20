@@ -35,8 +35,14 @@ body {
     background-color: #FBFBFB;
 }
 
-pre{
+.highlight pre{
+    position:relative;
     border: 1px solid #ccc;
+    padding: 5px 10px;
+    background: #E0FFB8;
+    border: 1px solid #94DA3A;
+    border-left: none;
+    border-right: none;
 }
 
 .container {
