@@ -13,7 +13,7 @@ author: crodjer
 The django admin filter horizontal/vertical widgets are a really cool
 replacement of the inconvenient and ugly default multiple select elements.
 
-![Django admin filter used in auth]({{ site.baseurl }}/images/posts/hor_filter_dj.png)
+![Django admin filter used in auth](http://i1105.photobucket.com/albums/h356/crodjer/Blog%20Posts/Selection_010.png)
 
 *But how do I get these in my normal forms?*  
 This is how:
