@@ -36,13 +36,8 @@ Current projects:
  - **[Google Summer of Code](http://www.google-melange.com/gsoc/project/google/gsoc2011/crodjer/10001)**: Summer of code project with universal subtitles
  - An internship with **Policy Innovations**
 
-My **to know** list for the summers:
-
-  - Java
-  - Algorithm Design
-
 Work Environment:
 
   - Debian
   - Gnome
-  - Vim, Tmux, Google Chrome, Irssi, Rhythmbox
+  - Vim, <s>Tmux</s> GNU Screen, Google Chrome, Irssi, Rhythmbox
