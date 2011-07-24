@@ -14,6 +14,13 @@ p {
     margin: 10px 0;
 }
 
+blockquote{
+    font-size: 0.9em;
+    background: #efefef;
+    padding: 1px 15px;
+    margin: 2px 15px;
+}
+
 h1, h2, h3, h4, h5{
     margin: 1px 0 5px;
 }

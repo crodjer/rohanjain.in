@@ -4,13 +4,57 @@
     <title>crodjer's blogRoll</title>
     <link href="http://www.rohanjain.in/atom.xml" rel="self"/>
     <link href="http://www.rohanjain.in/"/>
-    <updated>2011-07-09T10:15:00+05:30</updated>
+    <updated>2011-07-24T14:36:25+05:30</updated>
     <id>http://www.rohanjain.in/</id>
     <author>
         <name>Rohan Jain</name>
         <email>crodjer@gmail.com</email>
     </author>
 
+    
+    <entry>
+        <title>Why I do not prefer a shower</title>
+        <link href="http://www.rohanjain.in/random/2011/07/24/why-i-do-not-prefer-a-shower"/>
+        <updated>2011-07-24T00:00:00+05:30</updated>
+        <id>http://www.rohanjain.in/random/2011/07/24/why-i-do-not-prefer-a-shower</id>
+        
+        <category term="random" />
+        
+        <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;Let us say you have amount of water equal to the capacity of a bucket available
+for a bath. How would you prefer to use it? &lt;em&gt;All of it through a shower&lt;/em&gt;?
+&lt;em&gt;Or a mug to take out the water when you actually need it&lt;/em&gt;?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In India, our elder generations always suggest against the &lt;em&gt;new&lt;/em&gt; concept of
+&lt;em&gt;taking a “cool” shower&lt;/em&gt; for a bath. They prefer a mug with a bucket and pour
+it manually. Now, why is that? Isn’t it a faster, easier and more convenient
+to just have a shower do it for you? Let me tell you something before
+getting back at this:&lt;/p&gt;
+
+&lt;p&gt;Cell phone network services now allow us to pay per second (even smaller
+time units sometimes) instead of per minute to let the users pay according
+to the servce they use more precisely. A cloud hosting service allocates
+resources only when required instead of permanenty dedicating a resource
+even if it is not being used. The 8GB storage showing in Gmail doesn’t mean
+that google has put aside 8GB of space just for you. It means that it would
+be available when you need.&lt;br /&gt;
+These surely require more complicated implementation but yet are accepted
+technological advances.&lt;/p&gt;
+
+&lt;p&gt;Now back to our bath, consider water as the money you spend for services
+and your getting wet its usage. Here I observe that there is a revese
+development going on in the above analogy. We cannot use the water comming
+out of the shower at a time completely, it always does go wasted. No one
+needs the shower to run all the time. As far as the convenience, speed is
+concerned it will depend on if you actually are taking a bath or just trying
+to pretend to yourself that you did.&lt;/p&gt;
+
+&lt;p&gt;Taking a shower is &lt;em&gt;not&lt;/em&gt; “cool”.&lt;br /&gt;
+Thank you for reading this. Please at least consider the humble bucket and
+mug.&lt;/p&gt;
+</content>
+    </entry>
     
     <entry>
         <title>Django using admin horizontal filter in forms</title>

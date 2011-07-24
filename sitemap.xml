@@ -2,11 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>http://www.rohanjain.in/about/</loc>
-        <lastmod>2011-07-09</lastmod>
+        <lastmod>2011-07-24</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1</priority>
     </url>
 
+    
+    <url>
+        <loc>http://www.rohanjain.in/random/2011/07/24/why-i-do-not-prefer-a-shower/</loc>
+        <lastmod>2011-07-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
     
     <url>
         <loc>http://www.rohanjain.in/coding/2011/06/20/django-using-admin-horizontal-filter-in-forms/</loc>
