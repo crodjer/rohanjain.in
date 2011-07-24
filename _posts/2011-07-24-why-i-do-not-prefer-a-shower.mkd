@@ -12,7 +12,7 @@ author: crodjer
 ---
 
 > If you only have water quantity equal to the capacity of a bucket available
-> for a bath. How would you prefer to use it? *All of it through a shower*?
+> for a bath, how would you prefer to use it? *All at once through a shower*?
 > *Or a mug to take out the water when you actually need it*?
 
 In India, our elder generations always suggest against the *new* concept of
