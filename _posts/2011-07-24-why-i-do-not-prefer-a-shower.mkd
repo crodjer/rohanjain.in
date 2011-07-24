@@ -2,7 +2,7 @@
 layout: post
 title: "Why I do not prefer a shower"
 slug: "why-i-do-not-prefer-a-shower"
-published: false
+published: true
 tags:
     - practices
     - conservation
