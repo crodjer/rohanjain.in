@@ -11,7 +11,7 @@ category: random
 author: crodjer
 ---
 
-> Let us say you have amount of water equal to the capacity of a bucket available
+> If you only have water quantity equal to the capacity of a bucket available
 > for a bath. How would you prefer to use it? *All of it through a shower*?
 > *Or a mug to take out the water when you actually need it*?
 
