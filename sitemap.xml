@@ -9,6 +9,13 @@
 
     
     <url>
+        <loc>http://www.rohanjain.in/personal/2011/08/11/what-i-learnt-about-buying-computers/</loc>
+        <lastmod>2011-08-11</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
         <loc>http://www.rohanjain.in/personal/2011/07/18/an-incident-on-the-rails/</loc>
         <lastmod>2011-07-18</lastmod>
         <changefreq>weekly</changefreq>

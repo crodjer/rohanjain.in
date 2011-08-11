@@ -4,13 +4,66 @@
     <title>crodjer's blogRoll</title>
     <link href="http://www.rohanjain.in/atom.xml" rel="self"/>
     <link href="http://www.rohanjain.in/"/>
-    <updated>2011-08-11T20:26:10+05:30</updated>
+    <updated>2011-08-11T20:32:08+05:30</updated>
     <id>http://www.rohanjain.in/</id>
     <author>
         <name>Rohan Jain</name>
         <email>crodjer@gmail.com</email>
     </author>
 
+    
+    <entry>
+        <title>What I learnt about buying computers</title>
+        <link href="http://www.rohanjain.in/personal/2011/08/11/what-i-learnt-about-buying-computers"/>
+        <updated>2011-08-11T00:00:00+05:30</updated>
+        <id>http://www.rohanjain.in/personal/2011/08/11/what-i-learnt-about-buying-computers</id>
+        
+        <category term="personal" />
+        
+        <content type="html">&lt;p&gt;Some months ago I decided about the what my new computer’s](http://j.mp/o043VH)
+configuration will be. It was a really powerful machine with all the latest
+parts (they still are latest!). Its main strength was the new intel processor
+architecture - &lt;a href=&quot;http://j.mp/qbjSyR&quot;&gt;Sandy Bridge&lt;/a&gt;. I had ruled out laptops
+considering the higer costs with lower configuration and absence of the Sandy
+Bridge architecture.&lt;/p&gt;
+
+&lt;p&gt;But due to unavailablility of processor and motherboard in India, I had to wait
+for a long time till I figured out how to get all the parts. While the wait, I
+started doing a smart upgrade of my existing notebook. I got a new monitor,
+keyboard (The generic stuff). The one unique thing that not many people try was
+a &lt;strong&gt;Solid State Drive&lt;/strong&gt; (glad I am enjoying one). About this time only I took
+a look at the detailed configuration of my laptop and upgrade options. I was
+surprised to see that the maximum resolution the machine served was upto
+8192 x 8192. After the SSD and a memory upgrade I was surprised to see the
+performance boost and thanks it was giving me back. I was having all the fun
+using multiple screens and not caring if I left any programs open. So I decided
+to not get any new machine at all and keep using my CQ40-144TU for a while till
+I find something worth upgrading in the market.&lt;/p&gt;
+
+&lt;p&gt;Since the time when I first decided for a new machine and now, I saw that there
+were a &lt;em&gt;lot&lt;/em&gt; of notebooks availabe with the &lt;em&gt;2nd Generation Core i series&lt;/em&gt;
+(Sandy Bridge) processors and at compelling prices. So I started a new search
+with queries: &lt;strong&gt;Intel HD Graphics 3000&lt;/strong&gt; (Ensures Sandy Bridge arch. and no
+power hungry graphics card), &lt;strong&gt;Core i5&lt;/strong&gt; (Ensures hyper threading and more than
+required processing power and &lt;strong&gt;Free DOS&lt;/strong&gt; (Of Course! - I dont want to waste
+such a nice notebook with windows). There are some notebooks which come out
+as reasonable buys.&lt;/p&gt;
+
+&lt;p&gt;I rulled out Dell on the first go as it only seems like it that they
+allow you to customize. If you want a simple machine without all the useless
+(it is subjective) stuffs like Online backup (If I wanted one I would use a VPS
+, Windows (I can’t understand why force it!). What I want is a processor +
+motherboard with some notebook essentials with it. HP and ThinkPads are the
+brands I am looking at now. They provide some business notebooks which serve
+all my purposes.&lt;br /&gt;
+I’ll tell about the final machine which I bought in some newer post.&lt;/p&gt;
+
+&lt;p&gt;Still, I would always miss my old machine, which has always been there with me
+for roughly 1.5 years. It is still doing pretty good (This post is written with
+one only) and has more upgrade capabilities. It is well over &lt;em&gt;good enough&lt;/em&gt; as a
+general usage computer.&lt;/p&gt;
+</content>
+    </entry>
     
     <entry>
         <title>An incident on the RAILS</title>
