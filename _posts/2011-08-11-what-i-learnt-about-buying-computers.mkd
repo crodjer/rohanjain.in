@@ -10,8 +10,8 @@ category: personal
 author: crodjer
 ---
 
-Some months ago I decided about the what my new computer's](http://j.mp/o043VH)
-configuration will be. It was a really powerful machine with all the latest
+Some months ago I decided about the what my new [computer's configuration](http://j.mp/o043VH)
+will be. It was a really powerful machine with all the latest
 parts (they still are latest!). Its main strength was the new intel processor
 architecture - [Sandy Bridge](http://j.mp/qbjSyR). I had ruled out laptops
 considering the higer costs with lower configuration and absence of the Sandy
