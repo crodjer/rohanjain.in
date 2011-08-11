@@ -41,5 +41,5 @@ f = File.open(path, 'w')
 f.write(header)
 f.close
 
-system("gvim --remote-tab-silent #{path}")
+system("$EDITOR #{path}")
 exit(0)
