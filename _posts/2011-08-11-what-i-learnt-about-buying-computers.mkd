@@ -2,7 +2,7 @@
 layout: post
 title: "What I learnt about buying computers"
 slug: "what-i-learnt-about-buying-computers"
-published: false
+published: true
 tags:
     - computer
     - shopping
