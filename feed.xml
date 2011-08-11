@@ -4,13 +4,54 @@
     <title>crodjer's blogRoll</title>
     <link href="http://www.rohanjain.in/atom.xml" rel="self"/>
     <link href="http://www.rohanjain.in/"/>
-    <updated>2011-07-25T20:47:08+05:30</updated>
+    <updated>2011-08-11T16:11:03+05:30</updated>
     <id>http://www.rohanjain.in/</id>
     <author>
         <name>Rohan Jain</name>
         <email>crodjer@gmail.com</email>
     </author>
 
+    
+    <entry>
+        <title>An incident on the RAILS</title>
+        <link href="http://www.rohanjain.in/personal/2011/07/18/an-incident-on-the-rails"/>
+        <updated>2011-07-18T00:00:00+05:30</updated>
+        <id>http://www.rohanjain.in/personal/2011/07/18/an-incident-on-the-rails</id>
+        
+        <category term="personal" />
+        
+        <content type="html">&lt;p&gt;After having marvellous summers, I was comming back to collage. It is a tiring
+jounrney of total 30 hrs. First Jaipur-Howrah and then to Kharagpur from there.
+I was happy as I had got my confirmed reservation: Seat 32 in B-1 (It is nearly
+impossible to get a confirmed reservation in that train). The boarding time was
+2 AM in the morning (or night?).&lt;/p&gt;
+
+&lt;p&gt;So I boarded the train and headed to my seat, only to find out it was already
+occupied. &lt;em&gt;Mr. A&lt;/em&gt; was sitting there. So we (my parents had comewith me to see me
+of) asked Mr. A to move as this seat was reserved on my name (I had checked out
+my name on the reservation chart already). He says “This is not my seat, I have
+exchanged it with him (pointing to &lt;em&gt;Mr. B&lt;/em&gt;)”. So on asking the same to Mr. B,
+he also replied the same pointing to &lt;em&gt;Mr. X&lt;/em&gt;  and finally, we found the
+conflicting passanger. 5 - 6 people of the cabin had woken up from their sleeps
+because of all the noise.&lt;/p&gt;
+
+&lt;p&gt;Mr. X had a ticket which said “B-1 32” over the same train number and the right
+date of the month. Believe me about 4 -5 people checked the ticked, including
+myself. Infact it had a signature of a TC denoting &lt;em&gt;verified&lt;/em&gt;. This guy was
+adament and refusing to talk. We contacted the current TC who also agreed that
+it was my seat. He asked me to at least get the conflicting ticket as Mr. X
+wasn’t comming down. Finally he also decided to accompany me with his ticket
+mouthing bad words to the official. The ticket looked all OK to him too, before
+his eyes went on the month. It was a ticket of the train’s next month journy!
+The guy then silently unboarded with his stuff and maybe boarded a general
+compartment. Everybody who had exchanged “his” seat came back to theirs. Almost
+everybody from the cabin was awake now. And I got my seat on the train.&lt;/p&gt;
+
+&lt;p&gt;Maybe Mr. X didn’t know that he was travelling in the wrong month or he had
+booked a wrong ticket (more probable) or he was thinking that he could fool
+the system (I dont feel sorry for him at all if this were the truth).&lt;/p&gt;
+</content>
+    </entry>
     
     <entry>
         <title>Django using admin horizontal filter in forms</title>
@@ -34,66 +75,9 @@ is the snipet:&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;forms.py&lt;/em&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;django&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forms&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;django.contrib.admin.widgets&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FilteredSelectMultiple&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TagForm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;forms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Form&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;tags&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;forms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ModelMultipleChoiceField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;queryset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tag&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;objects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
-                                          &lt;span class=&quot;n&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;Select tags&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-                                          &lt;span class=&quot;n&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                                          &lt;span class=&quot;n&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FilteredSelectMultiple&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-                                                    &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;tags&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-                                                    &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                                                 &lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Media&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;css&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;s&quot;&gt;&amp;#39;all&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;admin/css/widgets.css&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                   &lt;span class=&quot;s&quot;&gt;&amp;#39;css/uid-manage-form.css&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;js&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;/admin/jsi18n/&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
 &lt;p&gt;Add form media and form in the template.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;django&quot;&gt;&lt;span class=&quot;x&quot;&gt;&amp;lt;!--HEAD --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;{{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;form.media&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;x&quot; /&gt;
-&lt;span class=&quot;x&quot;&gt;&amp;lt;!--BODY--&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;{{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;form&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;}}&lt;/span&gt;&lt;span class=&quot;x&quot; /&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
 &lt;p&gt;This extra css fixes some layout problems&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.selector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;330px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nc&quot;&gt;.selector&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;submit&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;clear&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;both&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nc&quot;&gt;.selector&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;h2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;15px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;.selector&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;font-weight&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;270px&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;!important&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;17.2em&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;textarea&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;450px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
 
 &lt;p&gt;Refrences: &lt;a href=&quot;http://j.mp/mAzALa&quot;&gt;http://j.mp/mAzALa&lt;/a&gt;, &lt;a href=&quot;http://j.mp/lIG2Fl&quot;&gt;http://j.mp/lIG2Fl&lt;/a&gt;&lt;br /&gt;
 I decided to create another post for this because, none of these suggests
