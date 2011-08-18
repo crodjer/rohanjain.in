@@ -6,7 +6,7 @@ slug: hosting-multiple-sites-with-same-django-project
 tags:
     - django
     - hosting
-category: coding
+category: hacking
 author: crodjer
 ---
 

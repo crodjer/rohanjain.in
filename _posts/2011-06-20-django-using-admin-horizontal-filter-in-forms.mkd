@@ -6,7 +6,7 @@ tags:
     - django
     - widget
     - snipet
-category: coding
+category: hacking
 author: crodjer
 ---
 
