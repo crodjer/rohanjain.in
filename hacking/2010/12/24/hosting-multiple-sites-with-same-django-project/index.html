@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hosting multiple sites with same django project - Rohan Jain</title>
+        <meta name="author" content="Rohan Jain">
+        <meta charset=utf-8>
+
+        <!-- Favicon -->
+        <link href="/favicon.ico" rel="shortcut icon"/>
+
+        <!--Stylesheets-->
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/style.css"/>
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/syntax.css"/>
+
+        <!--Atom Feed-->
+        <link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml"/>
+
+        <!-- Scripts-->
+        <script type="text/javascript" src="/js/head.min.js"></script>
+        <script type="text/javascript">
+            //Google analytics
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-15806710-5']);
+            _gaq.push(['_trackPageview']);
+
+            //Disqus
+            var disqus_shortname = 'crodjer';
+            
+            head.js(
+                "http://www.google-analytics.com/ga.js",
+                "https://apis.google.com/js/plusone.js"
+            );
+            
+            head.js("http://crodjer.disqus.com/count.js");
+            head.js("http://crodjer.disqus.com/embed.js");
+        </script>
+  </head>
+  <body>
+      <div id="header">
+    <span class="byline">what crodjer has to say...</span>
+    <h1><a href="/">Rohan Jain</a></h1>
+</div>
+
+<div id="content">
+    
+<div class="post">
+    <h2 class="post-title" id="hosting-multiple-sites-with-same-django-project"><a href="/hacking/2010/12/24/hosting-multiple-sites-with-same-django-project/">Hosting multiple sites with same django project</a></h2>
+<div class="meta">
+    <span class="date">
+        <img alt="Posted on" src="/images/calendar.png"/> 24 Dec, 2010
+    </span>
+    <span class="share">
+    </span>
+    <span class="tags" >
+        
+        <img alt="Tags" src="/images/tag.png"/>
+        
+        <a href="/tags/django">django</a>
+        
+        <a href="/tags/hosting">hosting</a>
+        
+        
+    </span>
+
+    <a class="comments" href="/hacking/2010/12/24/hosting-multiple-sites-with-same-django-project/#disqus_thread" data-disqus-identifier="hosting-multiple-sites-with-same-django-project">Comments</a>
+</div>
+
+
+    <div class='post-text'>
+        
+        <p>The first thing the title triggers in the mind is the django <a href="http://docs.djangoproject.com/en/dev/ref/contrib/sites/">sites framework</a>. Well this post is mostly related to that but suggests its utilization in slight different way. As we can get from the docs in every implementation of the sites framework you have to hardcode the SITE_ID in your settings.py file. So it assumes that you have multiple django projects or at least multiple settings.py files which will be used as the django settings module for the process. So basically it provides us to share database between multiple sites which is a nice feature.  </p>
+
+<p>For our case which is, we want to use a single django project to across multiple domains while presenting altered versions of content dependant on the originating domain (the domain names cannot be hardcoded as the number of domains is dynamic too.), we have to do something different to get this level of dynamicity. I did sone research about this on the <strong>#django</strong> IRC, <strong>stackoverflow</strong> and <strong>google</strong>. Here are some complete/incomplete ways I found out to achieve this.</p>
+
+<h3 id="using-custom-apps-and-modules">Using custom apps and modules</h3>
+<p>These ways would need us to define many custom models and middleware, hence a lot of work. The domain management would be done by the django project itself through middleware which use the HTTP_REQUST header and hence every request will be processed to obtain the information required to do database queries and render the views. So these methods looks like bit safer but would cause a performance decrease. </p>
+
+<h4 id="modify-contrib">Modify contrib</h4>
+<p>This is the rather easier way which involves modifications of code of some django contrib apps here and there. 
+Just copy the apps from django-&gt;contrib folder to the project directory and modify them to accept request as argument give out results according to the HTTP_HOST and Sites database. Also change all the imo reference of these apps from <em>django.contrib.app</em> to <em>app</em>.</p>
+
+<h4 id="forget-contrib">Forget contrib</h4>
+<p>Another way would be to forget the contrib apps and write your own custom similar ones from scratch. This may be a better way for long term projects which require highly customized and special functionalities. But it will require us to write a lot of code, though the existing modules can be used for reference. </p>
+
+<h3 id="using-unaltered-django-modules">Using unaltered django modules</h3>
+<p>If we are successful in doing this it will probably let us build our project in much less lines of code and using the already existent django contribs as is. So if we don’t modify django modules then what do we modify to achieve the dynamicity. </p>
+
+<h4 id="wsgi">.wsgi</h4>
+<p>This is what we could do: First define multiple settings files in some pattern so that they can be matched according to the domain name, say <em>settings_domain.py</em>. Now if the deployment is done using wsgi script (generally in <a href="http://docs.djangoproject.com/en/dev/howto/deployment/modwsgi/">this</a>) format. In the wsgi script we have to call the respective settings_domain.py according to the accessing domain name. So this seems pretty good but it can be dangerous. As we are setting a global variable (<code>os.environ['DJANGO_SETTINGS_MODULE']</code>) it is not at all a <strong>thread safe</strong> method. If there are two requests close enough this may pose dangerous effects. Unless we are not able to make sure that a new fork / new wsgi demon will be created per domain. So maybe one could suggest to write a good wsgi script which could handle this.</p>
+
+<h4 id="htaccess">.htaccess</h4>
+<p>Yet another way would be to make the .htaccess file dynamic, if it is possible. I don’t have any idea if I could write an apache config file that would trigger the correct wsgi file (which triggers the correct settings one). Maybe one could suggest a way of doing this (through regex?). To me thiss seems the best way which would trigger a corresponding process for each domain.</p>
+
+<h4 id="django-multisite">django-multisite</h4>
+<p>This is a django application I found (Source: https://github.com/shestera/django-multisite) which utilize <strong>thread locals</strong> to dynamically define the SITE_ID setting according to the request domain. I have tried this and is actually working but as the django documentation has <a href="http://code.djangoproject.com/wiki/CookBookThreadlocalsAndUser">pretty clearly</a> warned against its use, I am in doubt if it is a safe way. </p>
+
+<p>Till now I am still unclear of what method to implement among the above or some other one. There are some pros and cons of all the methods.  </p>
+
+<p>I apologise if I have written something wrong, these all are only some methods I have found out while searching the web and discussing on the groups, so please specify if there is any mistake or you can suggest something related to this.</p>
+
+        
+    </div>
+</div>
+
+
+
+<div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = 'hosting-multiple-sites-with-same-django-project';
+        var disqus_title = 'Hosting multiple sites with same django project';
+        var disqus_url = 'http://www.rohanjain.in/hacking/2010/12/24/hosting-multiple-sites-with-same-django-project/';
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+
+</div>
+
+<div id="sidebar">
+    <ul>
+        <li><a href="/">Blog</a></li>
+        <li><a href="/about">About Me</a></li>
+        <li><a href="/archive">Archive</a></li>
+    </ul>
+</div>
+
+<div id="footer">
+    <p>
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/80x15.png" /></a>
+        Using <a href="http://jekyllrb.com/">Jekyll</a>,
+        <a href="http://pygments.org/">Pygments</a>
+        | <a href="/sitemap.xml">Sitemap</a>, <a href="http://feeds.feedburner.com/crodjerBlog">Feed</a>
+    </p>
+</div>
+
+ </body>
+</html>

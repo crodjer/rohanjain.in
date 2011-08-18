@@ -1,0 +1,12 @@
+---
+layout: post
+title: "My new music solution"
+slug: "my-new-music-solution"
+published: false
+tags:
+    - radio
+    - music
+    - snipet
+category: coding
+author: crodjer
+---

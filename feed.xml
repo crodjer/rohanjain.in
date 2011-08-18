@@ -4,7 +4,7 @@
     <title>crodjer's blogRoll</title>
     <link href="http://www.rohanjain.in/atom.xml" rel="self"/>
     <link href="http://www.rohanjain.in/"/>
-    <updated>2011-08-15T21:09:02+05:30</updated>
+    <updated>2011-08-18T19:36:43+05:30</updated>
     <id>http://www.rohanjain.in/</id>
     <author>
         <name>Rohan Jain</name>
@@ -109,11 +109,11 @@ the system (I dont feel sorry for him at all if this were the truth).&lt;/p&gt;
     
     <entry>
         <title>Django using admin horizontal filter in forms</title>
-        <link href="http://www.rohanjain.in/coding/2011/06/20/django-using-admin-horizontal-filter-in-forms"/>
+        <link href="http://www.rohanjain.in/hacking/2011/06/20/django-using-admin-horizontal-filter-in-forms"/>
         <updated>2011-06-20T00:00:00+05:30</updated>
-        <id>http://www.rohanjain.in/coding/2011/06/20/django-using-admin-horizontal-filter-in-forms</id>
+        <id>http://www.rohanjain.in/hacking/2011/06/20/django-using-admin-horizontal-filter-in-forms</id>
         
-        <category term="coding" />
+        <category term="hacking" />
         
         <content type="html">&lt;p&gt;The django admin filter horizontal/vertical widgets are a really cool
 replacement of the inconvenient and ugly default multiple select elements.&lt;/p&gt;
@@ -228,11 +228,11 @@ SSD 64GB : Rs. 8, 000 - 9, 000
     
     <entry>
         <title>Hosting multiple sites with same django project</title>
-        <link href="http://www.rohanjain.in/coding/2010/12/24/hosting-multiple-sites-with-same-django-project"/>
+        <link href="http://www.rohanjain.in/hacking/2010/12/24/hosting-multiple-sites-with-same-django-project"/>
         <updated>2010-12-24T00:00:00+05:30</updated>
-        <id>http://www.rohanjain.in/coding/2010/12/24/hosting-multiple-sites-with-same-django-project</id>
+        <id>http://www.rohanjain.in/hacking/2010/12/24/hosting-multiple-sites-with-same-django-project</id>
         
-        <category term="coding" />
+        <category term="hacking" />
         
         <content type="html">&lt;p&gt;The first thing the title triggers in the mind is the django &lt;a href=&quot;http://docs.djangoproject.com/en/dev/ref/contrib/sites/&quot;&gt;sites framework&lt;/a&gt;. Well this post is mostly related to that but suggests its utilization in slight different way. As we can get from the docs in every implementation of the sites framework you have to hardcode the SITE_ID in your settings.py file. So it assumes that you have multiple django projects or at least multiple settings.py files which will be used as the django settings module for the process. So basically it provides us to share database between multiple sites which is a nice feature.  &lt;/p&gt;
 
@@ -268,11 +268,11 @@ Just copy the apps from django-&amp;gt;contrib folder to the project directory a
     
     <entry>
         <title>Whiteboarding with XMPP (Google Talk)</title>
-        <link href="http://www.rohanjain.in/coding/2010/10/25/whiteboarding-with-xmpp-google-talk"/>
+        <link href="http://www.rohanjain.in/hacking/2010/10/25/whiteboarding-with-xmpp-google-talk"/>
         <updated>2010-10-25T00:00:00+05:30</updated>
-        <id>http://www.rohanjain.in/coding/2010/10/25/whiteboarding-with-xmpp-google-talk</id>
+        <id>http://www.rohanjain.in/hacking/2010/10/25/whiteboarding-with-xmpp-google-talk</id>
         
-        <category term="coding" />
+        <category term="hacking" />
         
         <content type="html">&lt;p&gt;Sometimes, being too lazy to use the type, you might wish for some other way to interact with others. Well there is one and quit an interactive and entertaining one, a whiteboarding interface, i.e. the people involved in chat can do collaborative drawings, play games, convey emotions not possible by typing etc. It can have some bigger implementations like teaching, presentations many more utilities can be innovated.  &lt;/p&gt;
 

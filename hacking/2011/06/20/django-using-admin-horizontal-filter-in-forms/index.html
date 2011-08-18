@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Tags: django - Rohan Jain</title>
+        <title>Django using admin horizontal filter in forms - Rohan Jain</title>
         <meta name="author" content="Rohan Jain">
         <meta charset=utf-8>
 
@@ -32,7 +32,7 @@
             );
             
             head.js("http://crodjer.disqus.com/count.js");
-            
+            head.js("http://crodjer.disqus.com/embed.js");
         </script>
   </head>
   <body>
@@ -42,10 +42,9 @@
 </div>
 
 <div id="content">
-    <div class="posts">
     
-    <div class="post">
-        <h2 class="post-title" id="django-using-admin-horizontal-filter-in-forms"><a href="/hacking/2011/06/20/django-using-admin-horizontal-filter-in-forms/">Django using admin horizontal filter in forms</a></h2>
+<div class="post">
+    <h2 class="post-title" id="django-using-admin-horizontal-filter-in-forms"><a href="/hacking/2011/06/20/django-using-admin-horizontal-filter-in-forms/">Django using admin horizontal filter in forms</a></h2>
 <div class="meta">
     <span class="date">
         <img alt="Posted on" src="/images/calendar.png"/> 20 Jun, 2011
@@ -69,34 +68,47 @@
 </div>
 
 
-    </div>
-    
-    <div class="post">
-        <h2 class="post-title" id="hosting-multiple-sites-with-same-django-project"><a href="/hacking/2010/12/24/hosting-multiple-sites-with-same-django-project/">Hosting multiple sites with same django project</a></h2>
-<div class="meta">
-    <span class="date">
-        <img alt="Posted on" src="/images/calendar.png"/> 24 Dec, 2010
-    </span>
-    <span class="share">
-    </span>
-    <span class="tags" >
+    <div class='post-text'>
         
-        <img alt="Tags" src="/images/tag.png"/>
-        
-        <a href="/tags/django">django</a>
-        
-        <a href="/tags/hosting">hosting</a>
-        
-        
-    </span>
+        <p>The django admin filter horizontal/vertical widgets are a really cool
+replacement of the inconvenient and ugly default multiple select elements.</p>
 
-    <a class="comments" href="/hacking/2010/12/24/hosting-multiple-sites-with-same-django-project/#disqus_thread" data-disqus-identifier="hosting-multiple-sites-with-same-django-project">Comments</a>
+<p><img src="http://i1105.photobucket.com/albums/h356/crodjer/Blog%20Posts/Selection_010.png" alt="Django admin filter used in auth" /></p>
+
+<p><em>But how do I get these in my normal forms?</em><br />
+This is how:</p>
+
+<p>First create a django form with <code>ModelMultipleChoiceField</code> and <code>FilterSelectMultiple</code>
+as widget. To get this to work you need to add some extra media files. Here
+is the snipet:</p>
+
+<p><em>forms.py</em></p>
+
+<p>Add form media and form in the template.</p>
+
+<p>This extra css fixes some layout problems</p>
+
+<p>Refrences: <a href="http://j.mp/mAzALa">http://j.mp/mAzALa</a>, <a href="http://j.mp/lIG2Fl">http://j.mp/lIG2Fl</a><br />
+I decided to create another post for this because, none of these suggests
+the use of admin widget directly.</p>
+
+        
+    </div>
 </div>
 
 
-    </div>
-    
+
+<div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = 'django-using-admin-horizontal-filter-in-forms';
+        var disqus_title = 'Django using admin horizontal filter in forms';
+        var disqus_url = 'http://www.rohanjain.in/hacking/2011/06/20/django-using-admin-horizontal-filter-in-forms/';
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 </div>
+
 
 </div>
 
