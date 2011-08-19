@@ -84,9 +84,66 @@ is the snipet:</p>
 
 <p><em>forms.py</em></p>
 
+<div class="highlight"><pre><code class="python"><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">from</span> <span class="nn">django.contrib.admin.widgets</span> <span class="kn">import</span> <span class="n">FilteredSelectMultiple</span>
+
+<span class="k">class</span> <span class="nc">TagForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ModelMultipleChoiceField</span><span class="p">(</span><span class="n">queryset</span><span class="o">=</span><span class="n">Tag</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span>
+                                          <span class="n">label</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">&#39;Select tags&#39;</span><span class="p">),</span>
+                                          <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                          <span class="n">widget</span><span class="o">=</span><span class="n">FilteredSelectMultiple</span><span class="p">(</span>
+                                                    <span class="n">_</span><span class="p">(</span><span class="s">&#39;tags&#39;</span><span class="p">),</span>
+                                                    <span class="bp">False</span><span class="p">,</span>
+                                                 <span class="p">))</span>
+
+    <span class="k">class</span> <span class="nc">Media</span><span class="p">:</span>
+        <span class="n">css</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;all&#39;</span><span class="p">:[</span><span class="s">&#39;admin/css/widgets.css&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;css/uid-manage-form.css&#39;</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="n">js</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;/admin/jsi18n/&#39;</span><span class="p">]</span>
+</code></pre>
+</div>
+
 <p>Add form media and form in the template.</p>
 
+<div class="highlight"><pre><code class="django"><span class="x">&lt;!--HEAD --&gt;</span>
+<span class="cp">{{</span> <span class="nv">form.media</span> <span class="cp">}}</span><span class="x" />
+<span class="x">&lt;!--BODY--&gt;</span>
+<span class="cp">{{</span> <span class="nv">form</span> <span class="cp">}}</span><span class="x" />
+</code></pre>
+</div>
+
 <p>This extra css fixes some layout problems</p>
+
+<div class="highlight"><pre><code class="css"><span class="nc">.selector</span><span class="p">{</span>
+    <span class="k">float</span><span class="o">:</span><span class="k">none</span><span class="p">;</span>
+    <span class="k">display</span><span class="o">:</span><span class="k">block</span><span class="p">;</span>
+    <span class="k">height</span><span class="o">:</span><span class="m">330px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.selector</span> <span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span><span class="o">]</span><span class="p">{</span>
+    <span class="k">display</span><span class="o">:</span><span class="k">block</span><span class="p">;</span>
+    <span class="k">clear</span><span class="o">:</span><span class="k">both</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.selector</span> <span class="nt">h2</span><span class="p">{</span>
+    <span class="k">font-size</span><span class="o">:</span><span class="m">15px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.selector</span>  <span class="nt">select</span><span class="p">{</span>
+    <span class="k">margin</span><span class="o">:</span> <span class="m">2px</span> <span class="m">0</span><span class="p">;</span>
+    <span class="k">padding</span><span class="o">:</span> <span class="m">2px</span> <span class="m">3px</span><span class="p">;</span>
+    <span class="k">font-weight</span><span class="o">:</span> <span class="k">normal</span><span class="p">;</span>
+    <span class="k">width</span><span class="o">:</span> <span class="m">270px</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="k">height</span><span class="o">:</span> <span class="m">17.2em</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">textarea</span><span class="p">{</span>
+    <span class="k">display</span><span class="o">:</span><span class="k">block</span><span class="p">;</span>
+    <span class="k">width</span><span class="o">:</span><span class="m">450px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
 
 <p>Refrences: <a href="http://j.mp/mAzALa">http://j.mp/mAzALa</a>, <a href="http://j.mp/lIG2Fl">http://j.mp/lIG2Fl</a><br />
 I decided to create another post for this because, none of these suggests
