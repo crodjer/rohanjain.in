@@ -1,6 +1,7 @@
 ---
 layout: post
 title: An incident on the RAILS
+slug:  an-incident-on-the-rails
 published: true
 tags:
     - travel
