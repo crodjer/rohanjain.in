@@ -4,7 +4,7 @@
     <title>crodjer's blogRoll</title>
     <link href="http://www.rohanjain.in/atom.xml" rel="self"/>
     <link href="http://www.rohanjain.in/"/>
-    <updated>2011-08-19T21:00:45+05:30</updated>
+    <updated>2011-08-22T12:47:00+05:30</updated>
     <id>http://www.rohanjain.in/</id>
     <author>
         <name>Rohan Jain</name>
@@ -20,7 +20,7 @@
         
         <category term="personal" />
         
-        <content type="html">&lt;p&gt;Some months ago I decided about the what my new &lt;a href=&quot;http://j.mp/o043VH&quot;&gt;computer’s configuration&lt;/a&gt;
+        <content type="html">&lt;p&gt;Some months ago I decided about the what my new &lt;a href=&quot;http://j.mp/o043VH&quot;&gt;computer&amp;rsquo;s configuration&lt;/a&gt;
 will be. It was a really powerful machine with all the latest
 parts (they still are latest!). Its main strength was the new intel processor
 architecture - &lt;a href=&quot;http://j.mp/qbjSyR&quot;&gt;Sandy Bridge&lt;/a&gt;. I had ruled out laptops
@@ -50,14 +50,14 @@ such a nice notebook with windows). There are some notebooks which come out
 as reasonable buys.&lt;/p&gt;
 
 &lt;p&gt;I ruled out Dell on the first go as it only seems like it that they allow you
-to customize, but they don’t. If you want a simple machine without &lt;a href=&quot;http://j.mp/o7Zb36&quot;&gt;all the
+to customize, but they don&amp;rsquo;t. If you want a simple machine without &lt;a href=&quot;http://j.mp/o7Zb36&quot;&gt;all the
 useless&lt;/a&gt; (it is subjective) stuffs like Online backup (If I
-wanted one I would use a VPS , Windows (I can’t understand why force it!) or
+wanted one I would use a VPS , Windows (I can&amp;rsquo;t understand why force it!) or
 replaceable covers (I am getting a computer not a doll to play with!). What I
 want is a processor + motherboard with some notebook essentials with it. HP and
 ThinkPads are the brands I am looking at now. They provide some business
 notebooks which serve all my purposes.&lt;br /&gt;
-I’ll tell about the final machine which I bought in some newer post.&lt;/p&gt;
+I&amp;rsquo;ll tell about the final machine which I bought in some newer post.&lt;/p&gt;
 
 &lt;p&gt;Still, I would always miss my old machine, which has always been there with me
 for roughly 1.5 years. It is still doing pretty good (This post is written with
@@ -83,25 +83,25 @@ impossible to get a confirmed reservation in that train). The boarding time was
 &lt;p&gt;So I boarded the train and headed to my seat, only to find out it was already
 occupied. &lt;em&gt;Mr. A&lt;/em&gt; was sitting there. So we (my parents had comewith me to see me
 of) asked Mr. A to move as this seat was reserved on my name (I had checked out
-my name on the reservation chart already). He says “This is not my seat, I have
-exchanged it with him (pointing to &lt;em&gt;Mr. B&lt;/em&gt;)”. So on asking the same to Mr. B,
+my name on the reservation chart already). He says &amp;ldquo;This is not my seat, I have
+exchanged it with him (pointing to &lt;em&gt;Mr. B&lt;/em&gt;)&amp;rdquo;. So on asking the same to Mr. B,
 he also replied the same pointing to &lt;em&gt;Mr. X&lt;/em&gt;  and finally, we found the
 conflicting passanger. 5 - 6 people of the cabin had woken up from their sleeps
 because of all the noise.&lt;/p&gt;
 
-&lt;p&gt;Mr. X had a ticket which said “B-1 32” over the same train number and the right
+&lt;p&gt;Mr. X had a ticket which said &amp;ldquo;B-1 32&amp;rdquo; over the same train number and the right
 date of the month. Believe me about 4 -5 people checked the ticked, including
 myself. Infact it had a signature of a TC denoting &lt;em&gt;verified&lt;/em&gt;. This guy was
 adament and refusing to talk. We contacted the current TC who also agreed that
 it was my seat. He asked me to at least get the conflicting ticket as Mr. X
-wasn’t comming down. Finally he also decided to accompany me with his ticket
+wasn&amp;rsquo;t comming down. Finally he also decided to accompany me with his ticket
 mouthing bad words to the official. The ticket looked all OK to him too, before
-his eyes went on the month. It was a ticket of the train’s next month journy!
+his eyes went on the month. It was a ticket of the train&amp;rsquo;s next month journy!
 The guy then silently unboarded with his stuff and maybe boarded a general
-compartment. Everybody who had exchanged “his” seat came back to theirs. Almost
+compartment. Everybody who had exchanged &amp;ldquo;his&amp;rdquo; seat came back to theirs. Almost
 everybody from the cabin was awake now. And I got my seat on the train.&lt;/p&gt;
 
-&lt;p&gt;Maybe Mr. X didn’t know that he was travelling in the wrong month or he had
+&lt;p&gt;Maybe Mr. X didn&amp;rsquo;t know that he was travelling in the wrong month or he had
 booked a wrong ticket (more probable) or he was thinking that he could fool
 the system (I dont feel sorry for him at all if this were the truth).&lt;/p&gt;
 </content>
@@ -208,7 +208,7 @@ the use of admin widget directly.&lt;/p&gt;
 dynamic &lt;em&gt;django&lt;/em&gt; based and database oriented &lt;a href=&quot;http://old.rohanjain.in&quot;&gt;old one&lt;/a&gt;.
 The factor which drove this decision: &lt;strong&gt;VIM&lt;/strong&gt; period.&lt;/p&gt;
 
-&lt;p&gt;I did not put up much on the old site because I couldn’t post directly from
+&lt;p&gt;I did not put up much on the old site because I couldn&amp;rsquo;t post directly from
 my offline editor to posts there. The functionalities that were present over
 there were to much overkill and completely invisible to the public, so better
 save the processing power required to render the content every time the
@@ -228,13 +228,13 @@ blogging frequency.&lt;/p&gt;
         <category term="personal" />
         
         <content type="html">&lt;p&gt;I have been using laptops as working machines for 3 years now. With my ancient
-C2D 2GHz, I can’t play games (I don’t anyways but still), use powerfull
+C2D 2GHz, I can&amp;rsquo;t play games (I don&amp;rsquo;t anyways but still), use powerfull
 applications and am able to &lt;strong&gt;blink my eyes&lt;/strong&gt; (much more than once sometimes)
 for most of the executions. This asks for system upgrades. But wait! upgrade
 and laptop seem to be mutually exclusive. Now this is bad. I think &lt;em&gt;What is
 the reason to buy laptops?&lt;/em&gt;. I find only one: &lt;strong&gt;Portablity&lt;/strong&gt;. But is it really
 worth spending &lt;strong&gt;lots&lt;/strong&gt; of extra bucks just to achieve portability, which too
-come at price of way lower configuration? Aren’t tablets the one for portability?  &lt;/p&gt;
+come at price of way lower configuration? Aren&amp;rsquo;t tablets the one for portability?  &lt;/p&gt;
 
 &lt;p&gt;Looking for a good laptop around, I found to get one with i7 drains around
 90k-100k Rs and still the configuration will be way low end against the one
@@ -306,13 +306,13 @@ Just copy the apps from django-&amp;gt;contrib folder to the project directory a
 &lt;p&gt;Another way would be to forget the contrib apps and write your own custom similar ones from scratch. This may be a better way for long term projects which require highly customized and special functionalities. But it will require us to write a lot of code, though the existing modules can be used for reference. &lt;/p&gt;
 
 &lt;h3 id=&quot;using-unaltered-django-modules&quot;&gt;Using unaltered django modules&lt;/h3&gt;
-&lt;p&gt;If we are successful in doing this it will probably let us build our project in much less lines of code and using the already existent django contribs as is. So if we don’t modify django modules then what do we modify to achieve the dynamicity. &lt;/p&gt;
+&lt;p&gt;If we are successful in doing this it will probably let us build our project in much less lines of code and using the already existent django contribs as is. So if we don&amp;rsquo;t modify django modules then what do we modify to achieve the dynamicity. &lt;/p&gt;
 
 &lt;h4 id=&quot;wsgi&quot;&gt;.wsgi&lt;/h4&gt;
 &lt;p&gt;This is what we could do: First define multiple settings files in some pattern so that they can be matched according to the domain name, say &lt;em&gt;settings_domain.py&lt;/em&gt;. Now if the deployment is done using wsgi script (generally in &lt;a href=&quot;http://docs.djangoproject.com/en/dev/howto/deployment/modwsgi/&quot;&gt;this&lt;/a&gt;) format. In the wsgi script we have to call the respective settings_domain.py according to the accessing domain name. So this seems pretty good but it can be dangerous. As we are setting a global variable (&lt;code&gt;os.environ['DJANGO_SETTINGS_MODULE']&lt;/code&gt;) it is not at all a &lt;strong&gt;thread safe&lt;/strong&gt; method. If there are two requests close enough this may pose dangerous effects. Unless we are not able to make sure that a new fork / new wsgi demon will be created per domain. So maybe one could suggest to write a good wsgi script which could handle this.&lt;/p&gt;
 
 &lt;h4 id=&quot;htaccess&quot;&gt;.htaccess&lt;/h4&gt;
-&lt;p&gt;Yet another way would be to make the .htaccess file dynamic, if it is possible. I don’t have any idea if I could write an apache config file that would trigger the correct wsgi file (which triggers the correct settings one). Maybe one could suggest a way of doing this (through regex?). To me thiss seems the best way which would trigger a corresponding process for each domain.&lt;/p&gt;
+&lt;p&gt;Yet another way would be to make the .htaccess file dynamic, if it is possible. I don&amp;rsquo;t have any idea if I could write an apache config file that would trigger the correct wsgi file (which triggers the correct settings one). Maybe one could suggest a way of doing this (through regex?). To me thiss seems the best way which would trigger a corresponding process for each domain.&lt;/p&gt;
 
 &lt;h4 id=&quot;django-multisite&quot;&gt;django-multisite&lt;/h4&gt;
 &lt;p&gt;This is a django application I found (Source: https://github.com/shestera/django-multisite) which utilize &lt;strong&gt;thread locals&lt;/strong&gt; to dynamically define the SITE_ID setting according to the request domain. I have tried this and is actually working but as the django documentation has &lt;a href=&quot;http://code.djangoproject.com/wiki/CookBookThreadlocalsAndUser&quot;&gt;pretty clearly&lt;/a&gt; warned against its use, I am in doubt if it is a safe way. &lt;/p&gt;

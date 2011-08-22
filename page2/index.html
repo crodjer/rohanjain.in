@@ -72,13 +72,13 @@
     <div class='post-text'>
         
         <p>I have been using laptops as working machines for 3 years now. With my ancient
-C2D 2GHz, I can’t play games (I don’t anyways but still), use powerfull
+C2D 2GHz, I can&rsquo;t play games (I don&rsquo;t anyways but still), use powerfull
 applications and am able to <strong>blink my eyes</strong> (much more than once sometimes)
 for most of the executions. This asks for system upgrades. But wait! upgrade
 and laptop seem to be mutually exclusive. Now this is bad. I think <em>What is
 the reason to buy laptops?</em>. I find only one: <strong>Portablity</strong>. But is it really
 worth spending <strong>lots</strong> of extra bucks just to achieve portability, which too
-come at price of way lower configuration? Aren’t tablets the one for portability?  </p>
+come at price of way lower configuration? Aren&rsquo;t tablets the one for portability?  </p>
 
 <p>Looking for a good laptop around, I found to get one with i7 drains around
 90k-100k Rs and still the configuration will be way low end against the one
@@ -170,13 +170,13 @@ Just copy the apps from django-&gt;contrib folder to the project directory and m
 <p>Another way would be to forget the contrib apps and write your own custom similar ones from scratch. This may be a better way for long term projects which require highly customized and special functionalities. But it will require us to write a lot of code, though the existing modules can be used for reference. </p>
 
 <h3 id="using-unaltered-django-modules">Using unaltered django modules</h3>
-<p>If we are successful in doing this it will probably let us build our project in much less lines of code and using the already existent django contribs as is. So if we don’t modify django modules then what do we modify to achieve the dynamicity. </p>
+<p>If we are successful in doing this it will probably let us build our project in much less lines of code and using the already existent django contribs as is. So if we don&rsquo;t modify django modules then what do we modify to achieve the dynamicity. </p>
 
 <h4 id="wsgi">.wsgi</h4>
 <p>This is what we could do: First define multiple settings files in some pattern so that they can be matched according to the domain name, say <em>settings_domain.py</em>. Now if the deployment is done using wsgi script (generally in <a href="http://docs.djangoproject.com/en/dev/howto/deployment/modwsgi/">this</a>) format. In the wsgi script we have to call the respective settings_domain.py according to the accessing domain name. So this seems pretty good but it can be dangerous. As we are setting a global variable (<code>os.environ['DJANGO_SETTINGS_MODULE']</code>) it is not at all a <strong>thread safe</strong> method. If there are two requests close enough this may pose dangerous effects. Unless we are not able to make sure that a new fork / new wsgi demon will be created per domain. So maybe one could suggest to write a good wsgi script which could handle this.</p>
 
 <h4 id="htaccess">.htaccess</h4>
-<p>Yet another way would be to make the .htaccess file dynamic, if it is possible. I don’t have any idea if I could write an apache config file that would trigger the correct wsgi file (which triggers the correct settings one). Maybe one could suggest a way of doing this (through regex?). To me thiss seems the best way which would trigger a corresponding process for each domain.</p>
+<p>Yet another way would be to make the .htaccess file dynamic, if it is possible. I don&rsquo;t have any idea if I could write an apache config file that would trigger the correct wsgi file (which triggers the correct settings one). Maybe one could suggest a way of doing this (through regex?). To me thiss seems the best way which would trigger a corresponding process for each domain.</p>
 
 <h4 id="django-multisite">django-multisite</h4>
 <p>This is a django application I found (Source: https://github.com/shestera/django-multisite) which utilize <strong>thread locals</strong> to dynamically define the SITE_ID setting according to the request domain. I have tried this and is actually working but as the django documentation has <a href="http://code.djangoproject.com/wiki/CookBookThreadlocalsAndUser">pretty clearly</a> warned against its use, I am in doubt if it is a safe way. </p>
