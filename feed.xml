@@ -4,7 +4,7 @@
     <title>crodjer's blogRoll</title>
     <link href="http://www.rohanjain.in/atom.xml" rel="self"/>
     <link href="http://www.rohanjain.in/"/>
-    <updated>2011-08-24T09:35:57+05:30</updated>
+    <updated>2011-08-25T00:24:18+05:30</updated>
     <id>http://www.rohanjain.in/</id>
     <author>
         <name>Rohan Jain</name>
@@ -40,8 +40,8 @@ and invokes mplayer with correct proxy settings.&lt;/p&gt;
 &lt;span class=&quot;c&quot;&gt;# Initiate a hashtable to store radio channels&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;declare&lt;/span&gt; -A radios
 
-&lt;span class=&quot;c&quot;&gt;# Reset the environment proxy variables&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;http_proxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Set the environment proxy variables&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# http_proxy=&amp;quot;&amp;quot;&lt;/span&gt;
 
 &lt;span class=&quot;nv&quot;&gt;radios&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;
     &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;bb&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;http://bb.1.fm/bbfm32k&amp;quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#Bombay Beats - 1.fm&lt;/span&gt;
@@ -57,9 +57,7 @@ and invokes mplayer with correct proxy settings.&lt;/p&gt;
     &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
     &lt;span class=&quot;c&quot;&gt;# Call mplayer with radio&amp;#39;s address&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;# Remove proxychains if you don&amp;#39;t need tor or some other&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;# proxy solution.&lt;/span&gt;
-    proxychains mplayer -volume 15 &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;radios&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;$1&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+    mplayer -volume 15 &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;radios&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;$1&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;

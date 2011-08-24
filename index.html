@@ -91,8 +91,8 @@ and invokes mplayer with correct proxy settings.</p>
 <span class="c"># Initiate a hashtable to store radio channels</span>
 <span class="nb">declare</span> -A radios
 
-<span class="c"># Reset the environment proxy variables</span>
-<span class="nv">http_proxy</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="c"># Set the environment proxy variables</span>
+<span class="c"># http_proxy=&quot;&quot;</span>
 
 <span class="nv">radios</span><span class="o">=(</span>
     <span class="o">[</span><span class="s2">&quot;bb&quot;</span><span class="o">]=</span><span class="s2">&quot;http://bb.1.fm/bbfm32k&quot;</span> <span class="c">#Bombay Beats - 1.fm</span>
@@ -108,9 +108,7 @@ and invokes mplayer with correct proxy settings.</p>
     <span class="k">done</span>
 <span class="k">else</span>
     <span class="c"># Call mplayer with radio&#39;s address</span>
-    <span class="c"># Remove proxychains if you don&#39;t need tor or some other</span>
-    <span class="c"># proxy solution.</span>
-    proxychains mplayer -volume 15 <span class="k">${</span><span class="nv">radios</span><span class="p">[</span><span class="s2">&quot;$1&quot;</span><span class="p">]</span><span class="k">}</span>
+    mplayer -volume 15 <span class="k">${</span><span class="nv">radios</span><span class="p">[</span><span class="s2">&quot;$1&quot;</span><span class="p">]</span><span class="k">}</span>
 <span class="k">fi</span>
 </code></pre>
 </div>
