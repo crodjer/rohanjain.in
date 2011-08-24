@@ -1,0 +1,56 @@
+---
+layout: post
+title: "My new music solution"
+slug: "my-new-music-solution"
+published: true
+tags:
+    - music
+    - radio
+    - mplayer
+category: hacking
+author: crodjer
+---
+
+As far as listening to music is concerned, I have always been relying on the
+various radio broadcasters. I do not invest much time in maintaining a music
+collection.
+
+But this solution did not work at Kharagpur. There is no good radio station
+available over here, at least for listening to Hindi music. I then turned
+to the various online radio services, which seemed to work out pretty nice.
+Now all I needed a good interface to control the radio. The Rhythmbox interface
+and that of some other radio clients from the Debian repository did not look
+friendly (chuck the mouse and then test them). Here comes the mplayer to the
+rescue, which I am using currently.
+
+I also created this shell script which stores the channels as key value pairs
+and invokes mplayer with correct proxy settings.
+
+{% highlight bash %}
+#!/bin/bash
+
+# Initiate a hashtable to store radio channels
+declare -A radios
+
+# Reset the environment proxy variables
+http_proxy=""
+
+radios=(
+    ["bb"]="http://bb.1.fm/bbfm32k" #Bombay Beats - 1.fm
+    ["m"]="http://173.192.58.37:8226" #Radio Maska
+    ["nri"]="http://205.188.215.230:8024" #Radio NRI
+    ["tt"]="http://91.121.155.39:80/" #Radio Teen Taal
+)
+
+if [ -z "$1" ] ; then
+    echo "Provide a station name. Choices are:"
+    for station in "${!radios[@]}"; do
+        echo $station
+    done
+else
+    # Call mplayer with radio's address
+    # Remove proxychains if you don't need tor or some other
+    # proxy solution.
+    proxychains mplayer -volume 15 ${radios["$1"]}
+fi
+{% endhighlight %}
