@@ -32,8 +32,8 @@ and invokes mplayer with correct proxy settings.
 # Initiate a hashtable to store radio channels
 declare -A radios
 
-# Reset the environment proxy variables
-http_proxy=""
+# Set the environment proxy variables
+# http_proxy=""
 
 radios=(
     ["bb"]="http://bb.1.fm/bbfm32k" #Bombay Beats - 1.fm
@@ -49,8 +49,6 @@ if [ -z "$1" ] ; then
     done
 else
     # Call mplayer with radio's address
-    # Remove proxychains if you don't need tor or some other
-    # proxy solution.
-    proxychains mplayer -volume 15 ${radios["$1"]}
+    mplayer -volume 15 ${radios["$1"]}
 fi
 {% endhighlight %}
