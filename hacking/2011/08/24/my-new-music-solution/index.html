@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>My new music solution - Rohan Jain</title>
+        <meta name="author" content="Rohan Jain">
+        <meta charset=utf-8>
+
+        <!-- Favicon -->
+        <link href="/favicon.ico" rel="shortcut icon"/>
+
+        <!--Stylesheets-->
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/style.css"/>
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/syntax.css"/>
+
+        <!--Atom Feed-->
+        <link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml"/>
+
+        <!-- Scripts-->
+        <script type="text/javascript" src="/js/head.min.js"></script>
+        <script type="text/javascript">
+            //Google analytics
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-15806710-5']);
+            _gaq.push(['_trackPageview']);
+
+            //Disqus
+            var disqus_shortname = 'crodjer';
+            
+            head.js(
+                "http://www.google-analytics.com/ga.js",
+                "https://apis.google.com/js/plusone.js"
+            );
+            
+            head.js("http://crodjer.disqus.com/count.js");
+            head.js("http://crodjer.disqus.com/embed.js");
+        </script>
+  </head>
+  <body>
+      <div id="header">
+    <span class="byline">what crodjer has to say...</span>
+    <h1><a href="/">Rohan Jain</a></h1>
+</div>
+
+<div id="content">
+    
+<div class="post">
+    <h2 class="post-title" id="my-new-music-solution"><a href="/hacking/2011/08/24/my-new-music-solution/">My new music solution</a></h2>
+<div class="meta">
+    <span class="date">
+        <img alt="Posted on" src="/images/calendar.png"/> 24 Aug, 2011
+    </span>
+    <span class="share">
+    </span>
+    <span class="tags" >
+        
+        <img alt="Tags" src="/images/tag.png"/>
+        
+        <a href="/tags/music">music</a>
+        
+        <a href="/tags/radio">radio</a>
+        
+        <a href="/tags/mplayer">mplayer</a>
+        
+        
+    </span>
+
+    <a class="comments" href="/hacking/2011/08/24/my-new-music-solution/#disqus_thread" data-disqus-identifier="my-new-music-solution">Comments</a>
+</div>
+
+
+    <div class='post-text'>
+        
+        <p>As far as listening to music is concerned, I have always been relying on the
+various radio broadcasters. I do not invest much time in maintaining a music
+collection.</p>
+
+<p>But this solution did not work at Kharagpur. There is no good radio station
+available over here, at least for listening to Hindi music. I then turned
+to the various online radio services, which seemed to work out pretty nice.
+Now all I needed a good interface to control the radio. The Rhythmbox interface
+and that of some other radio clients from the Debian repository did not look
+friendly (chuck the mouse and then test them). Here comes the mplayer to the
+rescue, which I am using currently.</p>
+
+<p>I also created this shell script which stores the channels as key value pairs
+and invokes mplayer with correct proxy settings.</p>
+
+<div class="highlight"><pre><code class="bash"><span class="c">#!/bin/bash</span>
+
+<span class="c"># Initiate a hashtable to store radio channels</span>
+<span class="nb">declare</span> -A radios
+
+<span class="c"># Reset the environment proxy variables</span>
+<span class="nv">http_proxy</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+
+<span class="nv">radios</span><span class="o">=(</span>
+    <span class="o">[</span><span class="s2">&quot;bb&quot;</span><span class="o">]=</span><span class="s2">&quot;http://bb.1.fm/bbfm32k&quot;</span> <span class="c">#Bombay Beats - 1.fm</span>
+    <span class="o">[</span><span class="s2">&quot;m&quot;</span><span class="o">]=</span><span class="s2">&quot;http://173.192.58.37:8226&quot;</span> <span class="c">#Radio Maska</span>
+    <span class="o">[</span><span class="s2">&quot;nri&quot;</span><span class="o">]=</span><span class="s2">&quot;http://205.188.215.230:8024&quot;</span> <span class="c">#Radio NRI</span>
+    <span class="o">[</span><span class="s2">&quot;tt&quot;</span><span class="o">]=</span><span class="s2">&quot;http://91.121.155.39:80/&quot;</span> <span class="c">#Radio Teen Taal</span>
+<span class="o">)</span>
+
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;$1&quot;</span> <span class="o">]</span> ; <span class="k">then</span>
+<span class="k">    </span><span class="nb">echo</span> <span class="s2">&quot;Provide a station name. Choices are:&quot;</span>
+    <span class="k">for </span>station in <span class="s2">&quot;${!radios[@]}&quot;</span>; <span class="k">do</span>
+<span class="k">        </span><span class="nb">echo</span> <span class="nv">$station</span>
+    <span class="k">done</span>
+<span class="k">else</span>
+    <span class="c"># Call mplayer with radio&#39;s address</span>
+    <span class="c"># Remove proxychains if you don&#39;t need tor or some other</span>
+    <span class="c"># proxy solution.</span>
+    proxychains mplayer -volume 15 <span class="k">${</span><span class="nv">radios</span><span class="p">[</span><span class="s2">&quot;$1&quot;</span><span class="p">]</span><span class="k">}</span>
+<span class="k">fi</span>
+</code></pre>
+</div>
+
+
+        
+    </div>
+</div>
+
+
+
+<div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = 'my-new-music-solution';
+        var disqus_title = 'My new music solution';
+        var disqus_url = 'http://www.rohanjain.in/hacking/2011/08/24/my-new-music-solution/';
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+
+</div>
+
+<div id="sidebar">
+    <ul>
+        <li><a href="/">Blog</a></li>
+        <li><a href="/about">About Me</a></li>
+        <li><a href="/archive">Archive</a></li>
+    </ul>
+</div>
+
+<div id="footer">
+    <p>
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/80x15.png" /></a>
+        Using <a href="http://jekyllrb.com/">Jekyll</a>,
+        <a href="http://pygments.org/">Pygments</a>
+        | <a href="/sitemap.xml">Sitemap</a>, <a href="http://feeds.feedburner.com/crodjerBlog">Feed</a>
+    </p>
+</div>
+
+ </body>
+</html>

@@ -4,13 +4,68 @@
     <title>crodjer's blogRoll</title>
     <link href="http://www.rohanjain.in/atom.xml" rel="self"/>
     <link href="http://www.rohanjain.in/"/>
-    <updated>2011-08-22T12:47:00+05:30</updated>
+    <updated>2011-08-24T09:35:57+05:30</updated>
     <id>http://www.rohanjain.in/</id>
     <author>
         <name>Rohan Jain</name>
         <email>crodjer@gmail.com</email>
     </author>
 
+    
+    <entry>
+        <title>My new music solution</title>
+        <link href="http://www.rohanjain.in/hacking/2011/08/24/my-new-music-solution"/>
+        <updated>2011-08-24T00:00:00+05:30</updated>
+        <id>http://www.rohanjain.in/hacking/2011/08/24/my-new-music-solution</id>
+        
+        <category term="hacking" />
+        
+        <content type="html">&lt;p&gt;As far as listening to music is concerned, I have always been relying on the
+various radio broadcasters. I do not invest much time in maintaining a music
+collection.&lt;/p&gt;
+
+&lt;p&gt;But this solution did not work at Kharagpur. There is no good radio station
+available over here, at least for listening to Hindi music. I then turned
+to the various online radio services, which seemed to work out pretty nice.
+Now all I needed a good interface to control the radio. The Rhythmbox interface
+and that of some other radio clients from the Debian repository did not look
+friendly (chuck the mouse and then test them). Here comes the mplayer to the
+rescue, which I am using currently.&lt;/p&gt;
+
+&lt;p&gt;I also created this shell script which stores the channels as key value pairs
+and invokes mplayer with correct proxy settings.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Initiate a hashtable to store radio channels&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;declare&lt;/span&gt; -A radios
+
+&lt;span class=&quot;c&quot;&gt;# Reset the environment proxy variables&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;http_proxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;radios&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;bb&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;http://bb.1.fm/bbfm32k&amp;quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#Bombay Beats - 1.fm&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;m&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;http://173.192.58.37:8226&amp;quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#Radio Maska&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;nri&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;http://205.188.215.230:8024&amp;quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#Radio NRI&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;tt&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;http://91.121.155.39:80/&amp;quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#Radio Teen Taal&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; -z &lt;span class=&quot;s2&quot;&gt;&amp;quot;$1&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; ; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Provide a station name. Choices are:&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;station in &lt;span class=&quot;s2&quot;&gt;&amp;quot;${!radios[@]}&amp;quot;&lt;/span&gt;; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$station&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# Call mplayer with radio&amp;#39;s address&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# Remove proxychains if you don&amp;#39;t need tor or some other&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# proxy solution.&lt;/span&gt;
+    proxychains mplayer -volume 15 &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;radios&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;$1&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+</content>
+    </entry>
     
     <entry>
         <title>What I learnt about buying computers</title>
