@@ -36,8 +36,8 @@ Host 127.0.0.1, 10.*
 # http proxy.
 Host ecc.rohanjain.in
     ProxyCommand corkscrew 10.3.100.211 8080 %h %p
-        Port 443
-            ServerAliveInterval 600
+    Port 443
+    ServerAliveInterval 600
 
 # All the rest should connect through an ssh connection over the ec2 instance.
 Host *
