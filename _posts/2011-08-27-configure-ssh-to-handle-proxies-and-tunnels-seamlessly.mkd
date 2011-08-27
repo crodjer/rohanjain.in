@@ -7,7 +7,7 @@ tags:
     - tunneling
     - ssh
     - config
-category: coding
+category: hacking
 author: crodjer
 ---
 
