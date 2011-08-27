@@ -71,11 +71,11 @@
 
     <div class='post-text'>
         
-        <p>Recently I opened up on the port <em>443</em> over my EC2 instance, so that I can
-access it through any firewalled proxy too. Apart from getting SSH running
-to a machine from outside world, I did some cool configurations to have ssh
-deal with with various remote hosts automatically. It uses <em>the right</em>
-proxy settings according the host being accessed. Here is how it goes.</p>
+        <p>Recently I opened up on the port <em>443</em> over my EC2 instance (more or less like
+a VPS), so that I can access it through any firewalled proxy too. Apart from
+getting SSH running to a machine from outside world, I did some cool
+configuration to have ssh deal with with various remote hosts automatically. It
+uses <em>the right</em> proxy settings according the host being accessed.</p>
 
 <p>All the stuff which runs over ssh (like <em>scp</em>, <em>git</em> etc.) also work the way
 they are supposed to, following the ssh configuration.</p>
@@ -83,7 +83,8 @@ they are supposed to, following the ssh configuration.</p>
 <p>To get this to work you need to have <em>corkscrew</em> and <em>netcat</em> (the swiss army
 knife) already installed.</p>
 
-<p><code>File ~/ssh/config:</code></p>
+<p>Here is how it goes:<br />
+<code>File ~/ssh/config:</code></p>
 
 <div class="highlight"><pre><code class="apache"><span class="c"># Let me access local remotes directly.</span>
 <span class="nb">Host</span> <span class="m">127.0.0.1</span>, <span class="m">10</span>.*

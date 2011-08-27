@@ -4,7 +4,7 @@
     <title>crodjer's blogRoll</title>
     <link href="http://www.rohanjain.in/atom.xml" rel="self"/>
     <link href="http://www.rohanjain.in/"/>
-    <updated>2011-08-27T11:56:48+05:30</updated>
+    <updated>2011-08-27T11:59:23+05:30</updated>
     <id>http://www.rohanjain.in/</id>
     <author>
         <name>Rohan Jain</name>
@@ -20,11 +20,11 @@
         
         <category term="coding" />
         
-        <content type="html">&lt;p&gt;Recently I opened up on the port &lt;em&gt;443&lt;/em&gt; over my EC2 instance, so that I can
-access it through any firewalled proxy too. Apart from getting SSH running
-to a machine from outside world, I did some cool configurations to have ssh
-deal with with various remote hosts automatically. It uses &lt;em&gt;the right&lt;/em&gt;
-proxy settings according the host being accessed. Here is how it goes.&lt;/p&gt;
+        <content type="html">&lt;p&gt;Recently I opened up on the port &lt;em&gt;443&lt;/em&gt; over my EC2 instance (more or less like
+a VPS), so that I can access it through any firewalled proxy too. Apart from
+getting SSH running to a machine from outside world, I did some cool
+configuration to have ssh deal with with various remote hosts automatically. It
+uses &lt;em&gt;the right&lt;/em&gt; proxy settings according the host being accessed.&lt;/p&gt;
 
 &lt;p&gt;All the stuff which runs over ssh (like &lt;em&gt;scp&lt;/em&gt;, &lt;em&gt;git&lt;/em&gt; etc.) also work the way
 they are supposed to, following the ssh configuration.&lt;/p&gt;
@@ -32,7 +32,8 @@ they are supposed to, following the ssh configuration.&lt;/p&gt;
 &lt;p&gt;To get this to work you need to have &lt;em&gt;corkscrew&lt;/em&gt; and &lt;em&gt;netcat&lt;/em&gt; (the swiss army
 knife) already installed.&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;File ~/ssh/config:&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Here is how it goes:&lt;br /&gt;
+&lt;code&gt;File ~/ssh/config:&lt;/code&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;apache&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Let me access local remotes directly.&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;Host&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;127.0.0.1&lt;/span&gt;, &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.*
