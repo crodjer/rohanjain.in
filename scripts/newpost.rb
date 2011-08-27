@@ -31,7 +31,7 @@ published: false
 tags:
     - tag 1
     - tag 2
-category: coding
+category: hacking
 author: crodjer
 ---
 
