@@ -11,11 +11,11 @@ category: coding
 author: crodjer
 ---
 
-Recently I opened up on the port *443* over my EC2 instance, so that I can
-access it through any firewalled proxy too. Apart from getting SSH running
-to a machine from outside world, I did some cool configurations to have ssh
-deal with with various remote hosts automatically. It uses *the right*
-proxy settings according the host being accessed. Here is how it goes.
+Recently I opened up on the port *443* over my EC2 instance (more or less like
+a VPS), so that I can access it through any firewalled proxy too. Apart from
+getting SSH running to a machine from outside world, I did some cool
+configuration to have ssh deal with with various remote hosts automatically. It
+uses *the right* proxy settings according the host being accessed.
 
 All the stuff which runs over ssh (like *scp*, *git* etc.) also work the way
 they are supposed to, following the ssh configuration.
@@ -23,6 +23,7 @@ they are supposed to, following the ssh configuration.
 To get this to work you need to have *corkscrew* and *netcat* (the swiss army
 knife) already installed.
 
+Here is how it goes:  
 `File ~/ssh/config:`
 
 {% highlight apache %}
