@@ -35,7 +35,7 @@ were a *lot* of notebooks availabe with the *2nd Generation Core i series*
 (Sandy Bridge) processors and at compelling prices. So I started a new search
 with queries: **Intel HD Graphics 3000** (Ensures Sandy Bridge arch. and no
 power hungry graphics card), **Core i5** (Ensures hyper threading and more than
-required processing power and **Free DOS** (Of Course! - I dont want to waste
+required processing power) and **Free DOS** (Of Course! - I dont want to waste
 such a nice notebook with windows). There are some notebooks which come out
 as reasonable buys.
 
