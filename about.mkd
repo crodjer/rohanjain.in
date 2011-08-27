@@ -40,4 +40,4 @@ Work Environment:
 
   - Debian
   - Gnome
-  - Vim, <s>Tmux</s> GNU Screen, Google Chrome, Irssi, Rhythmbox
+  - XTerm, Vim, GNU Screen, Google Chrome, Irssi, Rhythmbox
