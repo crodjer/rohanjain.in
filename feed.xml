@@ -4,7 +4,7 @@
     <title>crodjer's blogRoll</title>
     <link href="http://www.rohanjain.in/atom.xml" rel="self"/>
     <link href="http://www.rohanjain.in/"/>
-    <updated>2011-08-27T12:06:10+05:30</updated>
+    <updated>2011-08-27T12:06:37+05:30</updated>
     <id>http://www.rohanjain.in/</id>
     <author>
         <name>Rohan Jain</name>
@@ -14,11 +14,11 @@
     
     <entry>
         <title>Configure ssh to handle proxies and tunnels seamlessly</title>
-        <link href="http://www.rohanjain.in/coding/2011/08/27/configure-ssh-to-handle-proxies-and-tunnels-seamlessly"/>
+        <link href="http://www.rohanjain.in/hacking/2011/08/27/configure-ssh-to-handle-proxies-and-tunnels-seamlessly"/>
         <updated>2011-08-27T00:00:00+05:30</updated>
-        <id>http://www.rohanjain.in/coding/2011/08/27/configure-ssh-to-handle-proxies-and-tunnels-seamlessly</id>
+        <id>http://www.rohanjain.in/hacking/2011/08/27/configure-ssh-to-handle-proxies-and-tunnels-seamlessly</id>
         
-        <category term="coding" />
+        <category term="hacking" />
         
         <content type="html">&lt;p&gt;Recently I opened up on the port &lt;em&gt;443&lt;/em&gt; over my EC2 instance (more or less like
 a VPS), so that I can access it through any firewalled proxy too. Apart from
