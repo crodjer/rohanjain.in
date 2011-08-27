@@ -93,8 +93,8 @@ knife) already installed.</p>
 <span class="c"># http proxy.</span>
 <span class="nb">Host</span> ecc.rohanjain.in
     <span class="nb">ProxyCommand</span> corkscrew <span class="m">10.3.100.211</span> <span class="m">8080</span> %h %p
-        <span class="nb">Port</span> <span class="m">443</span>
-            <span class="nb">ServerAliveInterval</span> <span class="m">600</span>
+    <span class="nb">Port</span> <span class="m">443</span>
+    <span class="nb">ServerAliveInterval</span> <span class="m">600</span>
 
 <span class="c"># All the rest should connect through an ssh connection over the ec2 instance.</span>
 <span class="nb">Host</span> *

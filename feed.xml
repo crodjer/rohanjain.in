@@ -4,7 +4,7 @@
     <title>crodjer's blogRoll</title>
     <link href="http://www.rohanjain.in/atom.xml" rel="self"/>
     <link href="http://www.rohanjain.in/"/>
-    <updated>2011-08-27T12:06:37+05:30</updated>
+    <updated>2011-08-27T12:19:39+05:30</updated>
     <id>http://www.rohanjain.in/</id>
     <author>
         <name>Rohan Jain</name>
@@ -43,8 +43,8 @@ knife) already installed.&lt;/p&gt;
 &lt;span class=&quot;c&quot;&gt;# http proxy.&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;Host&lt;/span&gt; ecc.rohanjain.in
     &lt;span class=&quot;nb&quot;&gt;ProxyCommand&lt;/span&gt; corkscrew &lt;span class=&quot;m&quot;&gt;10.3.100.211&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8080&lt;/span&gt; %h %p
-        &lt;span class=&quot;nb&quot;&gt;Port&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;443&lt;/span&gt;
-            &lt;span class=&quot;nb&quot;&gt;ServerAliveInterval&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;600&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;Port&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;443&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;ServerAliveInterval&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;600&lt;/span&gt;
 
 &lt;span class=&quot;c&quot;&gt;# All the rest should connect through an ssh connection over the ec2 instance.&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;Host&lt;/span&gt; *
