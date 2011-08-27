@@ -4,13 +4,55 @@
     <title>crodjer's blogRoll</title>
     <link href="http://www.rohanjain.in/atom.xml" rel="self"/>
     <link href="http://www.rohanjain.in/"/>
-    <updated>2011-08-27T11:08:42+05:30</updated>
+    <updated>2011-08-27T11:56:48+05:30</updated>
     <id>http://www.rohanjain.in/</id>
     <author>
         <name>Rohan Jain</name>
         <email>crodjer@gmail.com</email>
     </author>
 
+    
+    <entry>
+        <title>Configure ssh to handle proxies and tunnels seamlessly</title>
+        <link href="http://www.rohanjain.in/coding/2011/08/27/configure-ssh-to-handle-proxies-and-tunnels-seamlessly"/>
+        <updated>2011-08-27T00:00:00+05:30</updated>
+        <id>http://www.rohanjain.in/coding/2011/08/27/configure-ssh-to-handle-proxies-and-tunnels-seamlessly</id>
+        
+        <category term="coding" />
+        
+        <content type="html">&lt;p&gt;Recently I opened up on the port &lt;em&gt;443&lt;/em&gt; over my EC2 instance, so that I can
+access it through any firewalled proxy too. Apart from getting SSH running
+to a machine from outside world, I did some cool configurations to have ssh
+deal with with various remote hosts automatically. It uses &lt;em&gt;the right&lt;/em&gt;
+proxy settings according the host being accessed. Here is how it goes.&lt;/p&gt;
+
+&lt;p&gt;All the stuff which runs over ssh (like &lt;em&gt;scp&lt;/em&gt;, &lt;em&gt;git&lt;/em&gt; etc.) also work the way
+they are supposed to, following the ssh configuration.&lt;/p&gt;
+
+&lt;p&gt;To get this to work you need to have &lt;em&gt;corkscrew&lt;/em&gt; and &lt;em&gt;netcat&lt;/em&gt; (the swiss army
+knife) already installed.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;File ~/ssh/config:&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;apache&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Let me access local remotes directly.&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Host&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;127.0.0.1&lt;/span&gt;, &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.*
+    &lt;span class=&quot;nb&quot;&gt;ProxyCommand&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;none&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Let me ssh onto my ec2 instance, which has full network access, through a&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# http proxy.&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Host&lt;/span&gt; ecc.rohanjain.in
+    &lt;span class=&quot;nb&quot;&gt;ProxyCommand&lt;/span&gt; corkscrew &lt;span class=&quot;m&quot;&gt;10.3.100.211&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8080&lt;/span&gt; %h %p
+        &lt;span class=&quot;nb&quot;&gt;Port&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;443&lt;/span&gt;
+            &lt;span class=&quot;nb&quot;&gt;ServerAliveInterval&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;600&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# All the rest should connect through an ssh connection over the ec2 instance.&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Host&lt;/span&gt; *
+    &lt;span class=&quot;nb&quot;&gt;ProxyCommand&lt;/span&gt; ssh -q -a -x -p &lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; ecc.rohanjain.in nc %h %p
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+</content>
+    </entry>
     
     <entry>
         <title>My new music solution</title>

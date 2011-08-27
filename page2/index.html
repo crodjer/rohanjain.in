@@ -45,6 +45,117 @@
     <div class="posts">
     
     <div class="post">
+    <h2 class="post-title" id="django-using-admin-horizontal-filter-in-forms"><a href="/hacking/2011/06/20/django-using-admin-horizontal-filter-in-forms/">Django using admin horizontal filter in forms</a></h2>
+<div class="meta">
+    <span class="date">
+        <img alt="Posted on" src="/images/calendar.png"/> 20 Jun, 2011
+    </span>
+    <span class="share">
+    </span>
+    <span class="tags" >
+        
+        <img alt="Tags" src="/images/tag.png"/>
+        
+        <a href="/tags/django">django</a>
+        
+        <a href="/tags/widget">widget</a>
+        
+        <a href="/tags/snipet">snipet</a>
+        
+        
+    </span>
+
+    <a class="comments" href="/hacking/2011/06/20/django-using-admin-horizontal-filter-in-forms/#disqus_thread" data-disqus-identifier="django-using-admin-horizontal-filter-in-forms">Comments</a>
+</div>
+
+
+    <div class='post-text'>
+        
+        <p>The django admin filter horizontal/vertical widgets are a really cool
+replacement of the inconvenient and ugly default multiple select elements.</p>
+
+<p><img src="http://i1105.photobucket.com/albums/h356/crodjer/Blog%20Posts/Selection_010.png" alt="Django admin filter used in auth" /></p>
+
+<p><em>But how do I get these in my normal forms?</em><br />
+This is how:</p>
+
+<p>First create a django form with <code>ModelMultipleChoiceField</code> and <code>FilterSelectMultiple</code>
+as widget. To get this to work you need to add some extra media files. Here
+is the snipet:</p>
+
+<p><em>forms.py</em></p>
+
+<div class="highlight"><pre><code class="python"><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">from</span> <span class="nn">django.contrib.admin.widgets</span> <span class="kn">import</span> <span class="n">FilteredSelectMultiple</span>
+
+<span class="k">class</span> <span class="nc">TagForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">ModelMultipleChoiceField</span><span class="p">(</span><span class="n">queryset</span><span class="o">=</span><span class="n">Tag</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span>
+                                          <span class="n">label</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s">&#39;Select tags&#39;</span><span class="p">),</span>
+                                          <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                                          <span class="n">widget</span><span class="o">=</span><span class="n">FilteredSelectMultiple</span><span class="p">(</span>
+                                                    <span class="n">_</span><span class="p">(</span><span class="s">&#39;tags&#39;</span><span class="p">),</span>
+                                                    <span class="bp">False</span><span class="p">,</span>
+                                                 <span class="p">))</span>
+
+    <span class="k">class</span> <span class="nc">Media</span><span class="p">:</span>
+        <span class="n">css</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;all&#39;</span><span class="p">:[</span><span class="s">&#39;admin/css/widgets.css&#39;</span><span class="p">,</span>
+                   <span class="s">&#39;css/uid-manage-form.css&#39;</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="n">js</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;/admin/jsi18n/&#39;</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<p>Add form media and form in the template.</p>
+
+<div class="highlight"><pre><code class="django"><span class="x">&lt;!--HEAD --&gt;</span>
+<span class="cp">{{</span> <span class="nv">form.media</span> <span class="cp">}}</span><span class="x" />
+<span class="x">&lt;!--BODY--&gt;</span>
+<span class="cp">{{</span> <span class="nv">form</span> <span class="cp">}}</span><span class="x" />
+</code></pre>
+</div>
+
+<p>This extra css fixes some layout problems</p>
+
+<div class="highlight"><pre><code class="css"><span class="nc">.selector</span><span class="p">{</span>
+    <span class="k">float</span><span class="o">:</span><span class="k">none</span><span class="p">;</span>
+    <span class="k">display</span><span class="o">:</span><span class="k">block</span><span class="p">;</span>
+    <span class="k">height</span><span class="o">:</span><span class="m">330px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.selector</span> <span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span><span class="o">]</span><span class="p">{</span>
+    <span class="k">display</span><span class="o">:</span><span class="k">block</span><span class="p">;</span>
+    <span class="k">clear</span><span class="o">:</span><span class="k">both</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.selector</span> <span class="nt">h2</span><span class="p">{</span>
+    <span class="k">font-size</span><span class="o">:</span><span class="m">15px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.selector</span>  <span class="nt">select</span><span class="p">{</span>
+    <span class="k">margin</span><span class="o">:</span> <span class="m">2px</span> <span class="m">0</span><span class="p">;</span>
+    <span class="k">padding</span><span class="o">:</span> <span class="m">2px</span> <span class="m">3px</span><span class="p">;</span>
+    <span class="k">font-weight</span><span class="o">:</span> <span class="k">normal</span><span class="p">;</span>
+    <span class="k">width</span><span class="o">:</span> <span class="m">270px</span> <span class="cp">!important</span><span class="p">;</span>
+    <span class="k">height</span><span class="o">:</span> <span class="m">17.2em</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">textarea</span><span class="p">{</span>
+    <span class="k">display</span><span class="o">:</span><span class="k">block</span><span class="p">;</span>
+    <span class="k">width</span><span class="o">:</span><span class="m">450px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Refrences: <a href="http://j.mp/mAzALa">http://j.mp/mAzALa</a>, <a href="http://j.mp/lIG2Fl">http://j.mp/lIG2Fl</a><br />
+I decided to create another post for this because, none of these suggests
+the use of admin widget directly.</p>
+
+        
+    </div>
+</div>
+
+    
+    <div class="post">
     <h2 class="post-title" id="dynamic-to-static"><a href="/personal/2011/06/16/dynamic-to-static/">Dynamic to Static</a></h2>
 <div class="meta">
     <span class="date">
@@ -235,92 +346,15 @@ Just copy the apps from django-&gt;contrib folder to the project directory and m
 </div>
 
     
-    <div class="post">
-    <h2 class="post-title" id="whiteboarding-with-xmpp-google-talk"><a href="/hacking/2010/10/25/whiteboarding-with-xmpp-google-talk/">Whiteboarding with XMPP (Google Talk)</a></h2>
-<div class="meta">
-    <span class="date">
-        <img alt="Posted on" src="/images/calendar.png"/> 25 Oct, 2010
-    </span>
-    <span class="share">
-    </span>
-    <span class="tags" >
-        
-        <img alt="Tags" src="/images/tag.png"/>
-        
-        <a href="/tags/xmpp">xmpp</a>
-        
-        <a href="/tags/pidgin">pidgin</a>
-        
-        <a href="/tags/whiteboarding">whiteboarding</a>
-        
-        
-    </span>
-
-    <a class="comments" href="/hacking/2010/10/25/whiteboarding-with-xmpp-google-talk/#disqus_thread" data-disqus-identifier="whiteboarding-with-xmpp-google-talk">Comments</a>
-</div>
-
-
-    <div class='post-text'>
-        
-        <p>Sometimes, being too lazy to use the type, you might wish for some other way to interact with others. Well there is one and quit an interactive and entertaining one, a whiteboarding interface, i.e. the people involved in chat can do collaborative drawings, play games, convey emotions not possible by typing etc. It can have some bigger implementations like teaching, presentations many more utilities can be innovated.  </p>
-
-<p>There is already a small implementation of this feature in yahoo by name doodle. Seeing its utility one might wonder why this brilliant feature is not implemented with the widely used chat protocol, XMPP (Google Talk is based on XMPP)? Well I cant find out why not.  </p>
-
-<p>So, we have taken an initiative. Our group (<a href="http://github.com/crodjer" title="" target="_blank">Me</a>, <a href="http://github.com/snktagarwal" title="" target="_blank">Sanket Agarwal</a> and <a href="http://github.com/psjinx" title="" target="_blank">Pankaj Singh</a>) is working for implementing this feature with the XMPP protocol, at least for pidgin users.  </p>
-
-<h4 id="technical-info">Technical Info:</h4>
-<p>Project Repository: <a href="http://github.com/crodjer/pidgin_whiteboard">http://github.com/crodjer/pidgin_whiteboard</a><br />
-Updates: <a href="#updates">Project updates</a></p>
-
-<p>This project involves building a basic implementation of the protocol specified in,  <a href="http://xmpp.org/extensions/xep-0284.html">http://xmpp.org/extensions/xep-0284.html</a>, using the SVG graphics specified in, <a href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>. Both together define the standards for our work.  </p>
-
-<p>We hope to provide the following features:</p>
-
-<ul>
-  <li>Simple whiteboarding drawing Lines, Polygons, Circles and Free Curves.</li>
-  <li>Fancy Texting</li>
-  <li>Image Sending</li>
-  <li>This will provide users with a more enriching experience.  </li>
-</ul>
-
-<p>I am really excited about this project as it would be one of my initial contributions to the great open-source community. Till now it have been a fine ride of purpling, jingling and jabbering with pidgin.  </p>
-
-<h4 id="updates">Updates:</h4>
-<p><em>29 Nov 2010</em><br />
-Work resumed after a brief pause. The target now is to integrate <a href="http://xmpp.org/extensions/xep-0284.html" target="_blank">shared XML editing</a> with jingle and add more features to the whiteboard graphical gui.  </p>
-
-<p><em>10 Nov 2010</em><br />
-Our Proof of concept is ready. All the basic features of whiteboard are now incorporated. A usable implementation now exists. You may fetch and compile the code from the git repository (Address mentioned above). This is how it looks:<br />
-&lt;iframe width="425" height="349" src="http://www.youtube.com/embed/sYKutp4I4Zs"&gt;&lt;/iframe&gt;
-A <a href="http://img577.imageshack.us/img577/7910/screenshot1kg.png">Snapshot</a>.  </p>
-
-<p><em>9 Nov 2010</em>
-Syncing of whiteboards is up. The whiteboards are updated as the two users draw using their brushes. So a responsive interface is present. Just some small bug fix and feature additions remain now.  <br />
-<a href="http://img259.imageshack.us/img259/7980/screenshotrd.png" target="_blank">Screenshot</a>  </p>
-
-<p><em>6 Nov 2010</em><br />
-Now session initiate and accept integrated (popping up of whiteboard on both ends). Slight change in way of implementation, use of libjingle is now on a hold, creating a custom whiteboard message format for session management for now. Code in <strong>dcrodjer</strong> branch of the above git repository. 
-A screenshot of the code working: <a href="http://img837.imageshack.us/img837/8250/screenshot1gb.png" target="_blank">Image for session implementation</a>  </p>
-
-<p><em>24 Oct 2010</em><br />
-A whiteboard interface initiates. This is how it look like:<br />
-<a href="http://img841.imageshack.us/img841/5516/59586846.png" target="_blank">Image 1</a><br />
-<a href="http://img221.imageshack.us/img221/4198/65357038.png" target="_blank">Image 2</a></p>
-
-        
-    </div>
-</div>
-
-    
 </div>
 
 <div class="paginator">
     
     <a href="/" class="previous">Previous</a>
     
-    <span class="page_number ">Page: 2 of 2</span>
+    <span class="page_number ">Page: 2 of 3</span>
     
-    <span class="next ">Next</span>
+    <a href="/page3" class="next ">Next</a>
     
 </div>
 
