@@ -4,7 +4,7 @@
     <title>crodjer's blogRoll</title>
     <link href="http://www.rohanjain.in/atom.xml" rel="self"/>
     <link href="http://www.rohanjain.in/"/>
-    <updated>2011-08-27T12:19:39+05:30</updated>
+    <updated>2011-09-01T22:15:35+05:30</updated>
     <id>http://www.rohanjain.in/</id>
     <author>
         <name>Rohan Jain</name>
@@ -39,6 +39,15 @@ knife) already installed.&lt;/p&gt;
 &lt;span class=&quot;nb&quot;&gt;Host&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;127.0.0.1&lt;/span&gt;, &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.*
     &lt;span class=&quot;nb&quot;&gt;ProxyCommand&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;none&lt;/span&gt;
 
+&lt;span class=&quot;c&quot;&gt;# Github lets you ssh over port 443 too, utilize that instead of tunneling&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# through remote computer&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Host&lt;/span&gt; github.com
+    &lt;span class=&quot;nb&quot;&gt;Hostname&lt;/span&gt; ssh.github.com
+    &lt;span class=&quot;nb&quot;&gt;User&lt;/span&gt; git
+    &lt;span class=&quot;nb&quot;&gt;ProxyCommand&lt;/span&gt; corkscrew &lt;span class=&quot;m&quot;&gt;10.3.100.211&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8080&lt;/span&gt; %h %p
+    &lt;span class=&quot;nb&quot;&gt;Port&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;443&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;Hostname&lt;/span&gt; ssh.github.com
+
 &lt;span class=&quot;c&quot;&gt;# Let me ssh onto my ec2 instance, which has full network access, through a&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# http proxy.&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;Host&lt;/span&gt; ecc.rohanjain.in
@@ -52,6 +61,9 @@ knife) already installed.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
+&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;&lt;br /&gt;
+As brought out by yeban (&lt;a href=&quot;http://yeban.in/seamlessly-use-github-behind-http-proxy-on-port-443.html&quot;&gt;http://yeban.in/seamlessly-use-github-behind-http-proxy-on-port-443.html&lt;/a&gt;),
+use github&amp;rsquo;s 443 ssh host for accessing github.&lt;/p&gt;
 </content>
     </entry>
     
