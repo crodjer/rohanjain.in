@@ -39,5 +39,5 @@ Current projects:
 Work Environment:
 
   - Debian
-  - Gnome
-  - XTerm, Vim, GNU Screen, Google Chrome, Irssi, Rhythmbox
+  - Awesome Window Manager
+  - URxvt, Vim, GNU Screen, Google Chrome, Irssi
