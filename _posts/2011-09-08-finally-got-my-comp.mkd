@@ -1,0 +1,41 @@
+---
+layout: post
+title: "Finally got my comp"
+slug: "finally-got-my-comp"
+byline: "a task to the rest"
+published: true
+tags:
+    - computers
+    - configuration
+    - shopping
+category: personal
+author: crodjer
+---
+
+Some time ago, I [wrote about my search](/personal/2011/08/11/what-i-learnt-about-buying-computers/)
+for a notebook, which does exactly what I need it to. It is an [HP 630
+Essential Business PC](http://www.flipkart.com/computers/laptops/hp/itmczxzyhgkabvgp).
+The price is very much reasonable for the hardware it has and the useless stuff
+(some windows pre-installations, replaceable lid covers, graphic card etc.) it
+does not.
+
+Actually, I had bought it some time ago but didn't write about it earlier as I
+was waiting for its configuration to be complete so that it can be titled
+**awesome** (as was my old one). Now that it has a 6 Gigs of RAM and a fast OCz
+[SSD](http://en.wikipedia.org/wiki/Solid-state_drive) my hardware upgrade is
+finally complete so that I could brag about it.
+
+A [debian sid](http://www.debian.org/releases/sid/) installation with [awesome
+wm](http://awesome.naquadah.org/) (not directly related to the machine's title)
+and linux 3.0 is working pretty nicely. I have made sure that each and every
+hardware works. The processor turbo boosts up to 2.9 GHz when GCC asks to,
+graphics are pretty good and nothing makes any sound at all (the SSD adds to
+the fact). To my surprise the touchpad turned out to be really great. Although
+I had already given up the mouse, the pad makes sure that whenever the tragic
+need of moving the mouse cursor comes (sometimes with chrome) it'll ease it up.
+
+Another interesting fact about my configuration is the Standing Table (yeah I
+don't sit while working). This is how the whole setup looks like:
+
+![Standing Table](http://i1105.photobucket.com/albums/h356/crodjer/Blog%20Posts/Standing%20Table/Image0123.jpg)
+![Standing Table Under Focus](http://i1105.photobucket.com/albums/h356/crodjer/Blog%20Posts/Standing%20Table/Image0124.jpg)
