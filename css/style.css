@@ -143,6 +143,10 @@ body {
     color: #0000EE;
 }
 
+.post-text img{
+    max-width: 200px;
+}
+
 .meta {
     color: #9c8877;
     width: 660px;
