@@ -47,7 +47,9 @@ if [[ $_currbranch == $_origbranch ]]; then # we should generate the site
 
     # Make sure if all the above commands are executed, so that no changes are
     # made to the master branch.
-    if [ "$ERROR" -e "0" ]; then
+    if [ "$ERROR" -ne "0" ]; then
+        echo "Errors occurred in previous commands, Won't do anything."
+    else
         # overwrite existing files
         builtin shopt -s dotglob
         cp -rf "$_site"/* .
@@ -56,8 +58,6 @@ if [[ $_currbranch == $_origbranch ]]; then # we should generate the site
         "$_git" add .
         # commit all changes with a default message
         "$_git" commit -a -m "updated site @ $(date +"%F %T")"
-    else
-        echo "Errors occurred in previous commands, Won't do anything."
     fi
 
     # return
