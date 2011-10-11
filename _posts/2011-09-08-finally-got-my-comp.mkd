@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Finally got my comp"
+title: "Awesome is here"
 slug: "finally-got-my-comp"
 byline: "a task to the rest"
 published: true
