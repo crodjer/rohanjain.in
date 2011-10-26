@@ -85,6 +85,32 @@ knife) already installed.</p>
 <p>Here is how it goes:<br />
 <code>File ~/ssh/config:</code></p>
 
+<div class="highlight"><pre><code class="apache"><span class="c"># Let me access local remotes directly.</span>
+<span class="nb">Host</span> <span class="m">127.0.0.1</span>, <span class="m">10</span>.*
+    <span class="nb">ProxyCommand</span> <span class="k">none</span>
+
+<span class="c"># Github lets you ssh over port 443 too, utilize that instead of tunneling</span>
+<span class="c"># through remote computer</span>
+<span class="nb">Host</span> github.com
+    <span class="nb">Hostname</span> ssh.github.com
+    <span class="nb">User</span> git
+    <span class="nb">ProxyCommand</span> corkscrew <span class="m">10.3.100.211</span> <span class="m">8080</span> %h %p
+    <span class="nb">Port</span> <span class="m">443</span>
+    <span class="nb">Hostname</span> ssh.github.com
+
+<span class="c"># Let me ssh onto my ec2 instance, which has full network access, through a</span>
+<span class="c"># http proxy.</span>
+<span class="nb">Host</span> ecc.rohanjain.in
+    <span class="nb">ProxyCommand</span> corkscrew <span class="m">10.3.100.211</span> <span class="m">8080</span> %h %p
+    <span class="nb">Port</span> <span class="m">443</span>
+    <span class="nb">ServerAliveInterval</span> <span class="m">600</span>
+
+<span class="c"># All the rest should connect through an ssh connection over the ec2 instance.</span>
+<span class="nb">Host</span> *
+    <span class="nb">ProxyCommand</span> ssh -q -a -x -p <span class="m">443</span> ecc.rohanjain.in nc %h %p
+</code></pre>
+</div>
+
 <p><strong>Update</strong><br />
 As brought out by yeban (<a href="http://yeban.in/seamlessly-use-github-behind-http-proxy-on-port-443.html">http://yeban.in/seamlessly-use-github-behind-http-proxy-on-port-443.html</a>),
 use github&rsquo;s 443 ssh host for accessing github.</p>
