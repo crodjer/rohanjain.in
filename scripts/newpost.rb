@@ -41,5 +41,4 @@ f = File.open(path, 'w')
 f.write(header)
 f.close
 
-system("$EDITOR #{path}")
 exit(0)
