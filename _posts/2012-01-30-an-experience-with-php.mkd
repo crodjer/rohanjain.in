@@ -3,7 +3,7 @@ layout: post
 title: An experience with PHP
 slug: an-experience-with-php
 byline: lots of $'s huh?
-published: false
+published: true
 
 tags:
     - languages
@@ -80,8 +80,13 @@ don't have wide contexts. Each might fulfill functionality that one requires
 partially but not all.
 
 #Conclusion
-The only reason I see of using PHP is its popularity, the ease to build teams.
-It is never going to be a language of choice for my personal projects.  Its
-better to have multiple decoupled systems providing reasonable APIs
+PHP is definitely a major server side scripting language. Its popularity, the
+ease to build developer teams counts as a reason for choosing PHP. But, given
+a choice, PHP will always be on the lower side of my priority list. I'll
+mostly go with full fledged languages like Python. With
+[CouchDB](http://couchdb.apache.org/) and [node.js](http://nodejs.org/)
+around, server side Javascript also looks promising. To get around their
+limitations they can always be used in parallel with other systems.
+Its better to have multiple decoupled systems, providing reasonable APIs and
 implemented in a technology best for each of them, talk to each other instead
 of writing everything down in the same language.
