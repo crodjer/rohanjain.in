@@ -4,7 +4,7 @@
     <title>crodjer's blogRoll</title>
     <link href="http://www.rohanjain.in/atom.xml" rel="self"/>
     <link href="http://www.rohanjain.in/"/>
-    <updated>2012-02-01T11:33:49+05:30</updated>
+    <updated>2012-02-01T11:35:13+05:30</updated>
     <id>http://www.rohanjain.in/</id>
     <author>
         <name>Rohan Jain</name>
@@ -30,8 +30,9 @@ writing production code with PHP, I did struggle with it a bit.&lt;/p&gt;
 opinions so, tagged as &amp;lsquo;subjective&amp;rsquo;.&lt;/p&gt;
 
 &lt;h1 id=&quot;pros&quot;&gt;Pros&lt;/h1&gt;
-&lt;p&gt;##Comprehensive documentation
-PHP has a really high adoption, so has a rather comprehensive amount of
+
+&lt;h2 id=&quot;comprehensive-documentation&quot;&gt;Comprehensive documentation&lt;/h2&gt;
+&lt;p&gt;PHP has a really high adoption, so has a rather comprehensive amount of
 resources available over the web. If you run into some issue, you can mostly be
 sure that some else has had the same issue as well proceed as that person did.&lt;/p&gt;
 
