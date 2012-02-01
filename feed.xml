@@ -4,95 +4,13 @@
     <title>crodjer's blogRoll</title>
     <link href="http://www.rohanjain.in/atom.xml" rel="self"/>
     <link href="http://www.rohanjain.in/"/>
-    <updated>2012-02-01T11:35:13+05:30</updated>
+    <updated>2012-02-01T11:38:42+05:30</updated>
     <id>http://www.rohanjain.in/</id>
     <author>
         <name>Rohan Jain</name>
         <email>crodjer@gmail.com</email>
     </author>
 
-    
-    <entry>
-        <title>An experience with PHP</title>
-        <link href="http://www.rohanjain.in/hacking/2012/01/30/an-experience-with-php"/>
-        <updated>2012-01-30T00:00:00+05:30</updated>
-        <id>http://www.rohanjain.in/hacking/2012/01/30/an-experience-with-php</id>
-        
-        <category term="hacking" />
-        
-        <content type="html">&lt;p&gt;I have always tried to stay away from PHP. Python has always been my language
-of choice. But, recently I got to write a considerable amount of code in PHP,
-for my current projects. They are based on a web framework called
-&lt;a href=&quot;http://codeigniter.com/&quot;&gt;Codeigniter&lt;/a&gt;. Being completely inexperienced in
-writing production code with PHP, I did struggle with it a bit.&lt;/p&gt;
-
-&lt;p&gt;As a language PHP has its pros and cons. This post includes my personal
-opinions so, tagged as &amp;lsquo;subjective&amp;rsquo;.&lt;/p&gt;
-
-&lt;h1 id=&quot;pros&quot;&gt;Pros&lt;/h1&gt;
-
-&lt;h2 id=&quot;comprehensive-documentation&quot;&gt;Comprehensive documentation&lt;/h2&gt;
-&lt;p&gt;PHP has a really high adoption, so has a rather comprehensive amount of
-resources available over the web. If you run into some issue, you can mostly be
-sure that some else has had the same issue as well proceed as that person did.&lt;/p&gt;
-
-&lt;h2 id=&quot;c-like-syntax&quot;&gt;C like syntax&lt;/h2&gt;
-&lt;p&gt;The syntax is not much alien to C, which is a language most of the programmers
-know from their &amp;ldquo;Programming 101&amp;rdquo;s. So the initial slope of the learning curve
-is not steep.&lt;/p&gt;
-
-&lt;h2 id=&quot;lots-of-libraries&quot;&gt;Lots of libraries&lt;/h2&gt;
-&lt;p&gt;Want to implement something? There is probably an existing library which does
-that for me. Hence, you can save yourself from writing lots of code. Infact for
-any new web technology PHP is always amongst the languages which get a
-library first.&lt;/p&gt;
-
-&lt;h2 id=&quot;common-web-development-language&quot;&gt;Common web development language&lt;/h2&gt;
-&lt;p&gt;If one is assembling a team, it is probably true that PHP developers will be
-the easiest to find. So one could just choose PHP as the language.&lt;/p&gt;
-
-&lt;h2 id=&quot;closures&quot;&gt;Closures&lt;/h2&gt;
-&lt;p&gt;With PHP 5.3 and up, anonymous functions are available. These are very useful,
-particularly in array maps and callbacks.&lt;/p&gt;
-
-&lt;h1 id=&quot;cons&quot;&gt;Cons&lt;/h1&gt;
-
-&lt;h2 id=&quot;the--operator&quot;&gt;The &lt;code&gt;||&lt;/code&gt; operator&lt;/h2&gt;
-&lt;p&gt;The results from the or (&lt;code&gt;||&lt;/code&gt;) should be one of the operands instead it returns
-&lt;code&gt;1&lt;/code&gt; or &lt;code&gt;0&lt;/code&gt; which is useless most of the time.&lt;/p&gt;
-
-&lt;h2 id=&quot;error-reporting&quot;&gt;Error reporting&lt;/h2&gt;
-&lt;p&gt;Lot of errors that occur while execution, just fail silently or with warnings
-and the execution continues. Why not just halt the script execution and let
-the programmers deal with it, they can take it.&lt;/p&gt;
-
-&lt;h2 id=&quot;there-are-no-promises&quot;&gt;There are no promises&lt;/h2&gt;
-&lt;p&gt;You cannot promise PHP that &lt;code&gt;foo&lt;/code&gt; will return an array, so it is not possible
-to just do &lt;code&gt;foo(arg)['key']&lt;/code&gt; to get a particular index of the array resulting
-from the function call.  Instead a temporary variable, &lt;code&gt;$foo_result&lt;/code&gt; is needed.
-Because of this you can&amp;rsquo;t chain function calls to apply multiple functions
-over a variable. This is particularly annoying with arrays, while doing various
-manipulations over them.&lt;/p&gt;
-
-&lt;h2 id=&quot;embedding-code-in-html&quot;&gt;Embedding code in HTML&lt;/h2&gt;
-&lt;p&gt;Some might say that this is a good thing, but I don&amp;rsquo;t believe so. This doesn&amp;rsquo;t
-let you decouple the templates from the application back end. Templates get
-too much power and projects end up with some application logic in templates.&lt;/p&gt;
-
-&lt;h2 id=&quot;lots-of-libraries-1&quot;&gt;Lots of libraries&lt;/h2&gt;
-&lt;p&gt;Wasn&amp;rsquo;t this a pro too? It was but this also has some negative effect. There
-are multiple libraries available, sometimes for doing the same task. They
-don&amp;rsquo;t have wide contexts. Each might fulfill functionality that one requires
-partially but not all.&lt;/p&gt;
-
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;The only reason I see of using PHP is its popularity, the ease to build teams.
-It is never going to be a language of choice for my personal projects.  Its
-better to have multiple decoupled systems providing reasonable APIs
-implemented in a technology best for each of them, talk to each other instead
-of writing everything down in the same language.&lt;/p&gt;
-</content>
-    </entry>
     
     <entry>
         <title>Awesome is here</title>
