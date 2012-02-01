@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>An experience with PHP - Rohan Jain</title>
+        <meta name="author" content="Rohan Jain">
+        <meta charset=utf-8>
+
+        <!-- Favicon -->
+        <link href="/favicon.ico" rel="shortcut icon"/>
+
+        <!--Stylesheets-->
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/style.css"/>
+        <link rel="stylesheet" media="screen" type="text/css" href="/css/syntax.css"/>
+
+        <!--Atom Feed-->
+        <link rel="alternate" type="application/atom+xml" title="Atom" href="/atom.xml"/>
+
+        <!-- Scripts-->
+        <script type="text/javascript" src="/js/head.min.js"></script>
+        <script type="text/javascript">
+            //Google analytics
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-15806710-5']);
+            _gaq.push(['_trackPageview']);
+
+            //Disqus
+            var disqus_shortname = 'crodjer';
+            
+            head.js(
+                "http://www.google-analytics.com/ga.js",
+                "https://apis.google.com/js/plusone.js"
+            );
+            
+            head.js("http://crodjer.disqus.com/count.js");
+            head.js("http://crodjer.disqus.com/embed.js");
+        </script>
+  </head>
+  <body>
+      <div id="header">
+    <span class="byline">lots of $'s huh?...</span>
+    <h1><a href="/">Rohan Jain</a></h1>
+</div>
+
+<div id="content">
+    
+<div class="post">
+    <h2 class="post-title" id="an-experience-with-php"><a href="/hacking/2012/01/30/an-experience-with-php/">An experience with PHP</a></h2>
+<div class="meta">
+    <span class="date">
+        <img alt="Posted on" src="/images/calendar.png"/> 30 Jan, 2012
+    </span>
+    <span class="share">
+    </span>
+    <span class="tags" >
+        
+        <img alt="Tags" src="/images/tag.png"/>
+        
+        <a href="/tags/languages">languages</a>
+        
+        <a href="/tags/php">php</a>
+        
+        <a href="/tags/experience">experience</a>
+        
+        <a href="/tags/subjective">subjective</a>
+        
+        
+    </span>
+
+    <a class="comments" href="/hacking/2012/01/30/an-experience-with-php/#disqus_thread" data-disqus-identifier="an-experience-with-php">Comments</a>
+</div>
+
+
+    <div class='post-text'>
+        
+        <p>I have always tried to stay away from PHP. Python has always been my language
+of choice. But, recently I got to write a considerable amount of code in PHP,
+for my current projects. They are based on a web framework called
+<a href="http://codeigniter.com/">Codeigniter</a>. Being completely inexperienced in
+writing production code with PHP, I did struggle with it a bit.</p>
+
+<p>As a language PHP has its pros and cons. This post includes my personal
+opinions so, tagged as &lsquo;subjective&rsquo;.</p>
+
+<h1 id="pros">Pros</h1>
+<p>##Comprehensive documentation
+PHP has a really high adoption, so has a rather comprehensive amount of
+resources available over the web. If you run into some issue, you can mostly be
+sure that some else has had the same issue as well proceed as that person did.</p>
+
+<h2 id="c-like-syntax">C like syntax</h2>
+<p>The syntax is not much alien to C, which is a language most of the programmers
+know from their &ldquo;Programming 101&rdquo;s. So the initial slope of the learning curve
+is not steep.</p>
+
+<h2 id="lots-of-libraries">Lots of libraries</h2>
+<p>Want to implement something? There is probably an existing library which does
+that for me. Hence, you can save yourself from writing lots of code. Infact for
+any new web technology PHP is always amongst the languages which get a
+library first.</p>
+
+<h2 id="common-web-development-language">Common web development language</h2>
+<p>If one is assembling a team, it is probably true that PHP developers will be
+the easiest to find. So one could just choose PHP as the language.</p>
+
+<h2 id="closures">Closures</h2>
+<p>With PHP 5.3 and up, anonymous functions are available. These are very useful,
+particularly in array maps and callbacks.</p>
+
+<h1 id="cons">Cons</h1>
+
+<h2 id="the--operator">The <code>||</code> operator</h2>
+<p>The results from the or (<code>||</code>) should be one of the operands instead it returns
+<code>1</code> or <code>0</code> which is useless most of the time.</p>
+
+<h2 id="error-reporting">Error reporting</h2>
+<p>Lot of errors that occur while execution, just fail silently or with warnings
+and the execution continues. Why not just halt the script execution and let
+the programmers deal with it, they can take it.</p>
+
+<h2 id="there-are-no-promises">There are no promises</h2>
+<p>You cannot promise PHP that <code>foo</code> will return an array, so it is not possible
+to just do <code>foo(arg)['key']</code> to get a particular index of the array resulting
+from the function call.  Instead a temporary variable, <code>$foo_result</code> is needed.
+Because of this you can&rsquo;t chain function calls to apply multiple functions
+over a variable. This is particularly annoying with arrays, while doing various
+manipulations over them.</p>
+
+<h2 id="embedding-code-in-html">Embedding code in HTML</h2>
+<p>Some might say that this is a good thing, but I don&rsquo;t believe so. This doesn&rsquo;t
+let you decouple the templates from the application back end. Templates get
+too much power and projects end up with some application logic in templates.</p>
+
+<h2 id="lots-of-libraries-1">Lots of libraries</h2>
+<p>Wasn&rsquo;t this a pro too? It was but this also has some negative effect. There
+are multiple libraries available, sometimes for doing the same task. They
+don&rsquo;t have wide contexts. Each might fulfill functionality that one requires
+partially but not all.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+<p>The only reason I see of using PHP is its popularity, the ease to build teams.
+It is never going to be a language of choice for my personal projects.  Its
+better to have multiple decoupled systems providing reasonable APIs
+implemented in a technology best for each of them, talk to each other instead
+of writing everything down in the same language.</p>
+
+        
+    </div>
+</div>
+
+
+
+<div class="comments">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_identifier = 'an-experience-with-php';
+        var disqus_title = 'An experience with PHP';
+        var disqus_url = 'http://www.rohanjain.in/hacking/2012/01/30/an-experience-with-php/';
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+
+</div>
+
+<div id="sidebar">
+    <ul>
+        <li><a href="/">Blog</a></li>
+        <li><a href="/about">About Me</a></li>
+        <li><a href="http://github.com/crodjer">Code</a></li>
+        <li><a href="/archive">Archive</a></li>
+    </ul>
+</div>
+
+<div id="footer">
+    <p>
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/80x15.png" /></a>
+        Using <a href="http://jekyllrb.com/">Jekyll</a>,
+        <a href="http://pygments.org/">Pygments</a>
+        | <a href="/sitemap.xml">Sitemap</a>, <a href="http://feeds.feedburner.com/crodjerBlog">Feed</a>
+    </p>
+</div>
+
+ </body>
+</html>
