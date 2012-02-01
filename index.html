@@ -45,6 +45,117 @@
     <div class="posts">
     
     <div class="post">
+    <h2 class="post-title" id="an-experience-with-php"><a href="/hacking/2012/01/30/an-experience-with-php/">An experience with PHP</a></h2>
+<div class="meta">
+    <span class="date">
+        <img alt="Posted on" src="/images/calendar.png"/> 30 Jan, 2012
+    </span>
+    <span class="share">
+    </span>
+    <span class="tags" >
+        
+        <img alt="Tags" src="/images/tag.png"/>
+        
+        <a href="/tags/languages">languages</a>
+        
+        <a href="/tags/php">php</a>
+        
+        <a href="/tags/experience">experience</a>
+        
+        <a href="/tags/subjective">subjective</a>
+        
+        
+    </span>
+
+    <a class="comments" href="/hacking/2012/01/30/an-experience-with-php/#disqus_thread" data-disqus-identifier="an-experience-with-php">Comments</a>
+</div>
+
+
+    <div class='post-text'>
+        
+        <p>I have always tried to stay away from PHP. Python has always been my language
+of choice. But, recently I got to write a considerable amount of code in PHP,
+for my current projects. They are based on a web framework called
+<a href="http://codeigniter.com/">Codeigniter</a>. Being completely inexperienced in
+writing production code with PHP, I did struggle with it a bit.</p>
+
+<p>As a language PHP has its pros and cons. This post includes my personal
+opinions so, tagged as &lsquo;subjective&rsquo;.</p>
+
+<h1 id="pros">Pros</h1>
+
+<h2 id="comprehensive-documentation">Comprehensive documentation</h2>
+<p>PHP has a really high adoption, so has a rather comprehensive amount of
+resources available over the web. If you run into some issue, you can mostly be
+sure that some else has had the same issue as well proceed as that person did.</p>
+
+<h2 id="c-like-syntax">C like syntax</h2>
+<p>The syntax is not much alien to C, which is a language most of the programmers
+know from their &ldquo;Programming 101&rdquo;s. So the initial slope of the learning curve
+is not steep.</p>
+
+<h2 id="lots-of-libraries">Lots of libraries</h2>
+<p>Want to implement something? There is probably an existing library which does
+that for me. Hence, you can save yourself from writing lots of code. Infact for
+any new web technology PHP is always amongst the languages which get a
+library first.</p>
+
+<h2 id="common-web-development-language">Common web development language</h2>
+<p>If one is assembling a team, it is probably true that PHP developers will be
+the easiest to find. So one could just choose PHP as the language.</p>
+
+<h2 id="closures">Closures</h2>
+<p>With PHP 5.3 and up, anonymous functions are available. These are very useful,
+particularly in array maps and callbacks.</p>
+
+<h1 id="cons">Cons</h1>
+
+<h2 id="the--operator">The <code>||</code> operator</h2>
+<p>The results from the or (<code>||</code>) should be one of the operands instead it returns
+<code>1</code> or <code>0</code> which is useless most of the time.</p>
+
+<h2 id="error-reporting">Error reporting</h2>
+<p>Lot of errors that occur while execution, just fail silently or with warnings
+and the execution continues. Why not just halt the script execution and let
+the programmers deal with it, they can take it.</p>
+
+<h2 id="there-are-no-promises">There are no promises</h2>
+<p>You cannot promise PHP that <code>foo</code> will return an array, so it is not possible
+to just do <code>foo(arg)['key']</code> to get a particular index of the array resulting
+from the function call.  Instead a temporary variable, <code>$foo_result</code> is needed.
+Because of this you can&rsquo;t chain function calls to apply multiple functions
+over a variable. This is particularly annoying with arrays, while doing various
+manipulations over them.</p>
+
+<h2 id="embedding-code-in-html">Embedding code in HTML</h2>
+<p>Some might say that this is a good thing, but I don&rsquo;t believe so. This doesn&rsquo;t
+let you decouple the templates from the application back end. Templates get
+too much power and projects end up with some application logic in templates.</p>
+
+<h2 id="lots-of-libraries-1">Lots of libraries</h2>
+<p>Wasn&rsquo;t this a pro too? It was but this also has some negative effect. There
+are multiple libraries available, sometimes for doing the same task. They
+don&rsquo;t have wide contexts. Each might fulfill functionality that one requires
+partially but not all.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+<p>PHP is definitely a major server side scripting language. Its popularity, the
+ease to build developer teams counts as a reason for choosing PHP. But, given
+a choice, PHP will always be on the lower side of my priority list. I&rsquo;ll
+mostly go with full fledged languages like Python. With
+<a href="http://couchdb.apache.org/">CouchDB</a> and <a href="http://nodejs.org/">node.js</a>
+around, server side Javascript also looks promising. To get around their
+limitations they can always be used in parallel with other systems.
+Its better to have multiple decoupled systems, providing reasonable APIs and
+implemented in a technology best for each of them, talk to each other instead
+of writing everything down in the same language.</p>
+
+        
+    </div>
+</div>
+
+    
+    <div class="post">
     <h2 class="post-title" id="finally-got-my-comp"><a href="/personal/2011/09/08/finally-got-my-comp/">Awesome is here</a></h2>
 <div class="meta">
     <span class="date">
@@ -257,80 +368,6 @@ and invokes mplayer with correct proxy settings.</p>
 </code></pre>
 </div>
 
-
-        
-    </div>
-</div>
-
-    
-    <div class="post">
-    <h2 class="post-title" id="what-i-learnt-about-buying-computers"><a href="/personal/2011/08/11/what-i-learnt-about-buying-computers/">What I learnt about buying computers</a></h2>
-<div class="meta">
-    <span class="date">
-        <img alt="Posted on" src="/images/calendar.png"/> 11 Aug, 2011
-    </span>
-    <span class="share">
-    </span>
-    <span class="tags" >
-        
-        <img alt="Tags" src="/images/tag.png"/>
-        
-        <a href="/tags/computers">computers</a>
-        
-        <a href="/tags/shopping">shopping</a>
-        
-        
-    </span>
-
-    <a class="comments" href="/personal/2011/08/11/what-i-learnt-about-buying-computers/#disqus_thread" data-disqus-identifier="what-i-learnt-about-buying-computers">Comments</a>
-</div>
-
-
-    <div class='post-text'>
-        
-        <p>Some months ago I decided about the what my new <a href="http://j.mp/o043VH">computer&rsquo;s configuration</a>
-will be. It was a really powerful machine with all the latest
-parts (they still are latest!). Its main strength was the new intel processor
-architecture - <a href="http://j.mp/qbjSyR">Sandy Bridge</a>. I had ruled out laptops
-considering the higer costs with lower configuration and absence of the Sandy
-Bridge architecture.</p>
-
-<p>But due to unavailablility of processor and motherboard in India, I had to wait
-for a long time till I figured out how to get all the parts. While the wait, I
-started doing a smart upgrade of my existing notebook. I got a new monitor,
-keyboard (The generic stuff). The one unique thing that not many people try was
-a <strong>Solid State Drive</strong> (glad I am enjoying one). About this time only I took
-a look at the detailed configuration of my laptop and upgrade options. I was
-surprised to see that the maximum resolution the machine served was upto
-8192 x 8192. After the SSD and a memory upgrade I was surprised to see the
-performance boost and thanks it was giving me back. I was having all the fun
-using multiple screens and not caring if I left any programs open. So I decided
-to not get any new machine at all and keep using my CQ40-144TU for a while till
-I find something worth upgrading in the market.</p>
-
-<p>Since the time when I first decided for a new machine and now, I saw that there
-were a <em>lot</em> of notebooks availabe with the <em>2nd Generation Core i series</em>
-(Sandy Bridge) processors and at compelling prices. So I started a new search
-with queries: <strong>Intel HD Graphics 3000</strong> (Ensures Sandy Bridge arch. and no
-power hungry graphics card), <strong>Core i5</strong> (Ensures hyper threading and more than
-required processing power) and <strong>Free DOS</strong> (Of Course! - I dont want to waste
-such a nice notebook with windows). There are some notebooks which come out
-as reasonable buys.</p>
-
-<p>I ruled out Dell on the first go as it only seems like it that they allow you
-to customize, but they don&rsquo;t. If you want a simple machine without <a href="http://j.mp/o7Zb36">all the
-useless</a> (it is subjective) stuffs like Online backup (If I
-wanted one I would use a VPS , Windows (I can&rsquo;t understand why force it!) or
-replaceable covers (I am getting a computer not a doll to play with!). What I
-want is a processor + motherboard with some notebook essentials with it. HP and
-ThinkPads are the brands I am looking at now. They provide some business
-notebooks which serve all my purposes.<br />
-I&rsquo;ll tell about the final machine which I bought in some newer post.</p>
-
-<p>Still, I would always miss my old machine, which has always been there with me
-for roughly 1.5 years. It is still doing pretty good (This post is written with
-one only) and has more upgrade capabilities. It is well over <em>good enough</em> as a
-general usage computer.</p>
 
         
     </div>
