@@ -1,0 +1,86 @@
+---
+layout: post
+title: An experience with PHP
+slug: an-experience-with-php
+byline: lots of $'s huh?
+published: true
+
+tags:
+    - languages
+    - php
+    - experience
+    - subjective
+category: hacking
+author: crodjer
+---
+
+I have always tried to stay away from PHP. Python has always been my language
+of choice. But, recently I got to write a considerable amount of code in PHP,
+for my current projects. They are based on a web framework called
+[Codeigniter](http://codeigniter.com/). Being completely inexperienced in
+writing production code with PHP, I did struggle with it a bit.
+
+As a language PHP has its pros and cons. This post includes my personal
+opinions so, tagged as 'subjective'.
+
+#Pros
+##Comprehensive documentation
+PHP has a really high adoption, so has a rather comprehensive amount of
+resources available over the web. If you run into some issue, you can mostly be
+sure that some else has had the same issue as well proceed as that person did.
+
+##C like syntax
+The syntax is not much alien to C, which is a language most of the programmers
+know from their "Programming 101"s. So the initial slope of the learning curve
+is not steep.
+
+##Lots of libraries
+Want to implement something? There is probably an existing library which does
+that for me. Hence, you can save yourself from writing lots of code. Infact for
+any new web technology PHP is always amongst the languages which get a
+library first.
+
+##Common web development language
+If one is assembling a team, it is probably true that PHP developers will be
+the easiest to find. So one could just choose PHP as the language.
+
+##Closures
+With PHP 5.3 and up, anonymous functions are available. These are very useful,
+particularly in array maps and callbacks.
+
+#Cons
+
+##The `||` operator
+The results from the or (`||`) should be one of the operands instead it returns
+`1` or `0` which is useless most of the time.
+
+##Error reporting
+Lot of errors that occur while execution, just fail silently or with warnings
+and the execution continues. Why not just halt the script execution and let
+the programmers deal with it, they can take it.
+
+##There are no promises
+You cannot promise PHP that `foo` will return an array, so it is not possible
+to just do `foo(arg)['key']` to get a particular index of the array resulting
+from the function call.  Instead a temporary variable, `$foo_result` is needed.
+Because of this you can't chain function calls to apply multiple functions
+over a variable. This is particularly annoying with arrays, while doing various
+manipulations over them.
+
+##Embedding code in HTML
+Some might say that this is a good thing, but I don't believe so. This doesn't
+let you decouple the templates from the application back end. Templates get
+too much power and projects end up with some application logic in templates.
+
+##Lots of libraries
+Wasn't this a pro too? It was but this also has some negative effect. There
+are multiple libraries available, sometimes for doing the same task. They
+don't have wide contexts. Each might fulfill functionality that one requires
+partially but not all.
+
+#Conclusion
+The only reason I see of using PHP is its popularity, the ease to build teams.
+It is never going to be a language of choice for my personal projects.  Its
+better to have multiple decoupled systems providing reasonable APIs
+implemented in a technology best for each of them, talk to each other instead
+of writing everything down in the same language.
