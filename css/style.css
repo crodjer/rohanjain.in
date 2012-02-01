@@ -22,7 +22,7 @@ blockquote{
 }
 
 h1, h2, h3, h4, h5{
-    margin: 1px 0 5px;
+    margin: 15px 0 2px;
 }
 
 hr{
@@ -34,10 +34,10 @@ html{
 }
 
 body {
-    width: 950px;
+    width: 800px;
     margin: 0 auto;
     font-family: sans-serif;
-    font-size: 0.95em;
+    font-size: 0.9em;
     line-height: 150%;
     background-color: #FBFBFB;
 }
@@ -64,7 +64,7 @@ body {
 #content {
     float: left;
     margin-top: 10px;
-    width: 710px;
+    width: 630px;
 }
 
 #sidebar {
@@ -87,7 +87,7 @@ body {
     text-decoration:none;
     display:block;
     text-transform: uppercase;
-    width:220px;
+    width:100px;
 }
 
 #sidebar ul li a:hover {
@@ -111,7 +111,7 @@ body {
 }
 
 .posts {
-    width: 710px;
+    width: 600px;
 }
 
 .paginator {
@@ -122,7 +122,7 @@ body {
     border: 1px solid #CCC;
     color: #333;
     padding: 10px 15px;
-    width: 680px;
+    width: 600px;
     margin-bottom: 10px;
     min-height:100px;
 }
@@ -149,7 +149,7 @@ body {
 
 .meta {
     color: #9c8877;
-    width: 660px;
+    width: 600px;
     font-style: italic;
     font-size: 0.8em;
     margin-bottom: 5px;
