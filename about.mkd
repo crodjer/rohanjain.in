@@ -37,8 +37,4 @@ Current projects:
  - **[Google Summer of Code](http://www.google-melange.com/gsoc/project/google/gsoc2011/crodjer/10001)**: Summer of code project with universal subtitles
  - An internship with **Policy Innovations**
 
-Work Environment:
-
-  - Debian
-  - Awesome Window Manager
-  - URxvt, Vim, GNU Screen, Google Chrome, Irssi
+Work Environment: Debian, XMonad, Vim, Mutt, ZSH, Git, Irssi
