@@ -24,6 +24,7 @@ As a language PHP has its pros and cons. This post includes my personal
 opinions so, tagged as 'subjective'.
 
 #Pros
+
 ##Comprehensive documentation
 PHP has a really high adoption, so has a rather comprehensive amount of
 resources available over the web. If you run into some issue, you can mostly be
