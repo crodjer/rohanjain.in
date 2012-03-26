@@ -22,8 +22,31 @@ answer on *stackoverflow*, stumble again and again  and watching TV series
 as if they were one movie (seriously, I have watched most of the serieses
 my friends can suggest).
 
+Currently busy with:
+
+ - [Interview Street][is]: Software Engineer
+
+ - Bachelor Term Project: Automation with python over [Arc GIS][arcgis]
+
+ - XMonad: The most awesome window manager, written in haskell. Contributing to
+   [xmonad-contrib][xmonad-contrib-darcswatch]
+
+ - Functional Programming and Purity: Learning about the concepts of functional
+   programming. Trying to learn from talks and work of [Simon Peyton-Jones][spj]
+
+ - Javascript: Starting to admire the power of javascript, convinced by
+   [Douglas Crockford][crockford], [CouchDB][couch] and [NodeJS][node].
+
+Open Contributions (recent first):
+
+ - [XMonad Contrib](http://xmonad.org/xmonad-docs/xmonad-contrib/)
+ - [Universal Subtitles](https://github.com/pculture/unisubs)
+ - [Django-social-auth](https://github.com/omab/django-social-auth)
+ - [Python Markdown](https://github.com/waylan/Python-Markdown)
+ - More at github profile below
+
 Find me at:
-[Google](http://www.google.com/profiles/rohanjain.kgp),
+[Google](http://www.google.com/profiles/crodjer),
 [Github](http://github.com/crodjer),
 [StackOverflow](http://stackoverflow.com/users/420357/),
 [Twitter](http://twitter.com/__crodjer__),
@@ -32,9 +55,12 @@ Find me at:
 [Gitorious](https://gitorious.org/~crodjer)
 [Last.fm](http://www.last.fm/user/crodjer)
 
-Current projects:
-
- - **[Google Summer of Code](http://www.google-melange.com/gsoc/project/google/gsoc2011/crodjer/10001)**: Summer of code project with universal subtitles
- - An internship with **Policy Innovations**
-
 Work Environment: Debian, XMonad, Vim, Mutt, ZSH, Git, Irssi
+
+[arcgis]: http://www.esri.com/software/arcgis/index.html
+[is]: http://www.interviewstreet.org
+[xmonad-contrib-darcswatch]: http://darcswatch.nomeata.de/repo_http:__code.haskell.org_XMonadContrib.html
+[spj]: http://en.wikipedia.org/wiki/Simon_Peyton_Jones
+[crockford]: http://www.crockford.com/
+[couch]: http://couchdb.apache.org/
+[node]: http://nodejs.org
