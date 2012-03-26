@@ -5,7 +5,7 @@ byline: crodjer tells about himself
 title: About Me
 author: crodjer
 ---
-I am a 3rd year B. Tech Undergraduate student from IIT Kharagpur. I am a
+I am a 4th year B. Tech Undergraduate student from IIT Kharagpur. I am a
 *software* and *web developer* by passion and an opensource admirer and
 promoter.
 
