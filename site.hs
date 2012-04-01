@@ -42,7 +42,6 @@ main = hakyllWith config $ do
             >>> arr (setField "host" host)
             >>> applyTemplateCompiler "templates/post.html"
             >>> applyTemplateCompiler "templates/default.html"
-            >>> relativizeUrlsCompiler
 
 
     -- Render posts list
@@ -53,7 +52,6 @@ main = hakyllWith config $ do
                 "templates/postitem.html" "posts" "posts/*"
         >>> applyTemplateCompiler "templates/posts.html"
         >>> applyTemplateCompiler "templates/default.html"
-        >>> relativizeUrlsCompiler
 
     -- Index
     match  "index.html" $ route idRoute
@@ -63,7 +61,6 @@ main = hakyllWith config $ do
                 "templates/postitem.html" "posts" "posts/*"
         >>> applyTemplateCompiler "templates/index.html"
         >>> applyTemplateCompiler "templates/default.html"
-        >>> relativizeUrlsCompiler
 
     -- Render some static pages
     forM_ ["about.mkd"] $ \p ->
@@ -71,7 +68,6 @@ main = hakyllWith config $ do
             route   $ setExtension ".html"
             compile $ pageCompiler
                 >>> applyTemplateCompiler "templates/default.html"
-                >>> relativizeUrlsCompiler
 
     -- Sitemap
     match  "sitemap.xml" $ route idRoute
@@ -80,7 +76,6 @@ main = hakyllWith config $ do
         >>> setFieldPageList (reverse . chronological)
                 "templates/postsitemap.xml" "posts" "posts/*"
         >>> applyTemplateCompiler "templates/sitemap.xml"
-        >>> relativizeUrlsCompiler
 
     -- Read templates
     match "templates/*" $ compile templateCompiler
