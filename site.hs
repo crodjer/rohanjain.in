@@ -25,6 +25,11 @@ main = hakyll $ do
         route   idRoute
         compile copyFileCompiler
 
+    -- Copy favicon
+    match "favicon.ico" $ do
+      route   idRoute
+      compile copyFileCompiler
+
     -- Copy robots.txt
     match "robots.txt" $ do
       route   idRoute
