@@ -70,11 +70,6 @@ main = hakyll $ do
         >>> applyTemplateCompiler "templates/sitemap.xml"
         >>> relativizeUrlsCompiler
 
-    -- Render Atom feed
-    match  "atom.xml" $ route idRoute
-    create "atom.xml" $
-        requireAll_ "posts/*" >>> renderAtom feedConfiguration
-
     -- Read templates
     match "templates/*" $ compile templateCompiler
 
@@ -96,11 +91,3 @@ addPostListHtml = addPostList "templates/postitem.html"
 
 addPostListSitemap :: Compiler (Page String, [Page String]) (Page String)
 addPostListSitemap = addPostList "templates/postsitemap.xml"
-
-feedConfiguration :: FeedConfiguration
-feedConfiguration = FeedConfiguration
-    { feedTitle       = "Rohan's Blog"
-    , feedDescription = "A blog about hacking and sometimes personal"
-    , feedAuthorName  = "Rohan Jain"
-    , feedRoot        = "http://www.rohanjain.in"
-    }
