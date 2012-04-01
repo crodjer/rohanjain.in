@@ -1,0 +1,53 @@
+---
+layout: post
+title: Whiteboarding with XMPP (Google Talk)
+slug: whiteboarding-with-xmpp-google-talk
+tags: xmpp, pidgin, whiteboarding
+date: 25th Oct, 2010
+author: crodjer
+---
+
+Sometimes, being too lazy to use the type, you might wish for some other way to interact with others. Well there is one and quit an interactive and entertaining one, a whiteboarding interface, i.e. the people involved in chat can do collaborative drawings, play games, convey emotions not possible by typing etc. It can have some bigger implementations like teaching, presentations many more utilities can be innovated.  
+
+There is already a small implementation of this feature in yahoo by name doodle. Seeing its utility one might wonder why this brilliant feature is not implemented with the widely used chat protocol, XMPP (Google Talk is based on XMPP)? Well I cant find out why not.  
+
+So, we have taken an initiative. Our group (<a href="http://github.com/crodjer" title="" target="_blank">Me</a>, <a href="http://github.com/snktagarwal" title="" target="_blank">Sanket Agarwal</a> and <a href="http://github.com/psjinx" title="" target="_blank">Pankaj Singh</a>) is working for implementing this feature with the XMPP protocol, at least for pidgin users.  
+
+#### Technical Info: 
+Project Repository: <http://github.com/crodjer/pidgin_whiteboard>  
+Updates: [Project updates](#updates)
+
+This project involves building a basic implementation of the protocol specified in,  <a href="http://xmpp.org/extensions/xep-0284.html">http://xmpp.org/extensions/xep-0284.html</a>, using the SVG graphics specified in, <a href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>. Both together define the standards for our work.  
+
+We hope to provide the following features:
+
+* Simple whiteboarding drawing Lines, Polygons, Circles and Free Curves.
+* Fancy Texting
+* Image Sending
+* This will provide users with a more enriching experience.  
+
+
+I am really excited about this project as it would be one of my initial contributions to the great open-source community. Till now it have been a fine ride of purpling, jingling and jabbering with pidgin.  
+
+
+####Updates:
+*29 Nov 2010*  
+Work resumed after a brief pause. The target now is to integrate <a href="http://xmpp.org/extensions/xep-0284.html" target="_blank">shared XML editing</a> with jingle and add more features to the whiteboard graphical gui.  
+
+*10 Nov 2010*  
+Our Proof of concept is ready. All the basic features of whiteboard are now incorporated. A usable implementation now exists. You may fetch and compile the code from the git repository (Address mentioned above). This is how it looks:  
+<iframe width="425" height="349" src="http://www.youtube.com/embed/sYKutp4I4Zs"></iframe>
+A [Snapshot](http://img577.imageshack.us/img577/7910/screenshot1kg.png).  
+
+*9 Nov 2010*
+Syncing of whiteboards is up. The whiteboards are updated as the two users draw using their brushes. So a responsive interface is present. Just some small bug fix and feature additions remain now.    
+<a href="http://img259.imageshack.us/img259/7980/screenshotrd.png" target="_blank">Screenshot</a>  
+  
+*6 Nov 2010*  
+Now session initiate and accept integrated (popping up of whiteboard on both ends). Slight change in way of implementation, use of libjingle is now on a hold, creating a custom whiteboard message format for session management for now. Code in **dcrodjer** branch of the above git repository. 
+A screenshot of the code working: <a href="http://img837.imageshack.us/img837/8250/screenshot1gb.png" target="_blank">Image for session implementation</a>  
+  
+*24 Oct 2010*  
+A whiteboard interface initiates. This is how it look like:  
+<a href="http://img841.imageshack.us/img841/5516/59586846.png" target="_blank">Image 1</a>  
+<a href="http://img221.imageshack.us/img221/4198/65357038.png" target="_blank">Image 2</a>
