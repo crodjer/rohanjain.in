@@ -48,7 +48,7 @@ main = hakyllWith config $ do
     match  "posts.html" $ route idRoute
     create "posts.html" $ constA mempty
         >>> arr (setField "title" "What crodjer writes")
-        >>> setFieldPageList chronological
+        >>> setFieldPageList (reverse . chronological)
                 "templates/postitem.html" "posts" "posts/*"
         >>> applyTemplateCompiler "templates/posts.html"
         >>> applyTemplateCompiler "templates/default.html"
@@ -58,7 +58,7 @@ main = hakyllWith config $ do
     match  "index.html" $ route idRoute
     create "index.html" $ constA mempty
         >>> arr (setField "title" "What crodjer writes")
-        >>> setFieldPageList (take 5 . chronological)
+        >>> setFieldPageList (take 5 . reverse . chronological)
                 "templates/postitem.html" "posts" "posts/*"
         >>> applyTemplateCompiler "templates/index.html"
         >>> applyTemplateCompiler "templates/default.html"
@@ -76,7 +76,7 @@ main = hakyllWith config $ do
     match  "sitemap.xml" $ route idRoute
     create "sitemap.xml" $ constA mempty
         >>> arr (setField "host" host)
-        >>> setFieldPageList chronological
+        >>> setFieldPageList (reverse . chronological)
                 "templates/postsitemap.xml" "posts" "posts/*"
         >>> applyTemplateCompiler "templates/sitemap.xml"
         >>> relativizeUrlsCompiler
