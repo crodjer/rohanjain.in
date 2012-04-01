@@ -39,6 +39,7 @@ main = hakyllWith config $ do
     match "posts/*" $ do
         route   $ setExtension ".html"
         compile $ pageCompiler
+            >>> arr (setField "host" host)
             >>> applyTemplateCompiler "templates/post.html"
             >>> applyTemplateCompiler "templates/default.html"
             >>> relativizeUrlsCompiler
