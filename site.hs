@@ -48,7 +48,7 @@ main = hakyll $ do
     match  "posts.html" $ route idRoute
     create "posts.html" $ constA mempty
         >>> arr (setField "title" "What crodjer writes")
-        >>> requireAllA "posts/*" addPostList
+        >>> requireAllA "posts/*" addPostListHtml
         >>> applyTemplateCompiler "templates/posts.html"
         >>> applyTemplateCompiler "templates/default.html"
         >>> relativizeUrlsCompiler
@@ -57,9 +57,17 @@ main = hakyll $ do
     match  "index.html" $ route idRoute
     create "index.html" $ constA mempty
         >>> arr (setField "title" "What crodjer writes")
-        >>> requireAllA "posts/*" (id *** arr (take 5 . reverse . chronological ) >>> addPostList)
+        >>> requireAllA "posts/*" (id *** arr (take 5 . reverse . chronological ) >>> addPostListHtml)
         >>> applyTemplateCompiler "templates/index.html"
         >>> applyTemplateCompiler "templates/default.html"
+        >>> relativizeUrlsCompiler
+
+    -- Sitemap
+    match  "sitemap.xml" $ route idRoute
+    create "sitemap.xml" $ constA mempty
+        >>> arr (setField "host" host)
+        >>> requireAllA "posts/*" addPostListSitemap
+        >>> applyTemplateCompiler "templates/sitemap.xml"
         >>> relativizeUrlsCompiler
 
     -- Render Atom feed
@@ -70,15 +78,24 @@ main = hakyll $ do
     -- Read templates
     match "templates/*" $ compile templateCompiler
 
--- | Auxiliary compiler: generate a post list from a list of given posts, and
--- add it to the current page under @$posts@
+    where
+        host = "http://www.rohanjain.in"
+
+-- | Auxiliary compiler: generate a post list from a list of given posts and
+-- template, and add it to the current page under @$posts@
 --
-addPostList :: Compiler (Page String, [Page String]) (Page String)
-addPostList = setFieldA "posts" $
+addPostList :: Identifier Template -> Compiler (Page b, [Page String]) (Page b)
+addPostList template = setFieldA "posts" $
     arr (reverse . chronological)
-        >>> require "templates/postitem.html" (\p t -> map (applyTemplate t) p)
+        >>> require template (\p t -> map (applyTemplate t) p)
         >>> arr mconcat
         >>> arr pageBody
+
+addPostListHtml :: Compiler (Page String, [Page String]) (Page String)
+addPostListHtml = addPostList "templates/postitem.html"
+
+addPostListSitemap :: Compiler (Page String, [Page String]) (Page String)
+addPostListSitemap = addPostList "templates/postsitemap.xml"
 
 feedConfiguration :: FeedConfiguration
 feedConfiguration = FeedConfiguration
