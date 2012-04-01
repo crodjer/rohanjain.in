@@ -46,7 +46,7 @@ if [ $? ]; then
 
     done
 
-    SED_CHAING=$ABS_SED_CHAIN
+    SED_CHAIN=$ABS_SED_CHAIN
 
     for page in $XML_PAGES
     do
