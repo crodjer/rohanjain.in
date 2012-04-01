@@ -2,14 +2,14 @@
 module Main where
 
 import Prelude hiding (id)
-import Control.Category (id)
-import Control.Arrow ((>>>), (***), arr)
-import Data.Monoid (mempty, mconcat)
+import Control.Arrow ((>>>), arr)
+import Data.Monoid (mempty)
+import Control.Monad (forM_)
 
 import Hakyll
 
 main :: IO ()
-main = hakyll $ do
+main = hakyllWith config $ do
     -- Compress CSS
     match "css/*" $ do
         route   idRoute
@@ -48,7 +48,8 @@ main = hakyll $ do
     match  "posts.html" $ route idRoute
     create "posts.html" $ constA mempty
         >>> arr (setField "title" "What crodjer writes")
-        >>> requireAllA "posts/*" addPostListHtml
+        >>> setFieldPageList chronological
+                "templates/postitem.html" "posts" "posts/*"
         >>> applyTemplateCompiler "templates/posts.html"
         >>> applyTemplateCompiler "templates/default.html"
         >>> relativizeUrlsCompiler
@@ -57,16 +58,26 @@ main = hakyll $ do
     match  "index.html" $ route idRoute
     create "index.html" $ constA mempty
         >>> arr (setField "title" "What crodjer writes")
-        >>> requireAllA "posts/*" (id *** arr (take 5 . reverse . chronological ) >>> addPostListHtml)
+        >>> setFieldPageList (take 5 . chronological)
+                "templates/postitem.html" "posts" "posts/*"
         >>> applyTemplateCompiler "templates/index.html"
         >>> applyTemplateCompiler "templates/default.html"
         >>> relativizeUrlsCompiler
+
+    -- Render some static pages
+    forM_ ["about.mkd"] $ \p ->
+        match p $ do
+            route   $ setExtension ".html"
+            compile $ pageCompiler
+                >>> applyTemplateCompiler "templates/default.html"
+                >>> relativizeUrlsCompiler
 
     -- Sitemap
     match  "sitemap.xml" $ route idRoute
     create "sitemap.xml" $ constA mempty
         >>> arr (setField "host" host)
-        >>> requireAllA "posts/*" addPostListSitemap
+        >>> setFieldPageList chronological
+                "templates/postsitemap.xml" "posts" "posts/*"
         >>> applyTemplateCompiler "templates/sitemap.xml"
         >>> relativizeUrlsCompiler
 
@@ -76,18 +87,8 @@ main = hakyll $ do
     where
         host = "http://www.rohanjain.in"
 
--- | Auxiliary compiler: generate a post list from a list of given posts and
--- template, and add it to the current page under @$posts@
---
-addPostList :: Identifier Template -> Compiler (Page b, [Page String]) (Page b)
-addPostList template = setFieldA "posts" $
-    arr (reverse . chronological)
-        >>> require template (\p t -> map (applyTemplate t) p)
-        >>> arr mconcat
-        >>> arr pageBody
-
-addPostListHtml :: Compiler (Page String, [Page String]) (Page String)
-addPostListHtml = addPostList "templates/postitem.html"
-
-addPostListSitemap :: Compiler (Page String, [Page String]) (Page String)
-addPostListSitemap = addPostList "templates/postsitemap.xml"
+config :: HakyllConfiguration
+config = defaultHakyllConfiguration
+    { deployCommand = "rsync --checksum -ave 'ssh' \
+                      \_site/* blog:~/www/hakyll"
+    }
