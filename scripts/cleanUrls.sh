@@ -5,8 +5,11 @@
 # static site generators to clean the dirctory/index.html
 # based
 ############################################################
-SITE_DIR="_site/"
+PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd )"
+SITE_DIR="$PROJECT_DIR/_site"
 HOST="www.rohanjain.in"
+
+TMP_PAGE="/tmp/$RANDOM"
 
 cd $SITE_DIR
 
@@ -27,25 +30,28 @@ if [ $? ]; then
         fi
     done
 
-    echo "$SED_CHAIN"
-    echo "$ABS_SED_CHAIN"
-
     for page in $HTML_PAGES
     do
+        FILENAME="$page.html"
         echo "Updating urls in $page"
-        bash -c "cat $page.html $SED_CHAIN > $page.html"
-
+        bash -c "cat $FILENAME $SED_CHAIN > $TMP_PAGE"
         if [ `echo "$page" | sed 's/index$//'` ]; then
             echo "Moving $page"
             mkdir -p "$page"
-            mv "$page.html" "$page/index.html"
+            rm $FILENAME
+            FILENAME="$page/index.html"
         fi
+        mv "$TMP_PAGE" "$FILENAME"
 
     done
 
+    SED_CHAING=$ABS_SED_CHAIN
+
     for page in $XML_PAGES
     do
+        FILENAME="$page.xml"
         echo "Updating urls in $page"
-        bash -c "cat $page.xml $ABS_SED_CHAIN > $page.xml"
+        bash -c "cat $FILENAME $SED_CHAIN > $TMP_PAGE"
+        mv "$TMP_PAGE" "$FILENAME"
     done
 fi
