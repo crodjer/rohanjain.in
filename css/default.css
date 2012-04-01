@@ -88,8 +88,10 @@ pre{
   padding: 10px 0;
   font-size: 0.9em;
   color: #666;
+  text-align: right
 }
 
-#footer.links{
-  float: right;
+#footer .link{
+  float: left;
+  margin-right: 15px;
 }
