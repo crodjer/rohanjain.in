@@ -27,8 +27,9 @@ if [ $CHANGED_FILES -ne "0" ]; then
     "$_git" stash
 fi
 
-# directory holding the generated site -- should be outside this repo
-_site="$("mktemp" -d /tmp/_site.XXXXXXXXX)"
+# directory holding the generated site -- should be excluded from vc
+_site="$PROJECT_DIR/_site"
+
 let ERROR+=$?
 # the current branch
 _currbranch="$(grep "^*" < <("$_git" branch) | cut -d' ' -f2)"
@@ -40,7 +41,8 @@ if [[ $_currbranch == $_origbranch ]]; then # we should generate the site
     # go to root dir of the repo
     cd "$("$_git" rev-parse --show-toplevel)"
     # generate the site
-    "$_generate"  "$_site"
+    $_generate
+
     let ERROR+=$?
     # switch to branch the site will be stored
     "$_git" checkout "$_destbranch"
@@ -73,6 +75,3 @@ if [ $CHANGED_FILES -ne "0" ]; then
     "$_git" stash pop
     "$_git" reset
 fi
-
-# cleanup
-rm -rf "$_site"
