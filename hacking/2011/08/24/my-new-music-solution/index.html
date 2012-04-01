@@ -85,6 +85,33 @@ rescue, which I am using currently.</p>
 <p>I also created this shell script which stores the channels as key value pairs
 and invokes mplayer with correct proxy settings.</p>
 
+<div class="highlight"><pre><code class="bash"><span class="c">#!/bin/bash</span>
+
+<span class="c"># Initiate a hashtable to store radio channels</span>
+<span class="nb">declare</span> -A radios
+
+<span class="c"># Set the environment proxy variables</span>
+<span class="c"># http_proxy=&quot;&quot;</span>
+
+<span class="nv">radios</span><span class="o">=(</span>
+    <span class="o">[</span><span class="s2">&quot;bb&quot;</span><span class="o">]=</span><span class="s2">&quot;http://bb.1.fm/bbfm32k&quot;</span> <span class="c">#Bombay Beats - 1.fm</span>
+    <span class="o">[</span><span class="s2">&quot;m&quot;</span><span class="o">]=</span><span class="s2">&quot;http://173.192.58.37:8226&quot;</span> <span class="c">#Radio Maska</span>
+    <span class="o">[</span><span class="s2">&quot;nri&quot;</span><span class="o">]=</span><span class="s2">&quot;http://205.188.215.230:8024&quot;</span> <span class="c">#Radio NRI</span>
+    <span class="o">[</span><span class="s2">&quot;tt&quot;</span><span class="o">]=</span><span class="s2">&quot;http://91.121.155.39:80/&quot;</span> <span class="c">#Radio Teen Taal</span>
+<span class="o">)</span>
+
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;$1&quot;</span> <span class="o">]</span> ; <span class="k">then</span>
+<span class="k">    </span><span class="nb">echo</span> <span class="s2">&quot;Provide a station name. Choices are:&quot;</span>
+    <span class="k">for </span>station in <span class="s2">&quot;${!radios[@]}&quot;</span>; <span class="k">do</span>
+<span class="k">        </span><span class="nb">echo</span> <span class="nv">$station</span>
+    <span class="k">done</span>
+<span class="k">else</span>
+    <span class="c"># Call mplayer with radio&#39;s address</span>
+    mplayer -volume 15 <span class="k">${</span><span class="nv">radios</span><span class="p">[</span><span class="s2">&quot;$1&quot;</span><span class="p">]</span><span class="k">}</span>
+<span class="k">fi</span>
+</code></pre>
+</div>
+
 
         
     </div>
