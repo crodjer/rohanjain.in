@@ -26,12 +26,12 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    color: #000;
-}
-
 a:visited{
     color: #005c99;
+}
+
+a:hover {
+    color: #000;
 }
 
 .superTitle{
