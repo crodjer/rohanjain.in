@@ -65,6 +65,7 @@ main = hakyllWith config $ do
         match p $ do
             route   $ setRoot `composeRoutes` cleanURL
             compile $ pageCompiler
+                >>> arr (setField "host" host)
                 >>> applyTemplateCompiler "templates/default.html"
 
     -- Sitemap
@@ -72,6 +73,7 @@ main = hakyllWith config $ do
     create "sitemap.xml" $ constA mempty
         >>> arr (setField "host" host)
         >>> requireAllA "posts/*" postListSitemap
+        >>> requireAllA "pages/*" pageListSitemap
         >>> applyTemplateCompiler "templates/sitemap.xml"
 
     -- Read templates
@@ -122,6 +124,9 @@ postList = buildList "posts" "templates/postitem.html"
 
 postListSitemap :: Compiler (Page String, [Page String]) (Page String)
 postListSitemap = buildList "posts" "templates/postsitemap.xml"
+
+pageListSitemap :: Compiler (Page String, [Page String]) (Page String)
+pageListSitemap = buildList "pages" "templates/pagesitemap.xml"
 
 buildList :: String -> Identifier Template -> Compiler (Page String, [Page String]) (Page String)
 buildList field template = setFieldA field $
