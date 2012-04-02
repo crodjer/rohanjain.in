@@ -47,7 +47,7 @@ main = hakyllWith config $ do
 
     {-match  "./posts.html" $ route $ setRoot `composeRoutes` cleanURL-}
     {-create "./posts.html" $ constA mempty-}
-        {->>> arr (setField "title" "What crodjer writes")-}
+        {->>> arr (setField "title" "What I write")-}
         {->>> requireAllA "posts/*" postList-}
         {->>> applyTemplateCompiler "templates/posts.html"-}
         {->>> applyTemplateCompiler "templates/default.html"-}
@@ -55,7 +55,7 @@ main = hakyllWith config $ do
     -- Index
     match  "index.html" $ route idRoute
     create "index.html" $ constA mempty
-        >>> arr (setField "title" "What crodjer writes")
+        >>> arr (setField "title" "What I write")
         >>> requireAllA "posts/*" postList
         >>> applyTemplateCompiler "templates/posts.html"
         >>> applyTemplateCompiler "templates/default.html"
