@@ -2,25 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>http://www.rohanjain.in/about/</loc>
-        <lastmod>2012-04-01</lastmod>
+        <lastmod>2012-04-02</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1</priority>
     </url>
 
-    
-    <url>
-        <loc>http://www.rohanjain.in/hacking/2012/01/30/an-experience-with-php/</loc>
-        <lastmod>2012-01-30</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>http://www.rohanjain.in/personal/2011/09/08/finally-got-my-comp/</loc>
-        <lastmod>2011-09-08</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
     
     <url>
         <loc>http://www.rohanjain.in/hacking/2011/08/27/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</loc>
@@ -30,43 +16,8 @@
     </url>
     
     <url>
-        <loc>http://www.rohanjain.in/hacking/2011/08/24/my-new-music-solution/</loc>
-        <lastmod>2011-08-24</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>http://www.rohanjain.in/personal/2011/08/11/what-i-learnt-about-buying-computers/</loc>
-        <lastmod>2011-08-11</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>http://www.rohanjain.in/personal/2011/07/18/an-incident-on-the-rails/</loc>
-        <lastmod>2011-07-18</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>http://www.rohanjain.in/hacking/2011/06/20/django-using-admin-horizontal-filter-in-forms/</loc>
-        <lastmod>2011-06-20</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
         <loc>http://www.rohanjain.in/personal/2011/06/16/dynamic-to-static/</loc>
         <lastmod>2011-06-16</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>http://www.rohanjain.in/personal/2011/04/22/building-my-power-computer/</loc>
-        <lastmod>2011-04-22</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
