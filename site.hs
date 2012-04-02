@@ -3,8 +3,9 @@ module Main where
 
 import Prelude hiding (id)
 import Control.Arrow ((>>>), arr)
-import Data.Monoid (mempty)
+import Data.Monoid (mempty, mconcat)
 import Control.Monad (forM_)
+import System.FilePath
 
 import Hakyll
 
@@ -37,35 +38,32 @@ main = hakyllWith config $ do
 
     -- Render posts
     match "posts/*" $ do
-        route   $ setExtension ".html"
+        route   $ setRoot `composeRoutes` cleanURL
         compile $ pageCompiler
             >>> arr (setField "host" host)
             >>> applyTemplateCompiler "templates/post.html"
             >>> applyTemplateCompiler "templates/default.html"
 
 
-    -- Render posts list
-    match  "posts.html" $ route idRoute
-    create "posts.html" $ constA mempty
-        >>> arr (setField "title" "What crodjer writes")
-        >>> setFieldPageList (reverse . chronological)
-                "templates/postitem.html" "posts" "posts/*"
-        >>> applyTemplateCompiler "templates/posts.html"
-        >>> applyTemplateCompiler "templates/default.html"
+    {-match  "./posts.html" $ route $ setRoot `composeRoutes` cleanURL-}
+    {-create "./posts.html" $ constA mempty-}
+        {->>> arr (setField "title" "What crodjer writes")-}
+        {->>> requireAllA "posts/*" postList-}
+        {->>> applyTemplateCompiler "templates/posts.html"-}
+        {->>> applyTemplateCompiler "templates/default.html"-}
 
     -- Index
     match  "index.html" $ route idRoute
     create "index.html" $ constA mempty
         >>> arr (setField "title" "What crodjer writes")
-        >>> setFieldPageList (take 5 . reverse . chronological)
-                "templates/postitem.html" "posts" "posts/*"
-        >>> applyTemplateCompiler "templates/index.html"
+        >>> requireAllA "posts/*" postList
+        >>> applyTemplateCompiler "templates/posts.html"
         >>> applyTemplateCompiler "templates/default.html"
 
     -- Render some static pages
-    forM_ ["about.mkd"] $ \p ->
+    forM_ markUpPages $ \p ->
         match p $ do
-            route   $ setExtension ".html"
+            route   $ setRoot `composeRoutes` cleanURL
             compile $ pageCompiler
                 >>> applyTemplateCompiler "templates/default.html"
 
@@ -73,8 +71,7 @@ main = hakyllWith config $ do
     match  "sitemap.xml" $ route idRoute
     create "sitemap.xml" $ constA mempty
         >>> arr (setField "host" host)
-        >>> setFieldPageList (reverse . chronological)
-                "templates/postsitemap.xml" "posts" "posts/*"
+        >>> requireAllA "posts/*" postListSitemap
         >>> applyTemplateCompiler "templates/sitemap.xml"
 
     -- Read templates
@@ -82,6 +79,58 @@ main = hakyllWith config $ do
 
     where
         host = "http://www.rohanjain.in"
+        markUpPages = [ "pages/*.md"
+                      , "pages/*.mkd"
+                      , "pages/*.mkdn"
+                      , "pages/*.mdown"
+                      , "pages/*.markdown"
+                      , "pages/*.pandoc"
+                      , "pages/*.pdc"
+                      , "pages/*.lhs" ]
+
+-- custom routes
+--------------------------------------------------------------------------------
+
+setRoot :: Routes
+setRoot = customRoute stripTopDir
+
+stripTopDir :: Identifier a -> FilePath
+stripTopDir = joinPath . tail . splitPath . toFilePath
+
+cleanURL :: Routes
+cleanURL = customRoute fileToDirectory
+
+fileToDirectory :: Identifier a -> FilePath
+fileToDirectory = (flip combine) "index.html" . dropExtension . toFilePath
+
+toIndex :: Routes
+toIndex = customRoute fileToIndex
+
+fileToIndex :: Identifier a -> FilePath
+fileToIndex = (flip combine) "index.html" . dropFileName . toFilePath
+
+-- misc functions
+--------------------------------------------------------------------------------
+stripIndexLink :: Page a -> Page a
+stripIndexLink = changeField "url" dropFileName
+
+buildTitle :: Page a -> Page a
+buildTitle = renderField "title" "pagetitle" (++ " - Ethan Schoonover")
+
+postList :: Compiler (Page String, [Page String]) (Page String)
+postList = buildList "posts" "templates/postitem.html"
+
+postListSitemap :: Compiler (Page String, [Page String]) (Page String)
+postListSitemap = buildList "posts" "templates/postsitemap.xml"
+
+buildList :: String -> Identifier Template -> Compiler (Page String, [Page String]) (Page String)
+buildList field template = setFieldA field $
+    arr (reverse . chronological)
+        >>> arr (map stripIndexLink)
+        >>> require template (\p t -> map (applyTemplate t) p)
+        >>> arr mconcat
+        >>> arr pageBody
+
 
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration
