@@ -6,8 +6,6 @@ date: 24 Dec, 2010
 author: crodjer 
 ---
 
-$toc$
-
 The first thing the title triggers in the mind is the django [sites
 framework](http://docs.djangoproject.com/en/dev/ref/contrib/sites/). Well this
 post is mostly related to that but suggests its utilization in slight different
@@ -56,10 +54,10 @@ much less lines of code and using the already existent django contribs as is. So
 if we don't modify django modules then what do we modify to achieve the
     dynamicity.
 
-####.wsgi
+####wsgi
 
-This is what we could do: First define multiple settings files in ko some
-pattern so that they can be matched according to the domain name, say
+This is what we could do: First define multiple settings files in some pattern
+so that they can be matched according to the domain name, say
 *settings_domain.py*.  Now if the deployment is done using wsgi script
 (generally in
 [this](http://docs.djangoproject.com/en/dev/howto/deployment/modwsgi/)) format.
@@ -71,7 +69,7 @@ this may pose dangerous effects.  Unless we are not able to make sure that a new
 fork / new wsgi demon will be created per domain. So maybe one could suggest to
 write a good wsgi script which could handle this.
 
-####.htaccess
+####htaccess
 
 Yet another way would be to make the .htaccess file dynamic, if it is possible.
 I don't have any idea if I could write an apache config file that would trigger

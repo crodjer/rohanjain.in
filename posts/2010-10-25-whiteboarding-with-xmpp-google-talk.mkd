@@ -12,7 +12,8 @@ There is already a small implementation of this feature in yahoo by name doodle.
 
 So, we have taken an initiative. Our group (<a href="http://github.com/crodjer" title="" target="_blank">Me</a>, <a href="http://github.com/snktagarwal" title="" target="_blank">Sanket Agarwal</a> and <a href="http://github.com/psjinx" title="" target="_blank">Pankaj Singh</a>) is working for implementing this feature with the XMPP protocol, at least for pidgin users.  
 
-#### Technical Info: 
+####Technical Info
+
 Project Repository: <http://github.com/crodjer/pidgin_whiteboard>  
 Updates: [Project updates](#updates)
 
@@ -29,7 +30,8 @@ We hope to provide the following features:
 I am really excited about this project as it would be one of my initial contributions to the great open-source community. Till now it have been a fine ride of purpling, jingling and jabbering with pidgin.  
 
 
-####Updates:
+###Updates
+
 *29 Nov 2010*  
 Work resumed after a brief pause. The target now is to integrate <a href="http://xmpp.org/extensions/xep-0284.html" target="_blank">shared XML editing</a> with jingle and add more features to the whiteboard graphical gui.  
 
