@@ -20,6 +20,7 @@ to render the content every time the page is accessed.
 After the setting up of this, I expect a considerable increase in my
 blogging frequency.
 
-###Update
+**Updates**
+
 Now I have shifted to the haskell based site generator, [hakyll](http://jaspervdj.be/hakyll/)
 instead of jekyll.

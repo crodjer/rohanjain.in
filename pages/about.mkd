@@ -1,5 +1,5 @@
 ---
-title: About Me
+title: About
 author: crodjer
 ---
 I am a 4th year B. Tech Undergraduate student from IIT Kharagpur. I am a
