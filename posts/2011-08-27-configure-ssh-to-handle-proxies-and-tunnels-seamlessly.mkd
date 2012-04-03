@@ -2,7 +2,6 @@
 title: Configure ssh to handle proxies and tunnels seamlessly 
 slug: configure-ssh-to-handle-proxies-and-tunnels-seamlessly 
 tags: tunneling, ssh, config 
-date: 27th Aug, 2011 
 author: crodjer 
 ---
 

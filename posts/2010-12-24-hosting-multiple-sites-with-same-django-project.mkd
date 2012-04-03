@@ -1,8 +1,6 @@
 ---
-title: Hosting multiple sites with same django project 
 slug: hosting-multiple-sites-with-same-django-project 
 tags: django, hosting 
-date: 24 Dec, 2010 
 author: crodjer 
 ---
 

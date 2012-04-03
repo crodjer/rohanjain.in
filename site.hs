@@ -40,9 +40,10 @@ main = hakyllWith config $ do
 
     -- Render posts
     match "posts/*" $ do
-        route   $ setRoot `composeRoutes` cleanURL
+        route   $ postRoute `composeRoutes` cleanURL
         compile $ defaultCompiler
             >>> arr (setField "host" host)
+            >>> arr (renderDateField "date" "%B %e, %Y" "Date unknown")
             >>> arr (copyBodyToField "description")
             >>> applyTemplateCompiler "templates/post.html"
             >>> applyTemplateCompiler "templates/default.html"
@@ -84,7 +85,9 @@ main = hakyllWith config $ do
 
     match  "atom.xml" $ route idRoute
     create "atom.xml" $
-        requireAll_ "posts/*" >>> renderAtom myFeedConfiguration
+        requireAll_ "posts/*"
+            >>> arr (map stripIndexLink)
+            >>> renderAtom myFeedConfiguration
 
     where
         markUpPages = [ "pages/*.md"
@@ -112,6 +115,9 @@ defaultCompiler = pageCompilerWith
 
 -- custom routes
 --------------------------------------------------------------------------------
+
+postRoute :: Routes
+postRoute = customRoute $ (drop 11) . stripTopDir
 
 setRoot :: Routes
 setRoot = customRoute stripTopDir
