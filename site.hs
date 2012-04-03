@@ -44,6 +44,7 @@ main = hakyllWith config $ do
         compile $ defaultCompiler
             >>> arr (setField "host" host)
             >>> arr (renderDateField "date" "%B %e, %Y" "Date unknown")
+            >>> arr (renderDateField "lastmod" "%Y-%m-%d" "")
             >>> arr (copyBodyToField "description")
             >>> applyTemplateCompiler "templates/post.html"
             >>> applyTemplateCompiler "templates/default.html"
@@ -83,9 +84,10 @@ main = hakyllWith config $ do
     -- Read templates
     match "templates/*" $ compile templateCompiler
 
-    match  "atom.xml" $ route idRoute
-    create "atom.xml" $
+    match  "feed.xml" $ route idRoute
+    create "feed.xml" $
         requireAll_ "posts/*"
+            >>> arr (reverse . chronological)
             >>> arr (map stripIndexLink)
             >>> renderAtom myFeedConfiguration
 
@@ -149,7 +151,7 @@ postListSitemap :: Compiler (Page String, [Page String]) (Page String)
 postListSitemap = buildList "posts" "templates/postsitemap.xml"
 
 pageListSitemap :: Compiler (Page String, [Page String]) (Page String)
-pageListSitemap = buildList "pages" "templates/pagesitemap.xml"
+pageListSitemap = buildList "pages" "templates/postsitemap.xml"
 
 buildList :: String -> Identifier Template -> Compiler (Page String, [Page String]) (Page String)
 buildList field template = setFieldA field $
@@ -176,5 +178,6 @@ myFeedConfiguration = FeedConfiguration
     { feedTitle = "Rohan's Weblog"
     , feedDescription = ""
     , feedAuthorName = "Rohan Jain"
+    , feedAuthorEmail = "crodjer@gmail.com"
     , feedRoot = host
     }

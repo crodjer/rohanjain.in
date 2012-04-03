@@ -1,5 +1,6 @@
     <url>
         <loc>$host$$url$</loc>
         <changefreq>weekly</changefreq>
+        <lastmod>$lastmod$</lastmod>
         <priority>0.8</priority>
     </url>
