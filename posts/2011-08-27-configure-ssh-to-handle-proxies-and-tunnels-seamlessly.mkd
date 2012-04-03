@@ -1,11 +1,9 @@
 ---
-layout: post
-title: Configure ssh to handle proxies and tunnels seamlessly
-slug: configure-ssh-to-handle-proxies-and-tunnels-seamlessly
-published: true
-tags: tunneling, ssh, config
-date: 27th Aug, 2011
-author: crodjer
+title: Configure ssh to handle proxies and tunnels seamlessly 
+slug: configure-ssh-to-handle-proxies-and-tunnels-seamlessly 
+tags: tunneling, ssh, config 
+date: 27th Aug, 2011 
+author: crodjer 
 ---
 
 Recently I opened up on the port *443* over my EC2 instance (more or less like
