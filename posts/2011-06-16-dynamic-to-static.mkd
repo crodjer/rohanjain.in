@@ -1,10 +1,7 @@
 ---
-layout: post
 title: Dynamic to Static
 slug: dynamic-to-static
-byline: crodjer's new site
 tags: jekyll, blog, VIM
-date: 16th June, 2011
 author: crodjer
 ---
 
