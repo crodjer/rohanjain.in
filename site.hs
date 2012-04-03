@@ -169,7 +169,7 @@ host::String
 host = "http://www.rohanjain.in"
 
 defaultTitle::String
-defaultTitle = "Scroll"
+defaultTitle = "The Scroll"
 
 myFeedConfiguration:: FeedConfiguration
 myFeedConfiguration = FeedConfiguration
