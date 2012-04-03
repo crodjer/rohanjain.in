@@ -1,11 +1,13 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import Prelude hiding (id)
 import Control.Arrow ((>>>), arr)
 import Data.Monoid (mempty, mconcat)
 import Control.Monad (forM_)
 import System.FilePath
+import Text.Pandoc
+import Hakyll.Web.Feed
+import Hakyll.Web.Page.Metadata
 
 import Hakyll
 
@@ -39,15 +41,16 @@ main = hakyllWith config $ do
     -- Render posts
     match "posts/*" $ do
         route   $ setRoot `composeRoutes` cleanURL
-        compile $ pageCompiler
+        compile $ defaultCompiler
             >>> arr (setField "host" host)
+            >>> arr (copyBodyToField "description")
             >>> applyTemplateCompiler "templates/post.html"
             >>> applyTemplateCompiler "templates/default.html"
 
 
     {-match  "./posts.html" $ route $ setRoot `composeRoutes` cleanURL-}
     {-create "./posts.html" $ constA mempty-}
-        {->>> arr (setField "title" "What I write")-}
+        {->>> arr (setField "title" defaultTitle)-}
         {->>> requireAllA "posts/*" postList-}
         {->>> applyTemplateCompiler "templates/posts.html"-}
         {->>> applyTemplateCompiler "templates/default.html"-}
@@ -55,7 +58,7 @@ main = hakyllWith config $ do
     -- Index
     match  "index.html" $ route idRoute
     create "index.html" $ constA mempty
-        >>> arr (setField "title" "What I write")
+        >>> arr (setField "title" defaultTitle)
         >>> requireAllA "posts/*" postList
         >>> applyTemplateCompiler "templates/posts.html"
         >>> applyTemplateCompiler "templates/default.html"
@@ -64,7 +67,7 @@ main = hakyllWith config $ do
     forM_ markUpPages $ \p ->
         match p $ do
             route   $ setRoot `composeRoutes` cleanURL
-            compile $ pageCompiler
+            compile $ defaultCompiler
                 >>> arr (setField "host" host)
                 >>> applyTemplateCompiler "templates/default.html"
 
@@ -79,8 +82,11 @@ main = hakyllWith config $ do
     -- Read templates
     match "templates/*" $ compile templateCompiler
 
+    match  "atom.xml" $ route idRoute
+    create "atom.xml" $
+        requireAll_ "posts/*" >>> renderAtom myFeedConfiguration
+
     where
-        host = "http://www.rohanjain.in"
         markUpPages = [ "pages/*.md"
                       , "pages/*.mkd"
                       , "pages/*.mkdn"
@@ -89,6 +95,20 @@ main = hakyllWith config $ do
                       , "pages/*.pandoc"
                       , "pages/*.pdc"
                       , "pages/*.lhs" ]
+
+-- compilers
+--------------------------------------------------------------------------------
+defaultCompiler :: Compiler Resource (Page String)
+defaultCompiler = pageCompilerWith
+                    defaultHakyllParserState
+                    defaultHakyllWriterOptions
+                    { writerTableOfContents = True
+                    , writerTemplate = tocTemplate
+                    , writerStandalone = True }
+
+    where
+        tocTemplate = "$if(toc)$" ++ toc ++  "\n$endif$\n$body$"
+        toc = "<strong id=\"$idprefix$TOC\">Table of contents</strong>$toc$"
 
 -- custom routes
 --------------------------------------------------------------------------------
@@ -116,9 +136,6 @@ fileToIndex = (flip combine) "index.html" . dropFileName . toFilePath
 stripIndexLink :: Page a -> Page a
 stripIndexLink = changeField "url" dropFileName
 
-buildTitle :: Page a -> Page a
-buildTitle = renderField "title" "pagetitle" (++ " - Ethan Schoonover")
-
 postList :: Compiler (Page String, [Page String]) (Page String)
 postList = buildList "posts" "templates/postitem.html"
 
@@ -139,6 +156,19 @@ buildList field template = setFieldA field $
 
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration
-    { deployCommand = "rsync --checksum -ave 'ssh' \
-                      \_site/* blog:~/www/hakyll"
+    { deployCommand = "rsync --checksum -ave 'ssh' _site/* blog:~/www/hakyll"
+    }
+
+host::String
+host = "http://www.rohanjain.in"
+
+defaultTitle::String
+defaultTitle = "Scroll"
+
+myFeedConfiguration:: FeedConfiguration
+myFeedConfiguration = FeedConfiguration
+    { feedTitle = "Rohan's Weblog"
+    , feedDescription = ""
+    , feedAuthorName = "Rohan Jain"
+    , feedRoot = host
     }
