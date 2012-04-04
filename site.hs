@@ -43,6 +43,7 @@ main = hakyllWith config $ do
         route   $ postRoute `composeRoutes` cleanURL
         compile $ defaultCompiler
             >>> arr (setField "host" host)
+            >>> renderTagsField "prettytags" (fromCapture "tags/*")
             >>> renderModificationTime "lastmod" "%Y-%m-%d"
             >>> renderModificationTime "updated" "%Y-%m-%dT%H:%M:%SZ"
             >>> arr (renderDateField "date" "%B %e, %Y" "Date unknown")
@@ -62,6 +63,7 @@ main = hakyllWith config $ do
     match  "index.html" $ route idRoute
     create "index.html" $ constA mempty
         >>> arr (setField "title" defaultTitle)
+        >>> requireA "tags" (setFieldA "tagcloud" renderTagCloud')
         >>> requireAllA "posts/*" ( id *** arr (latest 3) >>> postList )
         >>> applyTemplateCompiler "templates/index.html"
         >>> applyTemplateCompiler "templates/default.html"
@@ -75,6 +77,15 @@ main = hakyllWith config $ do
                 >>> renderModificationTime "lastmod" "%Y-%m-%d"
                 >>> applyTemplateCompiler "templates/default.html"
 
+    -- Tags
+    create "tags" $
+        requireAll "posts/*" (\_ ps -> readTags ps :: Tags String)
+
+    -- Add a tag list compiler for every tag
+    match "tags/*" $ route $ cleanURL
+    metaCompile $ require_ "tags"
+        >>> arr tagsMap
+        >>> arr (map (\(t, p) -> (tagIdentifier t, makeTagList t p)))
 
     -- Sitemap
     match  "sitemap.xml" $ route idRoute
@@ -144,6 +155,27 @@ fileToIndex = (flip combine) "index.html" . dropFileName . toFilePath
 
 -- misc functions
 --------------------------------------------------------------------------------
+renderTagCloud' :: Compiler (Tags String) String
+renderTagCloud' = renderTagCloud tagIdentifier 100 160
+
+renderTagList' :: Compiler (Tags String) String
+renderTagList' = renderTagList tagIdentifier
+
+tagIdentifier :: String -> Identifier (Page String)
+tagIdentifier = fromCapture "tags/*"
+
+makeTagList :: String
+            -> [Page String]
+            -> Compiler () (Page String)
+makeTagList tag posts =
+    constA posts
+        >>> pageListCompiler recentFirst "templates/postitem.html"
+        >>> arr (copyBodyToField "posts" . fromBody)
+        >>> arr (setField "title" ("Posts tagged " ++ tag))
+        >>> applyTemplateCompiler "templates/posts.html"
+        >>> applyTemplateCompiler "templates/default.html"
+        >>> relativizeUrlsCompiler
+
 latest:: Int -> [Page b] -> [Page b]
 latest n = take n . reverse . chronological
 

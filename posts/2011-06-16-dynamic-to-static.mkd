@@ -1,7 +1,7 @@
 ---
 title: Dynamic to Static
 slug: dynamic-to-static
-tags: jekyll, blog, VIM
+tags: blog, vim
 author: crodjer
 ---
 
