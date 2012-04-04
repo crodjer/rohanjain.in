@@ -50,6 +50,7 @@ main = hakyllWith config $ do
             >>> arr (copyBodyToField "description")
             >>> applyTemplateCompiler "templates/post.html"
             >>> applyTemplateCompiler "templates/default.html"
+            >>> relativizeUrlsCompiler
 
 
     match  "./posts.html" $ route $ cleanURL
@@ -58,6 +59,7 @@ main = hakyllWith config $ do
         >>> requireAllA "posts/*" postList
         >>> applyTemplateCompiler "templates/posts.html"
         >>> applyTemplateCompiler "templates/default.html"
+        >>> relativizeUrlsCompiler
 
     -- Index
     match  "index.html" $ route idRoute
@@ -67,8 +69,16 @@ main = hakyllWith config $ do
         >>> requireAllA "posts/*" ( id *** arr (latest 3) >>> postList )
         >>> applyTemplateCompiler "templates/index.html"
         >>> applyTemplateCompiler "templates/default.html"
+        >>> relativizeUrlsCompiler
 
-    -- Render some static pages
+    forM_ htmlPages $ \p ->
+        match p $ do
+            route   $ setRoot `composeRoutes` setExtension "html"
+            compile $ pageCompiler
+                >>> applyTemplateCompiler "templates/default.html"
+                >>> relativizeUrlsCompiler
+
+
     forM_ markUpPages $ \p ->
         match p $ do
             route   $ setRoot `composeRoutes` cleanURL
@@ -76,6 +86,7 @@ main = hakyllWith config $ do
                 >>> arr (setField "host" host)
                 >>> renderModificationTime "lastmod" "%Y-%m-%d"
                 >>> applyTemplateCompiler "templates/default.html"
+                >>> relativizeUrlsCompiler
 
     -- Tags
     create "tags" $
@@ -114,6 +125,7 @@ main = hakyllWith config $ do
                       , "pages/*.pandoc"
                       , "pages/*.pdc"
                       , "pages/*.lhs" ]
+        htmlPages = [ "pages/*.html"]
 
 -- compilers
 --------------------------------------------------------------------------------
