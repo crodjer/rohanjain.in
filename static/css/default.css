@@ -9,6 +9,10 @@ body {
   line-height: 150%;
 }
 
+#content{
+  min-height: 400px;
+}
+
 h1, h2, {
   margin: 15px 0 5px;
 }
@@ -37,7 +41,7 @@ a:hover {
 .superTitle{
   font-size: 1em;
   float: right;
-  margin: 0 0 0 10px;
+  margin: 0 0 0 20px;
 }
 
 .superTitle a{

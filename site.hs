@@ -5,6 +5,7 @@ import Prelude hiding (id)
 import Control.Category (id)
 import Control.Arrow ((>>>), arr, (***))
 import Data.Monoid (mempty, mconcat)
+import Data.List (isPrefixOf, isSuffixOf)
 import Control.Monad (forM_)
 import System.FilePath
 import Text.Pandoc (writerTableOfContents, writerTemplate, writerStandalone)
@@ -13,30 +14,17 @@ import Hakyll
 
 main :: IO ()
 main = hakyllWith config $ do
+
     -- Compress CSS
-    match "css/*" $ do
+    match "static/css/*" $ do
         route   idRoute
         compile compressCssCompiler
 
-    -- Copy javascript
-    match "js/*" $ do
-        route   idRoute
-        compile copyFileCompiler
-
-    -- Copy images
-    match "img/*" $ do
-        route   idRoute
-        compile copyFileCompiler
-
-    -- Copy favicon
-    match "favicon.ico" $ do
-      route   idRoute
-      compile copyFileCompiler
-
-    -- Copy robots.txt
-    match "robots.txt" $ do
-      route   idRoute
-      compile copyFileCompiler
+    -- Copy root files and directories
+    forM_ copyFiles $ \p ->
+        match p $ do
+            route   idRoute
+            compile copyFileCompiler
 
     -- Render posts
     match "posts/*" $ do
@@ -71,15 +59,8 @@ main = hakyllWith config $ do
         >>> applyTemplateCompiler "templates/default.html"
         >>> relativizeUrlsCompiler
 
-    forM_ htmlPages $ \p ->
-        match p $ do
-            route   $ setRoot `composeRoutes` setExtension "html"
-            compile $ pageCompiler
-                >>> applyTemplateCompiler "templates/default.html"
-                >>> relativizeUrlsCompiler
 
-
-    forM_ markUpPages $ \p ->
+    forM_ staticPages $ \p ->
         match p $ do
             route   $ setRoot `composeRoutes` cleanURL
             compile $ defaultCompiler
@@ -117,15 +98,21 @@ main = hakyllWith config $ do
             >>> renderAtom myFeedConfiguration
 
     where
-        markUpPages = [ "pages/*.md"
+        staticPages = [ "pages/*.md"
                       , "pages/*.mkd"
                       , "pages/*.mkdn"
                       , "pages/*.mdown"
                       , "pages/*.markdown"
                       , "pages/*.pandoc"
                       , "pages/*.pdc"
-                      , "pages/*.lhs" ]
-        htmlPages = [ "pages/*.html"]
+                      , "pages/*.lhs" 
+                      , "pages/*.html" ]
+
+        copyFiles = [ "static/img/*"
+                    , "static/js/*"
+                    , "robots.txt"
+                    , "favicon.ico"
+                    , ".htaccess" ]
 
 -- compilers
 --------------------------------------------------------------------------------
@@ -215,8 +202,17 @@ buildList field template = setFieldA field $
 
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration
-    { deployCommand = "rsync --checksum -ave 'ssh' _site/* blog:~/www/hakyll"
+    { deployCommand = "rsync --checksum -ave 'ssh' _site/ blog:~/www/hakyll"
+    , ignoreFile = ignoreFile'
     }
+
+    where
+        ignoreFile' path
+            | "~" `isPrefixOf` fileName = True
+            | ".swp" `isSuffixOf` fileName = True
+            | otherwise = False
+            where
+                fileName = takeFileName path
 
 host::String
 host = "http://www.rohanjain.in"
