@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+unless ARGV[0]
+  puts "Usage: newpost post-title"
+  exit(-1)
+end
+
+SITE_DIR = "/home/rohan/workspace/site/"
+
+def slugify(title)
+    str = title.dup
+    str.gsub!(/[^a-zA-Z0-9 ]/,"")
+    str.gsub!(/[ ]+/," ")
+    str.gsub!(/ /,"-")
+    str.downcase!
+    str
+end
+
+
+title = ARGV.join(' ')
+slug = slugify(title)
+prefix = Time.new.strftime("%Y-%m-%d")
+filename = "#{prefix}-#{slug}.mkd"
+path = File.join(SITE_DIR, "/_posts/#{filename}")
+
+header = <<-END
+---
+title: "#{title}"
+slug: "#{slug}"
+tags: tag 1, tag 2
+category: hacking
+author: crodjer
+---
+
+END
+
+f = File.open(path, 'w')
+f.write(header)
+f.close
+
+exit(0)
