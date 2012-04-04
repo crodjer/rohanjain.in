@@ -82,7 +82,7 @@ main = hakyllWith config $ do
         requireAll "posts/*" (\_ ps -> readTags ps :: Tags String)
 
     -- Add a tag list compiler for every tag
-    match "tags/*" $ route $ cleanURL
+    match "tags/*" $ route $ setExtension ".html"
     metaCompile $ require_ "tags"
         >>> arr tagsMap
         >>> arr (map (\(t, p) -> (tagIdentifier t, makeTagList t p)))
@@ -169,6 +169,7 @@ makeTagList :: String
             -> Compiler () (Page String)
 makeTagList tag posts =
     constA posts
+        >>> arr (map stripIndexLink)
         >>> pageListCompiler recentFirst "templates/postitem.html"
         >>> arr (copyBodyToField "posts" . fromBody)
         >>> arr (setField "title" ("Posts tagged " ++ tag))
