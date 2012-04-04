@@ -1,7 +1,8 @@
 ---
-slug: hosting-multiple-sites-with-same-django-project 
-tags: django, hosting 
-author: crodjer 
+title: Hosting multiple sites with same django project
+slug: hosting-multiple-sites-with-same-django-project
+tags: django, hosting
+author: crodjer
 ---
 
 The first thing the title triggers in the mind is the django [sites
