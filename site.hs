@@ -1,13 +1,13 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import Control.Arrow ((>>>), arr)
+import Prelude hiding (id)
+import Control.Category (id)
+import Control.Arrow ((>>>), arr, (***))
 import Data.Monoid (mempty, mconcat)
 import Control.Monad (forM_)
 import System.FilePath
-import Text.Pandoc
-import Hakyll.Web.Feed
-import Hakyll.Web.Page.Metadata
+import Text.Pandoc (writerTableOfContents, writerTemplate, writerStandalone)
 
 import Hakyll
 
@@ -43,26 +43,27 @@ main = hakyllWith config $ do
         route   $ postRoute `composeRoutes` cleanURL
         compile $ defaultCompiler
             >>> arr (setField "host" host)
+            >>> renderModificationTime "lastmod" "%Y-%m-%d"
+            >>> renderModificationTime "updated" "%Y-%m-%dT%H:%M:%SZ"
             >>> arr (renderDateField "date" "%B %e, %Y" "Date unknown")
-            >>> arr (renderDateField "lastmod" "%Y-%m-%d" "")
             >>> arr (copyBodyToField "description")
             >>> applyTemplateCompiler "templates/post.html"
             >>> applyTemplateCompiler "templates/default.html"
 
 
-    {-match  "./posts.html" $ route $ setRoot `composeRoutes` cleanURL-}
-    {-create "./posts.html" $ constA mempty-}
-        {->>> arr (setField "title" defaultTitle)-}
-        {->>> requireAllA "posts/*" postList-}
-        {->>> applyTemplateCompiler "templates/posts.html"-}
-        {->>> applyTemplateCompiler "templates/default.html"-}
+    match  "./posts.html" $ route $ cleanURL
+    create "./posts.html" $ constA mempty
+        >>> arr (setField "title" defaultTitle)
+        >>> requireAllA "posts/*" postList
+        >>> applyTemplateCompiler "templates/posts.html"
+        >>> applyTemplateCompiler "templates/default.html"
 
     -- Index
     match  "index.html" $ route idRoute
     create "index.html" $ constA mempty
         >>> arr (setField "title" defaultTitle)
-        >>> requireAllA "posts/*" postList
-        >>> applyTemplateCompiler "templates/posts.html"
+        >>> requireAllA "posts/*" ( id *** arr (latest 3) >>> postList )
+        >>> applyTemplateCompiler "templates/index.html"
         >>> applyTemplateCompiler "templates/default.html"
 
     -- Render some static pages
@@ -71,7 +72,9 @@ main = hakyllWith config $ do
             route   $ setRoot `composeRoutes` cleanURL
             compile $ defaultCompiler
                 >>> arr (setField "host" host)
+                >>> renderModificationTime "lastmod" "%Y-%m-%d"
                 >>> applyTemplateCompiler "templates/default.html"
+
 
     -- Sitemap
     match  "sitemap.xml" $ route idRoute
@@ -141,6 +144,9 @@ fileToIndex = (flip combine) "index.html" . dropFileName . toFilePath
 
 -- misc functions
 --------------------------------------------------------------------------------
+latest:: Int -> [Page b] -> [Page b]
+latest n = take n . reverse . chronological
+
 stripIndexLink :: Page a -> Page a
 stripIndexLink = changeField "url" dropFileName
 
