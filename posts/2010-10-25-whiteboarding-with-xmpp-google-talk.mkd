@@ -1,7 +1,7 @@
 ---
 title: Whiteboarding with XMPP (Google Talk)
 slug: whiteboarding-with-xmpp-google-talk
-tags: pidgin, hacking
+tags: pidgin, hacking, xmpp
 author: crodjer
 ---
 

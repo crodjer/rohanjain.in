@@ -1,7 +1,7 @@
 ---
-title: "Access Interviewstreet's Code Checker over HTTP"
-slug: "access-interviewstreets-code-checker-over-http"
-tags: api, interviewstreet
+title: Access Interviewstreet's Code Checker over HTTP
+slug: access-interviewstreets-code-checker-over-http
+tags: api, interviewstreet, web, django
 author: crodjer
 ---
 
@@ -11,15 +11,21 @@ can utilize these to develop innovative apps and products.
 
 I have been working over exposing an API to the internal codecheckers for
 [Interviewstreet][is] for some time. A beta version of this is up now and we are
-accepting registrations on an invite basis.
+accepting registrations on an invite basis. Post a request for invite here:
+<http://api.interviewstreet.org/accounts/invites/>
 
 #The API
 The API is up at [api.interviewstreet.org][api]. It provides a HTTP based format
 agnostic interface. You can use any of these popular formats: json, xml, yaml,
 pickle. JSON is the default. Format can be specified by appending `.<format>` to
 the url. Eg:
-`http://api.interviewstreet.org/v1.0/submission.yaml?key=2&token=snr34je9n52tY32fJh8teLRl3z4h0wbl`
-for talking to the API in yaml format.
+
+```
+http://api.interviewstreet.org/v1.0/submission.yaml?key=2&token=snr34je9n52tY32fJh8teLRl3z4h0wbl
+
+```
+
+for talking to the API in `yaml` format.
 
 ##Functionality
 The functionality provided is straight forward. It asks for the programming
@@ -32,12 +38,12 @@ compiled, how it ran against all your test cases and the outputs it generated.
 This API is pretty reliable. It is a [django][django] front end to the system
 that is used internally. It is well maintained and regularly tested. In fact,
 it has already had a successful run with Overnite, a night long programming
-event conducted under [Kshitj][ktj] (IIT Kharagpur technical Fest).
+event conducted under [Kshitj][ktj] (IIT Kharagpur's technical Fest).
 
 #Developing a client
 If the language you are using supports basic HTTP request, developing a client
-to interact with the API is simple. The documentation explains how to use it
-against curl. Here is a python implementation using urllib2:
+to interact with the API is simple. The [documentation][doc] explains how to use
+it against curl. Here is a python implementation using urllib2:
 
 ```python
 import urllib2
@@ -75,3 +81,4 @@ result = json.loads(response.read())['result']
 [api]: http://api.interviewstreet.org/
 [django]: https://www.djangoproject.com/
 [ktj]: http://ktj.in/
+[doc]: http://api.interviewstreet.org/v1.0/doc/
