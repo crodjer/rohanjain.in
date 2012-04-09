@@ -24,8 +24,8 @@ path = File.join(SITE_DIR, "/drafts/#{filename}")
 
 header = <<-END
 ---
-title: "#{title}"
-slug: "#{slug}"
+title: #{title}
+slug: #{slug}
 tags: tag 1, tag 2
 author: crodjer
 ---
