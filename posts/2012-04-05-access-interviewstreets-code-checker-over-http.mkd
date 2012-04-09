@@ -21,11 +21,11 @@ pickle. JSON is the default. Format can be specified by appending `.<format>` to
 the url. Eg:
 
 ```
-http://api.interviewstreet.org/v1.0/submission.yaml?key=2&token=snr34je9n52tY32fJh8teLRl3z4h0wbl
+http://api.interviewstreet.org/v1.0/submission.xml?key=2&token=snr34je9n52tY32fJh8teLRl3z4h0wbl
 
 ```
 
-for talking to the API in `yaml` format.
+for talking to the API in `xml` format.
 
 ##Functionality
 The functionality provided is straight forward. It asks for the programming
