@@ -38,16 +38,14 @@ main = hakyllWith config $ do
             >>> arr (copyBodyToField "description")
             >>> applyTemplateCompiler "templates/post.html"
             >>> applyTemplateCompiler "templates/default.html"
-            >>> relativizeUrlsCompiler
 
 
-    match  "./posts.html" $ route $ cleanURL
+    match  "./posts.html" $ route  cleanURL
     create "./posts.html" $ constA mempty
         >>> arr (setField "title" defaultTitle)
         >>> requireAllA "posts/*" postList
         >>> applyTemplateCompiler "templates/posts.html"
         >>> applyTemplateCompiler "templates/default.html"
-        >>> relativizeUrlsCompiler
 
     -- Index
     match  "index.html" $ route idRoute
@@ -57,7 +55,6 @@ main = hakyllWith config $ do
         >>> requireAllA "posts/*" ( id *** arr (latest 3) >>> postList )
         >>> applyTemplateCompiler "templates/index.html"
         >>> applyTemplateCompiler "templates/default.html"
-        >>> relativizeUrlsCompiler
 
 
     forM_ staticPages $ \p ->
@@ -67,7 +64,6 @@ main = hakyllWith config $ do
                 >>> arr (setField "host" host)
                 >>> renderModificationTime "lastmod" "%Y-%m-%d"
                 >>> applyTemplateCompiler "templates/default.html"
-                >>> relativizeUrlsCompiler
 
     -- Tags
     create "tags" $
@@ -132,7 +128,7 @@ defaultCompiler = pageCompilerWith
 --------------------------------------------------------------------------------
 
 postRoute :: Routes
-postRoute = customRoute $ (drop 11) . stripTopDir
+postRoute = customRoute $ drop 11 . stripTopDir
 
 setRoot :: Routes
 setRoot = customRoute stripTopDir
@@ -144,13 +140,13 @@ cleanURL :: Routes
 cleanURL = customRoute fileToDirectory
 
 fileToDirectory :: Identifier a -> FilePath
-fileToDirectory = (flip combine) "index.html" . dropExtension . toFilePath
+fileToDirectory = flip combine "index.html" . dropExtension . toFilePath
 
 toIndex :: Routes
 toIndex = customRoute fileToIndex
 
 fileToIndex :: Identifier a -> FilePath
-fileToIndex = (flip combine) "index.html" . dropFileName . toFilePath
+fileToIndex = flip combine "index.html" . dropFileName . toFilePath
 
 -- misc functions
 --------------------------------------------------------------------------------
@@ -174,7 +170,6 @@ makeTagList tag posts =
         >>> arr (setField "title" ("Posts tagged " ++ tag))
         >>> applyTemplateCompiler "templates/posts.html"
         >>> applyTemplateCompiler "templates/default.html"
-        >>> relativizeUrlsCompiler
 
 latest:: Int -> [Page b] -> [Page b]
 latest n = take n . reverse . chronological
