@@ -45,7 +45,3 @@ Host ecc.rohanjain.in
 Host *
     ProxyCommand ssh -q -a -x -p 443 ecc.rohanjain.in nc %h %p
 ```
-
-**Update**  
-As brought out by yeban (<http://yeban.in/seamlessly-use-github-behind-http-proxy-on-port-443.html>),
-use github's 443 ssh host for accessing github.
