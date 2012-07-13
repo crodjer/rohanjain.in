@@ -106,6 +106,7 @@ main = hakyllWith config $ do
 
         copyFiles = [ "static/img/*"
                     , "static/js/*"
+                    , "404.html"
                     , "robots.txt"
                     , "favicon.ico"
                     , ".htaccess" ]
@@ -197,7 +198,7 @@ buildList field template = setFieldA field $
 
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration
-    { deployCommand = "rsync --checksum -ave 'ssh' _site/ blog:~/www/hakyll"
+    { deployCommand = "rsync --delete --checksum -ave 'ssh' _site/ blog:~/www/hakyll"
     , ignoreFile = ignoreFile'
     }
 
