@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Rohan's Weblog</title>
+    <link href="http://www.rohanjain.in/feed.xml" rel="self" />
+    <link href="http://www.rohanjain.in" />
+    <id>http://www.rohanjain.in/feed.xml</id>
+    <author>
+        <name>Rohan Jain</name>
+        <email>crodjer@gmail.com</email>
+    </author>
+    <updated>2012-07-18T07:59:58Z</updated>
+    <entry>
+    <title>Yet another Vim productivity post: Server-Client</title>
+    <link href="http://www.rohanjain.in/yet-another-vim-productivity-post-server-client/" />
+    <id>http://www.rohanjain.in/yet-another-vim-productivity-post-server-client/</id>
+    <published>2012-04-15T00:00:00Z</published>
+    <updated>2012-07-18T07:59:58Z</updated>
+    <summary type="html"><![CDATA[<strong id="TOC">Table of contents</strong><ul>
+                               <li><a href="#vim-server-zsh-and-tiles">Vim Server, ZSH and Tiles</a></li>
+                               <li><a href="#vim-sessions">Vim Sessions</a></li>
+                               <li><a href="#tldr">tldr;</a></li>
+                               </ul>
+
+<p>There are 10 text editors in this world: One is <em>Vim</em> and the other <em>Emacs</em>. Now, when it all began I chose Vim. I know there is no need for me to sell it to you. It does that itself. I rely heavily on the Vim <em>server-client</em> feature and thought that it should share it with everyone.</p>
+<h1 id="vim-server-zsh-and-tiles"><a href="#TOC">Vim Server, ZSH and Tiles</a></h1>
+<p>A Vim instance behaves as a server in which files can be opened through remote applications. Read <code>:help client-server</code> of Vim to know more about this. I generally keep multiple Vim sessions running, described by task they are related to. A typical workspace has one instance of Vim running and multiple terminals around it. Lets call this workspace for project <em>foo</em>. So the name of Vim instance server will be <em>foo</em>:</p>
+<pre><code>vim --servername foo</code></pre>
+<p>And any file will be open in this server, using this command:</p>
+<pre><code>vim --servername foo --remote-silent bar.hs
+
+
++-----------------------+
+|           |~$         |
+|           |           |
+|           |-----------+
+|    Vim    |~$         |
+|   Server  |           |
+|           |-----------+
+|           |~$         |
+|           |           |
++-----------------------+</code></pre>
+<p>How this helps:</p>
+<ul>
+<li><p>Lets me keep a well defined separation on various projects I am working on. The list of files in the buffer per instance remains short and manageable.</p></li>
+<li><p>Also each instance can have its own project specific environment - current directory, python virtual environments etc.</p></li>
+</ul>
+<p>For easing all this up, I use a set of helper functions in my <em>zshrc</em>:</p>
+<pre class="sh"><code># Set the name of vim session the terminal is tied up to
+eset(){
+    export VI_SERVER=$1
+}
+
+# Fire up a new server according to the argument supplied
+vs(){
+    eset $1
+    vim --servername $VI_SERVER
+}
+
+# Open up the files in the environment Vim server.
+es(){
+    vim --servername $VI_SERVER --remote-silent $*
+}
+
+# Reuse Vim ZSH completions for vim completions
+compdef _vim es
+</code></pre>
+<h1 id="vim-sessions"><a href="#TOC">Vim Sessions</a></h1>
+<p>Having multiple instances is great, but I don’t want to set each up every time I need resume working. For this I use <em>Vim Sessions</em>, which allow the current Vim state to be stored over the disk.</p>
+<p><a href="https://github.com/xolox/vim-session">vim-session</a> plugin will help you manage sessions easily. It is well integrated with Vim client-server.</p>
+<p>From docs:</p>
+<blockquote>
+<p>When you start Vim with a custom server name that matches one of the existing session names then the matching session will be automatically restored.</p>
+</blockquote>
+<h1 id="tldr"><a href="#TOC">tldr;</a></h1>
+<p>Checkout <code>:help client-server</code> in vim and <a href="https://github.com/xolox/vim-session">vim-session</a>, to boost your productivity some more with Vim.</p>]]></summary>
+</entry>
+<entry>
+    <title>Access Interviewstreet's Code Checker over HTTP</title>
+    <link href="http://www.rohanjain.in/access-interviewstreets-code-checker-over-http/" />
+    <id>http://www.rohanjain.in/access-interviewstreets-code-checker-over-http/</id>
+    <published>2012-04-05T00:00:00Z</published>
+    <updated>2012-07-18T07:59:58Z</updated>
+    <summary type="html"><![CDATA[<strong id="TOC">Table of contents</strong><ul>
+                               <li><a href="#the-api">The API</a><ul>
+                               <li><a href="#functionality">Functionality</a></li>
+                               <li><a href="#reliability">Reliability</a></li>
+                               </ul></li>
+                               <li><a href="#developing-a-client">Developing a client</a></li>
+                               </ul>
+
+<p>It is nowadays customary of companies to expose parts of their infrastructure to the public, in the form of an (API) Application Programming Interface. Hackers can utilize these to develop innovative apps and products.</p>
+<p>I have been working over exposing an API to the internal codecheckers for <a href="http://www.interviewstreet.org/">Interviewstreet</a> for some time. A beta version of this is up now and we are accepting registrations on an invite basis. Post a request for invite here: <a href="http://api.interviewstreet.org/accounts/invites/"><code class="url">http://api.interviewstreet.org/accounts/invites/</code></a></p>
+<h1 id="the-api"><a href="#TOC">The API</a></h1>
+<p>The API is up at <a href="http://api.interviewstreet.org/">api.interviewstreet.org</a>. It provides a HTTP based format agnostic interface. You can use any of these popular formats: json, xml, yaml, pickle. JSON is the default. Format can be specified by appending <code>.&lt;format&gt;</code> to the url. Eg:</p>
+<pre><code>http://api.interviewstreet.org/v1.0/submission.xml?key=2&amp;token=snr34je9n52tY32fJh8teLRl3z4h0wbl
+</code></pre>
+<p>for talking to the API in <code>xml</code> format.</p>
+<h2 id="functionality"><a href="#TOC">Functionality</a></h2>
+<p>The functionality provided is straight forward. It asks for the programming language (supporting over 15 languages), the program to evaluate and the testcases to run that code against.<br />As results to the evaluation, it will tell you if the code was successfully compiled, how it ran against all your test cases and the outputs it generated.</p>
+<h2 id="reliability"><a href="#TOC">Reliability</a></h2>
+<p>This API is pretty reliable. It is a <a href="https://www.djangoproject.com/">django</a> front end to the system that is used internally. It is well maintained and regularly tested. In fact, it has already had a successful run with Overnite, a night long programming event conducted under <a href="http://ktj.in/">Kshitj</a> (IIT Kharagpur’s technical Fest).</p>
+<h1 id="developing-a-client"><a href="#TOC">Developing a client</a></h1>
+<p>If the language you are using supports basic HTTP request, developing a client to interact with the API is simple. The <a href="http://api.interviewstreet.org/v1.0/doc/">documentation</a> explains how to use it against curl. Here is a python implementation using urllib2:</p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="ch">import</span> urllib2
+<span class="ch">import</span> json
+<span class="ch">import</span> random
+
+url = <span class="st">&#39;http://api.interviewstreet.org/v1.0/submission.json?token=your-api-token&#39;</span>
+
+<span class="co"># A demo submission</span>
+submission_data = {
+    <span class="st">&#39;source&#39;</span>: <span class="st">&#39;print 111&#39;</span> <span class="co">#prints 111 in python,</span>
+    <span class="st">&#39;hash&#39;</span>: <span class="st">&quot;your-random-submission-unique-hash&quot;</span>,
+    <span class="st">&#39;testcases&#39;</span>: [
+        <span class="st">&#39;case1</span><span class="ch">\n</span><span class="st">&#39;</span>,
+        <span class="st">&#39;case2</span><span class="ch">\n</span><span class="st">&#39;</span>
+    ],
+    <span class="st">&#39;lang&#39;</span>: <span class="dv">5</span> <span class="co">#This is python</span>
+}
+
+request = urllib2.Request(url)
+request.add_header(<span class="st">&#39;Content-type&#39;</span>, <span class="st">&#39;application/json&#39;</span>)
+response = urllib2.urlopen(request, json.dumps(submission_data)).read()
+key = json.loads(response)[<span class="st">&#39;key&#39;</span>]
+
+
+<span class="co"># Getting the result</span>
+
+response = urllib2.urlopen(<span class="st">&quot;</span><span class="ot">%s</span><span class="st">&amp;key=</span><span class="ot">%s</span><span class="st">&quot;</span> %(url, key))
+result = json.loads(response.read())[<span class="st">&#39;result&#39;</span>]
+
+<span class="co">## Do whatever with the result</span></code></pre>]]></summary>
+</entry>
+<entry>
+    <title>Configure ssh to handle proxies and tunnels seamlessly</title>
+    <link href="http://www.rohanjain.in/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/" />
+    <id>http://www.rohanjain.in/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</id>
+    <published>2011-08-27T00:00:00Z</published>
+    <updated>2012-07-18T07:59:58Z</updated>
+    <summary type="html"><![CDATA[
+<p>Recently I opened up on the port <em>443</em> over my EC2 instance (more or less like a VPS), so that I can access it through any firewalled proxy too. Apart from getting SSH running to a machine from outside world, I did some cool configuration to have ssh deal with with various remote hosts automatically. It uses <em>the right</em> proxy settings according the host being accessed.</p>
+<p>All the stuff which runs over ssh (like <em>scp</em>, <em>git</em> etc.) also work the way they are supposed to, following the ssh configuration.</p>
+<p>To get this to work you need to have <em>corkscrew</em> and <em>netcat</em> (the swiss army knife) already installed.</p>
+<p>Here is how it goes:<br /><code>File ~/ssh/config:</code></p>
+<pre class="sourceCode apache"><code class="sourceCode apache"><span class="co"># Let me access local remotes directly.</span>
+Host 127.0.0.1, 10.*
+    ProxyCommand none
+
+<span class="co"># Github lets you ssh over port 443 too, utilize that instead of tunneling</span>
+<span class="co"># through remote computer</span>
+Host github.com
+    Hostname ssh.github.com
+    User<span class="st"> git</span>
+    ProxyCommand corkscrew 10.3.100.211 8080 %h %p
+    Port 443
+    Hostname ssh.github.com
+
+<span class="co"># Let me ssh onto my ec2 instance, which has full network access, through a</span>
+<span class="co"># http proxy.</span>
+Host ecc.rohanjain.in
+    ProxyCommand corkscrew 10.3.100.211 8080 %h %p
+    Port 443
+    ServerAliveInterval 600
+
+<span class="co"># All the rest should connect through an ssh connection over the ec2 instance.</span>
+Host *
+    ProxyCommand ssh -q -a -x -p 443 ecc.rohanjain.in nc %h %p</code></pre>]]></summary>
+</entry>
+<entry>
+    <title>Dynamic to Static</title>
+    <link href="http://www.rohanjain.in/dynamic-to-static/" />
+    <id>http://www.rohanjain.in/dynamic-to-static/</id>
+    <published>2011-06-16T00:00:00Z</published>
+    <updated>2012-07-18T07:59:58Z</updated>
+    <summary type="html"><![CDATA[
+<p>I just shifted my website to Jekyll static pages, from the completely dynamic <em>django</em> based and database oriented <a href="http://old.rohanjain.in">old one</a>. The factor which drove this decision: <strong>VIM</strong>.</p>
+<p>I really like the convenience posting in this way provides to me. The functionalities that were present over there were to much overkill and completely invisible to the public, so better save the processing power required to render the content every time the page is accessed.</p>
+<p>After the setting up of this, I expect a considerable increase in my blogging frequency.</p>
+<p><strong>Updates</strong></p>
+<p>Now I have shifted to the haskell based site generator, <a href="http://jaspervdj.be/hakyll/">hakyll</a> instead of jekyll.</p>]]></summary>
+</entry>
+<entry>
+    <title>Hosting multiple sites with same django project</title>
+    <link href="http://www.rohanjain.in/hosting-multiple-sites-with-same-django-project/" />
+    <id>http://www.rohanjain.in/hosting-multiple-sites-with-same-django-project/</id>
+    <published>2010-12-24T00:00:00Z</published>
+    <updated>2012-07-18T07:59:58Z</updated>
+    <summary type="html"><![CDATA[<strong id="TOC">Table of contents</strong><ul>
+                               <li><a href="#using-custom-apps-and-modules">Using custom apps and modules</a><ul>
+                               <li><a href="#modify-contrib">Modify contrib</a></li>
+                               <li><a href="#forget-contrib">Forget contrib</a></li>
+                               </ul></li>
+                               <li><a href="#using-unaltered-django-modules">Using unaltered django modules</a><ul>
+                               <li><a href="#wsgi">wsgi</a></li>
+                               <li><a href="#htaccess">htaccess</a></li>
+                               <li><a href="#django-multisite">django-multisite</a></li>
+                               </ul></li>
+                               </ul>
+
+<p>The first thing the title triggers in the mind is the django <a href="http://docs.djangoproject.com/en/dev/ref/contrib/sites/">sites framework</a>. Well this post is mostly related to that but suggests its utilization in slight different way. As we can get from the docs in every implementation of the sites framework you have to hardcode the SITE_ID in your settings.py file. So it assumes that you have multiple django projects or at least multiple settings.py files which will be used as the django settings module for the process. So basically it provides us to share database between multiple sites which is a nice feature.</p>
+<p>For our case which is, we want to use a single django project to across multiple domains while presenting altered versions of content dependant on the originating domain (the domain names cannot be hardcoded as the number of domains is dynamic too.), we have to do something different to get this level of dynamicity. I did sone research about this on the <strong>#django</strong> IRC, <strong>stackoverflow</strong> and <strong>google</strong>. Here are some complete/incomplete ways I found out to achieve this.</p>
+<h3 id="using-custom-apps-and-modules"><a href="#TOC">Using custom apps and modules</a></h3>
+<p>These ways would need us to define many custom models and middleware, hence a lot of work. The domain management would be done by the django project itself through middleware which use the HTTP_REQUST header and hence every request will be processed to obtain the information required to do database queries and render the views. So these methods looks like bit safer but would cause a performance decrease.</p>
+<h4 id="modify-contrib"><a href="#TOC">Modify contrib</a></h4>
+<p>This is the rather easier way which involves modifications of code of some django contrib apps here and there. Just copy the apps from django-&gt;contrib folder to the project directory and modify them to accept request as argument give out results according to the HTTP_HOST and Sites database. Also change all the imo reference of these apps from <em>django.contrib.app</em> to <em>app</em>.</p>
+<h4 id="forget-contrib"><a href="#TOC">Forget contrib</a></h4>
+<p>Another way would be to forget the contrib apps and write your own custom similar ones from scratch. This may be a better way for long term projects which require highly customized and special functionalities. But it will require us to write a lot of code, though the existing modules can be used for reference.</p>
+<h3 id="using-unaltered-django-modules"><a href="#TOC">Using unaltered django modules</a></h3>
+<p>If we are successful in doing this it will probably let us build our project in much less lines of code and using the already existent django contribs as is. So if we don’t modify django modules then what do we modify to achieve the dynamicity.</p>
+<h4 id="wsgi"><a href="#TOC">wsgi</a></h4>
+<p>This is what we could do: First define multiple settings files in some pattern so that they can be matched according to the domain name, say <em>settings_domain.py</em>. Now if the deployment is done using wsgi script (generally in <a href="http://docs.djangoproject.com/en/dev/howto/deployment/modwsgi/">this</a>) format. In the wsgi script we have to call the respective settings_domain.py according to the accessing domain name. So this seems pretty good but it can be dangerous. As we are setting a global variable (<code>os.environ['DJANGO_SETTINGS_MODULE']</code>) it is not at all a <strong>thread safe</strong> method. If there are two requests close enough this may pose dangerous effects. Unless we are not able to make sure that a new fork / new wsgi demon will be created per domain. So maybe one could suggest to write a good wsgi script which could handle this.</p>
+<h4 id="htaccess"><a href="#TOC">htaccess</a></h4>
+<p>Yet another way would be to make the .htaccess file dynamic, if it is possible. I don’t have any idea if I could write an apache config file that would trigger the correct wsgi file (which triggers the correct settings one). Maybe one could suggest a way of doing this (through regex?). To me thiss seems the best way which would trigger a corresponding process for each domain.</p>
+<h4 id="django-multisite"><a href="#TOC">django-multisite</a></h4>
+<p>This is a django application I found (Source: https://github.com/shestera/django-multisite) which utilize <strong>thread locals</strong> to dynamically define the SITE_ID setting according to the request domain. I have tried this and is actually working but as the django documentation has <a href="http://code.djangoproject.com/wiki/CookBookThreadlocalsAndUser">pretty clearly</a> warned against its use, I am in doubt if it is a safe way.</p>
+<p>Till now I am still unclear of what method to implement among the above or some other one. There are some pros and cons of all the methods.</p>
+<p>I apologise if I have written something wrong, these all are only some methods I have found out while searching the web and discussing on the groups, so please specify if there is any mistake or you can suggest something related to this.</p>]]></summary>
+</entry>
+<entry>
+    <title>Whiteboarding with XMPP (Google Talk)</title>
+    <link href="http://www.rohanjain.in/whiteboarding-with-xmpp-google-talk/" />
+    <id>http://www.rohanjain.in/whiteboarding-with-xmpp-google-talk/</id>
+    <published>2010-10-25T00:00:00Z</published>
+    <updated>2012-07-18T07:59:58Z</updated>
+    <summary type="html"><![CDATA[<strong id="TOC">Table of contents</strong><ul>
+                               <li><a href="#technical-info">Technical Info</a></li>
+                               <li><a href="#updates">Updates</a></li>
+                               </ul>
+
+<p>Sometimes, being too lazy to use the type, you might wish for some other way to interact with others. Well there is one and quit an interactive and entertaining one, a whiteboarding interface, i.e. the people involved in chat can do collaborative drawings, play games, convey emotions not possible by typing etc. It can have some bigger implementations like teaching, presentations many more utilities can be innovated.</p>
+<p>There is already a small implementation of this feature in yahoo by name doodle. Seeing its utility one might wonder why this brilliant feature is not implemented with the widely used chat protocol, XMPP (Google Talk is based on XMPP)? Well I cant find out why not.</p>
+<p>So, we have taken an initiative. Our group (<a href="http://github.com/crodjer" title="" target="_blank">Me</a>, <a href="http://github.com/snktagarwal" title="" target="_blank">Sanket Agarwal</a> and <a href="http://github.com/psjinx" title="" target="_blank">Pankaj Singh</a>) is working for implementing this feature with the XMPP protocol, at least for pidgin users.</p>
+<h4 id="technical-info"><a href="#TOC">Technical Info</a></h4>
+<p>Project Repository: <a href="http://github.com/crodjer/pidgin_whiteboard"><code class="url">http://github.com/crodjer/pidgin_whiteboard</code></a><br />Updates: <a href="#updates">Project updates</a></p>
+<p>This project involves building a basic implementation of the protocol specified in, <a href="http://xmpp.org/extensions/xep-0284.html">http://xmpp.org/extensions/xep-0284.html</a>, using the SVG graphics specified in, <a href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>. Both together define the standards for our work.</p>
+<p>We hope to provide the following features:</p>
+<ul>
+<li>Simple whiteboarding drawing Lines, Polygons, Circles and Free Curves.</li>
+<li>Fancy Texting</li>
+<li>Image Sending</li>
+<li>This will provide users with a more enriching experience.</li>
+</ul>
+<p>I am really excited about this project as it would be one of my initial contributions to the great open-source community. Till now it have been a fine ride of purpling, jingling and jabbering with pidgin.</p>
+<h3 id="updates"><a href="#TOC">Updates</a></h3>
+<p><em>29 Nov 2010</em><br />Work resumed after a brief pause. The target now is to integrate <a href="http://xmpp.org/extensions/xep-0284.html" target="_blank">shared XML editing</a> with jingle and add more features to the whiteboard graphical gui.</p>
+<p><em>10 Nov 2010</em><br />Our Proof of concept is ready. All the basic features of whiteboard are now incorporated. A usable implementation now exists. You may fetch and compile the code from the git repository (Address mentioned above). This is how it looks:<br /><iframe width="425" height="349" src="http://www.youtube.com/embed/sYKutp4I4Zs"></iframe> A <a href="http://img577.imageshack.us/img577/7910/screenshot1kg.png">Snapshot</a>.</p>
+<p><em>9 Nov 2010</em> Syncing of whiteboards is up. The whiteboards are updated as the two users draw using their brushes. So a responsive interface is present. Just some small bug fix and feature additions remain now.<br /><a href="http://img259.imageshack.us/img259/7980/screenshotrd.png" target="_blank">Screenshot</a></p>
+<p><em>6 Nov 2010</em><br />Now session initiate and accept integrated (popping up of whiteboard on both ends). Slight change in way of implementation, use of libjingle is now on a hold, creating a custom whiteboard message format for session management for now. Code in <strong>dcrodjer</strong> branch of the above git repository. A screenshot of the code working: <a href="http://img837.imageshack.us/img837/8250/screenshot1gb.png" target="_blank">Image for session implementation</a></p>
+<p><em>24 Oct 2010</em><br />A whiteboard interface initiates. This is how it look like:<br /><a href="http://img841.imageshack.us/img841/5516/59586846.png" target="_blank">Image 1</a><br /><a href="http://img221.imageshack.us/img221/4198/65357038.png" target="_blank">Image 2</a></p>]]></summary>
+</entry>
+
+</feed>

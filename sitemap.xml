@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>http://www.rohanjain.in/about/</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2012-07-18</lastmod>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>http://www.rohanjain.in/yet-another-vim-productivity-post-server-client/</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2012-07-18</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>http://www.rohanjain.in/access-interviewstreets-code-checker-over-http/</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2012-07-18</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>http://www.rohanjain.in/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2012-07-18</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>http://www.rohanjain.in/dynamic-to-static/</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2012-07-18</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>http://www.rohanjain.in/hosting-multiple-sites-with-same-django-project/</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2012-07-18</lastmod>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>http://www.rohanjain.in/whiteboarding-with-xmpp-google-talk/</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2012-07-18</lastmod>
+        <priority>0.8</priority>
+    </url>
+
+</urlset>
