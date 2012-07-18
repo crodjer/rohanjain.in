@@ -199,7 +199,7 @@ buildList field template = setFieldA field $
 
 config :: HakyllConfiguration
 config = defaultHakyllConfiguration
-    { deployCommand = "scripts/deploy.sh"
+    { deployCommand = "rsync --checksum -ave 'ssh' _site/ blog:~/www/hakyll"
     , ignoreFile = ignoreFile'
     }
 
@@ -207,6 +207,7 @@ config = defaultHakyllConfiguration
         ignoreFile' path
             | "~" `isPrefixOf` fileName = True
             | ".swp" `isSuffixOf` fileName = True
+            | "_deploy" `isSuffixOf` fileName = True
             | otherwise = False
             where
                 fileName = takeFileName path
