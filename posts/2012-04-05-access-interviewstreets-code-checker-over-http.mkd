@@ -82,3 +82,6 @@ result = json.loads(response.read())['result']
 [django]: https://www.djangoproject.com/
 [ktj]: http://ktj.in/
 [doc]: http://api.interviewstreet.org/v1.0/doc/
+
+
+> The API is undergoing modifications, so it is currntly down.
