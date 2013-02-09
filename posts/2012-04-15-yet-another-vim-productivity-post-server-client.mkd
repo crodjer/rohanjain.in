@@ -5,10 +5,8 @@ tags: vim, server, productivity
 author: crodjer
 ---
 
-There are 10 text editors in this world: One is *Vim* and the other *Emacs*.
-Now, when it all began I chose Vim. I know there is no need for me to sell it to
-you. It does that itself. I rely heavily on the Vim *server-client* feature and
-thought that it should share it with everyone.
+You can find lot of posts on the internet which try to tell you how to improve
+the ways in which VIM is used. Well, here is another one.
 
 #Vim Server, ZSH and Tiles
 A Vim instance behaves as a server in which files can be opened through remote
@@ -82,10 +80,6 @@ From docs:
 
 > When you start Vim with a custom server name that matches one of the existing
 > session names then the matching session will be automatically restored.
-
-#tldr;
-Checkout `:help client-server` in vim and [vim-session][vim-session], to boost
-your productivity some more with Vim.
 
 [vim-session]: https://github.com/xolox/vim-session
 [zshrc]: https://github.com/crodjer/vimfiles
