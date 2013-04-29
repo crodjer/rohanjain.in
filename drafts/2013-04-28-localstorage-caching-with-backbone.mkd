@@ -1,0 +1,97 @@
+---
+title: Localstorage caching with backbone
+slug: localstorage-caching-with-backbone
+tags: javascript, backbone, caching
+author: crodjer
+---
+
+An advantage of using a MVC, in the front-end is it lets us tap in and add
+functionality like memoization, caching of data. At [HackerRank][hr] we do
+this with [Backbone][backbone] models and collection using a cache
+mixin. Object `url` serves as the key for its cache. It provides an extra
+interface for accessing data, through a cache. It is a layer between the
+server and client for increased responsiveness.
+
+# Code
+You can get the mixin from [this gist][cache-gist].
+The caching uses [jStorage](jstorage) for storage. Quoting the documentation,
+
+> [jStorage](jstorage) is a key-value store database cross-browser key-value
+> store database to store data locally in the browser.
+
+jStorage is useful its cross-browser support.
+
+# Usage
+
+## Cache key generation (object.cacheKey())
+For a model/collection, the *cache key* is generated based on the url.
+Say, resource `UserModel` is located at 'http://example.com/users'. For a
+user with id = 13, the url will be 'http://example.com/users/13' and so will
+be the key
+
+```javascript
+user = new User({id: 13}) // User object
+user.cacheKey() // 'http://example.com/users/13'
+```
+
+## Accessing data (object.cached([options]))
+To access the data, while it being cached for future use. For that, there is
+a method `cached`, with a api similar to `fetch`. It has an extra option
+`fetch`, which can be used to ask for a forced fetch even if the cached data
+is fresh.
+
+```javascript
+user = new User({id: 13}) // User object
+user.cached({
+    success: function (){
+        console.log(arguments);
+    }
+}) // Same user object
+user.get('name') // undefined
+// after fetch
+user.get('name') // "Foo"
+// Now, for new user objects the data will be pre-filled from cache
+user = (new User({id: 13})).cached().get('name') // "Foo"
+```
+
+`.cached` executes a fetch if:
+
+ - Cache is non-existent
+ - Cache is older than the timeout for the model
+ - If `options.fetch == true`
+
+
+## Flush cache (object.flush())
+Clears all the cached data. Mostly useful for debugging purposes.
+
+```javascript
+user.flush() // undefined
+```
+
+## Race conditions
+To handle race conditions i.e. simultaneous calls to `.cached`, resulting in
+multiple XHRs, a separate object is maintained which re-uses the XHR across
+objects. On response, callbacks for all models are executed and their `reset`
+events triggered. All this should be handled internally.
+
+## Options
+Few options which are available in the model definition, which let you tweak
+the behaviour a bit. Set while extending Backbone.Model or dynamically in a
+object method.
+
+### Model.cacheTimeout (defaut: 120)
+Timeout in seconds after which cache will be considered as stale and a
+`.fetch` will be triggered on next `.cached` call.
+
+### Model.keyPrefix (default: '')
+A prefix to be used with the cache key. Mostly useful for name-spacing cache
+per-user.
+
+### Model.metaKeys (default: [])
+Object attributes (top level) which should also be stored in the cache. These
+are generally complicated method calls, which need to be cached.
+
+[backbone]: http://backbonejs.org
+[hr]: https://www.hackerrank.com
+[jstorage]: http://www.jstorage.info/
+[cache-gist]: https://gist.github.com/crodjer/5482362
