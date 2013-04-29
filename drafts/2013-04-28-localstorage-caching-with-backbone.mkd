@@ -14,12 +14,8 @@ server and client for increased responsiveness.
 
 # Code
 You can get the mixin from [this gist][cache-gist].
-The caching uses [jStorage](jstorage) for storage. 
-
-> [jStorage](jstorage) is a key-value store database cross-browser key-value
-> store database to store data locally in the browser.
-
-jStorage is useful because of its cross-browser support.
+The caching layer uses [jStorage](jstorage) for storage. 
+jStorage is a cross-browser jQuery plugin for saving data locally in browser.
 
 # Usage
 
@@ -35,7 +31,7 @@ user.cacheKey() // 'http://example.com/users/13'
 ```
 
 ## Accessing data (object.cached([options]))
-To access the data, while it being cached for future use. For that, there is
+For accessing cached data, there is
 a method `cached`, with a api similar to `fetch`. It has an extra option
 `fetch`, which can be used to ask for a forced fetch even if the cached data
 is fresh.
