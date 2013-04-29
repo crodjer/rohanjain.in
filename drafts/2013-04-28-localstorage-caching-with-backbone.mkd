@@ -14,12 +14,12 @@ server and client for increased responsiveness.
 
 # Code
 You can get the mixin from [this gist][cache-gist].
-The caching uses [jStorage](jstorage) for storage. Quoting the documentation,
+The caching uses [jStorage](jstorage) for storage. 
 
 > [jStorage](jstorage) is a key-value store database cross-browser key-value
 > store database to store data locally in the browser.
 
-jStorage is useful its cross-browser support.
+jStorage is useful because of its cross-browser support.
 
 # Usage
 
