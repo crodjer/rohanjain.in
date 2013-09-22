@@ -144,6 +144,8 @@ site = do
 postCtx :: Context String
 postCtx =
     dateField "date" "%B %e, %Y" `mappend`
+    dateField "lastmod" "%Y-%m-%d" `mappend`
+    dateField "updated" "%Y-%m-%dT%H:%M:%SZ" `mappend`
     constField "host" host `mappend`
 
     defaultContext
