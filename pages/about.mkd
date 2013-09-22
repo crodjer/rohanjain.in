@@ -1,32 +1,10 @@
 ---
 title: About
+date: 2013-09-22
 author: crodjer
 ---
-I am a 4th year B. Tech Undergraduate student from IIT Kharagpur. I am a
-software and web developer by passion and an opensource enthusiast . I mostly
-engage in web infrastructure and back-end development. 
 
-Apart from coding I like to play cricket, table-tennis, badminton. I am also a
-fan of technical, philosophical and historical documentaries.
-
-Currently busy with:
-
- - [Interview Street][is]: Software Engineer
- - Bachelor Term Project: Automation with python over [Arc GIS][arcgis]
- - XMonad: The most awesome window manager, written in haskell. Contributing to
-   [xmonad-contrib][xmonad-contrib-darcswatch]
- - Functional Programming and Purity: Learning about the concepts of functional
-   programming. Trying to learn from talks and work of [Simon Peyton-Jones][spj]
- - Javascript: Starting to admire the power of javascript, convinced by
-   [Douglas Crockford][crockford], [CouchDB][couch] and [NodeJS][node].
-
-Open Contributions (recent first):
-
- - [XMonad Contrib](http://xmonad.org/xmonad-docs/xmonad-contrib/)
- - [Universal Subtitles](https://github.com/pculture/unisubs)
- - [Django-social-auth](https://github.com/omab/django-social-auth)
- - [Python Markdown](https://github.com/waylan/Python-Markdown)
- - More at github profile below
+A programmer.
 
 Find me at:
 [Google](http://www.google.com/profiles/crodjer),
@@ -36,14 +14,3 @@ Find me at:
 [LinkdIn](http://in.linkedin.com/in/crodjer),
 [Ohloh](https://www.ohloh.net/accounts/crodjer),
 [Gitorious](https://gitorious.org/~crodjer)
-[Last.fm](http://www.last.fm/user/crodjer)
-
-Work Environment: Debian, XMonad, Vim, Mutt, ZSH, Git, Irssi
-
-[arcgis]: http://www.esri.com/software/arcgis/index.html
-[is]: http://www.interviewstreet.org
-[xmonad-contrib-darcswatch]: http://darcswatch.nomeata.de/repo_http:__code.haskell.org_XMonadContrib.html
-[spj]: http://en.wikipedia.org/wiki/Simon_Peyton_Jones
-[crockford]: http://www.crockford.com/
-[couch]: http://couchdb.apache.org/
-[node]: http://nodejs.org
