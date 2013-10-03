@@ -27,9 +27,10 @@ myFeedConfiguration = FeedConfiguration
 copyFiles = [ "static/img/*"
             , "static/js/*"
             , "404.html"
-            , "CNAME"
             , "robots.txt"
-            , "favicon.ico" ]
+            , "favicon.ico"
+            , ".htaccess"
+            ]
 
 config = defaultConfiguration
     { deployCommand = "rsync --checksum -ave 'ssh' _site/ blog:~/www/hakyll"
@@ -47,18 +48,13 @@ config = defaultConfiguration
                 fileName = takeFileName path
 
 main :: IO ()
-main = hakyll site
+main = hakyllWith config site
 
 site = do
   forM_ copyFiles $ \pattern->
       match pattern $ do
          route   idRoute
          compile copyFileCompiler
-
-  match "htaccess" $ do
-         route   $ constRoute ".htaccess"
-         compile copyFileCompiler
-
 
   match "static/css/*" $ do
          route   idRoute
