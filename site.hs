@@ -177,7 +177,7 @@ postCtx tags = mconcat
 pageCtx :: Context String
 pageCtx = mconcat
     [ modificationTimeField "mtime" "%U"
-    , dateField "lastmod" "%Y-%m-%d"
+    , modificationTimeField "lastmod" "%Y-%m-%d"
     , dateField "updated" "%Y-%m-%dT%H:%M:%SZ"
     , constField "host" host
     , dateField "date" "%B %e, %Y"
