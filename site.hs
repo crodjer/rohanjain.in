@@ -127,7 +127,7 @@ site = do
 
            makeItem ""
             >>= loadAndApplyTemplate "templates/sitemap.xml" sitemapCtx
-            >>= cleanIndexUrls
+            >>= cleanIndexHtmls
 
   create ["feed.xml"] $ do
          route   idRoute
@@ -136,7 +136,7 @@ site = do
            posts <- fmap (take 10) . recentFirst =<<
                    loadAllSnapshots "posts/*" "content"
            renderAtom myFeedConfiguration feedCtx posts
-             >>= cleanIndexUrls
+             >>= cleanIndexHtmls
 
   match "templates/*" $ compile templateCompiler
 
@@ -176,3 +176,10 @@ cleanIndex url
 
 cleanIndexUrls :: Item String -> Compiler (Item String)
 cleanIndexUrls = return . fmap (withUrls cleanIndex)
+
+
+cleanIndexHtmls :: Item String -> Compiler (Item String)
+cleanIndexHtmls = return . fmap (replaceAll pattern replacement)
+    where
+      pattern = "/index.html"
+      replacement = const "/"
