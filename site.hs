@@ -29,8 +29,7 @@ copyFiles = [ "static/img/*"
             , "404.html"
             , "CNAME"
             , "robots.txt"
-            , "favicon.ico"
-            , ".htaccess" ]
+            , "favicon.ico" ]
 
 config = defaultConfiguration
     { deployCommand = "rsync --checksum -ave 'ssh' _site/ blog:~/www/hakyll"
@@ -55,6 +54,11 @@ site = do
       match pattern $ do
          route   idRoute
          compile copyFileCompiler
+
+  match "htaccess" $ do
+         route   $ constRoute ".htaccess"
+         compile copyFileCompiler
+
 
   match "static/css/*" $ do
          route   idRoute
