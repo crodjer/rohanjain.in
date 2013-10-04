@@ -3,9 +3,6 @@ Sitemap, Atom Feed, Clean URLs, Tags, Root level static pages.
 
 ##Thanks,
 
-- Awesome [jaspervd/hakyll](https://github.com/jaspervdj/hakyll)
-- [altercation/ethanschoonover.com](https://github.com/altercation/ethanschoonover.com)
-  for Clean url functionality
-
-##TODO:
-Learn the concept of arrows well, to improve the site efficiently.
+- Hakyll [jaspervd/hakyll](https://github.com/jaspervdj/hakyll)
+- [irneh/workforpizza](https://github.com/irneh/workforpizza) for
+  clean url functionality base.
