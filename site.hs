@@ -40,7 +40,9 @@ config = defaultConfiguration
     where
         ignoreFile' path
             | "~" `isPrefixOf` fileName = True
+            | ".#" `isPrefixOf` fileName = True
             | ".git" `isPrefixOf` fileName = True
+            | "~" `isSuffixOf` fileName = True
             | ".swp" `isSuffixOf` fileName = True
             | "_deploy" `isSuffixOf` fileName = True
             | otherwise = False
