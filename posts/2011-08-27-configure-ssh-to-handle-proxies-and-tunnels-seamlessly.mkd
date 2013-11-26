@@ -1,8 +1,8 @@
 ---
-title: Configure ssh to handle proxies and tunnels seamlessly 
-slug: configure-ssh-to-handle-proxies-and-tunnels-seamlessly 
-tags: hacking, ssh 
-author: crodjer 
+title: Configure ssh to handle proxies and tunnels seamlessly
+slug: configure-ssh-to-handle-proxies-and-tunnels-seamlessly
+tags: hacking, ssh
+author: crodjer
 ---
 
 Recently I opened up on the port *443* over my EC2 instance (more or less like
@@ -18,7 +18,7 @@ To get this to work you need to have *corkscrew* and *netcat* (the swiss army
 knife) already installed.
 
 Here is how it goes:  
-`File ~/ssh/config:`
+`File ~/.ssh/config:`
 
 ```apache
 # Let me access local remotes directly.
