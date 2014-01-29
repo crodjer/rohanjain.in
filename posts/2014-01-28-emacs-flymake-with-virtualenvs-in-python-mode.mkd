@@ -20,8 +20,12 @@ basic support for `virtualenvs`. I run `pylint/pyflakes` through the command
     (defun join-list (list delimiter)
       "Join a list of strings by a delimiter string."
       (mapconcat 'identity list delimiter))
+    (defun python-calculate-path-string ()
+      "Calculate path string for current python virtualenv."
+      (format "PATH=%s" (join-list (python-shell-calculate-exec-path) ":")))
     (defun python-calculate-env ()
       "Calculate env variables for current python virtualenv."
+      (python-calculate-path-string)
       (join-list
        (cons
         (format "PATH=%s" (join-list (python-shell-calculate-exec-path) ":"))
@@ -40,13 +44,20 @@ basic support for `virtualenvs`. I run `pylint/pyflakes` through the command
                (local-file (file-relative-name
                             temp-file
                             (file-name-directory buffer-file-name))))
-          (python-virtualenv-exec "pyflakes" (list local-file))))
+          (python-virtualenv-exec
+           "pylint"
+           (list
+            ;; Pylint args. Will depend on the checker being used.
+            "-r" "n"
+            "--msg-template='{path}:{line}:{category} [{msg_id} {obj}] {msg}'"
+            local-file))))
       (add-to-list 'flymake-allowed-file-name-masks
                  '("\\.py\\'" flymake-python-init)))
 
     (defun flymake-mode-hook-function ()
       (when (derived-mode-p 'python-mode)
         (flymake-mode t)))
-    ;; Run flymake mode hook function after the local variables are set (eg:
-    ;; through .dir-locals.el
+    ;; Run flymake mode hook function after the local variables are set (eg: through
+    ;; .dir-locals.el
     (add-hook 'hack-local-variables-hook #'flymake-mode-hook-function)
+    (setq virtualenv-workon-starts-python nil)
