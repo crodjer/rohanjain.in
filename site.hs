@@ -68,7 +68,7 @@ site = do
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
             >>= cleanIndexUrls
-                
+
   tags <- buildTags "posts/*" (fromCapture "tags/*.html")
 
   match "posts/*" $ do
