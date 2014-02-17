@@ -17,25 +17,31 @@ basic support for `virtualenvs`. I run `pylint/pyflakes` through the command
 `python-mode`. Here is the code extracted from my
 [emacs configuration](https://github.com/crodjer/configs/blob/master/.emacs):
 
-    (defun join-list (list delimiter)
-      "Join a list of strings by a delimiter string."
-      (mapconcat 'identity list delimiter))
-    (defun python-calculate-path-string ()
-      "Calculate path string for current python virtualenv."
-      (format "PATH=%s" (join-list (python-shell-calculate-exec-path) ":")))
     (defun python-calculate-env ()
       "Calculate env variables for current python virtualenv."
-      (python-calculate-path-string)
-      (join-list
-       (cons
-        (format "PATH=%s" (join-list (python-shell-calculate-exec-path) ":"))
-        (python-shell-calculate-process-environment))
-       " "))
+      ;; ;; This also overrides PYTHONHOME to "", which breaks the process
+      ;; ;; environment. Otherwise, a neat idea.
+      ;; (mapcar
+      ;;  (lambda (string)
+      ;;    (let ((splitted-string (split-string string "=")))
+      ;;      (format
+      ;;       "%s=\"%s\""
+      ;;       (car splitted-string)
+      ;;       (or (cadr splitted-string)
+      ;;           ""))))
+      ;; (python-shell-calculate-process-environment)))
+      (remove-if
+       (lambda (x)
+         (or
+          ;; If environment
+          (string-match " " x)
+          (not (string-match "=" x))))
+       (python-shell-calculate-process-environment)))
 
     (defun python-virtualenv-exec (command args)
       "Generate a flymake friendly list executable in virtualenv, for provided
     commands."
-      (list "env" (append (list (python-calculate-env) command) args)))
+      (list "env" (append (python-calculate-env) (list command) args)))
 
     (when (load "flymake" t)
       (defun flymake-python-init ()
