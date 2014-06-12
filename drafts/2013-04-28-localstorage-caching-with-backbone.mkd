@@ -4,22 +4,20 @@ slug: localstorage-caching-with-backbone
 tags: javascript, backbone, caching
 author: crodjer
 ---
-
-An advantage of using a MVC, in the front-end is it lets us tap in and add
-functionality like memoization, caching of data. At [HackerRank][hr] we do
+At [HackerRank][hr], we use [Backbone][backbone] extensively & 
+an advantage of using MVC in front-end is, it allows us to add 
+functionalities like memoization & caching of data easily. We do
 this with [Backbone][backbone] models and collection using a cache
-mixin. Object `url` serves as the key for its cache. It provides an extra
-interface for accessing data, through a cache. It is a layer between the
-server and client for increased responsiveness.
+mixin. Object `url` serves as the key for its cache. In essence it acts as a
+layer between server & client for accessing data from a cache, 
+which needless to say improves responsiveness of the site.
+
+##<ROHAN: Please add some numbers here>
 
 # Code
 You can get the mixin from [this gist][cache-gist].
-The caching uses [jStorage](jstorage) for storage. Quoting the documentation,
-
-> [jStorage](jstorage) is a key-value store database cross-browser key-value
-> store database to store data locally in the browser.
-
-jStorage is useful its cross-browser support.
+The caching layer uses [jStorage](jstorage) for storage. 
+jStorage is a cross-browser jQuery plugin for saving data locally in browser.
 
 # Usage
 
@@ -35,7 +33,7 @@ user.cacheKey() // 'http://example.com/users/13'
 ```
 
 ## Accessing data (object.cached([options]))
-To access the data, while it being cached for future use. For that, there is
+For accessing cached data, there is
 a method `cached`, with a api similar to `fetch`. It has an extra option
 `fetch`, which can be used to ask for a forced fetch even if the cached data
 is fresh.
