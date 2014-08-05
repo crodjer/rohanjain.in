@@ -2,8 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Data.Monoid (mappend, mconcat)
 import           Hakyll
-import           Data.List              (sortBy, isSuffixOf,
-                                         isPrefixOf)
+import           Data.List              (isSuffixOf, isPrefixOf)
 import           System.FilePath.Posix  (takeBaseName, takeDirectory,
                                          (</>), takeFileName)
 import           Control.Monad (forM_)
@@ -24,6 +23,7 @@ myFeedConfiguration = FeedConfiguration
     , feedRoot = host
     }
 
+copyFiles :: [Pattern]
 copyFiles = [ "static/img/*"
             , "static/js/*"
             , "404.html"
@@ -32,6 +32,7 @@ copyFiles = [ "static/img/*"
             , ".htaccess"
             ]
 
+config :: Configuration
 config = defaultConfiguration
     { deployCommand = "rsync --checksum -ave 'ssh' _site/ blog:~/www/hakyll"
     , ignoreFile = ignoreFile'
@@ -52,6 +53,7 @@ config = defaultConfiguration
 main :: IO ()
 main = hakyllWith config site
 
+site :: Rules ()
 site = do
   forM_ copyFiles $ \pattern->
       match pattern $ do
@@ -202,6 +204,7 @@ trimmedCleanRoute c = customRoute createIndexRoute
 postCleanRoute :: Routes
 postCleanRoute = trimmedCleanRoute 11 `composeRoutes` (gsubRoute "posts/" (const ""))
 
+cleanIndex :: String -> String
 cleanIndex url
     | idx `isSuffixOf` url = take (length url - length idx) url
     | otherwise            = url
