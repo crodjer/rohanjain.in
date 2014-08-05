@@ -6,3 +6,5 @@ site
 _site
 _deploy
 tmp
+.cabal-sandbox
+cabal.sandbox.config
