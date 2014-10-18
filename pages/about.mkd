@@ -10,5 +10,5 @@ Find me at:
 [Github](http://github.com/crodjer),
 [Twitter](http://twitter.com/__crodjer__),
 [StackOverflow](http://stackoverflow.com/users/420357/),
-[Gitorious](https://gitorious.org/~crodjer)
-[Ohloh](https://www.ohloh.net/accounts/crodjer),
+[Gitorious](https://gitorious.org/~crodjer),
+[Ohloh](https://www.ohloh.net/accounts/crodjer)
