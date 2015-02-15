@@ -5,8 +5,10 @@ html{
 body {
   width: 650px;
   margin: 0px auto 0px auto;
+  background: #000;
   font-family: Helvetica,sans-serif;
   line-height: 150%;
+  color: #fff;
 }
 
 #content{
@@ -26,16 +28,16 @@ h1.title{
 }
 
 a {
-    color: #009Cc9;
+    color: #009cc9;
     text-decoration: none;
 }
 
 a:visited{
-    color: #005c99;
+    color: #006fa9;
 }
 
 a:hover {
-    color: #000;
+    color: #ccc;
 }
 
 .superTitle{
@@ -46,25 +48,29 @@ a:hover {
 
 .superTitle a{
   text-decoration: none;
-  color: #444;
+  color: #ccc;
 }
 
 span.meta{
   font-size:14px;
-  color: #666;
+  color: #999;
 }
 
-pre, code, #post img{
-  background: #f5f5f5;
-}
+/* pre, #post img { */
+/*   /\* background: #333; *\/ */
+/* } */
 
-code{
-  padding: 2px;
+code {
+    padding: 2px;
+    border: 1px solid #777;
 }
-
-pre, blockquote{
+pre code {
+    border: none;
+    padding: none;
+}
+pre, blockquote, table.sourceCode {
   padding: 5px 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #777;
   overflow: auto;
   margin-left: 0px;
   margin-right: 0px;

@@ -46,7 +46,7 @@ How this helps:
 
 For easing all this up, I use a set of helper functions in my *zshrc*:
 
-```sh
+```bash
 # Set the name of vim session the terminal is tied up to
 eset(){
     export VI_SERVER=$1
