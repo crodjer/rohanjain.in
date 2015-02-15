@@ -2,7 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 import           Data.Monoid (mappend, mconcat)
 import           Hakyll
-import           Data.List              (isSuffixOf, isPrefixOf)
+import           Data.List              (isSuffixOf, isPrefixOf, isInfixOf)
 import           System.FilePath.Posix  (takeBaseName, takeDirectory,
                                          (</>), takeFileName)
 import           Control.Monad (forM_)
@@ -42,10 +42,10 @@ config = defaultConfiguration
         ignoreFile' path
             | "~" `isPrefixOf` fileName = True
             | ".#" `isPrefixOf` fileName = True
-            | ".git" `isPrefixOf` fileName = True
             | "~" `isSuffixOf` fileName = True
             | ".swp" `isSuffixOf` fileName = True
-            | "_deploy" `isSuffixOf` fileName = True
+            | ".git" `isInfixOf` path = True
+            | "_cache" `isInfixOf` path = True
             | otherwise = False
             where
                 fileName = takeFileName path
