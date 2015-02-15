@@ -5,10 +5,10 @@ html{
 body {
   width: 650px;
   margin: 0px auto 0px auto;
-  background: #000;
+  background: #fff;
   font-family: Helvetica,sans-serif;
   line-height: 150%;
-  color: #fff;
+  color: #000;
 }
 
 #content{
@@ -33,11 +33,11 @@ a {
 }
 
 a:visited{
-    color: #006fa9;
+    color: #005c99;
 }
 
 a:hover {
-    color: #ccc;
+    color: #000;
 }
 
 .superTitle{
@@ -48,12 +48,12 @@ a:hover {
 
 .superTitle a{
   text-decoration: none;
-  color: #ccc;
+  color: #444;
 }
 
 span.meta{
   font-size:14px;
-  color: #999;
+  color: #666;
 }
 
 /* pre, #post img { */
