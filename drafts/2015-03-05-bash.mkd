@@ -1,0 +1,41 @@
+---
+title: Fiddling with the bash shell
+slug: bash
+tags: bash, scripting, chores
+author: crodjer
+---
+
+Have been writing a lot of bash scripts lately. They are incredibly effective in
+automating laborious activities. For example: automatically [setting up my home
+directory][setuphome], [managing cabal sandboxes][hsb] for my Haskell software,
+even build on save with [watchman][watchman].
+
+## Synatx
+Bash scripting is specifically useful because of its syntactic simplicity. You
+feel like writing exactly what you intend.
+
+## Features
+Moreover, I have noticed that the cli interfaces of utilities almost always have
+a superset of the features than their corresponding bindings in other
+languages. For example in Python, `os.mkdir` doesn't have anything analogous to
+the `-p/--parent` flag.
+
+## Man pages
+Documentation is another advantage scripting in bash. Because of the strict unix
+convention of man pages, its easy to find well structured and comprehensive
+documentation of utilities. For most other languages, it almost always means
+opening the web browser.
+
+## IDE
+Scripting aside, bash has always been my go to IDE since always. It used to
+complement Vim, which was a pain to tweak (I refuse to write vimscript), very
+well. Now that I have been using emacs for a while the habits still remain. Bash
+is the most generic IDE there could be and with powerful window managers (XMonad
+for me) a shell feels like a part (an important one) of the editing experience.
+I generally have project workspaces with my editor on the left partition and two
+or three corresponding bash sessions on the right. I could find nothing more
+extensible than this system.
+
+[setuphome]: https://github.com/crodjer/configs/blob/master/scripts/setuphome.sh
+[hsb]: https://github.com/crodjer/configs/blob/master/scripts/hsb.sh
+[watchman]: https://github.com/crodjer/watchman
