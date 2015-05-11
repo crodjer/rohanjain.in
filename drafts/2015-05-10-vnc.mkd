@@ -1,0 +1,57 @@
+---
+title: VNC over reverse SSH
+slug: vnc
+tags: vnc, ssh, cloud
+---
+
+About a year ago, I switched my parents computer (lets call it `P`) from the
+pre-installed OS (Windows) to Ubuntu. The primary reason for this switch was it
+hard for me to debug and fix issues. Things have been smooth after the switch
+with no issues which I found it hard to fix remotely. What specially has worked
+is my ability to log in to the computer at any time through my VPS and service
+it.
+
+## Reverse SSH
+
+Whenever `P` starts, it makes a reverse SSH connection to my VPS. I use autossh
+to monitor and make sure that it is eventually always connected.
+
+    autossh
+
+I can tunnel through the VPS and login to `P` via VPS using the following SSH
+configuration:
+
+    Host home
+         Hostname localhost
+         User <username>
+         Port <reverse-ssh-port>
+         ProxyCommand ssh -e none -W %h:%p vps
+         # ControlPath /tmp/%r@%h:%p
+         ControlPersist 30
+
+To log in to `P` transparently, I have to simply do:
+
+    ssh home
+
+With this, I can resolve most of the issues that come up. Of course it does have
+the requirement that the system be booted up and connected to a network. Such
+issues (nothing significant happened yet) I have to resolve physically or phoned
+instructions.
+
+## VNC
+
+There also can be issues which have to do with the UI (say browser maintenance)
+and cannot be done over a text SSH session. For those cases, VNC is to rescue. I
+create a VNC server on `P` and tunnel the VNC port to my local through SSH. Now,
+I can access `P`'s graphical session remotely via `vncviewer`.
+
+
+    ssh home -L 5900:localhost:5900 "x11vnc -rfbauth ~/.vnc/passwd -display :0 -noxdamage"
+    vncviewer localhost::5900 -QualityLevel 3 -CompressLevel 6
+
+This have clear benefits over the more common proprietary solutions such has
+Google's VNC extension or teamviewers. But they are slow and untrustable 3rd
+parties. With this way of setting up VNC, everything is protected under SSH
+connections. The VNC session, the most vulnerable of the services, is almost
+never actually running apart from when I call it. Also, `P` is not directly
+exposed to the internet but is behind a router.
