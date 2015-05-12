@@ -6,43 +6,47 @@ author: crodjer
 ---
 
 I have been writing a lot of bash scripts lately. They are incredibly effective
-in automating laborious activities. It helps me out with some basic chores which
-only consume time and don't require much thinking. There are a few benefits I
-found that scripting in bash has over any other language:
+in automating laborious activities. It helps out with some chores while letting
+me do the real stuff. There are a few benefits I found that scripting in bash
+has over any other language:
 
 ## Synatx
+
 Bash scripting is specifically useful because of its syntactic simplicity. You
 write exactly what you intend. If I want to automate setting monitor
 configuration based on the plugged in monitors, [display.sh][display] will
 handle that. I can use `xrandr` command as I would in bash directly.
 
 ## Man pages
+
 Documentation is another advantage. Because of the strict unix convention of man
 pages, its easy to find well structured and comprehensive documentation of good
 utilities. For most other languages, it almost always means opening the web
 browser. An example of a comprehensive man page I used recently is `date`. I had
 to automate creating new drafts for my blog. I can do that now with:
 
-    e drafts/$(date +%F)-vps.mkd  # newpost
+```bash
+e drafts/$(date +%F)-vps.mkd  # newpost
+```
 
 > The hash tag in the end lets me reverse lookup through bash history quickly
 > when I want to write a new post. To edit a old post. `e` is an alias to open
 > file in the focused emacs frame, `emacsclient -n`.
 
-## Utility features
+## Full features sets
+
 I have noticed that the cli interfaces of utilities tend to have a superset of
 the features than their corresponding bindings in other languages. For example
 in Python, `os.mkdir` doesn't have anything analogous to the `-p/--parent`
 flag.
 
 ## IDE
-Scripting aside, bash has always been my go to IDE. It used to complement Vim
-for me very well. Now that I have been using emacs for a while, the habits still
-remain. Bash is the most generic IDE there could be and with powerful window
-managers (XMonad for me) a shell is an integral part of the editing experience.
-I generally have project workspaces with my editor on the left partition and two
-or three corresponding bash sessions on the right. There is nothing more
-extensible than this system, not even writing elisp on emacs. Coupled with my
+
+Scripting aside, bash has always been my go to IDE. It complements my editor
+well. I generally have project specific workspaces with editor on the left
+partition and corresponding bash sessions on the right (using a
+[tiling window manager][xmonad] helps here). There is nothing more extensible
+than this system, not even writing elisp on emacs. Coupled with my
 [watchman][watchman] utility, I get live feedback on the terminal as I write
 code.
 
@@ -62,3 +66,4 @@ Some other examples of scripts which I use frequently are:
 [watchman]: https://github.com/crodjer/watchman
 [jacked]: https://github.com/crodjer/configs/blob/master/scripts/jacked.sh
 [display]: https://github.com/crodjer/configs/blob/master/scripts/display.sh
+[xmonad]: http://xmonad.org/
