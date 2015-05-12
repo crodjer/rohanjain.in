@@ -2,6 +2,7 @@
 title: VNC over reverse SSH
 slug: vnc
 tags: vnc, ssh, cloud
+author: crodjer
 ---
 
 About a year ago, I switched my parents computer (lets call it `P`) from the
