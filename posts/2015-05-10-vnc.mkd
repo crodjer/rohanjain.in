@@ -8,9 +8,8 @@ author: crodjer
 About a year ago, I switched my parents computer (lets call it `P`) from the
 pre-installed OS (Windows) to Ubuntu. The primary reason for this switch was it
 hard for me to debug and fix issues. Things have been smooth after the switch
-with no issues which I found it hard to fix remotely. What specially has worked
-is my ability to log in to the computer at any time through my VPS and service
-it.
+with no issues which I found hard to fix remotely. What specially has worked is
+my ability to log in to the computer when its on through my VPS and service it.
 
 ## Reverse SSH
 
