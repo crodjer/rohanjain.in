@@ -1,0 +1,53 @@
+---
+title: A quest to get the proof of my failure
+slug: hidden-failure
+tags: failure, detection
+author: crodjer
+---
+
+I just got reminded about my two GSoC projects by a friend who started talking
+about it GSoC. I had a [permalink][old-permalink] to my GSoC projects, but I
+noticed that I couldn't access it anymore. I quickly found the link for my
+previous project by simple searching the GSoC 2011 site. Now, I wanted the link
+to 2nd one (with Django Software Foundation) as well, but realized
+[google-melange][] doesn't list down failures which the project was. It seemed
+that the melange, team had even changed the project ids for old projects (not
+the smartest thing to do?). So, I set out on figuring what my ID would be.
+
+Why?  I saw a challenge about which I couldn't just do nothing. I knew they
+couldn't have deleted the project from their database because the company would
+have real transactions connected to it.
+
+I started to guess the pattern by looking at my fellow GSoCer's link:
+
+    http://www.google-melange.com/gsoc/project/details/google/gsoc2012/<username>/<random-looking-id>
+
+I knew I needed to replace the username by `crodjer` (my own google-melange
+user). The next was the project id, the random looking number. I needed to
+figure out mine. I had three options:
+
+I checked if they just filter accepted projects in the front-end. They didn't.
+Things won't be that easy now will they?
+
+I started to revere-engineer how they'd generate them. Just by looking, the id I
+couldn't find an obvious pattern. It may have been a sequential number - I got
+the list of all accepted candidates, mine would then be a missing number in a
+sequence. I set a relaxed limit as 10000 on the student list API
+endpoint. Looking at the JSON, I realized the numbers weren't serial. They were
+just random.
+
+Just as I was about to set on reading the melange source code, I noticed that
+the ids weren't unique, they were batches - 82 in total. There was 1 in 1000
+chance that I would be a single member in a batch (if I were the last or 1067th
+person in the database).
+
+I made a request for every batch id and checked for 404. Soon, the program found
+something which didn't 404, which was indeed my project page. The link was:
+<http://www.google-melange.com/gsoc/project/details/google/gsoc2012/crodjer/5724160613416960>.
+
+I though, this was clever, but sadness prevailed soon. I have for the first
+time, properly acknowledged my failure.
+
+
+[old-permalink]: http://www.google-melange.com/gsoc/project/google/gsoc2012/crodjer/24002
+[google-melange]: http://www.google-melange.com/gsoc/projects/list/google/gsoc2012
