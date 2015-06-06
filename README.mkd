@@ -1,5 +1,4 @@
-##Look for:
-Sitemap, Atom Feed, Clean URLs, Tags, Root level static pages.
+My tussles with programming.
 
 ##Thanks,
 
