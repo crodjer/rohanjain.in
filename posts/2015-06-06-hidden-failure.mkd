@@ -29,7 +29,7 @@ figure out mine. I had three options:
 I checked if they just filter accepted projects in the front-end. They didn't.
 Things won't be that easy now will they?
 
-I started to revere-engineer how they'd generate them. Just by looking, the id I
+I started to reverse-engineer how they'd generate them. Just by looking, the id I
 couldn't find an obvious pattern. It may have been a sequential number - I got
 the list of all accepted candidates, mine would then be a missing number in a
 sequence. I set a relaxed limit as 10000 on the student list API
