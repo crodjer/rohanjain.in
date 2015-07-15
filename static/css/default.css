@@ -64,9 +64,16 @@ body {
 
 #content {
   min-height: 300px;
-  margin-top: 15px;
+}
+
+.post {
+  margin-top: 20px;
   font-size: 18px;
   line-height: 30px;
+}
+
+.post-list {
+  margin-top: 20px;
 }
 
 .post-item {
@@ -83,7 +90,7 @@ body {
 
 .meta {
   color: #777;
-  text-align: right;
+  text-align: left;
   font-size: 13px;
 }
 
@@ -118,7 +125,7 @@ a:visited {
   }
   /* Space out the masthead */
   .header {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {

@@ -2,7 +2,7 @@
 title: A quest to get the proof of my failure
 slug: hidden-failure
 tags: failure, detection
-author: crodjer
+author: Rohan
 ---
 
 I just got reminded about my two GSoC projects by a friend. I had a
