@@ -1,18 +1,20 @@
 ---
-title: Yet another Vim productivity post: Server-Client
+title: A productive workflow with vim sessions and servers
 slug: yet-another-vim-productivity-post-server-client
 tags: vim, server, productivity
 author: Rohan
 ---
 
 You can find lot of posts on the internet which try to tell you how to improve
-the ways in which VIM is used. Well, here is another one.
+the ways in which Vim is used. Well, here is another one.
 
 #Vim Server, ZSH and Tiles
+
 A Vim instance behaves as a server in which files can be opened through remote
 applications. Read `:help client-server` of Vim to know more about this. I
 generally keep multiple Vim sessions running, described by task they are related
 to.
+
 A typical workspace has one instance of Vim running and multiple terminals
 around it.  Lets call this workspace for project *foo*. So the name of Vim
 instance server will be *foo*:
@@ -69,9 +71,10 @@ compdef _vim es
 ```
 
 #Vim Sessions
-Having multiple instances is great, but I don't want to set each up every time
-I need resume working. For this I use *Vim Sessions*, which allow the current
-Vim state to be stored over the disk.
+
+Having multiple instances is great, but I don't want to set each up every time I
+need resume working. For this I use *Vim Sessions*, which allow the current Vim
+state to be stored over the disk.
 
 [vim-session][vim-session] plugin will help you manage sessions easily. It is
 well integrated with Vim client-server.
