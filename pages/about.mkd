@@ -8,9 +8,8 @@ Hi, I am Rohan. I like to read and write code. I frequently read about physics,
 energy and climate change. After getting depressed enough of the latter, I read
 fiction or annoy my friends about it or just code.
 
-I also like to play table tennis, cricket and chess. I also bought a
-harmonica. Keep your hands on ears if you see me holding it. And yeah, I also
-maintain a blog, which is so devoid of activity that it should have cobwebs on
+I like to play table tennis, cricket and chess. I also bought a
+harmonica. Keep your hands on ears if you see me holding it. And yeah, I maintain a blog, which is so devoid of activity that it should have cobwebs on
 it.
 
 > Find me at [Github][gh], [Twitter][twitter] and [StackOverflow][so].
