@@ -86,14 +86,16 @@ site = do
   match "pages/*" $ do
          route   $ cleanRoute `composeRoutes` (gsubRoute "pages/" (const ""))
          compile $ pandocCompiler
-            >>= loadAndApplyTemplate "templates/default.html" pageCtx
+            >>= loadAndApplyTemplate "templates/page.html" pageCtx
+            >>= saveSnapshot "content"
+            >>= loadAndApplyTemplate "templates/default.html" (postCtx tags)
             >>= relativizeUrls
             >>= cleanIndexUrls
 
   create ["index.html"] $ do
          route   idRoute
          compile $ do
-           posts <- fmap (take 3) . recentFirst =<< loadAll "posts/*"
+           posts <- fmap (take 5) . recentFirst =<< loadAll "posts/*"
            let indexCtx = mconcat
                           [ listField "posts" (postCtx tags) (return posts)
                           , constField "title" defaultTitle
