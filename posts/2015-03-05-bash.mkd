@@ -5,17 +5,14 @@ tags: bash, scripting, chores
 author: Rohan
 ---
 
-I have been writing a lot of bash scripts lately. They are incredibly effective
-in automating laborious activities. It helps out with some chores while letting
-me do the real stuff. There are a few benefits I found that scripting in bash
-has over any other language:
+Lately, I have been writing a lot of bash scripts. They are incredibly effective
+in automating laborious activities. Scripting in bash has multiple advantages
+over any other language:
 
 ## Synatx
 
-Bash scripting is specifically useful because of its syntactic simplicity. You
-write exactly what you intend. If I want to automate setting monitor
-configuration based on the plugged in monitors, [display.sh][display] will
-handle that. I can use `xrandr` command as I would in bash directly.
+The syntax is incredibly simple. You write exactly what you intend. No need to
+use any clumsy language API to pass arguments.
 
 ## Man pages
 
@@ -55,6 +52,7 @@ code.
 Some other examples of scripts which I use frequently are:
 
  - Quickly [set up my home directory][setuphome] on new systems.
+ - Automatically configure monitors: [display.sh][]
  - Managing [cabal sandboxes][hsb] for my Haskell software.
  - Automatically build on change with [watchman][watchman].
  - Checking if the headphone jack is plugged in with [jacked.sh][jacked].
@@ -65,5 +63,5 @@ Some other examples of scripts which I use frequently are:
 [hsb]: https://github.com/crodjer/configs/blob/master/scripts/hsb.sh
 [watchman]: https://github.com/crodjer/watchman
 [jacked]: https://github.com/crodjer/configs/blob/master/scripts/jacked.sh
-[display]: https://github.com/crodjer/configs/blob/master/scripts/display.sh
+[display.sh]: https://github.com/crodjer/configs/blob/master/scripts/display.sh
 [xmonad]: http://xmonad.org/
