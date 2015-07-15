@@ -2,7 +2,7 @@
 title: Fiddling with the bash shell
 slug: bash
 tags: bash, scripting, chores
-author: crodjer
+author: Rohan
 ---
 
 I have been writing a lot of bash scripts lately. They are incredibly effective
