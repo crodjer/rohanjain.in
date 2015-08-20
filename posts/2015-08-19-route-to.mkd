@@ -1,7 +1,7 @@
 ---
 title: Switch between networks based on availability
 slug: route-to
-tags: ssh
+tags: ip, network
 author: Rohan
 ---
 
