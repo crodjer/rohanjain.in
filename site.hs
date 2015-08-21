@@ -64,40 +64,34 @@ site = do
          route   idRoute
          compile compressCssCompiler
 
-  match (fromList ["about.rst", "contact.markdown"]) $ do
-         route   cleanRoute
-         compile $ pandocCompiler
-            >>= loadAndApplyTemplate "templates/default.html" defaultContext
-            >>= relativizeUrls
-            >>= cleanIndexUrls
+  tags <- buildTags "posts/*/*" (fromCapture "tags/*.html")
+  let postCtx = mconcat [tagsField "tags" tags, pageCtx]
 
-  tags <- buildTags "posts/*" (fromCapture "tags/*.html")
-
-  match "posts/*" $ do
-         route   $ postCleanRoute
-         compile $ pandocCompiler
-            >>= loadAndApplyTemplate "templates/post-content.html" (postCtx tags)
-            >>= saveSnapshot "content"
-            >>= loadAndApplyTemplate "templates/post.html"    (postCtx tags)
-            >>= loadAndApplyTemplate "templates/default.html" (postCtx tags)
-            >>= relativizeUrls
-            >>= cleanIndexUrls
+  match "posts/*/*" $ do
+        route   $ postCleanRoute
+        compile $ pandocCompiler
+           >>= loadAndApplyTemplate "templates/post-content.html" postCtx
+           >>= saveSnapshot "content"
+           >>= loadAndApplyTemplate "templates/post.html" postCtx
+           >>= loadAndApplyTemplate "templates/default.html" postCtx
+           >>= relativizeUrls
+           >>= cleanIndexUrls
 
   match "pages/*" $ do
          route   $ cleanRoute `composeRoutes` (gsubRoute "pages/" (const ""))
          compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/page.html" pageCtx
             >>= saveSnapshot "content"
-            >>= loadAndApplyTemplate "templates/default.html" (postCtx tags)
+            >>= loadAndApplyTemplate "templates/default.html" pageCtx
             >>= relativizeUrls
             >>= cleanIndexUrls
 
   create ["index.html"] $ do
          route   idRoute
          compile $ do
-           posts <- fmap (take 5) . recentFirst =<< loadAll "posts/*"
+           posts <- fmap (take 5) . recentFirst =<< loadAll "posts/*/*"
            let indexCtx = mconcat
-                          [ listField "posts" (postCtx tags) (return posts)
+                          [ listField "posts" postCtx (return posts)
                           , constField "title" "Recent posts"
                           , field "tags" (\_ -> renderTagCloud 100 300 tags)
                           , defaultContext
@@ -109,12 +103,12 @@ site = do
             >>= relativizeUrls
             >>= cleanIndexUrls
 
-  create ["posts.html"] $ do
+  create ["archive.html"] $ do
          route   cleanRoute
          compile $ do
-           posts <- recentFirst =<< loadAll "posts/*"
+           posts <- recentFirst =<< loadAll "posts/*/*"
            let postsCtx = mconcat
-                   [ listField "posts" (postCtx tags) (return posts)
+                   [ listField "posts" postCtx (return posts)
                    , constField "title" "Posts"
                    , defaultContext
                    ]
@@ -125,7 +119,6 @@ site = do
             >>= relativizeUrls
             >>= cleanIndexUrls
 
-
   tagsRules tags $ \tag pattern -> do
          let title = "Posts tagged " ++ tag
 
@@ -134,7 +127,7 @@ site = do
          compile $ do
            posts <- recentFirst =<< loadAll pattern
            let postsCtx = mconcat
-                          [ listField "posts" (postCtx tags) (return posts)
+                          [ listField "posts" postCtx (return posts)
                           , constField "title" title
                           , defaultContext
                           ]
@@ -148,12 +141,12 @@ site = do
   create ["sitemap.xml"] $ do
          route   idRoute
          compile $ do
-           posts <- recentFirst =<< loadAll "posts/*"
+           posts <- recentFirst =<< loadAll "posts/*/*"
            pages <- loadAll "pages/*"
 
            let allPosts = (return (pages ++ posts))
            let sitemapCtx = mconcat
-                            [ listField "entries" (postCtx tags) allPosts
+                            [ listField "entries" pageCtx allPosts
                             , constField "host" host
                             , defaultContext
                             ]
@@ -165,20 +158,15 @@ site = do
   create ["feed.xml"] $ do
          route   idRoute
          compile $ do
-           let feedCtx = (postCtx tags) `mappend` bodyField "description"
+           let feedCtx = pageCtx `mappend` bodyField "description"
            posts <- fmap (take 10) . recentFirst =<<
-                   loadAllSnapshots "posts/*" "content"
+                   loadAllSnapshots "posts/*/*" "content"
            renderAtom myFeedConfiguration feedCtx posts
              >>= cleanIndexHtmls
 
   match "templates/*" $ compile templateCompiler
 
 --------------------------------------------------------------------------------
-postCtx :: Tags -> Context String
-postCtx tags = mconcat
-    [ tagsField "tags" tags
-    , pageCtx
-    ]
 
 pageCtx :: Context String
 pageCtx = mconcat
@@ -195,6 +183,10 @@ pageCtx = mconcat
 cleanRoute :: Routes
 cleanRoute = trimmedCleanRoute 0
 
+postCleanRoute :: Routes
+postCleanRoute = trimmedCleanRoute 11
+ `composeRoutes` (gsubRoute "posts/[0-9]{4}/" (const ""))
+
 trimmedCleanRoute :: Int -> Routes
 trimmedCleanRoute c = customRoute createIndexRoute
   where
@@ -202,9 +194,6 @@ trimmedCleanRoute c = customRoute createIndexRoute
                                  </> drop c (takeBaseName p)
                                  </> "index.html"
                             where p = toFilePath ident
-
-postCleanRoute :: Routes
-postCleanRoute = trimmedCleanRoute 11 `composeRoutes` (gsubRoute "posts/" (const ""))
 
 cleanIndex :: String -> String
 cleanIndex url
@@ -214,7 +203,6 @@ cleanIndex url
 
 cleanIndexUrls :: Item String -> Compiler (Item String)
 cleanIndexUrls = return . fmap (withUrls cleanIndex)
-
 
 cleanIndexHtmls :: Item String -> Compiler (Item String)
 cleanIndexHtmls = return . fmap (replaceAll pattern replacement)
