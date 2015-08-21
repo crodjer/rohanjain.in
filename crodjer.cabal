@@ -62,6 +62,8 @@ executable site
   -- Other library packages from which modules are imported.
   build-depends:       base >=4.8 && <4.9,
                        filepath >= 1.4,
+                       containers >= 0.5.6,
+                       blaze-html >= 0.8,
                        hakyll >= 4.7
 
   -- Directories containing source files.

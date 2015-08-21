@@ -1,11 +1,18 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
+import           Control.Monad (forM_, forM, liftM)
 import           Data.Monoid (mappend, mconcat)
+import           Data.Maybe
+import qualified Data.Map as M
 import           Hakyll
-import           Data.List              (isSuffixOf, isPrefixOf, isInfixOf)
+import           Data.List              (isSuffixOf, isPrefixOf, isInfixOf,
+                                         intercalate, sort)
 import           System.FilePath.Posix  (takeBaseName, takeDirectory,
                                          (</>), takeFileName)
-import           Control.Monad (forM_)
+import           Text.Blaze.Html                 (toHtml, toValue, (!))
+import           Text.Blaze.Html.Renderer.String (renderHtml)
+import qualified Text.Blaze.Html5                as H
+import qualified Text.Blaze.Html5.Attributes     as A
 
 --------------------------------------------------------------------------------
 host::String
@@ -65,6 +72,7 @@ site = do
          compile compressCssCompiler
 
   tags <- buildTags "posts/*/*" (fromCapture "tags/*.html")
+  years <- buildYears "posts/*/*"
   let postCtx = mconcat [ tagsField "tags" tags
                         , postSlugField "slug"
                         , postYearField "year"
@@ -97,6 +105,7 @@ site = do
                           [ listField "posts" postCtx (return posts)
                           , constField "title" "Recent posts"
                           , field "tags" (\_ -> renderTagCloud 100 300 tags)
+                          , field "years" (\_ -> renderYears years)
                           , defaultContext
                           ]
 
@@ -106,31 +115,16 @@ site = do
             >>= relativizeUrls
             >>= cleanIndexUrls
 
-  create ["archive.html"] $ do
-         route   cleanRoute
+  forM_ years $ \(year, _)->
+      create [yearId year] $ do
+         route   idRoute
          compile $ do
-           posts <- recentFirst =<< loadAll "posts/*/*"
+           posts <- recentFirst =<< loadAll (fromGlob $ "posts/" ++ year ++"/*")
            let postsCtx = mconcat
-                   [ listField "posts" postCtx (return posts)
-                   , constField "title" "Posts"
-                   , defaultContext
-                   ]
-
-           makeItem ""
-            >>= loadAndApplyTemplate "templates/posts.html" postsCtx
-            >>= loadAndApplyTemplate "templates/default.html" postsCtx
-            >>= relativizeUrls
-            >>= cleanIndexUrls
-
-  create ["posts/*"] $ do
-         route   cleanRoute
-         compile $ do
-           posts <- recentFirst =<< loadAll "posts/*/*"
-           let postsCtx = mconcat
-                   [ listField "posts" postCtx (return posts)
-                   , constField "title" "Posts"
-                   , defaultContext
-                   ]
+                          [ listField "posts" postCtx (return posts)
+                          , constField "title" ("Posts published in " ++ year)
+                          , defaultContext
+                          ]
            makeItem ""
             >>= loadAndApplyTemplate "templates/posts.html" postsCtx
             >>= loadAndApplyTemplate "templates/default.html" postsCtx
@@ -138,15 +132,13 @@ site = do
             >>= cleanIndexUrls
 
   tagsRules tags $ \tag pattern -> do
-         let title = "Posts tagged " ++ tag
-
          -- Copied from posts, need to refactor
          route cleanRoute
          compile $ do
            posts <- recentFirst =<< loadAll pattern
            let postsCtx = mconcat
                           [ listField "posts" postCtx (return posts)
-                          , constField "title" title
+                          , constField "title" ("Posts tagged " ++ tag)
                           , defaultContext
                           ]
 
@@ -226,10 +218,43 @@ cleanIndexHtmls = return . fmap (replaceAll pattern replacement)
       pattern = "/index.html"
       replacement = const "/"
 
+-- utils
+--------------------------------------------------------------------------------
+
+type Year = String
+
+buildYears :: MonadMetadata m => Pattern -> m [(Year, Int)]
+buildYears pattern = do
+    ids <- getMatches pattern
+    return . frequency . (map getYear) $ ids
+  where
+    frequency xs =  M.toList (M.fromListWith (+) [(x, 1) | x <- xs])
+
 postSlugField :: String -> Context a
 postSlugField key = field key $ return . baseName
   where baseName = takeBaseName . toFilePath . itemIdentifier
 
 postYearField :: String -> Context a
-postYearField key = field key $ return . baseName
-  where baseName = takeBaseName . takeDirectory . toFilePath . itemIdentifier
+postYearField key = field key $ return . getYear . itemIdentifier
+
+getYear :: Identifier -> Year
+getYear = takeBaseName . takeDirectory . toFilePath
+
+yearPath :: Year -> FilePath
+yearPath year = "archive/" ++ year ++ "/index.html"
+
+yearId :: Year -> Identifier
+yearId = fromFilePath . yearPath
+
+renderYears :: [(Year, Int)] -> Compiler String
+renderYears years = do
+  years' <- forM (reverse . sort $ years) $ \(year, count) -> do
+      route' <- getRoute $ yearId year
+      return (year, route', count)
+  return . intercalate ", " $ map makeLink years'
+
+  where
+    makeLink (year, route', count) =
+      (renderHtml (H.a ! A.href (yearUrl year) $ toHtml year)) ++
+      " (" ++ show count ++ ")"
+    yearUrl = toValue . toUrl . yearPath
