@@ -199,18 +199,16 @@ pageCtx = mconcat
 -- custom routes
 --------------------------------------------------------------------------------
 cleanRoute :: Routes
-cleanRoute = trimmedCleanRoute 0
+cleanRoute = trimmedCleanRoute
 
 postCleanRoute :: Routes
-postCleanRoute = trimmedCleanRoute dateLength
+postCleanRoute = trimmedCleanRoute
  `composeRoutes` (gsubRoute "posts/[0-9]{4}/" (const ""))
 
-trimmedCleanRoute :: Int -> Routes
-trimmedCleanRoute c = customRoute createIndexRoute
+trimmedCleanRoute :: Routes
+trimmedCleanRoute = customRoute createIndexRoute
   where
-    createIndexRoute ident = takeDirectory p
-                                 </> drop c (takeBaseName p)
-                                 </> "index.html"
+    createIndexRoute ident = takeDirectory p </> takeBaseName p </> "index.html"
                             where p = toFilePath ident
 
 cleanIndex :: String -> String
@@ -229,12 +227,9 @@ cleanIndexHtmls = return . fmap (replaceAll pattern replacement)
       replacement = const "/"
 
 postSlugField :: String -> Context a
-postSlugField key = field key $ return . (drop dateLength) . baseName
+postSlugField key = field key $ return . baseName
   where baseName = takeBaseName . toFilePath . itemIdentifier
 
 postYearField :: String -> Context a
 postYearField key = field key $ return . baseName
   where baseName = takeBaseName . takeDirectory . toFilePath . itemIdentifier
-
-dateLength :: Int
-dateLength = 11

@@ -1,6 +1,7 @@
 ---
 title: Using pulseaudio to play system beeps
 tags: pulseaudio, x11
+date: 2015-08-20
 author: Rohan
 ---
 
