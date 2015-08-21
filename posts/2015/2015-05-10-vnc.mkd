@@ -1,6 +1,5 @@
 ---
 title: VNC over reverse SSH
-slug: vnc
 tags: vnc, ssh, cloud
 author: Rohan
 ---

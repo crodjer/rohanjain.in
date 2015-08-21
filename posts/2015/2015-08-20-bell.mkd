@@ -1,6 +1,5 @@
 ---
 title: Using pulseaudio to play system beeps
-slug: bell
 tags: pulseaudio, x11
 author: Rohan
 ---

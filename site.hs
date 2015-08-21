@@ -65,7 +65,10 @@ site = do
          compile compressCssCompiler
 
   tags <- buildTags "posts/*/*" (fromCapture "tags/*.html")
-  let postCtx = mconcat [tagsField "tags" tags, pageCtx]
+  let postCtx = mconcat [ tagsField "tags" tags
+                        , postSlugField "slug"
+                        , postYearField "year"
+                        , pageCtx ]
 
   match "posts/*/*" $ do
         route   $ postCleanRoute
@@ -113,6 +116,21 @@ site = do
                    , defaultContext
                    ]
 
+           makeItem ""
+            >>= loadAndApplyTemplate "templates/posts.html" postsCtx
+            >>= loadAndApplyTemplate "templates/default.html" postsCtx
+            >>= relativizeUrls
+            >>= cleanIndexUrls
+
+  create ["posts/*"] $ do
+         route   cleanRoute
+         compile $ do
+           posts <- recentFirst =<< loadAll "posts/*/*"
+           let postsCtx = mconcat
+                   [ listField "posts" postCtx (return posts)
+                   , constField "title" "Posts"
+                   , defaultContext
+                   ]
            makeItem ""
             >>= loadAndApplyTemplate "templates/posts.html" postsCtx
             >>= loadAndApplyTemplate "templates/default.html" postsCtx
@@ -184,7 +202,7 @@ cleanRoute :: Routes
 cleanRoute = trimmedCleanRoute 0
 
 postCleanRoute :: Routes
-postCleanRoute = trimmedCleanRoute 11
+postCleanRoute = trimmedCleanRoute dateLength
  `composeRoutes` (gsubRoute "posts/[0-9]{4}/" (const ""))
 
 trimmedCleanRoute :: Int -> Routes
@@ -209,3 +227,14 @@ cleanIndexHtmls = return . fmap (replaceAll pattern replacement)
     where
       pattern = "/index.html"
       replacement = const "/"
+
+postSlugField :: String -> Context a
+postSlugField key = field key $ return . (drop dateLength) . baseName
+  where baseName = takeBaseName . toFilePath . itemIdentifier
+
+postYearField :: String -> Context a
+postYearField key = field key $ return . baseName
+  where baseName = takeBaseName . takeDirectory . toFilePath . itemIdentifier
+
+dateLength :: Int
+dateLength = 11

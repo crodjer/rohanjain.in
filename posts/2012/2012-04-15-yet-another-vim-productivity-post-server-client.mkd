@@ -1,6 +1,5 @@
 ---
 title: A productive workflow with vim sessions and servers
-slug: yet-another-vim-productivity-post-server-client
 tags: vim, server, productivity
 author: Rohan
 ---
