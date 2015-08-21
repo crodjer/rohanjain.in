@@ -1,6 +1,5 @@
 ---
 title: Switch between networks based on availability
-slug: route-to
 tags: ip, network
 author: Rohan
 ---

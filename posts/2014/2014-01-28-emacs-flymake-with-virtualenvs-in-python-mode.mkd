@@ -1,6 +1,5 @@
 ---
 title: Emacs: Flymake with virtualenvs in python-mode
-slug: emacs-flymake-with-virtualenvs-in-python-mode
 tags: emacs, python
 author: Rohan
 ---
