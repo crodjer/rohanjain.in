@@ -81,15 +81,8 @@ site = do
                         , postYearField "year"
                         , pageCtx ]
 
-  match "posts/*/*" $ do
-        route   $ postCleanRoute
-        compile $ pandocCompiler
-           >>= loadAndApplyTemplate "templates/post-content.html" postCtx
-           >>= saveSnapshot "content"
-           >>= loadAndApplyTemplate "templates/post.html" postCtx
-           >>= loadAndApplyTemplate "templates/default.html" postCtx
-           >>= relativizeUrls
-           >>= cleanIndexUrls
+  match "posts/*/*" (postRules postCtx)
+  match "drafts/*/*" (postRules postCtx)
 
   match "pages/*" $ do
          route   $ cleanRoute `composeRoutes` (gsubRoute "pages/" (const ""))
@@ -194,6 +187,17 @@ pageCtx = mconcat
     , defaultContext
     ]
 
+postRules :: Context String -> Rules ()
+postRules ctx = do
+    route   $ postCleanRoute
+    compile $ pandocCompiler
+       >>= loadAndApplyTemplate "templates/post-content.html" ctx
+       >>= saveSnapshot "content"
+       >>= loadAndApplyTemplate "templates/post.html" ctx
+       >>= loadAndApplyTemplate "templates/default.html" ctx
+       >>= relativizeUrls
+           >>= cleanIndexUrls
+
 -- custom routes
 --------------------------------------------------------------------------------
 cleanRoute :: Routes
@@ -201,7 +205,7 @@ cleanRoute = trimmedCleanRoute
 
 postCleanRoute :: Routes
 postCleanRoute = trimmedCleanRoute
- `composeRoutes` (gsubRoute "posts/[0-9]{4}/" (const ""))
+ `composeRoutes` (gsubRoute "(posts|drafts)/[0-9]{4}/" (const ""))
 
 trimmedCleanRoute :: Routes
 trimmedCleanRoute = customRoute createIndexRoute
