@@ -21,6 +21,9 @@ host = "http://www.rohanjain.in"
 defaultTitle::String
 defaultTitle = "The Scroll"
 
+sourceRepository :: String
+sourceRepository = "https://github.com/crodjer/rohanjain.in"
+
 myFeedConfiguration:: FeedConfiguration
 myFeedConfiguration = FeedConfiguration
     { feedTitle = "Rohan's Weblog"
@@ -184,6 +187,7 @@ pageCtx = mconcat
     , modificationTimeField "lastmod" "%Y-%m-%d"
     , dateField "updated" "%Y-%m-%dT%H:%M:%SZ"
     , constField "host" host
+    , constField "source" sourceRepository
     , dateField "date" "%B %e, %Y"
     , defaultContext
     ]
