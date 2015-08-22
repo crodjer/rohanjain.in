@@ -98,11 +98,11 @@ body {
 }
 
 a.superTitle {
-  color: #000;
+  color: #777;
 }
 
 a.superTitle:visited {
-  color: #000;
+  color: #777;
 }
 
 a:visited {
