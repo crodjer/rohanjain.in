@@ -1,6 +1,6 @@
 ---
 title: A productive workflow with vim sessions and servers
-tags: vim, server, productivity
+tags: vim, productivity
 date: 2012-04-15
 author: Rohan
 ---
