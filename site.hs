@@ -126,6 +126,7 @@ site = do
            let postsCtx = mconcat
                           [ listField "posts" postCtx (return posts)
                           , constField "title" ("Posts published in " ++ year)
+                          , field "years" (\_ -> renderYears years)
                           , defaultContext
                           ]
            makeItem ""
@@ -142,6 +143,7 @@ site = do
            let postsCtx = mconcat
                           [ listField "posts" postCtx (return posts)
                           , constField "title" ("Posts tagged " ++ tag)
+                          , field "years" (\_ -> renderYears years)
                           , defaultContext
                           ]
 
