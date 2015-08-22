@@ -6,7 +6,7 @@ author: Rohan
 ---
 
 Having been blessed with an unreliable internet, I always have had the need to
-change the default route when one goes down. [ip][], provides you the required
+change the default route when one goes down. [ip][] provides you the required
 tooling to do that. I had been doing it so often, that I ended up writing a
 function to do this:
 
@@ -18,7 +18,7 @@ route_to () {
         sudo ip route del default &> /dev/null
         sudo ip route replace default via $route
     else
-        echo "Invalid route $interface" >&2
+        echo "No routes match: $interface" >&2
     fi
 }
 ```
