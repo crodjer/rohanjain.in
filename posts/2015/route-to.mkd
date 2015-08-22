@@ -1,6 +1,6 @@
 ---
 title: Switch between networks based on availability
-tags: ip, network
+tags: network
 date: 2015-08-19
 author: Rohan
 ---
