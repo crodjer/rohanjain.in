@@ -66,6 +66,10 @@ body {
   min-height: 300px;
 }
 
+.small {
+  font-size: 13px;
+}
+
 .post {
   margin-top: 20px;
   font-size: 18px;
