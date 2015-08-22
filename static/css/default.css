@@ -9,9 +9,7 @@ body {
   padding-bottom: 20px;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
-.marketing,
 .footer {
   padding-right: 15px;
   padding-left: 15px;
@@ -44,23 +42,12 @@ body {
   float: right;
 }
 
-/* Customize container */
-@media (min-width: 768px) {
-  .container {
-    max-width: 800px;
-  }
-}
-.container-narrow > hr {
-  margin: 30px 0;
+.gh-banner {
+  display: none;
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-  border-bottom: 1px solid #e5e5e5;
-}
-.jumbotron .btn {
-  padding: 14px 24px;
-  font-size: 21px;
+.container-narrow > hr {
+  margin: 30px 0;
 }
 
 #content {
@@ -110,19 +97,10 @@ a:visited {
   color: #23527C;
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
-}
-
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
   .header,
-  .marketing,
   .footer {
     padding-right: 0;
     padding-left: 0;
@@ -131,11 +109,13 @@ a:visited {
   .header {
     margin-bottom: 5px;
   }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
   #content {
     min-height: 500px;
+  }
+  .container {
+    max-width: 800px;
+  }
+  .gh-banner {
+    display: block;
   }
 }
