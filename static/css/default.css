@@ -113,8 +113,12 @@ a:visited {
     min-height: 500px;
   }
   .container {
-    max-width: 800px;
+    max-width: 768px;
   }
+}
+
+/* Don't let the banner overlap on the superTitle */
+@media screen and (min-width: 900px) {
   .gh-banner {
     display: block;
   }
