@@ -84,7 +84,7 @@ body {
   padding: 0 0 20px;
 }
 
-.post-item a {
+.post-item .post-link {
   font-size: 24px;
 }
 
@@ -94,7 +94,6 @@ body {
 
 .meta {
   color: #777;
-  text-align: left;
   font-size: 13px;
 }
 
