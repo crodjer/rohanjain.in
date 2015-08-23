@@ -149,6 +149,9 @@ code:
         self.assertEqual('foo', response)
 ```
 
+The application built out of this post is available [as a gist][example].
+
 [qotr]: http://github.com/crodjer/qotr/
 [tornado]: http://www.tornadoweb.org/
 [ember.js]: http://emberjs.com/
+[example]: https://gist.github.com/crodjer/1e9989ab30fdc32db926
