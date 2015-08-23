@@ -96,7 +96,7 @@ site = do
   create ["index.html"] $ do
          route   idRoute
          compile $ do
-           posts <- fmap (take 5) . recentFirst =<< loadAll "posts/*/*"
+           posts <- fmap (take 7) . recentFirst =<< loadAll "posts/*/*"
            let indexCtx = mconcat
                           [ listField "posts" postCtx (return posts)
                           , constField "title" "Recent posts"
