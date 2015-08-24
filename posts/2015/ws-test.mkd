@@ -1,6 +1,6 @@
 ---
 title: Testing websockets with tornado
-date: 2015-08-12
+date: 2015-08-22
 tags: python, websocket
 author: Rohan
 ---
