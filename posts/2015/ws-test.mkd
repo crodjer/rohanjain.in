@@ -10,6 +10,10 @@ Recently, I built an encrypted [chat service][qotr], which was based on
 shut it down, but while working on it I learned a few new things and testing
 websockets with tornado is one of them.
 
+Most of the material out there for this suggests developing a separate client
+based tests, which I didn't want to do. Eventually, I figured out that tornado
+already provides all the utilities to do unit/integration tests for websockets.
+
 First, we will need a websockets based echo server to test, lets call it
 `ws.py`. The websocket handler would be:
 
