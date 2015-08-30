@@ -200,15 +200,12 @@ postRules ctx = do
 
 -- custom routes
 --------------------------------------------------------------------------------
-cleanRoute :: Routes
-cleanRoute = trimmedCleanRoute
-
 postCleanRoute :: Routes
-postCleanRoute = trimmedCleanRoute
+postCleanRoute = cleanRoute
  `composeRoutes` (gsubRoute "(posts|drafts)/[0-9]{4}/" (const ""))
 
-trimmedCleanRoute :: Routes
-trimmedCleanRoute = customRoute createIndexRoute
+cleanRoute :: Routes
+cleanRoute = customRoute createIndexRoute
   where
     createIndexRoute ident = takeDirectory p </> takeBaseName p </> "index.html"
                             where p = toFilePath ident
