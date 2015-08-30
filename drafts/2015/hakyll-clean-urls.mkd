@@ -11,7 +11,7 @@ because as a static site generator, it cannot presume anything about
 the final server which will be used.
 
 But it does provide all the utilities with which we can get clean
-URLs, like [this page][this-page]. For this, I rely on the fact that
+URLs, like [this page](.). For this, I rely on the fact that
 most of the web servers automatically serve `/foo/index.html` for the
 URL `/foo/`. To generate *clean* paths, I define a custom route -
 `cleanRoute`:
@@ -63,6 +63,5 @@ all the anchor tags and complete text respectively.
 > based.
 
 [hakyll]: http://jaspervdj.be/hakyll/
-[this-page]: /hakyll-clean-urls/
 [my-compiler]: https://github.com/crodjer/rohanjain.in/blob/master/site.hs
 [workforpizza]: https://github.com/irneh/workforpizza/blob/master/site.hs
