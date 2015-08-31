@@ -1,6 +1,6 @@
 ---
 title: Categorizing archives by years
-date: 2015-08-30
+date: 2015-08-31
 tags: hakyll
 author: Rohan
 ---
@@ -36,8 +36,7 @@ This now can be used in the site `Rules`:
 ```
 
 With this, you have a list of years available for other rules to use.
-Using this, we build an index of posts by years (similar to
-`tagsRules`):
+Now, we build an index of posts by years (similar to `tagsRules`):
 
 ```haskell
   forM_ years $ \(year, _)->
