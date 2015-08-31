@@ -1,7 +1,7 @@
 ---
 title: Clean URLs with Hakyll
 date: 2015-08-30
-tags: hakyll
+tags: hakyll, seo
 author: Rohan
 ---
 
