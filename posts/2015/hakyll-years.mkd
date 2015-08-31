@@ -1,5 +1,5 @@
 ---
-title: Categorizing archives by years
+title: Categorizing archives by year with Hakyll
 date: 2015-08-31
 tags: hakyll
 author: Rohan
