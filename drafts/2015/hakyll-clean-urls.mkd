@@ -56,7 +56,17 @@ cleanIndex url
 ```
 
 `cleanIndexUrls` and `cleanIndexHtmls` strip out `/index.html` from
-all the anchor tags and complete text respectively.
+all the anchor tags and complete text respectively. These can be used
+over a page's compiler like this:
+
+```haskell
+         compile $ pandocCompiler
+            >>= loadAndApplyTemplate "templates/page.html" pageCtx
+            >>= saveSnapshot "content"
+            >>= loadAndApplyTemplate "templates/default.html" pageCtx
+            >>= relativizeUrls
+            >>= cleanIndexUrls -- cleanup href in all anchor tags.
+```
 
 > This functionality is being used by [this blog][my-compiler] and
 > [irneh/workforpizza][workforpizza] off which this blog is actually
