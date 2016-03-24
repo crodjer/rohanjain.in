@@ -18,9 +18,6 @@ import qualified Text.Blaze.Html5.Attributes     as A
 host::String
 host = "http://www.rohanjain.in"
 
-defaultTitle::String
-defaultTitle = "The Scroll"
-
 sourceRepository :: String
 sourceRepository = "https://github.com/crodjer/rohanjain.in"
 
@@ -102,7 +99,7 @@ site = do
                           , constField "title" "Recent posts"
                           , field "tags" (\_ -> renderTagCloud 100 300 tags)
                           , field "years" (\_ -> renderYears years)
-                          , defaultContext
+                          , myCtx
                           ]
 
            makeItem ""
@@ -120,7 +117,7 @@ site = do
                           [ listField "posts" postCtx (return posts)
                           , constField "title" ("Posts published in " ++ year)
                           , field "years" (\_ -> renderYears years)
-                          , defaultContext
+                          , myCtx
                           ]
            makeItem ""
             >>= loadAndApplyTemplate "templates/posts.html" postsCtx
@@ -137,7 +134,7 @@ site = do
                           [ listField "posts" postCtx (return posts)
                           , constField "title" ("Posts tagged " ++ tag)
                           , field "years" (\_ -> renderYears years)
-                          , defaultContext
+                          , myCtx
                           ]
 
            makeItem ""
@@ -156,7 +153,7 @@ site = do
            let sitemapCtx = mconcat
                             [ listField "entries" pageCtx allPosts
                             , constField "host" host
-                            , defaultContext
+                            , myCtx
                             ]
 
            makeItem ""
@@ -176,6 +173,12 @@ site = do
 
 --------------------------------------------------------------------------------
 
+myCtx :: Context String
+myCtx = mconcat
+  [ constField "superTitle" "Brownian Motion"
+  , defaultContext
+  ]
+
 pageCtx :: Context String
 pageCtx = mconcat
     [ modificationTimeField "mtime" "%U"
@@ -184,7 +187,7 @@ pageCtx = mconcat
     , constField "host" host
     , constField "source" sourceRepository
     , dateField "date" "%B %e, %Y"
-    , defaultContext
+    , myCtx
     ]
 
 postRules :: Context String -> Rules ()
