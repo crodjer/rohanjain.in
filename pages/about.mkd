@@ -1,6 +1,5 @@
 ---
 title: About
-date: 2013-09-22
 author: Rohan
 ---
 
@@ -11,6 +10,9 @@ or annoy my friends about it or just code.
 I like to play table tennis, cricket and chess. I also bought a
 harmonica. Keep your hands on ears if you see me holding it. And yeah, I maintain a blog, which is so devoid of activity that it should have cobwebs on
 it.
+
+On the days with clear skies, I take out my telescope and observe star clusters
+and nebulae. I am trying to go observe the Messier catalog.
 
 > Find me at [Github][gh], [Twitter][twitter] and [StackOverflow][so].
 
