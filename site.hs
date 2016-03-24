@@ -73,13 +73,14 @@ site = do
 
   tags <- buildTags "posts/*/*" (fromCapture "tags/*.html")
   years <- buildYears "posts/*/*"
+  let draftCtx = mconcat [ postSlugField "slug"
+                         , postYearField "year"
+                         , pageCtx ]
   let postCtx = mconcat [ tagsField "tags" tags
-                        , postSlugField "slug"
-                        , postYearField "year"
-                        , pageCtx ]
+                        , draftCtx]
 
+  match "drafts/*/*" (postRules $ draftCtx)
   match "posts/*/*" (postRules postCtx)
-  match "drafts/*/*" (postRules postCtx)
 
   match "pages/*" $ do
          route   $ cleanRoute `composeRoutes` (gsubRoute "pages/" (const ""))
