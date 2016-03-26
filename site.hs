@@ -41,7 +41,7 @@ copyFiles = [ "static/img/*"
 
 config :: Configuration
 config = defaultConfiguration
-    { deployCommand = "rsync --checksum -ave 'ssh' _site/ blog:~/www/hakyll"
+    { deployCommand = "rsync -c -ave 'ssh' _site/ blog:~/www/rohanjain.in"
     , ignoreFile = ignoreFile'
     }
 
