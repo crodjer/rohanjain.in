@@ -80,7 +80,7 @@ site = do
                         , draftCtx]
 
   match "drafts/*/*" (postRules $ draftCtx)
-  match "posts/*/*" (postRules postCtx)
+  match "posts/*/*" (postRules $ postCtx)
 
   match "pages/*" $ do
          route   $ cleanRoute `composeRoutes` (gsubRoute "pages/" (const ""))
