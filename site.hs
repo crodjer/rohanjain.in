@@ -33,7 +33,7 @@ myFeedConfiguration = FeedConfiguration
 copyFiles :: [Pattern]
 copyFiles = [ "static/img/*"
             , "static/js/*"
-            , "404.html"
+            , "static/html/404.html"
             , "robots.txt"
             , "favicon.ico"
             , ".htaccess"
