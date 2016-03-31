@@ -98,6 +98,18 @@ a:visited {
   color: #23527C;
 }
 
+.figure img {
+  border: 1px solid #777;
+  padding: 1px;
+  max-width: 600px;
+  max-height: 400px;
+}
+
+.figure p.caption {
+  color: #777;
+  font-size: 13px;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
