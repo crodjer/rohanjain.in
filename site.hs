@@ -79,7 +79,7 @@ site = do
   let postCtx = mconcat [ tagsField "tags" tags
                         , draftCtx]
 
-  match "drafts/*/*" (postRules $ draftCtx)
+  match "drafts/*" (postRules $ draftCtx)
   match "posts/*/*" (postRules $ postCtx)
 
   match "pages/*" $ do
@@ -206,7 +206,7 @@ postRules ctx = do
 --------------------------------------------------------------------------------
 postCleanRoute :: Routes
 postCleanRoute = cleanRoute
- `composeRoutes` (gsubRoute "(posts|drafts)/[0-9]{4}/" (const ""))
+ `composeRoutes` (gsubRoute "(posts/[0-9]{4}/|drafts/)" (const ""))
 
 cleanRoute :: Routes
 cleanRoute = customRoute createIndexRoute
