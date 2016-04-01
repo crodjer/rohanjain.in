@@ -12,7 +12,7 @@ harmonica. Keep your hands on ears if you see me holding it. And yeah, I maintai
 it.
 
 On the days with clear skies, I take out my telescope and observe star clusters
-and nebulae. I am trying to go observe the Messier catalog.
+and nebulae. I am trying to go through the Messier catalog.
 
 > Find me at [Github][gh], [Twitter][twitter] and [StackOverflow][so].
 
