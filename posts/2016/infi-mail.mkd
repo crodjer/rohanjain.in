@@ -10,7 +10,7 @@ author: Rohan
 > `your-email+tag@your-provider.ext` will land in the inbox for
 > `your-email@your-provider.ext`.
 
-Emails are important. They are one's identity on the web. Just like on phone,
+Emails are important. They are your identity on the web. Just like on phone,
 you'd want to control who can contact you via email. This warrants caution in
 signing up at places on the internet. It can be unsafe to register with the
 personal email address on new services for multiple reasons:
@@ -46,8 +46,7 @@ internet. Say Jon wants to register on `nightswatch.got`.
  - Jon will get the confirmation mail in the original account. Being prudent,
    he'll verify that the mail it does have the correct tag in the *to address*.
  - Also, `email.wf` lets Jon send emails with the tagged address. This is useful
-   for talking to the customer care. For GMail users, this can be done
-   by going to:  
+   for talking to the customer care. GMail users can go to:  
    `Settings -> Accounts and Import -> Add another email address you own`.  
    and filling up the form with the tagged address.
 
