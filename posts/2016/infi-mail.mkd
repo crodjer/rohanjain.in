@@ -25,7 +25,7 @@ personal email address on new services for multiple reasons:
    points of catastrophic failures utilizing email addresses.
 
 These sound upsetting, but are indeed manageable to an extent. One trick that I
-use is *tagging he email address*. It is a fairly common practice among
+use is *tagging the email address*. It is a fairly common practice among
 programmers. Most popular email services support this.
 
 What do I mean by tagging? Lets take Jon's email: `jon.snow@email.wf`. His
