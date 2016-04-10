@@ -15,15 +15,18 @@ import qualified Text.Blaze.Html5                as H
 import qualified Text.Blaze.Html5.Attributes     as A
 
 --------------------------------------------------------------------------------
-host::String
+host :: String
 host = "http://www.rohanjain.in"
+
+siteName :: String
+siteName = "The Perpetual Amateur"
 
 sourceRepository :: String
 sourceRepository = "https://github.com/crodjer/rohanjain.in"
 
 myFeedConfiguration:: FeedConfiguration
 myFeedConfiguration = FeedConfiguration
-    { feedTitle = "Rohan's Weblog"
+    { feedTitle = siteName
     , feedDescription = ""
     , feedAuthorName = "Rohan Jain"
     , feedAuthorEmail = "crodjer@gmail.com"
@@ -176,7 +179,7 @@ site = do
 
 myCtx :: Context String
 myCtx = mconcat
-  [ constField "superTitle" "Brownian Motion"
+  [ constField "superTitle" siteName
   , defaultContext
   ]
 
