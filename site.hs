@@ -37,6 +37,7 @@ copyFiles :: [Pattern]
 copyFiles = [ "static/img/*"
             , "static/js/*"
             , "static/html/404.html"
+            , "CNAME"
             , "robots.txt"
             , "favicon.ico"
             , ".htaccess"
@@ -44,7 +45,7 @@ copyFiles = [ "static/img/*"
 
 config :: Configuration
 config = defaultConfiguration
-    { deployCommand = "rsync -c -ave 'ssh' _site/ blog:~/www/rohanjain.in"
+    { deployCommand = "./scripts/deploy-cmd.sh"
     , ignoreFile = ignoreFile'
     }
 
