@@ -6,7 +6,7 @@
     <meta name="description" content="A web blog, by Rohan Jain" />
     <meta name="author" content="Rohan Jain" />
 
-    <title>Configure ssh to handle proxies and tunnels seamlessly | The Perpetual Amateur</title>
+    <title>VNC over reverse SSH | The Perpetual Amateur</title>
     <link href="../favicon.ico" rel="icon" />
     <link rel="alternate" type="application/atom+xml" title="Rohan's Weblog" href="../feed.xml" />
 
@@ -49,53 +49,44 @@
           </ul>
         </nav>
         <!-- <h1 class="superTitle"><a href="/">Rohan's Weblog</a></h1> -->
-        <h1 class="text-muted">Configure ssh to handle proxies and tunnels seamlessly</h1>
+        <h1 class="text-muted">VNC over reverse SSH</h1>
       </div>
 
       <div id="content">
         <div class="meta">
-  <em class="date">August 27, 2011</em>
+  <em class="date">May 10, 2015</em>
   
   |
-  <span class="tags"><a href="../tags/ssh/">ssh</a>, <a href="../tags/tunneling/">tunneling</a>, <a href="../tags/network/">network</a></span>
+  <span class="tags"><a href="../tags/vnc/">vnc</a>, <a href="../tags/ssh/">ssh</a></span>
   
 </div>
 
 <div class="post">
-  <p>Recently I opened up on the port <em>443</em> over my EC2 instance (more or less like a VPS), so that I can access it through any firewalled proxy too. Apart from getting SSH running to a machine from outside world, I did some cool configuration to have ssh deal with with various remote hosts automatically. It uses <em>the right</em> proxy settings according the host being accessed.</p>
-<p>All the stuff which runs over ssh (like <em>scp</em>, <em>git</em> etc.) also work the way they are supposed to, following the ssh configuration.</p>
-<p>To get this to work you need to have <em>corkscrew</em> and <em>netcat</em> (the swiss army knife) already installed.</p>
-<p>Here is how it goes:<br />
-<code>File ~/.ssh/config:</code></p>
-<div class="sourceCode"><pre class="sourceCode apache"><code class="sourceCode apache"><span class="co"># Let me access local remotes directly.</span>
-Host 127.0.0.1, 10.*
-    ProxyCommand none
-
-<span class="co"># Github lets you ssh over port 443 too, utilize that instead of tunneling</span>
-<span class="co"># through remote computer</span>
-Host github.com
-    Hostname ssh.github.com
-    User<span class="st"> git</span>
-    ProxyCommand corkscrew 10.3.100.211 8080 %h %p
-    Port 443
-    Hostname ssh.github.com
-
-<span class="co"># Let me ssh onto my ec2 instance, which has full network access, through a</span>
-<span class="co"># http proxy.</span>
-Host ecc.rohanjain.in
-    ProxyCommand corkscrew 10.3.100.211 8080 %h %p
-    Port 443
-    ServerAliveInterval 600
-
-<span class="co"># All the rest should connect through an ssh connection over the ec2 instance.</span>
-Host *
-    ProxyCommand ssh -q -a -x -p 443 ecc.rohanjain.in nc %h %p</code></pre></div>
+  <p>About a year ago, I switched my parents computer (lets call it <code>P</code>) from the pre-installed OS (Windows) to Ubuntu. The primary reason for this switch was it hard for me to debug and fix issues. Things have been smooth after the switch with no issues which I found hard to fix remotely. What specially has worked is my ability to log in to the computer when its on through my VPS and service it.</p>
+<h2 id="reverse-ssh">Reverse SSH</h2>
+<p>Whenever <code>P</code> starts, it makes a reverse SSH connection to my VPS. I use <a href="https://www.archlinux.org/packages/community/x86_64/autossh/">autossh</a> to monitor and make sure that it is eventually always connected.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">autossh</span> -M 10001 -f -NXYR 10000:localhost:22 vps</code></pre></div>
+<p>Here <code>vps</code> is a SSH alias for my personal VPS.</p>
+<p>I can tunnel through the VPS and login to <code>P</code> via VPS using the following SSH configuration:</p>
+<pre class="config"><code>Host home
+     Hostname localhost
+     User username
+     Port 10000
+     ProxyCommand ssh -e none -W %h:%p vps</code></pre>
+<p>To log in to <code>P</code> transparently, I can simply do:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ssh</span> home</code></pre></div>
+<p>I use this to resolve most of the issues. Of course it does have the requirement that the system be booted up and connected to a network.</p>
+<h2 id="vnc">VNC</h2>
+<p>There also can be issues which have to do with the GUI (say browser maintenance) and cannot be done easily over a text SSH session. For those cases, VNC is to rescue. I create a VNC server on <code>P</code> using <a href="https://wiki.archlinux.org/index.php/X11vnc">x11vnc</a> and tunnel the VNC port to my local through SSH. Now, I can access <code>P</code>’s graphical session remotely via a vnc client (mine is <a href="https://www.archlinux.org/packages/community/x86_64/tigervnc/">tigervnc</a>).</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ssh</span> home -L 5900:localhost:5900 <span class="st">&quot;x11vnc -rfbauth ~/.vnc/passwd -display :0 -noxdamage&quot;</span>
+$ <span class="kw">vncviewer</span> localhost::5900 -QualityLevel 3 -CompressLevel 6</code></pre></div>
+<p>This method is much better compared to the more common solutions such has Google’s VNC chrome extension or other proprietary services. But they are slow and untrustable 3rd parties. With this way of setting up VNC, everything is protected under SSH connections.</p>
 
 
 </div>
 <em class="small">
   Any suggestions for the post? You may send me a pull request
-  <a href="https://github.com/crodjer/rohanjain.in/tree/master/posts/2011/configure-ssh-to-handle-proxies-and-tunnels-seamlessly.mkd">here</a>.
+  <a href="https://github.com/crodjer/rohanjain.in/tree/master/posts/2015/vnc.mkd">here</a>.
 </em>
 <!--
 
@@ -107,8 +98,8 @@ Host *
     //Disqus
     var disqus_shortname = 'crodjer';
 
-    var disqus_identifier = 'posts/2011/configure-ssh-to-handle-proxies-and-tunnels-seamlessly.mkd';
-    var disqus_title = 'Configure ssh to handle proxies and tunnels seamlessly';
+    var disqus_identifier = 'posts/2015/vnc.mkd';
+    var disqus_title = 'VNC over reverse SSH';
 
   </script>
   <script src="http://crodjer.disqus.com/embed.js"></script>

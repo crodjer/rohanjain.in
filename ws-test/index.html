@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="google-site-verification" content="iVLOY09LTW8dfYg1-bEVDAMFBIPsb_VNNWRAJjQw5Is" />
+    <meta name="description" content="A web blog, by Rohan Jain" />
+    <meta name="author" content="Rohan Jain" />
+
+    <title>Testing tornado websockets without third party clients | The Perpetual Amateur</title>
+    <link href="../favicon.ico" rel="icon" />
+    <link rel="alternate" type="application/atom+xml" title="Rohan's Weblog" href="../feed.xml" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/default.css" rel="stylesheet" />
+    <link href="../static/css/highlight.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script>
+      // Google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-15806710-5', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation">
+              <a class="superTitle" href="../">
+                The Perpetual Amateur
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- <h1 class="superTitle"><a href="/">Rohan's Weblog</a></h1> -->
+        <h1 class="text-muted">Testing tornado websockets without third party clients</h1>
+      </div>
+
+      <div id="content">
+        <div class="meta">
+  <em class="date">August 22, 2015</em>
+  
+  |
+  <span class="tags"><a href="../tags/python/">python</a>, <a href="../tags/websocket/">websocket</a></span>
+  
+</div>
+
+<div class="post">
+  <p>Recently, I built an encrypted <a href="http://github.com/crodjer/qotr/">chat service</a>, which was based on <a href="http://www.tornadoweb.org/">tornado</a> and <a href="http://emberjs.com/">ember.js</a>. The project itself had grave security issues, so I shut it down, but while working on it I learned a few new things and testing websockets with tornado is one of them.</p>
+<p>Most of the material out there for this suggests developing separate client based tests, which I didn’t want to do. Eventually, I figured out that tornado already provides all the utilities to do unit/integration tests for websockets.</p>
+<p>First, we will need a websockets based echo server to test, lets call it <code>ws.py</code>. The websocket handler would be:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> tornado <span class="im">import</span> web, websocket
+
+<span class="kw">class</span> Echo(websocket.WebSocketHandler):
+
+    <span class="co"># Open allows for any number arguments, unlike what pylint thinks.</span>
+    <span class="co"># pylint: disable=W0221</span>
+    <span class="kw">def</span> <span class="bu">open</span>(<span class="va">self</span>):
+        <span class="va">self</span>.write_message(<span class="st">'hello'</span>)
+
+    <span class="kw">def</span> on_message(<span class="va">self</span>, message):
+        <span class="va">self</span>.write_message(message)
+
+    <span class="kw">def</span> on_close(<span class="va">self</span>):
+        <span class="va">self</span>.write_message(<span class="st">'bye'</span>)</code></pre></div>
+<p>Lets define an application which uses the above handler:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">APP <span class="op">=</span> web.Application([
+    (<span class="vs">r&quot;/&quot;</span>, Echo),
+])
+
+<span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:
+    APP.listen(<span class="dv">5000</span>)</code></pre></div>
+<p>Now, we will test the application out. Create a file, say <code>test_ws.py</code>:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> tornado <span class="im">import</span> testing, httpserver, gen, websocket
+<span class="im">from</span> ws <span class="im">import</span> APP
+
+<span class="kw">class</span> TestChatHandler(testing.AsyncTestCase):
+    <span class="cf">pass</span></code></pre></div>
+<p>We use tornado’s testing wrapper for the integration it provides with the event loop. Lets tell unittest how to setup the tests:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> TestChatHandler(testing.AsyncTestCase):
+
+    <span class="kw">def</span> setUp(<span class="va">self</span>):
+        <span class="bu">super</span>(TestChatHandler, <span class="va">self</span>).setUp()
+        server <span class="op">=</span> httpserver.HTTPServer(APP)
+        socket, <span class="va">self</span>.port <span class="op">=</span> testing.bind_unused_port()
+        server.add_socket(socket)</code></pre></div>
+<p>We create a http server out of our application and get a socket bound to an unused port. We then ask the server to accept on the created socket. Don’t forget the <code>super</code> call, it ensures that the ioloop gets created. <code>unittest</code> will now ensure that a server and an ioloop is up and running before running tests.</p>
+<p>Moving forward, we need to define a helper for creating a websocket connection to the server. Tornado websocket provides a handly websocket client. It can be created with <code>websocket.websocket_connect</code>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">def</span> _mk_connection(<span class="va">self</span>):
+        <span class="cf">return</span> websocket.websocket_connect(
+            <span class="st">'ws://localhost:{}/'</span>.<span class="bu">format</span>(<span class="va">self</span>.port)
+        )</code></pre></div>
+<p>We can write a simple test for this:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="at">@testing.gen_test</span>
+    <span class="kw">def</span> test_hello(<span class="va">self</span>):
+        c <span class="op">=</span> <span class="cf">yield</span> <span class="va">self</span>._mk_connection()
+        <span class="co"># Get the initial hello from the server.</span>
+        response <span class="op">=</span> <span class="cf">yield</span> c.read_message()
+        <span class="co"># Make sure that we got a 'hello' not 'bye'</span>
+        <span class="va">self</span>.assertEqual(<span class="st">'hello'</span>, response)</code></pre></div>
+<p><code>testing.gen_test</code> is a wrapper over tornado’s <code>gen.coroutine</code>. It runs the test synchronously under the ioloop that <code>testing.AsyncTestCase</code> creates in <code>setUp</code>. The test checks for the ‘hello’ message that we expect from the server on connection. <code>yield</code> makes sure that we for the response from the server. Note that if you write a <code>yield c.read_message()</code> when a message from server isn’t expected, the coroutine will keep waiting, eventually raising <code>tornado.ioloop.TimeoutError</code> (5 seconds by default). Great, we can write lot of tests using just what we have now.</p>
+<p>The tests can be run via:</p>
+<pre><code>python -m tornado.testing discover</code></pre>
+<p>This could still be further improved. We need to yield and ignore the ‘hello’ message in every test, for every client. And in your application, it may be a more complicated handshake - possibly a few initial messages. Once you write a test for that handshake, it needn’t be re-written in every test. To avoid that, we will write an an abstraction over this:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="at">@gen.coroutine</span>
+    <span class="kw">def</span> _mk_client(<span class="va">self</span>):
+        c <span class="op">=</span> <span class="cf">yield</span> <span class="va">self</span>._mk_connection()
+
+        <span class="co"># Discard the hello</span>
+        <span class="co"># This could be any initial handshake, which needs to be generalized</span>
+        <span class="co"># for most of the tests.</span>
+        _ <span class="op">=</span> <span class="cf">yield</span> c.read_message()
+
+        <span class="cf">raise</span> gen.Return(c)</code></pre></div>
+<p><code>_mk_client</code> here is a method in which you could place all the boilerplate. The key point here is the exception <code>gen.Return(c)</code> we raise in the end. <code>return</code> with a value is allowed only after Python <code>3.3</code>, so <code>tornado.gen</code> uses the value associated with this exception as the coroutine’s result.</p>
+<p>With <code>_mk_client</code> available, we can write tests which only include the relevant code:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="at">@testing.gen_test</span>
+    <span class="kw">def</span> test_echo(<span class="va">self</span>):
+        <span class="co"># A client with the hello taken care of.</span>
+        c <span class="op">=</span> <span class="cf">yield</span> <span class="va">self</span>._mk_client()
+
+        <span class="co"># Send a 'foo' to the server.</span>
+        c.write_message(<span class="st">&quot;foo&quot;</span>)
+        <span class="co"># Get the 'foo' back.</span>
+        response <span class="op">=</span> <span class="cf">yield</span> c.read_message()
+        <span class="co"># Make sure that we got a 'foo' back and not 'bar'.</span>
+        <span class="va">self</span>.assertEqual(<span class="st">'foo'</span>, response)</code></pre></div>
+<p>The application built out of this post is available <a href="https://gist.github.com/crodjer/1e9989ab30fdc32db926">as a gist</a>.</p>
+
+
+</div>
+<em class="small">
+  Any suggestions for the post? You may send me a pull request
+  <a href="https://github.com/crodjer/rohanjain.in/tree/master/posts/2015/ws-test.mkd">here</a>.
+</em>
+<!--
+
+<div class="comments">
+  <div id="disqus_thread"></div>
+
+  <script type="text/javascript">
+
+    //Disqus
+    var disqus_shortname = 'crodjer';
+
+    var disqus_identifier = 'posts/2015/ws-test.mkd';
+    var disqus_title = 'Testing tornado websockets without third party clients';
+
+  </script>
+  <script src="http://crodjer.disqus.com/embed.js"></script>
+</div>
+
+-->
+
+      </div>
+
+      <footer class="footer">
+        <a class="link" href="../">Home</a>
+        <a class="link" href="../about/">About</a>
+        <a class="link" href="../feed.xml">Feed</a>
+
+        <span class="credits">
+          Site proudly generated using
+          <a href="http://github.com/jaspervdj/hakyll">Hakyll</a>
+        </span>
+      </footer>
+    </div> <!-- /container -->
+
+    <a href="https://github.com/crodjer" class="gh-banner">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" />
+    </a>
+
+  </body>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/turbolinks/1.3.0/turbolinks.min.js">
+  </script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js">
+  </script>
+  <script>
+    document.addEventListener('page:fetch', function() {
+      NProgress.start();
+    });
+    document.addEventListener('page:change', function() {
+      NProgress.done();
+    });
+    document.addEventListener('page:restore', function() {
+      NProgress.remove();
+    });
+  </script>
+</html>

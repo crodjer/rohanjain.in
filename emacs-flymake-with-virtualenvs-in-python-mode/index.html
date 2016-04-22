@@ -6,7 +6,7 @@
     <meta name="description" content="A web blog, by Rohan Jain" />
     <meta name="author" content="Rohan Jain" />
 
-    <title>Configure ssh to handle proxies and tunnels seamlessly | The Perpetual Amateur</title>
+    <title>Emacs: Flymake with virtualenvs in python-mode | The Perpetual Amateur</title>
     <link href="../favicon.ico" rel="icon" />
     <link rel="alternate" type="application/atom+xml" title="Rohan's Weblog" href="../feed.xml" />
 
@@ -49,53 +49,77 @@
           </ul>
         </nav>
         <!-- <h1 class="superTitle"><a href="/">Rohan's Weblog</a></h1> -->
-        <h1 class="text-muted">Configure ssh to handle proxies and tunnels seamlessly</h1>
+        <h1 class="text-muted">Emacs: Flymake with virtualenvs in python-mode</h1>
       </div>
 
       <div id="content">
         <div class="meta">
-  <em class="date">August 27, 2011</em>
+  <em class="date">January 28, 2014</em>
   
   |
-  <span class="tags"><a href="../tags/ssh/">ssh</a>, <a href="../tags/tunneling/">tunneling</a>, <a href="../tags/network/">network</a></span>
+  <span class="tags"><a href="../tags/emacs/">emacs</a>, <a href="../tags/python/">python</a></span>
   
 </div>
 
 <div class="post">
-  <p>Recently I opened up on the port <em>443</em> over my EC2 instance (more or less like a VPS), so that I can access it through any firewalled proxy too. Apart from getting SSH running to a machine from outside world, I did some cool configuration to have ssh deal with with various remote hosts automatically. It uses <em>the right</em> proxy settings according the host being accessed.</p>
-<p>All the stuff which runs over ssh (like <em>scp</em>, <em>git</em> etc.) also work the way they are supposed to, following the ssh configuration.</p>
-<p>To get this to work you need to have <em>corkscrew</em> and <em>netcat</em> (the swiss army knife) already installed.</p>
-<p>Here is how it goes:<br />
-<code>File ~/.ssh/config:</code></p>
-<div class="sourceCode"><pre class="sourceCode apache"><code class="sourceCode apache"><span class="co"># Let me access local remotes directly.</span>
-Host 127.0.0.1, 10.*
-    ProxyCommand none
+  <p>Lately, I have been writing some python with emacs. So, I have been trying to get the popular checkers (<code>pylint</code>/<code>pyflakes</code>) to work with flymake and virtualenvs. The issues with existing solutions to get flymake working with the checkers is that most of them assume a global version of executable (which would be fine if it weren’t for the whole python 2 and 3 incompatibility).</p>
+<p>The <code>python-mode</code> in the latest emacs versions (mine is <code>24.3.1</code>) includes a basic support for <code>virtualenvs</code>. I run <code>pylint/pyflakes</code> through the command <code>env</code> with the environment variables calculated from the functions provided by <code>python-mode</code>. Here is the code extracted from my <a href="https://github.com/crodjer/configs/blob/master/.emacs">emacs configuration</a>:</p>
+<pre class="elisp"><code>(defun python-calculate-env ()
+  &quot;Calculate env variables for current python virtualenv.&quot;
+  ;; ;; This also overrides PYTHONHOME to &quot;&quot;, which breaks the process
+  ;; ;; environment. Otherwise, a neat idea.
+  ;; (mapcar
+  ;;  (lambda (string)
+  ;;    (let ((splitted-string (split-string string &quot;=&quot;)))
+  ;;      (format
+  ;;       &quot;%s=\&quot;%s\&quot;&quot;
+  ;;       (car splitted-string)
+  ;;       (or (cadr splitted-string)
+  ;;           &quot;&quot;))))
+  ;; (python-shell-calculate-process-environment)))
+  (remove-if
+   (lambda (x)
+     (or
+      ;; If environment
+      (string-match &quot; &quot; x)
+      (not (string-match &quot;=&quot; x))))
+   (python-shell-calculate-process-environment)))
 
-<span class="co"># Github lets you ssh over port 443 too, utilize that instead of tunneling</span>
-<span class="co"># through remote computer</span>
-Host github.com
-    Hostname ssh.github.com
-    User<span class="st"> git</span>
-    ProxyCommand corkscrew 10.3.100.211 8080 %h %p
-    Port 443
-    Hostname ssh.github.com
+(defun python-virtualenv-exec (command args)
+  &quot;Generate a flymake friendly list executable in virtualenv, for provided
+commands.&quot;
+  (list &quot;env&quot; (append (python-calculate-env) (list command) args)))
 
-<span class="co"># Let me ssh onto my ec2 instance, which has full network access, through a</span>
-<span class="co"># http proxy.</span>
-Host ecc.rohanjain.in
-    ProxyCommand corkscrew 10.3.100.211 8080 %h %p
-    Port 443
-    ServerAliveInterval 600
+(when (load &quot;flymake&quot; t)
+  (defun flymake-python-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+      (python-virtualenv-exec
+       &quot;pylint&quot;
+       (list
+        ;; Pylint args. Will depend on the checker being used.
+        &quot;-r&quot; &quot;n&quot;
+        &quot;--msg-template='{path}:{line}:{category} [{msg_id} {obj}] {msg}'&quot;
+        local-file))))
+  (add-to-list 'flymake-allowed-file-name-masks
+             '(&quot;\\.py\\'&quot; flymake-python-init)))
 
-<span class="co"># All the rest should connect through an ssh connection over the ec2 instance.</span>
-Host *
-    ProxyCommand ssh -q -a -x -p 443 ecc.rohanjain.in nc %h %p</code></pre></div>
+(defun flymake-mode-hook-function ()
+  (when (derived-mode-p 'python-mode)
+    (flymake-mode t)))
+;; Run flymake mode hook function after the local variables are set (eg: through
+;; .dir-locals.el
+(add-hook 'hack-local-variables-hook #'flymake-mode-hook-function)
+(setq virtualenv-workon-starts-python nil)</code></pre>
 
 
 </div>
 <em class="small">
   Any suggestions for the post? You may send me a pull request
-  <a href="https://github.com/crodjer/rohanjain.in/tree/master/posts/2011/configure-ssh-to-handle-proxies-and-tunnels-seamlessly.mkd">here</a>.
+  <a href="https://github.com/crodjer/rohanjain.in/tree/master/posts/2014/emacs-flymake-with-virtualenvs-in-python-mode.mkd">here</a>.
 </em>
 <!--
 
@@ -107,8 +131,8 @@ Host *
     //Disqus
     var disqus_shortname = 'crodjer';
 
-    var disqus_identifier = 'posts/2011/configure-ssh-to-handle-proxies-and-tunnels-seamlessly.mkd';
-    var disqus_title = 'Configure ssh to handle proxies and tunnels seamlessly';
+    var disqus_identifier = 'posts/2014/emacs-flymake-with-virtualenvs-in-python-mode.mkd';
+    var disqus_title = 'Emacs: Flymake with virtualenvs in python-mode';
 
   </script>
   <script src="http://crodjer.disqus.com/embed.js"></script>

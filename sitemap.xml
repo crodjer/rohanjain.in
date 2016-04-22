@@ -1,46 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
     <url>
         <loc>http://www.rohanjain.in/about/</loc>
         <changefreq>weekly</changefreq>
-        <lastmod>2012-07-18</lastmod>
+        <lastmod>2016-04-01</lastmod>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>http://www.rohanjain.in/infi-mail/</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2016-04-06</lastmod>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>http://www.rohanjain.in/hakyll-years/</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2016-02-09</lastmod>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>http://www.rohanjain.in/hakyll-sitemap/</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2016-02-09</lastmod>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>http://www.rohanjain.in/hakyll-clean-urls/</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2016-02-09</lastmod>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>http://www.rohanjain.in/ws-test/</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2016-02-09</lastmod>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>http://www.rohanjain.in/bell/</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2016-02-09</lastmod>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>http://www.rohanjain.in/route-to/</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2016-02-09</lastmod>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>http://www.rohanjain.in/vnc/</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2016-04-01</lastmod>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>http://www.rohanjain.in/emacs-flymake-with-virtualenvs-in-python-mode/</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2016-02-09</lastmod>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>http://www.rohanjain.in/yet-another-vim-productivity-post-server-client/</loc>
         <changefreq>weekly</changefreq>
-        <lastmod>2012-07-18</lastmod>
+        <lastmod>2016-02-09</lastmod>
         <priority>0.8</priority>
     </url>
-    <url>
-        <loc>http://www.rohanjain.in/access-interviewstreets-code-checker-over-http/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2012-07-18</lastmod>
-        <priority>0.8</priority>
-    </url>
+
     <url>
         <loc>http://www.rohanjain.in/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</loc>
         <changefreq>weekly</changefreq>
-        <lastmod>2012-07-18</lastmod>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>http://www.rohanjain.in/dynamic-to-static/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2012-07-18</lastmod>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>http://www.rohanjain.in/hosting-multiple-sites-with-same-django-project/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2012-07-18</lastmod>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>http://www.rohanjain.in/whiteboarding-with-xmpp-google-talk/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2012-07-18</lastmod>
+        <lastmod>2016-02-09</lastmod>
         <priority>0.8</priority>
     </url>
 

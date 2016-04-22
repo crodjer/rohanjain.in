@@ -6,9 +6,9 @@
     <meta name="description" content="A web blog, by Rohan Jain" />
     <meta name="author" content="Rohan Jain" />
 
-    <title>Recent posts | The Perpetual Amateur</title>
-    <link href="./favicon.ico" rel="icon" />
-    <link rel="alternate" type="application/atom+xml" title="Rohan's Weblog" href="./feed.xml" />
+    <title>Using pulseaudio to play system beeps | The Perpetual Amateur</title>
+    <link href="../favicon.ico" rel="icon" />
+    <link rel="alternate" type="application/atom+xml" title="Rohan's Weblog" href="../feed.xml" />
 
     <!-- Bootstrap core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -16,8 +16,8 @@
 
 
     <!-- Custom styles for this template -->
-    <link href="./static/css/default.css" rel="stylesheet" />
-    <link href="./static/css/highlight.css" rel="stylesheet" />
+    <link href="../static/css/default.css" rel="stylesheet" />
+    <link href="../static/css/highlight.css" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -42,125 +42,64 @@
         <nav>
           <ul class="nav nav-pills pull-right">
             <li role="presentation">
-              <a class="superTitle" href="./">
+              <a class="superTitle" href="../">
                 The Perpetual Amateur
               </a>
             </li>
           </ul>
         </nav>
         <!-- <h1 class="superTitle"><a href="/">Rohan's Weblog</a></h1> -->
-        <h1 class="text-muted">Recent posts</h1>
+        <h1 class="text-muted">Using pulseaudio to play system beeps</h1>
       </div>
 
       <div id="content">
-        <div id="posts">
-  <div class="post-list">
-  
-  <div class="post-item">
-  <a class="post-link" href="./infi-mail/">You have infinite email addresses</a>
-  <div class="meta">
-  <em class="date">April  2, 2016</em>
-  
-  |
-  <span class="tags"><a href="./tags/productivity/">productivity</a>, <a href="./tags/email/">email</a></span>
-  
-</div>
-
-</div>
-
-  
-  <div class="post-item">
-  <a class="post-link" href="./hakyll-years/">Categorizing archives by year with Hakyll</a>
-  <div class="meta">
-  <em class="date">August 31, 2015</em>
-  
-  |
-  <span class="tags"><a href="./tags/hakyll/">hakyll</a></span>
-  
-</div>
-
-</div>
-
-  
-  <div class="post-item">
-  <a class="post-link" href="./hakyll-sitemap/">Sitemap with Hakyll</a>
-  <div class="meta">
-  <em class="date">August 30, 2015</em>
-  
-  |
-  <span class="tags"><a href="./tags/hakyll/">hakyll</a>, <a href="./tags/seo/">seo</a></span>
-  
-</div>
-
-</div>
-
-  
-  <div class="post-item">
-  <a class="post-link" href="./hakyll-clean-urls/">Clean URLs with Hakyll</a>
-  <div class="meta">
-  <em class="date">August 30, 2015</em>
-  
-  |
-  <span class="tags"><a href="./tags/hakyll/">hakyll</a></span>
-  
-</div>
-
-</div>
-
-  
-  <div class="post-item">
-  <a class="post-link" href="./ws-test/">Testing tornado websockets without third party clients</a>
-  <div class="meta">
-  <em class="date">August 22, 2015</em>
-  
-  |
-  <span class="tags"><a href="./tags/python/">python</a>, <a href="./tags/websocket/">websocket</a></span>
-  
-</div>
-
-</div>
-
-  
-  <div class="post-item">
-  <a class="post-link" href="./bell/">Using pulseaudio to play system beeps</a>
-  <div class="meta">
+        <div class="meta">
   <em class="date">August 20, 2015</em>
   
   |
-  <span class="tags"><a href="./tags/pulseaudio/">pulseaudio</a>, <a href="./tags/x11/">x11</a></span>
+  <span class="tags"><a href="../tags/pulseaudio/">pulseaudio</a>, <a href="../tags/x11/">x11</a></span>
   
 </div>
 
-</div>
-
-  
-  <div class="post-item">
-  <a class="post-link" href="./route-to/">Switch between networks based on availability</a>
-  <div class="meta">
-  <em class="date">August 19, 2015</em>
-  
-  |
-  <span class="tags"><a href="./tags/network/">network</a></span>
-  
-</div>
-
-</div>
-
-  
-</div>
-
-<h3>Archive</h3>
-<a href="./archive/2016/">2016</a> (1), <a href="./archive/2015/">2015</a> (7), <a href="./archive/2014/">2014</a> (1), <a href="./archive/2012/">2012</a> (1), <a href="./archive/2011/">2011</a> (1)
+<div class="post">
+  <p>Recently, I built a new desktop. After receiving everything, I realized that I was missing the onboard speaker (which creates the annoying beep sound). Ideally, the computer case should have had it, but they don’t come with a buzzer anymore. My various applications rely on the system beep, hence I needed to find a software alternative. Turns out it is fairly trivial to configure it to capture alerts with pulseaudio:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">start-pulseaudio-x11</span>
+<span class="kw">pactl</span> upload-sample /usr/share/sounds/freedesktop/stereo/message.oga beep
+<span class="kw">pactl</span> load-module module-x11-bell sample=beep
+<span class="kw">xset</span> b 100</code></pre></div>
+<p>To automatically do it on X11 start, I placed the above in my <a href="https://github.com/crodjer/configs/blob/121caa22d4b7c6324fa9a5b22e2d2fcc334afc96/.xsessionrc#L31">xsessionrc</a>.</p>
 
 
 </div>
+<em class="small">
+  Any suggestions for the post? You may send me a pull request
+  <a href="https://github.com/crodjer/rohanjain.in/tree/master/posts/2015/bell.mkd">here</a>.
+</em>
+<!--
+
+<div class="comments">
+  <div id="disqus_thread"></div>
+
+  <script type="text/javascript">
+
+    //Disqus
+    var disqus_shortname = 'crodjer';
+
+    var disqus_identifier = 'posts/2015/bell.mkd';
+    var disqus_title = 'Using pulseaudio to play system beeps';
+
+  </script>
+  <script src="http://crodjer.disqus.com/embed.js"></script>
+</div>
+
+-->
 
       </div>
 
       <footer class="footer">
-        <a class="link" href="./">Home</a>
-        <a class="link" href="./about/">About</a>
-        <a class="link" href="./feed.xml">Feed</a>
+        <a class="link" href="../">Home</a>
+        <a class="link" href="../about/">About</a>
+        <a class="link" href="../feed.xml">Feed</a>
 
         <span class="credits">
           Site proudly generated using

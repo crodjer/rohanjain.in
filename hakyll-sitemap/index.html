@@ -6,7 +6,7 @@
     <meta name="description" content="A web blog, by Rohan Jain" />
     <meta name="author" content="Rohan Jain" />
 
-    <title>Configure ssh to handle proxies and tunnels seamlessly | The Perpetual Amateur</title>
+    <title>Sitemap with Hakyll | The Perpetual Amateur</title>
     <link href="../favicon.ico" rel="icon" />
     <link rel="alternate" type="application/atom+xml" title="Rohan's Weblog" href="../feed.xml" />
 
@@ -49,53 +49,53 @@
           </ul>
         </nav>
         <!-- <h1 class="superTitle"><a href="/">Rohan's Weblog</a></h1> -->
-        <h1 class="text-muted">Configure ssh to handle proxies and tunnels seamlessly</h1>
+        <h1 class="text-muted">Sitemap with Hakyll</h1>
       </div>
 
       <div id="content">
         <div class="meta">
-  <em class="date">August 27, 2011</em>
+  <em class="date">August 30, 2015</em>
   
   |
-  <span class="tags"><a href="../tags/ssh/">ssh</a>, <a href="../tags/tunneling/">tunneling</a>, <a href="../tags/network/">network</a></span>
+  <span class="tags"><a href="../tags/hakyll/">hakyll</a>, <a href="../tags/seo/">seo</a></span>
   
 </div>
 
 <div class="post">
-  <p>Recently I opened up on the port <em>443</em> over my EC2 instance (more or less like a VPS), so that I can access it through any firewalled proxy too. Apart from getting SSH running to a machine from outside world, I did some cool configuration to have ssh deal with with various remote hosts automatically. It uses <em>the right</em> proxy settings according the host being accessed.</p>
-<p>All the stuff which runs over ssh (like <em>scp</em>, <em>git</em> etc.) also work the way they are supposed to, following the ssh configuration.</p>
-<p>To get this to work you need to have <em>corkscrew</em> and <em>netcat</em> (the swiss army knife) already installed.</p>
-<p>Here is how it goes:<br />
-<code>File ~/.ssh/config:</code></p>
-<div class="sourceCode"><pre class="sourceCode apache"><code class="sourceCode apache"><span class="co"># Let me access local remotes directly.</span>
-Host 127.0.0.1, 10.*
-    ProxyCommand none
-
-<span class="co"># Github lets you ssh over port 443 too, utilize that instead of tunneling</span>
-<span class="co"># through remote computer</span>
-Host github.com
-    Hostname ssh.github.com
-    User<span class="st"> git</span>
-    ProxyCommand corkscrew 10.3.100.211 8080 %h %p
-    Port 443
-    Hostname ssh.github.com
-
-<span class="co"># Let me ssh onto my ec2 instance, which has full network access, through a</span>
-<span class="co"># http proxy.</span>
-Host ecc.rohanjain.in
-    ProxyCommand corkscrew 10.3.100.211 8080 %h %p
-    Port 443
-    ServerAliveInterval 600
-
-<span class="co"># All the rest should connect through an ssh connection over the ec2 instance.</span>
-Host *
-    ProxyCommand ssh -q -a -x -p 443 ecc.rohanjain.in nc %h %p</code></pre></div>
+  <p>Its fairly trivial to configure <a href="http://jaspervdj.be/hakyll/">Hakyll</a> to generate sitemaps. Sitemaps helps search engines websites. Similar to any typical html page, create a template - <code>templates/sitemap.xml</code>:</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;?xml</span> version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;<span class="kw">?&gt;</span>
+<span class="kw">&lt;urlset</span><span class="ot"> xmlns=</span><span class="st">&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;</span><span class="kw">&gt;</span>
+$for(entries)$
+    <span class="kw">&lt;url&gt;</span>
+        <span class="kw">&lt;loc&gt;</span>$host$$url$<span class="kw">&lt;/loc&gt;</span>
+        <span class="kw">&lt;changefreq&gt;</span>weekly<span class="kw">&lt;/changefreq&gt;</span>
+        $if(lastmod)$<span class="kw">&lt;lastmod&gt;</span>$lastmod$<span class="kw">&lt;/lastmod&gt;</span>$endif$
+        <span class="kw">&lt;priority&gt;</span>0.8<span class="kw">&lt;/priority&gt;</span>
+    <span class="kw">&lt;/url&gt;</span>
+$endfor$
+<span class="kw">&lt;/urlset&gt;</span></code></pre></div>
+<p>Then, using the templates, create a rule which uses all the pages from the site as entries. Here is what I do:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  create [<span class="st">&quot;sitemap.xml&quot;</span>] <span class="fu">$</span> <span class="kw">do</span>
+         route   idRoute
+         compile <span class="fu">$</span> <span class="kw">do</span>
+           posts <span class="ot">&lt;-</span> recentFirst <span class="fu">=&lt;&lt;</span> loadAll <span class="st">&quot;posts/*/*&quot;</span>
+           pages <span class="ot">&lt;-</span> loadAll <span class="st">&quot;pages/*&quot;</span>
+           <span class="kw">let</span> allPosts <span class="fu">=</span> (return (pages <span class="fu">++</span> posts))
+           <span class="kw">let</span> sitemapCtx <span class="fu">=</span> mconcat
+                            [ listField <span class="st">&quot;entries&quot;</span> pageCtx allPosts
+                            , constField <span class="st">&quot;host&quot;</span> host
+                            , defaultContext
+                            ]
+           makeItem <span class="st">&quot;&quot;</span>
+            <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/sitemap.xml&quot;</span> sitemapCtx
+            <span class="fu">&gt;&gt;=</span> cleanIndexHtmls</code></pre></div>
+<p>This generates <a href="../sitemap.xml" class="uri">/sitemap.xml</a> which can be submitted to search engines for indexing.</p>
 
 
 </div>
 <em class="small">
   Any suggestions for the post? You may send me a pull request
-  <a href="https://github.com/crodjer/rohanjain.in/tree/master/posts/2011/configure-ssh-to-handle-proxies-and-tunnels-seamlessly.mkd">here</a>.
+  <a href="https://github.com/crodjer/rohanjain.in/tree/master/posts/2015/hakyll-sitemap.mkd">here</a>.
 </em>
 <!--
 
@@ -107,8 +107,8 @@ Host *
     //Disqus
     var disqus_shortname = 'crodjer';
 
-    var disqus_identifier = 'posts/2011/configure-ssh-to-handle-proxies-and-tunnels-seamlessly.mkd';
-    var disqus_title = 'Configure ssh to handle proxies and tunnels seamlessly';
+    var disqus_identifier = 'posts/2015/hakyll-sitemap.mkd';
+    var disqus_title = 'Sitemap with Hakyll';
 
   </script>
   <script src="http://crodjer.disqus.com/embed.js"></script>

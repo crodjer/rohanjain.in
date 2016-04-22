@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <title>Rohan's Weblog</title>
+    <title>The Perpetual Amateur</title>
     <link href="http://www.rohanjain.in/feed.xml" rel="self" />
     <link href="http://www.rohanjain.in" />
     <id>http://www.rohanjain.in/feed.xml</id>
@@ -8,22 +8,427 @@
         <name>Rohan Jain</name>
         <email>crodjer@gmail.com</email>
     </author>
-    <updated>2012-07-18T07:59:58Z</updated>
+    <updated>2016-04-02T00:00:00Z</updated>
     <entry>
-    <title>Yet another Vim productivity post: Server-Client</title>
+    <title>You have infinite email addresses</title>
+    <link href="http://www.rohanjain.in/infi-mail/" />
+    <id>http://www.rohanjain.in/infi-mail/</id>
+    <published>2016-04-02T00:00:00Z</published>
+    <updated>2016-04-02T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<blockquote>
+<p><strong>tl;dr</strong><br />
+You can add arbitrary tags to your email address. Any email sent to <code>your-email+tag@your-provider.ext</code> will land in the inbox for <code>your-email@your-provider.ext</code>.</p>
+</blockquote>
+<p>Emails are important. They are your identity on the web. Just like on phone, you’d want to control who can contact you via email. This warrants caution in signing up at places on the internet. It can be unsafe to register with the personal email address on new services for multiple reasons:</p>
+<ul>
+<li>Bulk data breaches <a href="http://www.huffingtonpost.com/entry/biggest-worst-data-breaches-hacks_us_55d4b5a5e4b07addcb44fd9e">are fairly common</a>. You don’t want your email address out there for bots around the world to feed on.</li>
+<li>The service you are signing up for may itself be malicious. Or worse, it may be Facebook!</li>
+<li>Same email address on every service can make it simpler for bots to break into your accounts once they succeed in attacking one.</li>
+<li>There <a href="https://www.fullcontact.com/gmail/">are actual services</a> dedicated for creating single points of catastrophic failures utilizing email addresses.</li>
+</ul>
+<p>These sound upsetting, but are indeed manageable to an extent. One trick that I use is <em>tagging the email address</em>. It is a fairly common practice among programmers. Most popular email services support this.</p>
+<p>What do I mean by tagging? Lets take Jon’s email: <code>jon.snow@email.wf</code>. His sister, Arya, will know this address as is. But for the untrustworthy Lannisters, he tags the email: <code>jon.snow+lannister@email.wf</code>. When someone writes to this address: he will receive the mails knowing that Lannisters were involved.</p>
+<blockquote>
+<p><code>email.wf</code> here is a fictional service, analogous to <code>gmail.com</code>. I didn’t want to accidentally use an actual email address.</p>
+</blockquote>
+<p>One may use a similar technique while signing up for services on the internet. Say Jon wants to register on <code>nightswatch.got</code>.</p>
+<ul>
+<li>In <em>Night’s Watch</em> registration form, he’d use <code>jon.snow+nighstwatch@email.wf</code> as the email. The tag <code>+nighstwatch</code> here is arbitrarily chosen.</li>
+<li>Jon will get the confirmation mail in the original account. Being prudent, he’ll verify that the mail it does have the correct tag in the <em>to address</em>.</li>
+<li>Also, <code>email.wf</code> lets Jon send emails with the tagged address. This is useful for talking to the customer care. GMail users can go to:<br />
+<code>Settings -&gt; Accounts and Import -&gt; Add another email address you own</code>.<br />
+and filling up the form with the tagged address.</li>
+</ul>
+<p>This means Jon can have practically infinite email addresses. Why is this helpful?</p>
+<ul>
+<li>Jon can collect all the mails from <em>Night’s Watch</em> at one place, specially when their mails aren’t consistent enough to write filters.</li>
+<li>If the credentials for the <em>Night’s Watch</em> account were to be leaked, say through Phishing, other more important services like the email account itself would not be as vulnerable.</li>
+<li>One cannot track Jon’s movements across various accounts/profiles through his email.</li>
+<li>Sites which don’t allow tags in the email address can be a red flags for Jon. He can assume that they’d have terrible developers/management and look for alternates.</li>
+</ul>
+<p>Making this into a habit will require a bit of discipline. But eventually, it gets instinctive.</p>
+<p>On a related note, <a href="http://www.amazon.com/gp/product/1118958470/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1118958470&amp;linkCode=as2&amp;tag=crodjer-20&amp;linkId=244BG6VSA5AT2K5S">this</a> is an interesting book, that talks about Phishing through email in the real world.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Categorizing archives by year with Hakyll</title>
+    <link href="http://www.rohanjain.in/hakyll-years/" />
+    <id>http://www.rohanjain.in/hakyll-years/</id>
+    <published>2015-08-31T00:00:00Z</published>
+    <updated>2015-08-31T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Recently, I decided to categorize my posts under directories named by the year they were created in. For example, this post is placed at: <code>posts/2015/hakyll-years.mkd</code>. I decided to utilize this structure to also group how archives are listed. Inspired from <a href="http://jaspervdj.be/hakyll/reference/src/Hakyll-Web-Tags.html">Hakyll’s tag functionality</a> I wrote my own group by years functionality. This post tries to explain that. Also, I don’t see why a similar logic cannot be used to do simple pagination.</p>
+<p>First, like tags, we need to build the list of years. <code>buildYears</code> (like <code>buildTags</code>) will do that:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">buildYears ::</span> <span class="dt">MonadMetadata</span> m <span class="ot">=&gt;</span> <span class="dt">Pattern</span> <span class="ot">-&gt;</span> m [(<span class="dt">Year</span>, <span class="dt">Int</span>)]
+buildYears pattern <span class="fu">=</span> <span class="kw">do</span>
+    ids <span class="ot">&lt;-</span> getMatches pattern
+    return <span class="fu">.</span> frequency <span class="fu">.</span> (map getYear) <span class="fu">$</span> ids
+  <span class="kw">where</span>
+    frequency xs <span class="fu">=</span>  M.toList (M.fromListWith (<span class="fu">+</span>) [(x, <span class="dv">1</span>) <span class="fu">|</span> x <span class="ot">&lt;-</span> xs])
+
+<span class="ot">getYear ::</span> <span class="dt">Identifier</span> <span class="ot">-&gt;</span> <span class="dt">Year</span>
+getYear <span class="fu">=</span> takeBaseName <span class="fu">.</span> takeDirectory <span class="fu">.</span> toFilePath</code></pre></div>
+<p>This now can be used in the site <code>Rules</code>:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  years <span class="ot">&lt;-</span> buildYears <span class="st">&quot;posts/*/*&quot;</span></code></pre></div>
+<p>With this, you have a list of years available for other rules to use. Now, we build an index of posts by years (similar to <code>tagsRules</code>):</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  forM_ years <span class="fu">$</span> \(year, _)<span class="ot">-&gt;</span>
+      create [yearId year] <span class="fu">$</span> <span class="kw">do</span>
+         route   idRoute
+         compile <span class="fu">$</span> <span class="kw">do</span>
+           <span class="co">-- Only the posts published in &#39;year&#39;</span>
+           posts <span class="ot">&lt;-</span> recentFirst <span class="fu">=&lt;&lt;</span> loadAll (fromGlob <span class="fu">$</span> <span class="st">&quot;posts/&quot;</span> <span class="fu">++</span> year <span class="fu">++</span><span class="st">&quot;/*&quot;</span>)
+           <span class="kw">let</span> postsCtx <span class="fu">=</span> mconcat
+                          [ listField <span class="st">&quot;posts&quot;</span> postCtx (return posts)
+                          , constField <span class="st">&quot;title&quot;</span> (<span class="st">&quot;Posts published in &quot;</span> <span class="fu">++</span> year)
+                          , defaultContext
+                          ]
+           makeItem <span class="st">&quot;&quot;</span>
+            <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/posts.html&quot;</span> postsCtx
+            <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> postsCtx
+            <span class="fu">&gt;&gt;=</span> relativizeUrls
+            <span class="fu">&gt;&gt;=</span> cleanIndexUrls
+
+<span class="ot">yearPath ::</span> <span class="dt">Year</span> <span class="ot">-&gt;</span> FilePath
+yearPath year <span class="fu">=</span> <span class="st">&quot;archive/&quot;</span> <span class="fu">++</span> year <span class="fu">++</span> <span class="st">&quot;/&quot;</span>
+
+<span class="ot">yearId ::</span> <span class="dt">Year</span> <span class="ot">-&gt;</span> <span class="dt">Identifier</span>
+yearId <span class="fu">=</span> fromFilePath <span class="fu">.</span> yearPath</code></pre></div>
+<p>We now have year wise archives which can be accessed through paths like: <code>/archive/2015/</code>. Similar to tags, we need to support browsing through posts by years. <code>renderYears</code> does that:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="co">-- Extra blaze related imports</span>
+<span class="kw">import           </span><span class="dt">Text.Blaze.Html</span>                 (toHtml, toValue, (!))
+<span class="kw">import           </span><span class="dt">Text.Blaze.Html.Renderer.String</span> (renderHtml)
+<span class="kw">import qualified</span> <span class="dt">Text.Blaze.Html5</span>                <span class="kw">as</span> <span class="dt">H</span>
+<span class="kw">import qualified</span> <span class="dt">Text.Blaze.Html5.Attributes</span>     <span class="kw">as</span> <span class="dt">A</span>
+
+
+<span class="ot">renderYears ::</span> [(<span class="dt">Year</span>, <span class="dt">Int</span>)] <span class="ot">-&gt;</span> <span class="dt">Compiler</span> <span class="dt">String</span>
+renderYears years <span class="fu">=</span> <span class="kw">do</span>
+  years&#39; <span class="ot">&lt;-</span> forM (reverse <span class="fu">.</span> sort <span class="fu">$</span> years) <span class="fu">$</span> \(year, count) <span class="ot">-&gt;</span> <span class="kw">do</span>
+      route&#39; <span class="ot">&lt;-</span> getRoute <span class="fu">$</span> yearId year
+      return (year, route&#39;, count)
+  return <span class="fu">.</span> intercalate <span class="st">&quot;, &quot;</span> <span class="fu">$</span> map makeLink years&#39;
+
+  <span class="kw">where</span>
+    makeLink (year, route&#39;, count) <span class="fu">=</span>
+      (renderHtml (H.a <span class="fu">!</span> A.href (yearUrl year) <span class="fu">$</span> toHtml year)) <span class="fu">++</span>
+      <span class="st">&quot; (&quot;</span> <span class="fu">++</span> show count <span class="fu">++</span> <span class="st">&quot;)&quot;</span>
+    yearUrl <span class="fu">=</span> toValue <span class="fu">.</span> toUrl <span class="fu">.</span> yearPath</code></pre></div>
+<p>Add this to a pages context like this:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  create [<span class="st">&quot;index.html&quot;</span>] <span class="fu">$</span> <span class="kw">do</span>
+         route   idRoute
+         compile <span class="fu">$</span> <span class="kw">do</span>
+           <span class="co">-- rest of the compiler context</span>
+           <span class="kw">let</span> indexCtx <span class="fu">=</span> mconcat
+                          [ <span class="co">-- some context</span>
+                          , field <span class="st">&quot;years&quot;</span> (\_ <span class="ot">-&gt;</span> renderYears years)
+                          , defaultContext
+                          ]
+           <span class="co">-- rest of the compiler</span></code></pre></div>
+<p><code>$years$</code> will be available in the template which will link to year wise archives with their corresponding per year count.</p>
+<blockquote>
+<p>See this functionality being used by <a href="https://github.com/crodjer/rohanjain.in/blob/master/site.hs">this blog</a>.</p>
+</blockquote>
+<p>Also, you’d notice that years here could easily have been various categories you may want to have in your blog.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Sitemap with Hakyll</title>
+    <link href="http://www.rohanjain.in/hakyll-sitemap/" />
+    <id>http://www.rohanjain.in/hakyll-sitemap/</id>
+    <published>2015-08-30T00:00:00Z</published>
+    <updated>2015-08-30T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Its fairly trivial to configure <a href="http://jaspervdj.be/hakyll/">Hakyll</a> to generate sitemaps. Sitemaps helps search engines websites. Similar to any typical html page, create a template - <code>templates/sitemap.xml</code>:</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;?xml</span> version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;<span class="kw">?&gt;</span>
+<span class="kw">&lt;urlset</span><span class="ot"> xmlns=</span><span class="st">&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;</span><span class="kw">&gt;</span>
+$for(entries)$
+    <span class="kw">&lt;url&gt;</span>
+        <span class="kw">&lt;loc&gt;</span>$host$$url$<span class="kw">&lt;/loc&gt;</span>
+        <span class="kw">&lt;changefreq&gt;</span>weekly<span class="kw">&lt;/changefreq&gt;</span>
+        $if(lastmod)$<span class="kw">&lt;lastmod&gt;</span>$lastmod$<span class="kw">&lt;/lastmod&gt;</span>$endif$
+        <span class="kw">&lt;priority&gt;</span>0.8<span class="kw">&lt;/priority&gt;</span>
+    <span class="kw">&lt;/url&gt;</span>
+$endfor$
+<span class="kw">&lt;/urlset&gt;</span></code></pre></div>
+<p>Then, using the templates, create a rule which uses all the pages from the site as entries. Here is what I do:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  create [<span class="st">&quot;sitemap.xml&quot;</span>] <span class="fu">$</span> <span class="kw">do</span>
+         route   idRoute
+         compile <span class="fu">$</span> <span class="kw">do</span>
+           posts <span class="ot">&lt;-</span> recentFirst <span class="fu">=&lt;&lt;</span> loadAll <span class="st">&quot;posts/*/*&quot;</span>
+           pages <span class="ot">&lt;-</span> loadAll <span class="st">&quot;pages/*&quot;</span>
+           <span class="kw">let</span> allPosts <span class="fu">=</span> (return (pages <span class="fu">++</span> posts))
+           <span class="kw">let</span> sitemapCtx <span class="fu">=</span> mconcat
+                            [ listField <span class="st">&quot;entries&quot;</span> pageCtx allPosts
+                            , constField <span class="st">&quot;host&quot;</span> host
+                            , defaultContext
+                            ]
+           makeItem <span class="st">&quot;&quot;</span>
+            <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/sitemap.xml&quot;</span> sitemapCtx
+            <span class="fu">&gt;&gt;=</span> cleanIndexHtmls</code></pre></div>
+<p>This generates <a href="/sitemap.xml" class="uri">/sitemap.xml</a> which can be submitted to search engines for indexing.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Clean URLs with Hakyll</title>
+    <link href="http://www.rohanjain.in/hakyll-clean-urls/" />
+    <id>http://www.rohanjain.in/hakyll-clean-urls/</id>
+    <published>2015-08-30T00:00:00Z</published>
+    <updated>2015-08-30T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>The URLs generated by <a href="http://jaspervdj.be/hakyll/">Hakyll</a>, by default also include a <code>.html</code> extension. I have never been a fan of this. When things in reality are driven by the <code>Content-Type</code> header, it is absolutely redundant.</p>
+<p>Hakyll provides all the utilities with which we can get cleaner URLs, like <a href=".">this page’s</a>. For this, I rely on the fact that most of the web servers automatically serve <code>/foo/</code> for the URL <code>/foo/</code>. To generate <em>clean</em> paths, I define a custom route - <code>cleanRoute</code>:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">cleanRoute ::</span> <span class="dt">Routes</span>
+cleanRoute <span class="fu">=</span> customRoute createIndexRoute
+  <span class="kw">where</span>
+    createIndexRoute ident <span class="fu">=</span> takeDirectory p <span class="fu">&lt;/&gt;</span> takeBaseName p <span class="fu">&lt;/&gt;</span> <span class="st">&quot;index.html&quot;</span>
+                            <span class="kw">where</span> p <span class="fu">=</span> toFilePath ident</code></pre></div>
+<p>This can now be used in in rule definition:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">  match <span class="st">&quot;pages/*&quot;</span> <span class="fu">$</span> <span class="kw">do</span>
+         route   <span class="fu">$</span> cleanRoute
+         <span class="co">-- the compiler follows</span></code></pre></div>
+<p>With this, a path say <code>/pages/about.html</code> will be generated as <code>/pages/about/</code>, hence solving the generation problem. We are only partially done though. The links that Hakyll generates will also include the <code>/</code> suffix in every URL. To get rid of that we define a set of functions:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">cleanIndexUrls ::</span> <span class="dt">Item</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)
+cleanIndexUrls <span class="fu">=</span> return <span class="fu">.</span> fmap (withUrls cleanIndex)
+
+<span class="ot">cleanIndexHtmls ::</span> <span class="dt">Item</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Compiler</span> (<span class="dt">Item</span> <span class="dt">String</span>)
+cleanIndexHtmls <span class="fu">=</span> return <span class="fu">.</span> fmap (replaceAll pattern replacement)
+    <span class="kw">where</span>
+      pattern <span class="fu">=</span> <span class="st">&quot;/&quot;</span>
+      replacement <span class="fu">=</span> const <span class="st">&quot;/&quot;</span>
+
+<span class="ot">cleanIndex ::</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">String</span>
+cleanIndex url
+    <span class="fu">|</span> idx <span class="ot">`isSuffixOf`</span> url <span class="fu">=</span> take (length url <span class="fu">-</span> length idx) url
+    <span class="fu">|</span> otherwise            <span class="fu">=</span> url
+  <span class="kw">where</span> idx <span class="fu">=</span> <span class="st">&quot;index.html&quot;</span></code></pre></div>
+<p><code>cleanIndexUrls</code> and <code>cleanIndexHtmls</code> strip out <code>/</code> from all the anchor tags and complete text respectively. These can be used over a page’s compiler like this:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">         compile <span class="fu">$</span> pandocCompiler
+            <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/page.html&quot;</span> pageCtx
+            <span class="fu">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;content&quot;</span>
+            <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> pageCtx
+            <span class="fu">&gt;&gt;=</span> relativizeUrls
+            <span class="fu">&gt;&gt;=</span> cleanIndexUrls <span class="co">-- cleanup href in all anchor tags.</span></code></pre></div>
+<blockquote>
+<p>This functionality is being used by <a href="https://github.com/crodjer/rohanjain.in/blob/master/site.hs">this blog</a> and <a href="https://github.com/irneh/workforpizza/blob/master/site.hs">irneh/workforpizza</a> off which this blog is actually based.</p>
+</blockquote>
+]]></summary>
+</entry>
+<entry>
+    <title>Testing tornado websockets without third party clients</title>
+    <link href="http://www.rohanjain.in/ws-test/" />
+    <id>http://www.rohanjain.in/ws-test/</id>
+    <published>2015-08-22T00:00:00Z</published>
+    <updated>2015-08-22T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Recently, I built an encrypted <a href="http://github.com/crodjer/qotr/">chat service</a>, which was based on <a href="http://www.tornadoweb.org/">tornado</a> and <a href="http://emberjs.com/">ember.js</a>. The project itself had grave security issues, so I shut it down, but while working on it I learned a few new things and testing websockets with tornado is one of them.</p>
+<p>Most of the material out there for this suggests developing separate client based tests, which I didn’t want to do. Eventually, I figured out that tornado already provides all the utilities to do unit/integration tests for websockets.</p>
+<p>First, we will need a websockets based echo server to test, lets call it <code>ws.py</code>. The websocket handler would be:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> tornado <span class="im">import</span> web, websocket
+
+<span class="kw">class</span> Echo(websocket.WebSocketHandler):
+
+    <span class="co"># Open allows for any number arguments, unlike what pylint thinks.</span>
+    <span class="co"># pylint: disable=W0221</span>
+    <span class="kw">def</span> <span class="bu">open</span>(<span class="va">self</span>):
+        <span class="va">self</span>.write_message(<span class="st">&#39;hello&#39;</span>)
+
+    <span class="kw">def</span> on_message(<span class="va">self</span>, message):
+        <span class="va">self</span>.write_message(message)
+
+    <span class="kw">def</span> on_close(<span class="va">self</span>):
+        <span class="va">self</span>.write_message(<span class="st">&#39;bye&#39;</span>)</code></pre></div>
+<p>Lets define an application which uses the above handler:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">APP <span class="op">=</span> web.Application([
+    (<span class="vs">r&quot;/&quot;</span>, Echo),
+])
+
+<span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:
+    APP.listen(<span class="dv">5000</span>)</code></pre></div>
+<p>Now, we will test the application out. Create a file, say <code>test_ws.py</code>:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> tornado <span class="im">import</span> testing, httpserver, gen, websocket
+<span class="im">from</span> ws <span class="im">import</span> APP
+
+<span class="kw">class</span> TestChatHandler(testing.AsyncTestCase):
+    <span class="cf">pass</span></code></pre></div>
+<p>We use tornado’s testing wrapper for the integration it provides with the event loop. Lets tell unittest how to setup the tests:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> TestChatHandler(testing.AsyncTestCase):
+
+    <span class="kw">def</span> setUp(<span class="va">self</span>):
+        <span class="bu">super</span>(TestChatHandler, <span class="va">self</span>).setUp()
+        server <span class="op">=</span> httpserver.HTTPServer(APP)
+        socket, <span class="va">self</span>.port <span class="op">=</span> testing.bind_unused_port()
+        server.add_socket(socket)</code></pre></div>
+<p>We create a http server out of our application and get a socket bound to an unused port. We then ask the server to accept on the created socket. Don’t forget the <code>super</code> call, it ensures that the ioloop gets created. <code>unittest</code> will now ensure that a server and an ioloop is up and running before running tests.</p>
+<p>Moving forward, we need to define a helper for creating a websocket connection to the server. Tornado websocket provides a handly websocket client. It can be created with <code>websocket.websocket_connect</code>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">def</span> _mk_connection(<span class="va">self</span>):
+        <span class="cf">return</span> websocket.websocket_connect(
+            <span class="st">&#39;ws://localhost:{}/&#39;</span>.<span class="bu">format</span>(<span class="va">self</span>.port)
+        )</code></pre></div>
+<p>We can write a simple test for this:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="at">@testing.gen_test</span>
+    <span class="kw">def</span> test_hello(<span class="va">self</span>):
+        c <span class="op">=</span> <span class="cf">yield</span> <span class="va">self</span>._mk_connection()
+        <span class="co"># Get the initial hello from the server.</span>
+        response <span class="op">=</span> <span class="cf">yield</span> c.read_message()
+        <span class="co"># Make sure that we got a &#39;hello&#39; not &#39;bye&#39;</span>
+        <span class="va">self</span>.assertEqual(<span class="st">&#39;hello&#39;</span>, response)</code></pre></div>
+<p><code>testing.gen_test</code> is a wrapper over tornado’s <code>gen.coroutine</code>. It runs the test synchronously under the ioloop that <code>testing.AsyncTestCase</code> creates in <code>setUp</code>. The test checks for the ‘hello’ message that we expect from the server on connection. <code>yield</code> makes sure that we for the response from the server. Note that if you write a <code>yield c.read_message()</code> when a message from server isn’t expected, the coroutine will keep waiting, eventually raising <code>tornado.ioloop.TimeoutError</code> (5 seconds by default). Great, we can write lot of tests using just what we have now.</p>
+<p>The tests can be run via:</p>
+<pre><code>python -m tornado.testing discover</code></pre>
+<p>This could still be further improved. We need to yield and ignore the ‘hello’ message in every test, for every client. And in your application, it may be a more complicated handshake - possibly a few initial messages. Once you write a test for that handshake, it needn’t be re-written in every test. To avoid that, we will write an an abstraction over this:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="at">@gen.coroutine</span>
+    <span class="kw">def</span> _mk_client(<span class="va">self</span>):
+        c <span class="op">=</span> <span class="cf">yield</span> <span class="va">self</span>._mk_connection()
+
+        <span class="co"># Discard the hello</span>
+        <span class="co"># This could be any initial handshake, which needs to be generalized</span>
+        <span class="co"># for most of the tests.</span>
+        _ <span class="op">=</span> <span class="cf">yield</span> c.read_message()
+
+        <span class="cf">raise</span> gen.Return(c)</code></pre></div>
+<p><code>_mk_client</code> here is a method in which you could place all the boilerplate. The key point here is the exception <code>gen.Return(c)</code> we raise in the end. <code>return</code> with a value is allowed only after Python <code>3.3</code>, so <code>tornado.gen</code> uses the value associated with this exception as the coroutine’s result.</p>
+<p>With <code>_mk_client</code> available, we can write tests which only include the relevant code:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="at">@testing.gen_test</span>
+    <span class="kw">def</span> test_echo(<span class="va">self</span>):
+        <span class="co"># A client with the hello taken care of.</span>
+        c <span class="op">=</span> <span class="cf">yield</span> <span class="va">self</span>._mk_client()
+
+        <span class="co"># Send a &#39;foo&#39; to the server.</span>
+        c.write_message(<span class="st">&quot;foo&quot;</span>)
+        <span class="co"># Get the &#39;foo&#39; back.</span>
+        response <span class="op">=</span> <span class="cf">yield</span> c.read_message()
+        <span class="co"># Make sure that we got a &#39;foo&#39; back and not &#39;bar&#39;.</span>
+        <span class="va">self</span>.assertEqual(<span class="st">&#39;foo&#39;</span>, response)</code></pre></div>
+<p>The application built out of this post is available <a href="https://gist.github.com/crodjer/1e9989ab30fdc32db926">as a gist</a>.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Using pulseaudio to play system beeps</title>
+    <link href="http://www.rohanjain.in/bell/" />
+    <id>http://www.rohanjain.in/bell/</id>
+    <published>2015-08-20T00:00:00Z</published>
+    <updated>2015-08-20T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Recently, I built a new desktop. After receiving everything, I realized that I was missing the onboard speaker (which creates the annoying beep sound). Ideally, the computer case should have had it, but they don’t come with a buzzer anymore. My various applications rely on the system beep, hence I needed to find a software alternative. Turns out it is fairly trivial to configure it to capture alerts with pulseaudio:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">start-pulseaudio-x11</span>
+<span class="kw">pactl</span> upload-sample /usr/share/sounds/freedesktop/stereo/message.oga beep
+<span class="kw">pactl</span> load-module module-x11-bell sample=beep
+<span class="kw">xset</span> b 100</code></pre></div>
+<p>To automatically do it on X11 start, I placed the above in my <a href="https://github.com/crodjer/configs/blob/121caa22d4b7c6324fa9a5b22e2d2fcc334afc96/.xsessionrc#L31">xsessionrc</a>.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Switch between networks based on availability</title>
+    <link href="http://www.rohanjain.in/route-to/" />
+    <id>http://www.rohanjain.in/route-to/</id>
+    <published>2015-08-19T00:00:00Z</published>
+    <updated>2015-08-19T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Having been blessed with an unreliable internet, I always have had the need to change the default route when one goes down. <a href="http://linux.die.net/man/8/ip">ip</a> provides you the required tooling to do that. I had been doing it so often, that I ended up writing a function to do this:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">route_to ()</span> <span class="kw">{</span>
+    <span class="ot">interface=$1</span>
+    <span class="ot">route=$(</span><span class="kw">ip</span> route <span class="kw">|</span> <span class="kw">grep</span> <span class="ot">$interface</span> <span class="kw">|</span> <span class="kw">sed</span> -r <span class="st">&#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39;</span> <span class="kw">|</span> <span class="kw">cut</span> -d <span class="st">&#39; &#39;</span> -f -4<span class="ot">)</span>
+    <span class="kw">if [</span> <span class="ot">-n</span> <span class="st">&quot;</span><span class="ot">$route</span><span class="st">&quot;</span><span class="kw"> ]</span>; <span class="kw">then</span>
+        <span class="kw">sudo</span> ip route del default <span class="kw">&amp;&gt;</span> /dev/null
+        <span class="kw">sudo</span> ip route replace default via <span class="ot">$route</span>
+    <span class="kw">else</span>
+        <span class="kw">echo</span> <span class="st">&quot;No routes match: </span><span class="ot">$interface</span><span class="st">&quot;</span> <span class="kw">&gt;&amp;2</span>
+    <span class="kw">fi</span>
+<span class="kw">}</span></code></pre></div>
+<p>With this in available in my shell, I can simply do <code>route_to wlan0</code> and my system will start using <code>wlan0</code> as the default interface.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>VNC over reverse SSH</title>
+    <link href="http://www.rohanjain.in/vnc/" />
+    <id>http://www.rohanjain.in/vnc/</id>
+    <published>2015-05-10T00:00:00Z</published>
+    <updated>2015-05-10T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>About a year ago, I switched my parents computer (lets call it <code>P</code>) from the pre-installed OS (Windows) to Ubuntu. The primary reason for this switch was it hard for me to debug and fix issues. Things have been smooth after the switch with no issues which I found hard to fix remotely. What specially has worked is my ability to log in to the computer when its on through my VPS and service it.</p>
+<h2 id="reverse-ssh">Reverse SSH</h2>
+<p>Whenever <code>P</code> starts, it makes a reverse SSH connection to my VPS. I use <a href="https://www.archlinux.org/packages/community/x86_64/autossh/">autossh</a> to monitor and make sure that it is eventually always connected.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">autossh</span> -M 10001 -f -NXYR 10000:localhost:22 vps</code></pre></div>
+<p>Here <code>vps</code> is a SSH alias for my personal VPS.</p>
+<p>I can tunnel through the VPS and login to <code>P</code> via VPS using the following SSH configuration:</p>
+<pre class="config"><code>Host home
+     Hostname localhost
+     User username
+     Port 10000
+     ProxyCommand ssh -e none -W %h:%p vps</code></pre>
+<p>To log in to <code>P</code> transparently, I can simply do:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ssh</span> home</code></pre></div>
+<p>I use this to resolve most of the issues. Of course it does have the requirement that the system be booted up and connected to a network.</p>
+<h2 id="vnc">VNC</h2>
+<p>There also can be issues which have to do with the GUI (say browser maintenance) and cannot be done easily over a text SSH session. For those cases, VNC is to rescue. I create a VNC server on <code>P</code> using <a href="https://wiki.archlinux.org/index.php/X11vnc">x11vnc</a> and tunnel the VNC port to my local through SSH. Now, I can access <code>P</code>’s graphical session remotely via a vnc client (mine is <a href="https://www.archlinux.org/packages/community/x86_64/tigervnc/">tigervnc</a>).</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ssh</span> home -L 5900:localhost:5900 <span class="st">&quot;x11vnc -rfbauth ~/.vnc/passwd -display :0 -noxdamage&quot;</span>
+$ <span class="kw">vncviewer</span> localhost::5900 -QualityLevel 3 -CompressLevel 6</code></pre></div>
+<p>This method is much better compared to the more common solutions such has Google’s VNC chrome extension or other proprietary services. But they are slow and untrustable 3rd parties. With this way of setting up VNC, everything is protected under SSH connections.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Emacs: Flymake with virtualenvs in python-mode</title>
+    <link href="http://www.rohanjain.in/emacs-flymake-with-virtualenvs-in-python-mode/" />
+    <id>http://www.rohanjain.in/emacs-flymake-with-virtualenvs-in-python-mode/</id>
+    <published>2014-01-28T00:00:00Z</published>
+    <updated>2014-01-28T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Lately, I have been writing some python with emacs. So, I have been trying to get the popular checkers (<code>pylint</code>/<code>pyflakes</code>) to work with flymake and virtualenvs. The issues with existing solutions to get flymake working with the checkers is that most of them assume a global version of executable (which would be fine if it weren’t for the whole python 2 and 3 incompatibility).</p>
+<p>The <code>python-mode</code> in the latest emacs versions (mine is <code>24.3.1</code>) includes a basic support for <code>virtualenvs</code>. I run <code>pylint/pyflakes</code> through the command <code>env</code> with the environment variables calculated from the functions provided by <code>python-mode</code>. Here is the code extracted from my <a href="https://github.com/crodjer/configs/blob/master/.emacs">emacs configuration</a>:</p>
+<pre class="elisp"><code>(defun python-calculate-env ()
+  &quot;Calculate env variables for current python virtualenv.&quot;
+  ;; ;; This also overrides PYTHONHOME to &quot;&quot;, which breaks the process
+  ;; ;; environment. Otherwise, a neat idea.
+  ;; (mapcar
+  ;;  (lambda (string)
+  ;;    (let ((splitted-string (split-string string &quot;=&quot;)))
+  ;;      (format
+  ;;       &quot;%s=\&quot;%s\&quot;&quot;
+  ;;       (car splitted-string)
+  ;;       (or (cadr splitted-string)
+  ;;           &quot;&quot;))))
+  ;; (python-shell-calculate-process-environment)))
+  (remove-if
+   (lambda (x)
+     (or
+      ;; If environment
+      (string-match &quot; &quot; x)
+      (not (string-match &quot;=&quot; x))))
+   (python-shell-calculate-process-environment)))
+
+(defun python-virtualenv-exec (command args)
+  &quot;Generate a flymake friendly list executable in virtualenv, for provided
+commands.&quot;
+  (list &quot;env&quot; (append (python-calculate-env) (list command) args)))
+
+(when (load &quot;flymake&quot; t)
+  (defun flymake-python-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                       &#39;flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+      (python-virtualenv-exec
+       &quot;pylint&quot;
+       (list
+        ;; Pylint args. Will depend on the checker being used.
+        &quot;-r&quot; &quot;n&quot;
+        &quot;--msg-template=&#39;{path}:{line}:{category} [{msg_id} {obj}] {msg}&#39;&quot;
+        local-file))))
+  (add-to-list &#39;flymake-allowed-file-name-masks
+             &#39;(&quot;\\.py\\&#39;&quot; flymake-python-init)))
+
+(defun flymake-mode-hook-function ()
+  (when (derived-mode-p &#39;python-mode)
+    (flymake-mode t)))
+;; Run flymake mode hook function after the local variables are set (eg: through
+;; .dir-locals.el
+(add-hook &#39;hack-local-variables-hook #&#39;flymake-mode-hook-function)
+(setq virtualenv-workon-starts-python nil)</code></pre>
+]]></summary>
+</entry>
+<entry>
+    <title>A productive workflow with vim sessions and servers</title>
     <link href="http://www.rohanjain.in/yet-another-vim-productivity-post-server-client/" />
     <id>http://www.rohanjain.in/yet-another-vim-productivity-post-server-client/</id>
     <published>2012-04-15T00:00:00Z</published>
-    <updated>2012-07-18T07:59:58Z</updated>
-    <summary type="html"><![CDATA[<strong id="TOC">Table of contents</strong><ul>
-                               <li><a href="#vim-server-zsh-and-tiles">Vim Server, ZSH and Tiles</a></li>
-                               <li><a href="#vim-sessions">Vim Sessions</a></li>
-                               <li><a href="#tldr">tldr;</a></li>
-                               </ul>
-
-<p>There are 10 text editors in this world: One is <em>Vim</em> and the other <em>Emacs</em>. Now, when it all began I chose Vim. I know there is no need for me to sell it to you. It does that itself. I rely heavily on the Vim <em>server-client</em> feature and thought that it should share it with everyone.</p>
-<h1 id="vim-server-zsh-and-tiles"><a href="#TOC">Vim Server, ZSH and Tiles</a></h1>
-<p>A Vim instance behaves as a server in which files can be opened through remote applications. Read <code>:help client-server</code> of Vim to know more about this. I generally keep multiple Vim sessions running, described by task they are related to. A typical workspace has one instance of Vim running and multiple terminals around it. Lets call this workspace for project <em>foo</em>. So the name of Vim instance server will be <em>foo</em>:</p>
+    <updated>2012-04-15T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>You can find lot of posts on the internet which try to tell you how to improve the ways in which Vim is used. Well, here is another one.</p>
+<h1 id="vim-server-zsh-and-tiles">Vim Server, ZSH and Tiles</h1>
+<p>A Vim instance behaves as a server in which files can be opened through remote applications. Read <code>:help client-server</code> of Vim to know more about this. I generally keep multiple Vim sessions running, described by task they are related to.</p>
+<p>A typical workspace has one instance of Vim running and multiple terminals around it. Lets call this workspace for project <em>foo</em>. So the name of Vim instance server will be <em>foo</em>:</p>
 <pre><code>vim --servername foo</code></pre>
 <p>And any file will be open in this server, using this command:</p>
 <pre><code>vim --servername foo --remote-silent bar.hs
@@ -45,208 +450,32 @@
 <li><p>Also each instance can have its own project specific environment - current directory, python virtual environments etc.</p></li>
 </ul>
 <p>For easing all this up, I use a set of helper functions in my <em>zshrc</em>:</p>
-<pre class="sh"><code># Set the name of vim session the terminal is tied up to
-eset(){
-    export VI_SERVER=$1
-}
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Set the name of vim session the terminal is tied up to</span>
+<span class="fu">eset()</span><span class="kw">{</span>
+    <span class="kw">export</span> <span class="ot">VI_SERVER=$1</span>
+<span class="kw">}</span>
 
-# Fire up a new server according to the argument supplied
-vs(){
-    eset $1
-    vim --servername $VI_SERVER
-}
+<span class="co"># Fire up a new server according to the argument supplied</span>
+<span class="fu">vs()</span><span class="kw">{</span>
+    <span class="kw">eset</span> <span class="ot">$1</span>
+    <span class="kw">vim</span> --servername <span class="ot">$VI_SERVER</span>
+<span class="kw">}</span>
 
-# Open up the files in the environment Vim server.
-es(){
-    vim --servername $VI_SERVER --remote-silent $*
-}
+<span class="co"># Open up the files in the environment Vim server.</span>
+<span class="fu">es()</span><span class="kw">{</span>
+    <span class="kw">vim</span> --servername <span class="ot">$VI_SERVER</span> --remote-silent <span class="ot">$*</span>
+<span class="kw">}</span>
 
-# Reuse Vim ZSH completions for vim completions
-compdef _vim es
-</code></pre>
-<h1 id="vim-sessions"><a href="#TOC">Vim Sessions</a></h1>
+<span class="co"># Reuse Vim ZSH completions for vim completions</span>
+<span class="kw">compdef</span> _vim es</code></pre></div>
+<h1 id="vim-sessions">Vim Sessions</h1>
 <p>Having multiple instances is great, but I don’t want to set each up every time I need resume working. For this I use <em>Vim Sessions</em>, which allow the current Vim state to be stored over the disk.</p>
 <p><a href="https://github.com/xolox/vim-session">vim-session</a> plugin will help you manage sessions easily. It is well integrated with Vim client-server.</p>
 <p>From docs:</p>
 <blockquote>
 <p>When you start Vim with a custom server name that matches one of the existing session names then the matching session will be automatically restored.</p>
 </blockquote>
-<h1 id="tldr"><a href="#TOC">tldr;</a></h1>
-<p>Checkout <code>:help client-server</code> in vim and <a href="https://github.com/xolox/vim-session">vim-session</a>, to boost your productivity some more with Vim.</p>]]></summary>
-</entry>
-<entry>
-    <title>Access Interviewstreet's Code Checker over HTTP</title>
-    <link href="http://www.rohanjain.in/access-interviewstreets-code-checker-over-http/" />
-    <id>http://www.rohanjain.in/access-interviewstreets-code-checker-over-http/</id>
-    <published>2012-04-05T00:00:00Z</published>
-    <updated>2012-07-18T07:59:58Z</updated>
-    <summary type="html"><![CDATA[<strong id="TOC">Table of contents</strong><ul>
-                               <li><a href="#the-api">The API</a><ul>
-                               <li><a href="#functionality">Functionality</a></li>
-                               <li><a href="#reliability">Reliability</a></li>
-                               </ul></li>
-                               <li><a href="#developing-a-client">Developing a client</a></li>
-                               </ul>
-
-<p>It is nowadays customary of companies to expose parts of their infrastructure to the public, in the form of an (API) Application Programming Interface. Hackers can utilize these to develop innovative apps and products.</p>
-<p>I have been working over exposing an API to the internal codecheckers for <a href="http://www.interviewstreet.org/">Interviewstreet</a> for some time. A beta version of this is up now and we are accepting registrations on an invite basis. Post a request for invite here: <a href="http://api.interviewstreet.org/accounts/invites/"><code class="url">http://api.interviewstreet.org/accounts/invites/</code></a></p>
-<h1 id="the-api"><a href="#TOC">The API</a></h1>
-<p>The API is up at <a href="http://api.interviewstreet.org/">api.interviewstreet.org</a>. It provides a HTTP based format agnostic interface. You can use any of these popular formats: json, xml, yaml, pickle. JSON is the default. Format can be specified by appending <code>.&lt;format&gt;</code> to the url. Eg:</p>
-<pre><code>http://api.interviewstreet.org/v1.0/submission.xml?key=2&amp;token=snr34je9n52tY32fJh8teLRl3z4h0wbl
-</code></pre>
-<p>for talking to the API in <code>xml</code> format.</p>
-<h2 id="functionality"><a href="#TOC">Functionality</a></h2>
-<p>The functionality provided is straight forward. It asks for the programming language (supporting over 15 languages), the program to evaluate and the testcases to run that code against.<br />As results to the evaluation, it will tell you if the code was successfully compiled, how it ran against all your test cases and the outputs it generated.</p>
-<h2 id="reliability"><a href="#TOC">Reliability</a></h2>
-<p>This API is pretty reliable. It is a <a href="https://www.djangoproject.com/">django</a> front end to the system that is used internally. It is well maintained and regularly tested. In fact, it has already had a successful run with Overnite, a night long programming event conducted under <a href="http://ktj.in/">Kshitj</a> (IIT Kharagpur’s technical Fest).</p>
-<h1 id="developing-a-client"><a href="#TOC">Developing a client</a></h1>
-<p>If the language you are using supports basic HTTP request, developing a client to interact with the API is simple. The <a href="http://api.interviewstreet.org/v1.0/doc/">documentation</a> explains how to use it against curl. Here is a python implementation using urllib2:</p>
-<pre class="sourceCode python"><code class="sourceCode python"><span class="ch">import</span> urllib2
-<span class="ch">import</span> json
-<span class="ch">import</span> random
-
-url = <span class="st">&#39;http://api.interviewstreet.org/v1.0/submission.json?token=your-api-token&#39;</span>
-
-<span class="co"># A demo submission</span>
-submission_data = {
-    <span class="st">&#39;source&#39;</span>: <span class="st">&#39;print 111&#39;</span> <span class="co">#prints 111 in python,</span>
-    <span class="st">&#39;hash&#39;</span>: <span class="st">&quot;your-random-submission-unique-hash&quot;</span>,
-    <span class="st">&#39;testcases&#39;</span>: [
-        <span class="st">&#39;case1</span><span class="ch">\n</span><span class="st">&#39;</span>,
-        <span class="st">&#39;case2</span><span class="ch">\n</span><span class="st">&#39;</span>
-    ],
-    <span class="st">&#39;lang&#39;</span>: <span class="dv">5</span> <span class="co">#This is python</span>
-}
-
-request = urllib2.Request(url)
-request.add_header(<span class="st">&#39;Content-type&#39;</span>, <span class="st">&#39;application/json&#39;</span>)
-response = urllib2.urlopen(request, json.dumps(submission_data)).read()
-key = json.loads(response)[<span class="st">&#39;key&#39;</span>]
-
-
-<span class="co"># Getting the result</span>
-
-response = urllib2.urlopen(<span class="st">&quot;</span><span class="ot">%s</span><span class="st">&amp;key=</span><span class="ot">%s</span><span class="st">&quot;</span> %(url, key))
-result = json.loads(response.read())[<span class="st">&#39;result&#39;</span>]
-
-<span class="co">## Do whatever with the result</span></code></pre>]]></summary>
-</entry>
-<entry>
-    <title>Configure ssh to handle proxies and tunnels seamlessly</title>
-    <link href="http://www.rohanjain.in/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/" />
-    <id>http://www.rohanjain.in/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</id>
-    <published>2011-08-27T00:00:00Z</published>
-    <updated>2012-07-18T07:59:58Z</updated>
-    <summary type="html"><![CDATA[
-<p>Recently I opened up on the port <em>443</em> over my EC2 instance (more or less like a VPS), so that I can access it through any firewalled proxy too. Apart from getting SSH running to a machine from outside world, I did some cool configuration to have ssh deal with with various remote hosts automatically. It uses <em>the right</em> proxy settings according the host being accessed.</p>
-<p>All the stuff which runs over ssh (like <em>scp</em>, <em>git</em> etc.) also work the way they are supposed to, following the ssh configuration.</p>
-<p>To get this to work you need to have <em>corkscrew</em> and <em>netcat</em> (the swiss army knife) already installed.</p>
-<p>Here is how it goes:<br /><code>File ~/ssh/config:</code></p>
-<pre class="sourceCode apache"><code class="sourceCode apache"><span class="co"># Let me access local remotes directly.</span>
-Host 127.0.0.1, 10.*
-    ProxyCommand none
-
-<span class="co"># Github lets you ssh over port 443 too, utilize that instead of tunneling</span>
-<span class="co"># through remote computer</span>
-Host github.com
-    Hostname ssh.github.com
-    User<span class="st"> git</span>
-    ProxyCommand corkscrew 10.3.100.211 8080 %h %p
-    Port 443
-    Hostname ssh.github.com
-
-<span class="co"># Let me ssh onto my ec2 instance, which has full network access, through a</span>
-<span class="co"># http proxy.</span>
-Host ecc.rohanjain.in
-    ProxyCommand corkscrew 10.3.100.211 8080 %h %p
-    Port 443
-    ServerAliveInterval 600
-
-<span class="co"># All the rest should connect through an ssh connection over the ec2 instance.</span>
-Host *
-    ProxyCommand ssh -q -a -x -p 443 ecc.rohanjain.in nc %h %p</code></pre>]]></summary>
-</entry>
-<entry>
-    <title>Dynamic to Static</title>
-    <link href="http://www.rohanjain.in/dynamic-to-static/" />
-    <id>http://www.rohanjain.in/dynamic-to-static/</id>
-    <published>2011-06-16T00:00:00Z</published>
-    <updated>2012-07-18T07:59:58Z</updated>
-    <summary type="html"><![CDATA[
-<p>I just shifted my website to Jekyll static pages, from the completely dynamic <em>django</em> based and database oriented <a href="http://old.rohanjain.in">old one</a>. The factor which drove this decision: <strong>VIM</strong>.</p>
-<p>I really like the convenience posting in this way provides to me. The functionalities that were present over there were to much overkill and completely invisible to the public, so better save the processing power required to render the content every time the page is accessed.</p>
-<p>After the setting up of this, I expect a considerable increase in my blogging frequency.</p>
-<p><strong>Updates</strong></p>
-<p>Now I have shifted to the haskell based site generator, <a href="http://jaspervdj.be/hakyll/">hakyll</a> instead of jekyll.</p>]]></summary>
-</entry>
-<entry>
-    <title>Hosting multiple sites with same django project</title>
-    <link href="http://www.rohanjain.in/hosting-multiple-sites-with-same-django-project/" />
-    <id>http://www.rohanjain.in/hosting-multiple-sites-with-same-django-project/</id>
-    <published>2010-12-24T00:00:00Z</published>
-    <updated>2012-07-18T07:59:58Z</updated>
-    <summary type="html"><![CDATA[<strong id="TOC">Table of contents</strong><ul>
-                               <li><a href="#using-custom-apps-and-modules">Using custom apps and modules</a><ul>
-                               <li><a href="#modify-contrib">Modify contrib</a></li>
-                               <li><a href="#forget-contrib">Forget contrib</a></li>
-                               </ul></li>
-                               <li><a href="#using-unaltered-django-modules">Using unaltered django modules</a><ul>
-                               <li><a href="#wsgi">wsgi</a></li>
-                               <li><a href="#htaccess">htaccess</a></li>
-                               <li><a href="#django-multisite">django-multisite</a></li>
-                               </ul></li>
-                               </ul>
-
-<p>The first thing the title triggers in the mind is the django <a href="http://docs.djangoproject.com/en/dev/ref/contrib/sites/">sites framework</a>. Well this post is mostly related to that but suggests its utilization in slight different way. As we can get from the docs in every implementation of the sites framework you have to hardcode the SITE_ID in your settings.py file. So it assumes that you have multiple django projects or at least multiple settings.py files which will be used as the django settings module for the process. So basically it provides us to share database between multiple sites which is a nice feature.</p>
-<p>For our case which is, we want to use a single django project to across multiple domains while presenting altered versions of content dependant on the originating domain (the domain names cannot be hardcoded as the number of domains is dynamic too.), we have to do something different to get this level of dynamicity. I did sone research about this on the <strong>#django</strong> IRC, <strong>stackoverflow</strong> and <strong>google</strong>. Here are some complete/incomplete ways I found out to achieve this.</p>
-<h3 id="using-custom-apps-and-modules"><a href="#TOC">Using custom apps and modules</a></h3>
-<p>These ways would need us to define many custom models and middleware, hence a lot of work. The domain management would be done by the django project itself through middleware which use the HTTP_REQUST header and hence every request will be processed to obtain the information required to do database queries and render the views. So these methods looks like bit safer but would cause a performance decrease.</p>
-<h4 id="modify-contrib"><a href="#TOC">Modify contrib</a></h4>
-<p>This is the rather easier way which involves modifications of code of some django contrib apps here and there. Just copy the apps from django-&gt;contrib folder to the project directory and modify them to accept request as argument give out results according to the HTTP_HOST and Sites database. Also change all the imo reference of these apps from <em>django.contrib.app</em> to <em>app</em>.</p>
-<h4 id="forget-contrib"><a href="#TOC">Forget contrib</a></h4>
-<p>Another way would be to forget the contrib apps and write your own custom similar ones from scratch. This may be a better way for long term projects which require highly customized and special functionalities. But it will require us to write a lot of code, though the existing modules can be used for reference.</p>
-<h3 id="using-unaltered-django-modules"><a href="#TOC">Using unaltered django modules</a></h3>
-<p>If we are successful in doing this it will probably let us build our project in much less lines of code and using the already existent django contribs as is. So if we don’t modify django modules then what do we modify to achieve the dynamicity.</p>
-<h4 id="wsgi"><a href="#TOC">wsgi</a></h4>
-<p>This is what we could do: First define multiple settings files in some pattern so that they can be matched according to the domain name, say <em>settings_domain.py</em>. Now if the deployment is done using wsgi script (generally in <a href="http://docs.djangoproject.com/en/dev/howto/deployment/modwsgi/">this</a>) format. In the wsgi script we have to call the respective settings_domain.py according to the accessing domain name. So this seems pretty good but it can be dangerous. As we are setting a global variable (<code>os.environ['DJANGO_SETTINGS_MODULE']</code>) it is not at all a <strong>thread safe</strong> method. If there are two requests close enough this may pose dangerous effects. Unless we are not able to make sure that a new fork / new wsgi demon will be created per domain. So maybe one could suggest to write a good wsgi script which could handle this.</p>
-<h4 id="htaccess"><a href="#TOC">htaccess</a></h4>
-<p>Yet another way would be to make the .htaccess file dynamic, if it is possible. I don’t have any idea if I could write an apache config file that would trigger the correct wsgi file (which triggers the correct settings one). Maybe one could suggest a way of doing this (through regex?). To me thiss seems the best way which would trigger a corresponding process for each domain.</p>
-<h4 id="django-multisite"><a href="#TOC">django-multisite</a></h4>
-<p>This is a django application I found (Source: https://github.com/shestera/django-multisite) which utilize <strong>thread locals</strong> to dynamically define the SITE_ID setting according to the request domain. I have tried this and is actually working but as the django documentation has <a href="http://code.djangoproject.com/wiki/CookBookThreadlocalsAndUser">pretty clearly</a> warned against its use, I am in doubt if it is a safe way.</p>
-<p>Till now I am still unclear of what method to implement among the above or some other one. There are some pros and cons of all the methods.</p>
-<p>I apologise if I have written something wrong, these all are only some methods I have found out while searching the web and discussing on the groups, so please specify if there is any mistake or you can suggest something related to this.</p>]]></summary>
-</entry>
-<entry>
-    <title>Whiteboarding with XMPP (Google Talk)</title>
-    <link href="http://www.rohanjain.in/whiteboarding-with-xmpp-google-talk/" />
-    <id>http://www.rohanjain.in/whiteboarding-with-xmpp-google-talk/</id>
-    <published>2010-10-25T00:00:00Z</published>
-    <updated>2012-07-18T07:59:58Z</updated>
-    <summary type="html"><![CDATA[<strong id="TOC">Table of contents</strong><ul>
-                               <li><a href="#technical-info">Technical Info</a></li>
-                               <li><a href="#updates">Updates</a></li>
-                               </ul>
-
-<p>Sometimes, being too lazy to use the type, you might wish for some other way to interact with others. Well there is one and quit an interactive and entertaining one, a whiteboarding interface, i.e. the people involved in chat can do collaborative drawings, play games, convey emotions not possible by typing etc. It can have some bigger implementations like teaching, presentations many more utilities can be innovated.</p>
-<p>There is already a small implementation of this feature in yahoo by name doodle. Seeing its utility one might wonder why this brilliant feature is not implemented with the widely used chat protocol, XMPP (Google Talk is based on XMPP)? Well I cant find out why not.</p>
-<p>So, we have taken an initiative. Our group (<a href="http://github.com/crodjer" title="" target="_blank">Me</a>, <a href="http://github.com/snktagarwal" title="" target="_blank">Sanket Agarwal</a> and <a href="http://github.com/psjinx" title="" target="_blank">Pankaj Singh</a>) is working for implementing this feature with the XMPP protocol, at least for pidgin users.</p>
-<h4 id="technical-info"><a href="#TOC">Technical Info</a></h4>
-<p>Project Repository: <a href="http://github.com/crodjer/pidgin_whiteboard"><code class="url">http://github.com/crodjer/pidgin_whiteboard</code></a><br />Updates: <a href="#updates">Project updates</a></p>
-<p>This project involves building a basic implementation of the protocol specified in, <a href="http://xmpp.org/extensions/xep-0284.html">http://xmpp.org/extensions/xep-0284.html</a>, using the SVG graphics specified in, <a href="http://www.w3.org/2000/svg">http://www.w3.org/2000/svg</a>. Both together define the standards for our work.</p>
-<p>We hope to provide the following features:</p>
-<ul>
-<li>Simple whiteboarding drawing Lines, Polygons, Circles and Free Curves.</li>
-<li>Fancy Texting</li>
-<li>Image Sending</li>
-<li>This will provide users with a more enriching experience.</li>
-</ul>
-<p>I am really excited about this project as it would be one of my initial contributions to the great open-source community. Till now it have been a fine ride of purpling, jingling and jabbering with pidgin.</p>
-<h3 id="updates"><a href="#TOC">Updates</a></h3>
-<p><em>29 Nov 2010</em><br />Work resumed after a brief pause. The target now is to integrate <a href="http://xmpp.org/extensions/xep-0284.html" target="_blank">shared XML editing</a> with jingle and add more features to the whiteboard graphical gui.</p>
-<p><em>10 Nov 2010</em><br />Our Proof of concept is ready. All the basic features of whiteboard are now incorporated. A usable implementation now exists. You may fetch and compile the code from the git repository (Address mentioned above). This is how it looks:<br /><iframe width="425" height="349" src="http://www.youtube.com/embed/sYKutp4I4Zs"></iframe> A <a href="http://img577.imageshack.us/img577/7910/screenshot1kg.png">Snapshot</a>.</p>
-<p><em>9 Nov 2010</em> Syncing of whiteboards is up. The whiteboards are updated as the two users draw using their brushes. So a responsive interface is present. Just some small bug fix and feature additions remain now.<br /><a href="http://img259.imageshack.us/img259/7980/screenshotrd.png" target="_blank">Screenshot</a></p>
-<p><em>6 Nov 2010</em><br />Now session initiate and accept integrated (popping up of whiteboard on both ends). Slight change in way of implementation, use of libjingle is now on a hold, creating a custom whiteboard message format for session management for now. Code in <strong>dcrodjer</strong> branch of the above git repository. A screenshot of the code working: <a href="http://img837.imageshack.us/img837/8250/screenshot1gb.png" target="_blank">Image for session implementation</a></p>
-<p><em>24 Oct 2010</em><br />A whiteboard interface initiates. This is how it look like:<br /><a href="http://img841.imageshack.us/img841/5516/59586846.png" target="_blank">Image 1</a><br /><a href="http://img221.imageshack.us/img221/4198/65357038.png" target="_blank">Image 2</a></p>]]></summary>
+]]></summary>
 </entry>
 
 </feed>

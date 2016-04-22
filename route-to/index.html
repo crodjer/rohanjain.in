@@ -6,7 +6,7 @@
     <meta name="description" content="A web blog, by Rohan Jain" />
     <meta name="author" content="Rohan Jain" />
 
-    <title>About | The Perpetual Amateur</title>
+    <title>Switch between networks based on availability | The Perpetual Amateur</title>
     <link href="../favicon.ico" rel="icon" />
     <link rel="alternate" type="application/atom+xml" title="Rohan's Weblog" href="../feed.xml" />
 
@@ -49,18 +49,56 @@
           </ul>
         </nav>
         <!-- <h1 class="superTitle"><a href="/">Rohan's Weblog</a></h1> -->
-        <h1 class="text-muted">About</h1>
+        <h1 class="text-muted">Switch between networks based on availability</h1>
       </div>
 
       <div id="content">
-        <div class="post">
-  <p>Hi, I am Rohan. I read and write code. I frequently read about physics, energy and climate change. After getting depressed enough of the latter, I read fiction or annoy my friends about it or just code.</p>
-<p>I like to play table tennis, cricket and chess. I also bought a harmonica. Keep your hands on ears if you see me holding it. And yeah, I maintain a blog, which is so devoid of activity that it should have cobwebs on it.</p>
-<p>On the days with clear skies, I take out my telescope and observe star clusters and nebulae. I am trying to go through the Messier catalog.</p>
-<blockquote>
-<p>Find me at <a href="http://github.com/crodjer">Github</a>, <a href="http://twitter.com/__crodjer__">Twitter</a> and <a href="http://stackoverflow.com/users/420357/">StackOverflow</a>.</p>
-</blockquote>
+        <div class="meta">
+  <em class="date">August 19, 2015</em>
+  
+  |
+  <span class="tags"><a href="../tags/network/">network</a></span>
+  
 </div>
+
+<div class="post">
+  <p>Having been blessed with an unreliable internet, I always have had the need to change the default route when one goes down. <a href="http://linux.die.net/man/8/ip">ip</a> provides you the required tooling to do that. I had been doing it so often, that I ended up writing a function to do this:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">route_to ()</span> <span class="kw">{</span>
+    <span class="ot">interface=$1</span>
+    <span class="ot">route=$(</span><span class="kw">ip</span> route <span class="kw">|</span> <span class="kw">grep</span> <span class="ot">$interface</span> <span class="kw">|</span> <span class="kw">sed</span> -r <span class="st">'s/\.0\/[[:digit:]]{2,3} /.1 /'</span> <span class="kw">|</span> <span class="kw">cut</span> -d <span class="st">' '</span> -f -4<span class="ot">)</span>
+    <span class="kw">if [</span> <span class="ot">-n</span> <span class="st">&quot;</span><span class="ot">$route</span><span class="st">&quot;</span><span class="kw"> ]</span>; <span class="kw">then</span>
+        <span class="kw">sudo</span> ip route del default <span class="kw">&amp;&gt;</span> /dev/null
+        <span class="kw">sudo</span> ip route replace default via <span class="ot">$route</span>
+    <span class="kw">else</span>
+        <span class="kw">echo</span> <span class="st">&quot;No routes match: </span><span class="ot">$interface</span><span class="st">&quot;</span> <span class="kw">&gt;&amp;2</span>
+    <span class="kw">fi</span>
+<span class="kw">}</span></code></pre></div>
+<p>With this in available in my shell, I can simply do <code>route_to wlan0</code> and my system will start using <code>wlan0</code> as the default interface.</p>
+
+
+</div>
+<em class="small">
+  Any suggestions for the post? You may send me a pull request
+  <a href="https://github.com/crodjer/rohanjain.in/tree/master/posts/2015/route-to.mkd">here</a>.
+</em>
+<!--
+
+<div class="comments">
+  <div id="disqus_thread"></div>
+
+  <script type="text/javascript">
+
+    //Disqus
+    var disqus_shortname = 'crodjer';
+
+    var disqus_identifier = 'posts/2015/route-to.mkd';
+    var disqus_title = 'Switch between networks based on availability';
+
+  </script>
+  <script src="http://crodjer.disqus.com/embed.js"></script>
+</div>
+
+-->
 
       </div>
 
