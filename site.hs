@@ -24,7 +24,7 @@ siteName = "The Perpetual Amateur"
 sourceRepository :: String
 sourceRepository = "https://github.com/crodjer/rohanjain.in"
 
-myFeedConfiguration:: FeedConfiguration
+myFeedConfiguration :: FeedConfiguration
 myFeedConfiguration = FeedConfiguration
     { feedTitle = siteName
     , feedDescription = ""
