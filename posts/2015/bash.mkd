@@ -51,6 +51,7 @@ Unix interface design.
 [.bashrc]: https://github.com/crodjer/configs/blob/master/.bashrc
 [.profile]: https://github.com/crodjer/configs/blob/master/.profile
 [ag]: https://github.com/ggreer/the_silver_searcher
+[rsync]: https://wiki.archlinux.org/index.php/rsync
 [entr]: https://github.com/ggreer/the_silver_searcher
 [autojump]: https://www.archlinux.org/packages/community/any/autojump/
 [jq]: https://stedolan.github.io/jq/
