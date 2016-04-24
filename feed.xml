@@ -370,7 +370,7 @@ $ <span class="kw">vncviewer</span> localhost::5900 -QualityLevel 3 -CompressLev
 <p>Apart from the standard utilities (sed, cut, cat, tr etc.), I use a few tools as an aid:</p>
 <ul>
 <li><strong><a href="https://github.com/ggreer/the_silver_searcher">ag</a></strong> for amazingly fast lookup in files.</li>
-<li><strong>[rsync][]</strong>, to keep the files synchronized with remote servers.</li>
+<li><strong><a href="https://wiki.archlinux.org/index.php/rsync">rsync</a></strong>, to keep the files synchronized with remote servers.</li>
 <li><strong><a href="https://github.com/ggreer/the_silver_searcher">entr</a></strong> to run build/test commands on a file change. Or, with rsync, synchronize on modifications.</li>
 <li><strong><a href="https://www.archlinux.org/packages/community/any/autojump/">autojump</a></strong> to jump directly to frequently used directories.</li>
 <li><strong><a href="https://stedolan.github.io/jq/">jq</a></strong> to process JSON output of a command.</li>
