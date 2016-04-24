@@ -1,6 +1,6 @@
 ---
 title: Switch between networks based on availability
-tags: network
+tags: network, scripting
 date: 2015-08-19
 author: Rohan
 ---
