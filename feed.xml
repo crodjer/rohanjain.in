@@ -360,6 +360,32 @@ $ <span class="kw">vncviewer</span> localhost::5900 -QualityLevel 3 -CompressLev
 ]]></summary>
 </entry>
 <entry>
+    <title>The ubiquitous shell</title>
+    <link href="http://www.rohanjain.in/bash/" />
+    <id>http://www.rohanjain.in/bash/</id>
+    <published>2015-03-05T00:00:00Z</published>
+    <updated>2015-03-05T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Nothing makes a terminal feel more like home as one’s own shell configuration. My shell is bash, configured through a <a href="https://github.com/crodjer/configs/blob/master/.bashrc">.bashrc</a> and <a href="https://github.com/crodjer/configs/blob/master/.profile">.profile</a>. Bash is likely to be present in any Unix machine one uses.</p>
+<p>Bash is also my primary IDE. This allows for keeping a relatively simple set of utilities and tools to internalize. Coupled with a reliable window manager, workflows can be quickly scripted in the head. Shell scripts are an option as well for more complex flows. This can be done at multiple levels: using uniquely identifiable comments in commands , bash functions, complete bash script.</p>
+<p>Apart from the standard utilities (sed, cut, cat, tr etc.), I use a few tools as an aid:</p>
+<ul>
+<li><strong><a href="https://github.com/ggreer/the_silver_searcher">ag</a></strong> for amazingly fast lookup in files.</li>
+<li><strong>[rsync][]</strong>, to keep the files synchronized with remote servers.</li>
+<li><strong><a href="https://github.com/ggreer/the_silver_searcher">entr</a></strong> to run build/test commands on a file change. Or, with rsync, synchronize on modifications.</li>
+<li><strong><a href="https://www.archlinux.org/packages/community/any/autojump/">autojump</a></strong> to jump directly to frequently used directories.</li>
+<li><strong><a href="https://stedolan.github.io/jq/">jq</a></strong> to process JSON output of a command.</li>
+</ul>
+<p>Tools are designed for the console first, and then bound to editors or IDEs. Familiarizing oneself to the command line interface makes the maximum amount of functionality accessible. For example, <a href="https://github.com/magit/magit">magit</a> is a powerful git interface for Emacs, but can be limiting for complex git operations such as an interactive rebase.</p>
+<p>Composibility of the various commands can be useful as well, allowing one to build complex, repeatable commands. For example, the following uses <code>ip</code> to change a system’s default route, given the interface:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ip</span> route del default <span class="kw">&amp;&gt;</span> /dev/null
+<span class="kw">ip</span> route replace default via <span class="ot">$(</span><span class="kw">ip</span> route
+     <span class="kw">|</span> <span class="kw">grep</span> ppp0 <span class="co"># Change this filter as per need.</span>
+     <span class="kw">|</span> <span class="kw">sed</span> -r <span class="st">&#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39;</span>
+     <span class="kw">|</span> <span class="kw">cut</span> -d <span class="st">&#39; &#39;</span> -f -4<span class="ot">)</span></code></pre></div>
+<p>A great piece of literature on the Unix Philosophy is <a href="http://amzn.to/1qFlKCz">The Art of Unix Programming</a> by Eric S. Raymond. It also talks about the Unix interface design.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Emacs: Flymake with virtualenvs in python-mode</title>
     <link href="http://www.rohanjain.in/emacs-flymake-with-virtualenvs-in-python-mode/" />
     <id>http://www.rohanjain.in/emacs-flymake-with-virtualenvs-in-python-mode/</id>
@@ -417,64 +443,6 @@ commands.&quot;
 ;; .dir-locals.el
 (add-hook &#39;hack-local-variables-hook #&#39;flymake-mode-hook-function)
 (setq virtualenv-workon-starts-python nil)</code></pre>
-]]></summary>
-</entry>
-<entry>
-    <title>A productive workflow with vim sessions and servers</title>
-    <link href="http://www.rohanjain.in/yet-another-vim-productivity-post-server-client/" />
-    <id>http://www.rohanjain.in/yet-another-vim-productivity-post-server-client/</id>
-    <published>2012-04-15T00:00:00Z</published>
-    <updated>2012-04-15T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>You can find lot of posts on the internet which try to tell you how to improve the ways in which Vim is used. Well, here is another one.</p>
-<h1 id="vim-server-zsh-and-tiles">Vim Server, ZSH and Tiles</h1>
-<p>A Vim instance behaves as a server in which files can be opened through remote applications. Read <code>:help client-server</code> of Vim to know more about this. I generally keep multiple Vim sessions running, described by task they are related to.</p>
-<p>A typical workspace has one instance of Vim running and multiple terminals around it. Lets call this workspace for project <em>foo</em>. So the name of Vim instance server will be <em>foo</em>:</p>
-<pre><code>vim --servername foo</code></pre>
-<p>And any file will be open in this server, using this command:</p>
-<pre><code>vim --servername foo --remote-silent bar.hs
-
-
-+-----------------------+
-|           |~$         |
-|           |           |
-|           |-----------+
-|    Vim    |~$         |
-|   Server  |           |
-|           |-----------+
-|           |~$         |
-|           |           |
-+-----------------------+</code></pre>
-<p>How this helps:</p>
-<ul>
-<li><p>Lets me keep a well defined separation on various projects I am working on. The list of files in the buffer per instance remains short and manageable.</p></li>
-<li><p>Also each instance can have its own project specific environment - current directory, python virtual environments etc.</p></li>
-</ul>
-<p>For easing all this up, I use a set of helper functions in my <em>zshrc</em>:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Set the name of vim session the terminal is tied up to</span>
-<span class="fu">eset()</span><span class="kw">{</span>
-    <span class="kw">export</span> <span class="ot">VI_SERVER=$1</span>
-<span class="kw">}</span>
-
-<span class="co"># Fire up a new server according to the argument supplied</span>
-<span class="fu">vs()</span><span class="kw">{</span>
-    <span class="kw">eset</span> <span class="ot">$1</span>
-    <span class="kw">vim</span> --servername <span class="ot">$VI_SERVER</span>
-<span class="kw">}</span>
-
-<span class="co"># Open up the files in the environment Vim server.</span>
-<span class="fu">es()</span><span class="kw">{</span>
-    <span class="kw">vim</span> --servername <span class="ot">$VI_SERVER</span> --remote-silent <span class="ot">$*</span>
-<span class="kw">}</span>
-
-<span class="co"># Reuse Vim ZSH completions for vim completions</span>
-<span class="kw">compdef</span> _vim es</code></pre></div>
-<h1 id="vim-sessions">Vim Sessions</h1>
-<p>Having multiple instances is great, but I don’t want to set each up every time I need resume working. For this I use <em>Vim Sessions</em>, which allow the current Vim state to be stored over the disk.</p>
-<p><a href="https://github.com/xolox/vim-session">vim-session</a> plugin will help you manage sessions easily. It is well integrated with Vim client-server.</p>
-<p>From docs:</p>
-<blockquote>
-<p>When you start Vim with a custom server name that matches one of the existing session names then the matching session will be automatically restored.</p>
-</blockquote>
 ]]></summary>
 </entry>
 

@@ -6,7 +6,7 @@
     <meta name="description" content="A web blog, by Rohan Jain" />
     <meta name="author" content="Rohan Jain" />
 
-    <title>Switch between networks based on availability | The Perpetual Amateur</title>
+    <title>The ubiquitous shell | The Perpetual Amateur</title>
     <link href="../favicon.ico" rel="icon" />
     <link rel="alternate" type="application/atom+xml" title="Rohan's Weblog" href="../feed.xml" />
 
@@ -49,37 +49,43 @@
           </ul>
         </nav>
         <!-- <h1 class="superTitle"><a href="/">Rohan's Weblog</a></h1> -->
-        <h1 class="text-muted">Switch between networks based on availability</h1>
+        <h1 class="text-muted">The ubiquitous shell</h1>
       </div>
 
       <div id="content">
         <div class="meta">
-  <em class="date">August 19, 2015</em>
+  <em class="date">March  5, 2015</em>
   
   |
-  <span class="tags"><a href="../tags/network/">network</a>, <a href="../tags/scripting/">scripting</a></span>
+  <span class="tags"><a href="../tags/bash/">bash</a>, <a href="../tags/scripting/">scripting</a></span>
   
 </div>
 
 <div class="post">
-  <p>Having been blessed with an unreliable internet, I always have had the need to change the default route when one goes down. <a href="http://linux.die.net/man/8/ip">ip</a> provides you the required tooling to do that. I had been doing it so often, that I ended up writing a function to do this:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">route_to ()</span> <span class="kw">{</span>
-    <span class="ot">interface=$1</span>
-    <span class="ot">route=$(</span><span class="kw">ip</span> route <span class="kw">|</span> <span class="kw">grep</span> <span class="ot">$interface</span> <span class="kw">|</span> <span class="kw">sed</span> -r <span class="st">'s/\.0\/[[:digit:]]{2,3} /.1 /'</span> <span class="kw">|</span> <span class="kw">cut</span> -d <span class="st">' '</span> -f -4<span class="ot">)</span>
-    <span class="kw">if [</span> <span class="ot">-n</span> <span class="st">&quot;</span><span class="ot">$route</span><span class="st">&quot;</span><span class="kw"> ]</span>; <span class="kw">then</span>
-        <span class="kw">sudo</span> ip route del default <span class="kw">&amp;&gt;</span> /dev/null
-        <span class="kw">sudo</span> ip route replace default via <span class="ot">$route</span>
-    <span class="kw">else</span>
-        <span class="kw">echo</span> <span class="st">&quot;No routes match: </span><span class="ot">$interface</span><span class="st">&quot;</span> <span class="kw">&gt;&amp;2</span>
-    <span class="kw">fi</span>
-<span class="kw">}</span></code></pre></div>
-<p>With this in available in my shell, I can simply do <code>route_to wlan0</code> and my system will start using <code>wlan0</code> as the default interface.</p>
+  <p>Nothing makes a terminal feel more like home as one’s own shell configuration. My shell is bash, configured through a <a href="https://github.com/crodjer/configs/blob/master/.bashrc">.bashrc</a> and <a href="https://github.com/crodjer/configs/blob/master/.profile">.profile</a>. Bash is likely to be present in any Unix machine one uses.</p>
+<p>Bash is also my primary IDE. This allows for keeping a relatively simple set of utilities and tools to internalize. Coupled with a reliable window manager, workflows can be quickly scripted in the head. Shell scripts are an option as well for more complex flows. This can be done at multiple levels: using uniquely identifiable comments in commands , bash functions, complete bash script.</p>
+<p>Apart from the standard utilities (sed, cut, cat, tr etc.), I use a few tools as an aid:</p>
+<ul>
+<li><strong><a href="https://github.com/ggreer/the_silver_searcher">ag</a></strong> for amazingly fast lookup in files.</li>
+<li><strong>[rsync][]</strong>, to keep the files synchronized with remote servers.</li>
+<li><strong><a href="https://github.com/ggreer/the_silver_searcher">entr</a></strong> to run build/test commands on a file change. Or, with rsync, synchronize on modifications.</li>
+<li><strong><a href="https://www.archlinux.org/packages/community/any/autojump/">autojump</a></strong> to jump directly to frequently used directories.</li>
+<li><strong><a href="https://stedolan.github.io/jq/">jq</a></strong> to process JSON output of a command.</li>
+</ul>
+<p>Tools are designed for the console first, and then bound to editors or IDEs. Familiarizing oneself to the command line interface makes the maximum amount of functionality accessible. For example, <a href="https://github.com/magit/magit">magit</a> is a powerful git interface for Emacs, but can be limiting for complex git operations such as an interactive rebase.</p>
+<p>Composibility of the various commands can be useful as well, allowing one to build complex, repeatable commands. For example, the following uses <code>ip</code> to change a system’s default route, given the interface:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ip</span> route del default <span class="kw">&amp;&gt;</span> /dev/null
+<span class="kw">ip</span> route replace default via <span class="ot">$(</span><span class="kw">ip</span> route
+     <span class="kw">|</span> <span class="kw">grep</span> ppp0 <span class="co"># Change this filter as per need.</span>
+     <span class="kw">|</span> <span class="kw">sed</span> -r <span class="st">'s/\.0\/[[:digit:]]{2,3} /.1 /'</span>
+     <span class="kw">|</span> <span class="kw">cut</span> -d <span class="st">' '</span> -f -4<span class="ot">)</span></code></pre></div>
+<p>A great piece of literature on the Unix Philosophy is <a href="http://amzn.to/1qFlKCz">The Art of Unix Programming</a> by Eric S. Raymond. It also talks about the Unix interface design.</p>
 
 
 </div>
 <em class="small">
   Any suggestions for the post? You may send me a pull request
-  <a href="https://github.com/crodjer/rohanjain.in/tree/master/posts/2015/route-to.mkd">here</a>.
+  <a href="https://github.com/crodjer/rohanjain.in/tree/master/posts/2015/bash.mkd">here</a>.
 </em>
 <!--
 
@@ -91,8 +97,8 @@
     //Disqus
     var disqus_shortname = 'crodjer';
 
-    var disqus_identifier = 'posts/2015/route-to.mkd';
-    var disqus_title = 'Switch between networks based on availability';
+    var disqus_identifier = 'posts/2015/bash.mkd';
+    var disqus_title = 'The ubiquitous shell';
 
   </script>
   <script src="http://crodjer.disqus.com/embed.js"></script>
