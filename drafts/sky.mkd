@@ -5,10 +5,16 @@ tags: astronomy
 author: Rohan
 ---
 
-About 6 months ago, I picked up a new hobby: Stargazing. I started with simply
+About 6 months ago, I picked up a new hobby: Stargazing. I started with
 exploring and identifying constellations ([Taurus][], [Orion][] and
-[Canis Major][]) in the night sky. With a few week worth of such sessions, I
-was able to observe a few (some interesting and some obvious) things:
+[Canis Major][]) in the night sky. A few observations can be made just through
+the naked eyes.
+
+## Moon
+
+
+With a few week worth of such sessions, I was
+able to observe a few (some interesting and some obvious) things:
 
  - The [International Space Station][ISS] is frequently visible and the
    time/location can be accurately predicted.
