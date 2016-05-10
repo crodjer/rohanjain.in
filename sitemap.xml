@@ -9,9 +9,16 @@
     </url>
 
     <url>
+        <loc>http://www.rohanjain.in/telescope/</loc>
+        <changefreq>weekly</changefreq>
+        <lastmod>2016-05-10</lastmod>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>http://www.rohanjain.in/sky/</loc>
         <changefreq>weekly</changefreq>
-        <lastmod>2016-05-07</lastmod>
+        <lastmod>2016-05-10</lastmod>
         <priority>0.8</priority>
     </url>
 
