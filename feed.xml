@@ -10,15 +10,6 @@
     </author>
     <updated>2016-05-04T00:00:00Z</updated>
     <entry>
-    <title>Experiences with my first telescope</title>
-    <link href="http://www.rohanjain.in/telescope/" />
-    <id>http://www.rohanjain.in/telescope/</id>
-    <published>2016-05-04T00:00:00Z</published>
-    <updated>2016-05-04T00:00:00Z</updated>
-    <summary type="html"><![CDATA[
-]]></summary>
-</entry>
-<entry>
     <title>Gazing in the night sky</title>
     <link href="http://www.rohanjain.in/sky/" />
     <id>http://www.rohanjain.in/sky/</id>
@@ -408,6 +399,32 @@ cleanIndex url
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ssh</span> home -L 5900:localhost:5900 <span class="st">&quot;x11vnc -rfbauth ~/.vnc/passwd -display :0 -noxdamage&quot;</span>
 $ <span class="kw">vncviewer</span> localhost::5900 -QualityLevel 3 -CompressLevel 6</code></pre></div>
 <p>This method is much better compared to the more common solutions such has Google’s VNC chrome extension or other proprietary services. But they are slow and untrustable 3rd parties. With this way of setting up VNC, everything is protected under SSH connections.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>The ubiquitous shell</title>
+    <link href="http://www.rohanjain.in/bash/" />
+    <id>http://www.rohanjain.in/bash/</id>
+    <published>2015-03-05T00:00:00Z</published>
+    <updated>2015-03-05T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Nothing makes a terminal feel more like home as one’s own shell configuration. My shell is bash, configured through a <a href="https://github.com/crodjer/configs/blob/master/.bashrc">.bashrc</a> and <a href="https://github.com/crodjer/configs/blob/master/.profile">.profile</a>. Bash is likely to be present in any Unix machine one uses.</p>
+<p>Bash is also my primary IDE. This allows for keeping a relatively simple set of utilities and tools to internalize. Coupled with a reliable window manager, workflows can be quickly scripted in the head. Shell scripts are an option as well for more complex flows. This can be done at multiple levels: using uniquely identifiable comments in commands , bash functions, complete bash script.</p>
+<p>Apart from the standard utilities (sed, cut, cat, tr etc.), I use a few tools as an aid:</p>
+<ul>
+<li><strong><a href="https://github.com/ggreer/the_silver_searcher">ag</a></strong> for amazingly fast lookup in files.</li>
+<li><strong><a href="https://wiki.archlinux.org/index.php/rsync">rsync</a></strong>, to keep the files synchronized with remote servers.</li>
+<li><strong><a href="https://github.com/ggreer/the_silver_searcher">entr</a></strong> to run build/test commands on a file change. Or, with rsync, synchronize on modifications.</li>
+<li><strong><a href="https://www.archlinux.org/packages/community/any/autojump/">autojump</a></strong> to jump directly to frequently used directories.</li>
+<li><strong><a href="https://stedolan.github.io/jq/">jq</a></strong> to process JSON output of a command.</li>
+</ul>
+<p>Tools are designed for the console first, and then bound to editors or IDEs. Familiarizing oneself to the command line interface makes the maximum amount of functionality accessible. For example, <a href="https://github.com/magit/magit">magit</a> is a powerful git interface for Emacs, but can be limiting for complex git operations such as an interactive rebase.</p>
+<p>Composibility of the various commands can be useful as well, allowing one to build complex, repeatable commands. For example, the following uses <code>ip</code> to change a system’s default route, given the interface:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ip</span> route del default <span class="kw">&amp;&gt;</span> /dev/null
+<span class="kw">ip</span> route replace default via <span class="ot">$(</span><span class="kw">ip</span> route
+     <span class="kw">|</span> <span class="kw">grep</span> ppp0 <span class="co"># Change this filter as per need.</span>
+     <span class="kw">|</span> <span class="kw">sed</span> -r <span class="st">&#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39;</span>
+     <span class="kw">|</span> <span class="kw">cut</span> -d <span class="st">&#39; &#39;</span> -f -4<span class="ot">)</span></code></pre></div>
+<p>A great piece of literature on the Unix Philosophy is <a href="http://amzn.to/1qFlKCz">The Art of Unix Programming</a> by Eric S. Raymond. It also talks about the Unix interface design.</p>
 ]]></summary>
 </entry>
 
