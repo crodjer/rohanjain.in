@@ -1,0 +1,161 @@
+---
+title: Experiences with my first telescope
+date: 2016-05-12
+tags: astronomy, stargazing
+author: Rohan
+---
+
+In my [previous post][], I wrote about my initial experiences with stargazing -
+primarily to demonstrate that stargazing can be fascinating without fancy
+equipment. After the initial naked eye experiences, I bought a telescope which
+magnified my experience significantly.
+
+
+## The Telescope
+
+The primary purpose of a telescope (astronomical in this case), unlike popular
+belief, is not actually magnification. They actually are light collectors
+(think: burning a match with a converging lens). Because the aperture of our eye
+is very small (7mm at best), we don't capture enough light to see faint
+stars. Telescopes (and Binoculars) can have much larger objectives (that face
+the object of interest) and hence more surface area where the photon can hit.
+
+Buying a telescope (or anything?) on an impulse is a bad idea and needs careful
+research. There are multiple very good articles/guides (like [this one][guide])
+about it. I'd recommend going through a lot of such guides while doing a few
+direct gazing sessions. This will give you a perspective on what you'd like to
+see best. I personally like to see faint stars and deep sky objects (star
+clusters, galaxies, nebulae) instead of planets/moon. In particular, the objects
+that [Charles Messier catalogued][dso].
+
+My telescope has a **114mm** aperture and **900mm** focal length. I have 3
+kellner eyepieces of sizes (and magnifications) **25mm (36x)**, **10mm (90x)**
+and **4mm (225x)**. It has a **6x24** (i.e. 6x magnification and 24mm aperture)
+finder. To keep the weight (and price) at a minimum, I got a Altazimuth mount.
+
+On the web, [this scope][powerseeker] is similar to mine. But I'd actually
+recommend [Orion XT6][] for much better observations or [Orion StarBlast 4.5][]
+for its portability.
+
+
+## Finding things
+
+[Star hopping][] is the technique that is conventionally used by armature
+astronomers. But instead of star charts, I have [Stellarium][], with which I get
+precise details of much fainter stars. Once having pointed the scope to a bright
+star, I synchronize my path with Stellarium. Because I am comparing stars in sky
+to a star in telescope, it is possible for me to end up at the exact locations
+of a deep sky object even if I can't discern it because of light pollution.
+
+I'll write more about this in a future post.
+
+
+## Orion Nebula
+
+[Orion Nebula][] is the brightest diffuse nebula in the sky and lies in the
+constellation Orion (which also hosts my favorite star Betelgeuse). Although, in
+reality, it looks nothing like the colourful and highly detailed photos that
+float around. I saw it as a fuzzy extended grey object, quite impressive
+nevertheless. It looks similar to [Charles Messier's sketch][m42-sketch]. The
+four stars in its heart are distinctly noticeable.
+
+> The Orion Nebula is an example of a stellar nursery where new stars are being
+> born.
+
+
+## Open star clusters
+
+Of all the deep sky objects, I find open star clusters the most exciting. I like
+examine their finer details, matching each star with those in Stellarium.
+
+ - **[M41][]** in constellation Canis Major. This was my first cluster and is
+   fairly bright. I even sketched the star pattern on paper, which now stays on
+   my table at work.
+ - **M93** in Puppis constellation. Fairly bright.
+ - **M45** (Pleiades) in Taurus. A cluster of very bright stars. The brightest
+   few stars are visible even without and optical equipment.
+ - **M47** (bright) and **M46 (very dim)** in Puppis consellation.
+ - **M35** in Gemini and bright.
+
+
+## Planets
+
+Planets in the sky are like stars but brighter and without the twinkling. But,
+with a telescope, more details can be seen because of the proximity.
+
+The planet I have most observed is **Jupiter**. Initially, to my disappointment,
+I could only make out an extend bright white disk. Eventually, my skills
+improved (Jupiter moved toward opposition as well) and I could actually make out
+the colors and the stripes. By coincidence I even got to see the great red
+spot. Jupiter rotates about its axis very fast (8 hour days), and I never had
+actually planned a sighting.
+
+Of all the planets, I was most interested in **Saturn**. Having straightened my
+expectations through research, I was not disappointed on first sight. The ring
+is indeed present and looks beautiful. I haven't been able to see the Cassini's
+division yet though.
+
+**Mars** is a red/orange disk with no other features visible (yet). I saw
+**Venus** only for a few minutes. Its unlikely I'd be able to see **Mercury**
+from where I am.
+
+**Moon** (although not a planet) can be seen in fine details. It is the only
+object which is bright enough to take photos of with my phone's camera. But
+other than that, I find it uninteresting. Moreover, it obliterates my eye's dark
+adjustment.
+
+
+## Nebulae, Globular clusters and Galaxies
+
+I don't attempt to see these much. They tend to be faint and the city lights
+takes away the required contrast for their visibility. I can be sure of having
+looked at them though, based on the nearby star patterns. My eyes likely caught
+some photons from these.
+
+ - **M1** (Crab nebula), supernova remnant in Taurus. I must have put 6+ hours
+   overall in trying to see it. Infact, I remember much of the star patterns
+   near the nebula. But, wouldn't claim to have seen the nebula itself.
+ - **M78**, reflection nebula in Orion. Tried to see it in multiple sittings,
+   enough to have the nearby star patterns memorized. Was able to see a very
+   dark grey and fuzzy object, if at all.
+ - **M43**, nebula right beside Orion nebula. Not discernible.
+ - **M53**, a globular clusters in Coma Berenices, visible as a round grey
+   object. Very dim, but noticeable.
+ - **M68** a globular clusters in Hydra. Could not clearly distinguish it.
+ - **M104** (Sombrero Galaxy), galaxy in Virgo. Just recently started seeing
+   it. I did likely discern it though. View should improve in the future
+   sightings.
+
+
+## Limiting Magnitude
+
+> In astronomy, [limiting magnitude][] is the faintest apparent magnitude of a
+> celestial body that is detectable or detected by a given instrument.  
+> - Wikipedia
+
+I like to calculate the limiting magnitude for my telescope. Theoretically, I
+should be able to see stars upto an apparent magnitude (lower the better and
+functions on a logarithmic scale) of **12.8**, but I can't actually. My skills,
+light pollution, quality of optics and the atmosphere bring this down
+significantly. The faintest stars I have seen, with significant effort, are
+roughly of magnitude **11.2**. Usually, I can conveniently see stars upto **10**
+and with a bit of effort (a second or so of concentration), **10.5**.
+
+Because of how our eye are designed, moving it during observations and using
+[averted vision][] improves the ability to distinguish very low contrast
+objects.
+
+
+[previous post]: /sky/
+[dso]: https://en.wikipedia.org/wiki/List_of_Messier_objects
+[guide]: http://www.skyandtelescope.com/astronomy-equipment/how-to-choose-a-telescope/
+[powerseeker]: http://www.amazon.com/gp/product/B0000Y8C2Y/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B0000Y8C2Y&linkCode=as2&tag=crodjer-20&linkId=H3RLG5OMNQX6ZMOH
+[Orion XT6]: http://www.amazon.com/gp/product/B001DDW9UW/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B001DDW9UW&linkCode=as2&tag=crodjer-20&linkId=U6A22R7IFLTDIBPQ.amazon.com/gp/product/B001DDW9UW
+[Orion StarBlast 4.5]: http://www.amazon.com/gp/product/B00D12U1IK/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B00D12U1IK&linkCode=as2&tag=crodjer-20&linkId=XUNVRD64WYTFUT6U
+[Star hopping]: https://en.wikipedia.org/wiki/Star_hopping#The_technique
+[Orion Nebula]: https://en.wikipedia.org/wiki/Orion_Nebula
+[m42-sketch]: http://messier.seds.org/Pics/History/m42m.jpg
+[Stellarium]: http://stellarium.org/
+[M41]: https://en.wikipedia.org/wiki/Messier_41
+[limiting magnitude]: https://en.wikipedia.org/wiki/Limiting_magnitude
+[averted vision]: https://en.wikipedia.org/wiki/Averted_vision
