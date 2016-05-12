@@ -139,6 +139,11 @@ After a month of naked eye stargazing, I bought a telescope (similar to
 [this one][telescope-114mm] but with better eyepieces) from a local
 provider. I'll write about my observations with that over the next few days.
 
+> **Edit*  
+> The post on my experience with a telescope has now been published
+> [here](/telescope/).
+
+
 [Sky Map]: https://play.google.com/store/apps/details?id=com.google.android.stardroid&hl=en
 [apparent magnitude]: https://en.wikipedia.org/wiki/Apparent_magnitude
 [Taurus]: https://en.wikipedia.org/wiki/Taurus_(constellation)
