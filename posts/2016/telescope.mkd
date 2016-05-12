@@ -1,5 +1,5 @@
 ---
-title: Experiences with my first telescope
+title: Navigating with the first telescope
 date: 2016-05-12
 tags: astronomy, stargazing
 author: Rohan
