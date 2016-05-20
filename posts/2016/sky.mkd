@@ -119,7 +119,7 @@ and 4 visible stars.
 
 ## Wonders
 
-Stargazing results in multiple inserting and unsettling thoughts:
+Stargazing results in multiple interesting and unsettling thoughts:
 
  - When I see a star, the photons hitting my eyes are 1000s of year old. For
    example: Light from Betelgeuse travels for roughly 643 years to reach us.
@@ -139,7 +139,7 @@ After a month of naked eye stargazing, I bought a telescope (similar to
 [this one][telescope-114mm] but with better eyepieces) from a local
 provider. I'll write about my observations with that over the next few days.
 
-> **Edit*  
+> **Edit**  
 > The post on my experience with a telescope has now been published
 > [here](/telescope/).
 
