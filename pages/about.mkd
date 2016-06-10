@@ -14,7 +14,7 @@ it.
 On the days with clear skies, I take out my telescope and observe star clusters
 and nebulae. I am trying to go through the Messier catalog.
 
-> Find me at [Github][gh], [Twitter][twitter] and [StackOverflow][so].
+> Find me at [GitHub][gh], [Twitter][twitter] and [StackOverflow][so].
 
 [gh]: http://github.com/crodjer
 [twitter]: http://twitter.com/__crodjer__
