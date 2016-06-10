@@ -105,6 +105,10 @@ a:visited {
   color: #23527C;
 }
 
+.sourceCode pre code {
+  white-space: pre;
+}
+
 .figure img {
   border: 1px solid #777;
   padding: 1px;
