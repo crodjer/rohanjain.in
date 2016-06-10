@@ -9,22 +9,15 @@ body {
   padding-bottom: 20px;
 }
 
-.header,
-.footer {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
 /* Custom page header */
 .header {
   padding-bottom: 10px;
   border-bottom: 1px solid #e5e5e5;
 }
-/* Make the masthead heading the same height as the navigation */
+
 .header h1 {
   margin-top: 0;
   margin-bottom: 0;
-  line-height: 40px;
 }
 
 /* Custom page footer */
@@ -36,10 +29,10 @@ body {
 }
 
 .footer .link {
-  padding: 5px;
+  padding-right: 10px;
 }
 .footer .credits {
-  float: right;
+  display: block;
 }
 
 .gh-banner {
@@ -52,10 +45,6 @@ body {
 
 #content {
   min-height: 300px;
-}
-
-.small {
-  font-size: 13px;
 }
 
 .post {
@@ -81,7 +70,7 @@ body {
 
 .meta {
   color: #777;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 h1 {
@@ -130,16 +119,19 @@ a:visited {
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
-  .header,
-  .footer {
-    padding-right: 0;
-    padding-left: 0;
-  }
   /* Space out the masthead */
   .header {
     margin-bottom: 5px;
   }
+
+  .header nav {
+    float: right;
+  }
+
+  .footer .credits {
+    float: right;
+  }
+
   #content {
     min-height: 500px;
   }
