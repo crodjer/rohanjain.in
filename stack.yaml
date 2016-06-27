@@ -1,11 +1,8 @@
-resolver: nightly-2016-06-12
+resolver: lts-6.5
 packages:
 - '.'
-- ../src/hakyll/
 extra-deps: []
-flags:
-  hakyll:
-    previewServer: False
+flags: {}
 extra-package-dbs: []
 # extra-include-dirs: [/path/to/dir]
 # extra-lib-dirs: [/path/to/dir]
