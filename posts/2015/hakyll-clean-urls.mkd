@@ -42,12 +42,6 @@ we define a set of functions:
 cleanIndexUrls :: Item String -> Compiler (Item String)
 cleanIndexUrls = return . fmap (withUrls cleanIndex)
 
-cleanIndexHtmls :: Item String -> Compiler (Item String)
-cleanIndexHtmls = return . fmap (replaceAll pattern replacement)
-    where
-      pattern = "/index.html"
-      replacement = const "/"
-
 cleanIndex :: String -> String
 cleanIndex url
     | idx `isSuffixOf` url = take (length url - length idx) url
