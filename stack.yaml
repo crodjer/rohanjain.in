@@ -1,6 +1,10 @@
-resolver: lts-6.5
+resolver: nightly-2016-08-17
 packages:
-- '.'
+    - '.'
+    - location:
+        git: git@github.com:jaspervdj/hakyll.git
+        commit: 2ef6d11
+      extra-dep: true
 extra-deps: []
 flags: {}
 extra-package-dbs: []
