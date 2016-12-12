@@ -63,10 +63,10 @@
 
 <div class="post">
   <p>Recently, I built a new desktop. After receiving everything, I realized that I was missing the onboard speaker (which creates the annoying beep sound). Ideally, the computer case should have had it, but they don’t come with a buzzer anymore. My various applications rely on the system beep, hence I needed to find a software alternative. Turns out it is fairly trivial to configure it to capture alerts with pulseaudio:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">start-pulseaudio-x11</span>
-<span class="kw">pactl</span> upload-sample /usr/share/sounds/freedesktop/stereo/message.oga beep
-<span class="kw">pactl</span> load-module module-x11-bell sample=beep
-<span class="kw">xset</span> b 100</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">start-pulseaudio-x11</span>
+<span class="ex">pactl</span> upload-sample /usr/share/sounds/freedesktop/stereo/message.oga beep
+<span class="ex">pactl</span> load-module module-x11-bell sample=beep
+<span class="fu">xset</span> b 100</code></pre></div>
 <p>To automatically do it on X11 start, I placed the above in my <a href="https://github.com/crodjer/configs/blob/121caa22d4b7c6324fa9a5b22e2d2fcc334afc96/.xsessionrc#L31">xsessionrc</a>.</p>
 
 

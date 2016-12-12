@@ -74,11 +74,11 @@
 </ul>
 <p>Tools are designed for the console first, and then bound to editors or IDEs. Familiarizing oneself to the command line interface makes the maximum amount of functionality accessible. For example, <a href="https://github.com/magit/magit">magit</a> is a powerful git interface for Emacs, but can be limiting for complex git operations such as an interactive rebase.</p>
 <p>Composibility of the various commands can be useful as well, allowing one to build complex, repeatable commands. For example, the following uses <code>ip</code> to change a system’s default route, given the interface:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ip</span> route del default <span class="kw">&amp;&gt;</span> /dev/null
-<span class="kw">ip</span> route replace default via <span class="ot">$(</span><span class="kw">ip</span> route
-     <span class="kw">|</span> <span class="kw">grep</span> ppp0 <span class="co"># Change this filter as per need.</span>
-     <span class="kw">|</span> <span class="kw">sed</span> -r <span class="st">'s/\.0\/[[:digit:]]{2,3} /.1 /'</span>
-     <span class="kw">|</span> <span class="kw">cut</span> -d <span class="st">' '</span> -f -4<span class="ot">)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">ip</span> route del default <span class="op">&amp;&gt;</span> /dev/null
+<span class="ex">ip</span> route replace default via <span class="va">$(</span><span class="ex">ip</span> route
+     <span class="kw">|</span> <span class="fu">grep</span> ppp0 <span class="co"># Change this filter as per need.</span>
+     <span class="kw">|</span> <span class="fu">sed</span> -r <span class="st">'s/\.0\/[[:digit:]]{2,3} /.1 /'</span>
+     <span class="kw">|</span> <span class="fu">cut</span> -d <span class="st">' '</span> -f -4<span class="va">)</span></code></pre></div>
 <p>A great piece of literature on the Unix Philosophy is <a href="http://amzn.to/1qFlKCz">The Art of Unix Programming</a> by Eric S. Raymond. It also talks about the Unix interface design.</p>
 
 

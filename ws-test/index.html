@@ -104,7 +104,7 @@
 <p>Moving forward, we need to define a helper for creating a websocket connection to the server. Tornado websocket provides a handly websocket client. It can be created with <code>websocket.websocket_connect</code>.</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">def</span> _mk_connection(<span class="va">self</span>):
         <span class="cf">return</span> websocket.websocket_connect(
-            <span class="st">'ws://localhost:{}/'</span>.<span class="bu">format</span>(<span class="va">self</span>.port)
+            <span class="st">'ws://localhost:</span><span class="sc">{}</span><span class="st">/'</span>.<span class="bu">format</span>(<span class="va">self</span>.port)
         )</code></pre></div>
 <p>We can write a simple test for this:</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="at">@testing.gen_test</span>

@@ -65,7 +65,7 @@
   <p>About a year ago, I switched my parents computer (lets call it <code>P</code>) from the pre-installed OS (Windows) to Ubuntu. The primary reason for this switch was it hard for me to debug and fix issues. Things have been smooth after the switch with no issues which I found hard to fix remotely. What specially has worked is my ability to log in to the computer when its on through my VPS and service it.</p>
 <h2 id="reverse-ssh">Reverse SSH</h2>
 <p>Whenever <code>P</code> starts, it makes a reverse SSH connection to my VPS. I use <a href="https://www.archlinux.org/packages/community/x86_64/autossh/">autossh</a> to monitor and make sure that it is eventually always connected.</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">autossh</span> -M 10001 -f -NXYR 10000:localhost:22 vps</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">autossh</span> -M 10001 -f -NXYR 10000:localhost:22 vps</code></pre></div>
 <p>Here <code>vps</code> is a SSH alias for my personal VPS.</p>
 <p>I can tunnel through the VPS and login to <code>P</code> via VPS using the following SSH configuration:</p>
 <pre class="config"><code>Host home
@@ -74,12 +74,12 @@
      Port 10000
      ProxyCommand ssh -e none -W %h:%p vps</code></pre>
 <p>To log in to <code>P</code> transparently, I can simply do:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ssh</span> home</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">ssh</span> home</code></pre></div>
 <p>I use this to resolve most of the issues. Of course it does have the requirement that the system be booted up and connected to a network.</p>
 <h2 id="vnc">VNC</h2>
 <p>There also can be issues which have to do with the GUI (say browser maintenance) and cannot be done easily over a text SSH session. For those cases, VNC is to rescue. I create a VNC server on <code>P</code> using <a href="https://wiki.archlinux.org/index.php/X11vnc">x11vnc</a> and tunnel the VNC port to my local through SSH. Now, I can access <code>P</code>’s graphical session remotely via a vnc client (mine is <a href="https://www.archlinux.org/packages/community/x86_64/tigervnc/">tigervnc</a>).</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">ssh</span> home -L 5900:localhost:5900 <span class="st">&quot;x11vnc -rfbauth ~/.vnc/passwd -display :0 -noxdamage&quot;</span>
-$ <span class="kw">vncviewer</span> localhost::5900 -QualityLevel 3 -CompressLevel 6</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">ssh</span> home -L 5900:localhost:5900 <span class="st">&quot;x11vnc -rfbauth ~/.vnc/passwd -display :0 -noxdamage&quot;</span>
+$ <span class="ex">vncviewer</span> localhost::5900 -QualityLevel 3 -CompressLevel 6</code></pre></div>
 <p>This method is much better compared to the more common solutions such has Google’s VNC chrome extension or other proprietary services. But they are slow and untrustable 3rd parties. With this way of setting up VNC, everything is protected under SSH connections.</p>
 
 

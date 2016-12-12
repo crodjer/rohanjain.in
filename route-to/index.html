@@ -64,13 +64,13 @@
 <div class="post">
   <p>Having been blessed with an unreliable internet, I always have had the need to change the default route when one goes down. <a href="http://linux.die.net/man/8/ip">ip</a> provides you the required tooling to do that. I had been doing it so often, that I ended up writing a function to do this:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">route_to ()</span> <span class="kw">{</span>
-    <span class="ot">interface=$1</span>
-    <span class="ot">route=$(</span><span class="kw">ip</span> route <span class="kw">|</span> <span class="kw">grep</span> <span class="ot">$interface</span> <span class="kw">|</span> <span class="kw">sed</span> -r <span class="st">'s/\.0\/[[:digit:]]{2,3} /.1 /'</span> <span class="kw">|</span> <span class="kw">cut</span> -d <span class="st">' '</span> -f -4<span class="ot">)</span>
-    <span class="kw">if [</span> <span class="ot">-n</span> <span class="st">&quot;</span><span class="ot">$route</span><span class="st">&quot;</span><span class="kw"> ]</span>; <span class="kw">then</span>
-        <span class="kw">sudo</span> ip route del default <span class="kw">&amp;&gt;</span> /dev/null
-        <span class="kw">sudo</span> ip route replace default via <span class="ot">$route</span>
+    <span class="va">interface=$1</span>
+    <span class="va">route=$(</span><span class="ex">ip</span> route <span class="kw">|</span> <span class="fu">grep</span> <span class="va">$interface</span> <span class="kw">|</span> <span class="fu">sed</span> -r <span class="st">'s/\.0\/[[:digit:]]{2,3} /.1 /'</span> <span class="kw">|</span> <span class="fu">cut</span> -d <span class="st">' '</span> -f -4<span class="va">)</span>
+    <span class="kw">if</span><span class="bu"> [</span> <span class="ot">-n</span> <span class="st">&quot;</span><span class="va">$route</span><span class="st">&quot;</span><span class="bu"> ]</span>; <span class="kw">then</span>
+        <span class="fu">sudo</span> ip route del default <span class="op">&amp;&gt;</span> /dev/null
+        <span class="fu">sudo</span> ip route replace default via <span class="va">$route</span>
     <span class="kw">else</span>
-        <span class="kw">echo</span> <span class="st">&quot;No routes match: </span><span class="ot">$interface</span><span class="st">&quot;</span> <span class="kw">&gt;&amp;2</span>
+        <span class="bu">echo</span> <span class="st">&quot;No routes match: </span><span class="va">$interface</span><span class="st">&quot;</span> <span class="op">&gt;&amp;2</span>
     <span class="kw">fi</span>
 <span class="kw">}</span></code></pre></div>
 <p>With this in available in my shell, I can simply do <code>route_to wlan0</code> and my system will start using <code>wlan0</code> as the default interface.</p>

@@ -89,22 +89,22 @@
 <p>For easing all this up, I use a set of helper functions in my <em>zshrc</em>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Set the name of vim session the terminal is tied up to</span>
 <span class="fu">eset()</span><span class="kw">{</span>
-    <span class="kw">export</span> <span class="ot">VI_SERVER=$1</span>
+    <span class="bu">export</span> <span class="va">VI_SERVER=$1</span>
 <span class="kw">}</span>
 
 <span class="co"># Fire up a new server according to the argument supplied</span>
 <span class="fu">vs()</span><span class="kw">{</span>
-    <span class="kw">eset</span> <span class="ot">$1</span>
-    <span class="kw">vim</span> --servername <span class="ot">$VI_SERVER</span>
+    <span class="ex">eset</span> <span class="va">$1</span>
+    <span class="ex">vim</span> --servername <span class="va">$VI_SERVER</span>
 <span class="kw">}</span>
 
 <span class="co"># Open up the files in the environment Vim server.</span>
 <span class="fu">es()</span><span class="kw">{</span>
-    <span class="kw">vim</span> --servername <span class="ot">$VI_SERVER</span> --remote-silent <span class="ot">$*</span>
+    <span class="ex">vim</span> --servername <span class="va">$VI_SERVER</span> --remote-silent <span class="va">$*</span>
 <span class="kw">}</span>
 
 <span class="co"># Reuse Vim ZSH completions for vim completions</span>
-<span class="kw">compdef</span> _vim es</code></pre></div>
+<span class="ex">compdef</span> _vim es</code></pre></div>
 <h1 id="vim-sessions">Vim Sessions</h1>
 <p>Having multiple instances is great, but I don’t want to set each up every time I need resume working. For this I use <em>Vim Sessions</em>, which allow the current Vim state to be stored over the disk.</p>
 <p><a href="https://github.com/xolox/vim-session">vim-session</a> plugin will help you manage sessions easily. It is well integrated with Vim client-server.</p>
