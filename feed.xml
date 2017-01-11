@@ -8,8 +8,61 @@
         <name>Rohan Jain</name>
         <email>crodjer@gmail.com</email>
     </author>
-    <updated>2016-05-12T00:00:00Z</updated>
+    <updated>2017-01-08T00:00:00Z</updated>
     <entry>
+    <title>Learning German</title>
+    <link href="http://www.rohanjain.in/german/" />
+    <id>http://www.rohanjain.in/german/</id>
+    <published>2017-01-08T00:00:00Z</published>
+    <updated>2017-01-08T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>There are far too many famous scientists, philosophers, authors that I admire who published their work in German. So, I am considering to put in some serious effort in learning the language and take on reading some of these famous works without any English translations.</p>
+<p>Mostly likely, I’ll start with re-reading Wittgenstein’s, <a href="https://www.goodreads.com/book/show/12075.Tractatus_Logico_Philosophicus?ac=1&amp;from_search=true">Tractatus Logico-Philosophicus</a> in german, specifically because of the unique style of writing. It will make comparing (and hence learning) with the translations easier.</p>
+<p>Other popular authors I’d like to read are:</p>
+<ul>
+<li>Einstein</li>
+<li>Wittgenstein</li>
+<li>Kant (too ambitious?)</li>
+<li>Neitzche</li>
+<li>Johann Wolfgang von Goethe</li>
+</ul>
+<p>On a more practicle side, learning multiple languages is considered to be good for brain development. Moreover, its a good to have professionally.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Revisiting Rust</title>
+    <link href="http://www.rohanjain.in/rust/" />
+    <id>http://www.rohanjain.in/rust/</id>
+    <published>2017-01-07T00:00:00Z</published>
+    <updated>2017-01-07T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Last year, I started learning the Rust programming language and was able to put in a fair amount of time doing that. Went through the official Rust book, played a bit with code. But the learning halted abruptly.</p>
+<p>Now I am re-visiting it again. This time though, I’ll dive into actual code instead of passive reading. I may start a pet project (suggestions?), try some programming exercies or my favorite: start contributing to an existing project. So far, <a href="https://github.com/cobalt-org/cobalt.rs">cobalt.rs</a> looks like a candidate. I am considering moving my personal website from Hakyll to Cobalt and then contribute patches for features that I’d like or bugs I find.</p>
+<p>I have decided not to start Haskell again, for now anyway. Although I learnt immense amount of programming concepts from it, I was never able to move forward practically with it.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>A new twitter policy</title>
+    <link href="http://www.rohanjain.in/twitter/" />
+    <id>http://www.rohanjain.in/twitter/</id>
+    <published>2017-01-05T00:00:00Z</published>
+    <updated>2017-01-05T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>I am fairly active on twitter. It is a very convenient place to register interesting thoughts and ideas. I actually like to revisit my twitter history frequently and each of the tweets function as a photograph to what my state of the mind, the context was at the time I published the tweet. Hence, I personally can recover most of the idea.</p>
+<p>But 140 characters aren’t generally enough to convey the context plus the idea, leaving an immense amount of room for misunderstanding. To someone else reading the tweets, it mostly would be meaningless or worse, they’d end up misinterpreting it.</p>
+<p>So, I have decided I’ll tweet less and try to keep them more accessible. There is no point in inflicting gratuitous ideas to public who most likely uses twitter as a news aggregator.</p>
+<p>As far as keeping snapshots of my states of mind at various points of history is concerned, I am yet to figure that out. Maybe a good old physical notebook would do the job.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Read! Read! Read!</title>
+    <link href="http://www.rohanjain.in/read/" />
+    <id>http://www.rohanjain.in/read/</id>
+    <published>2017-01-03T00:00:00Z</published>
+    <updated>2017-01-03T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Lately, I have noticed my reading speed has picked up. It’s not so much the reading speed, but the will to read that is now higher. Partially, I’d attribute it to my sudden drop in binging TV serials that I have observed and partially it’s because of group of readers at my workplace.</p>
+<p>Although, I have always been an active reader, I was able to read at 2-3 books per week in the last month or so. So, I’ll try to keep this momentum up as much as possible. I have set a target of 30 books over the year. I hope its a conservative goal.</p>
+<p>I also realized that against what I thought would be the case, I read slower in Hindi compared to English. I’ll read a book or two in Hindi as well to improve the reading speed in my native language. Discovery (specially eBooks) is very difficult for non-English language books. It is a bothersome situation for the various not so mainstream on Internet languages on the internet.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Navigating with the first telescope</title>
     <link href="http://www.rohanjain.in/telescope/" />
     <id>http://www.rohanjain.in/telescope/</id>
@@ -319,155 +372,6 @@ cleanIndex url
 <blockquote>
 <p>This functionality is being used by <a href="https://github.com/crodjer/rohanjain.in/blob/master/site.hs">this blog</a> and <a href="https://github.com/irneh/workforpizza/blob/master/site.hs">irneh/workforpizza</a> off which this blog is actually based.</p>
 </blockquote>
-]]></summary>
-</entry>
-<entry>
-    <title>Testing tornado websockets without third party clients</title>
-    <link href="http://www.rohanjain.in/ws-test/" />
-    <id>http://www.rohanjain.in/ws-test/</id>
-    <published>2015-08-22T00:00:00Z</published>
-    <updated>2015-08-22T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Recently, I built an encrypted <a href="http://github.com/crodjer/qotr/">chat service</a>, which was based on <a href="http://www.tornadoweb.org/">tornado</a> and <a href="http://emberjs.com/">ember.js</a>. The project itself had grave security issues, so I shut it down, but while working on it I learned a few new things and testing websockets with tornado is one of them.</p>
-<p>Most of the material out there for this suggests developing separate client based tests, which I didn’t want to do. Eventually, I figured out that tornado already provides all the utilities to do unit/integration tests for websockets.</p>
-<p>First, we will need a websockets based echo server to test, lets call it <code>ws.py</code>. The websocket handler would be:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> tornado <span class="im">import</span> web, websocket
-
-<span class="kw">class</span> Echo(websocket.WebSocketHandler):
-
-    <span class="co"># Open allows for any number arguments, unlike what pylint thinks.</span>
-    <span class="co"># pylint: disable=W0221</span>
-    <span class="kw">def</span> <span class="bu">open</span>(<span class="va">self</span>):
-        <span class="va">self</span>.write_message(<span class="st">&#39;hello&#39;</span>)
-
-    <span class="kw">def</span> on_message(<span class="va">self</span>, message):
-        <span class="va">self</span>.write_message(message)
-
-    <span class="kw">def</span> on_close(<span class="va">self</span>):
-        <span class="va">self</span>.write_message(<span class="st">&#39;bye&#39;</span>)</code></pre></div>
-<p>Lets define an application which uses the above handler:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">APP <span class="op">=</span> web.Application([
-    (<span class="vs">r&quot;/&quot;</span>, Echo),
-])
-
-<span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:
-    APP.listen(<span class="dv">5000</span>)</code></pre></div>
-<p>Now, we will test the application out. Create a file, say <code>test_ws.py</code>:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> tornado <span class="im">import</span> testing, httpserver, gen, websocket
-<span class="im">from</span> ws <span class="im">import</span> APP
-
-<span class="kw">class</span> TestChatHandler(testing.AsyncTestCase):
-    <span class="cf">pass</span></code></pre></div>
-<p>We use tornado’s testing wrapper for the integration it provides with the event loop. Lets tell unittest how to setup the tests:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> TestChatHandler(testing.AsyncTestCase):
-
-    <span class="kw">def</span> setUp(<span class="va">self</span>):
-        <span class="bu">super</span>(TestChatHandler, <span class="va">self</span>).setUp()
-        server <span class="op">=</span> httpserver.HTTPServer(APP)
-        socket, <span class="va">self</span>.port <span class="op">=</span> testing.bind_unused_port()
-        server.add_socket(socket)</code></pre></div>
-<p>We create a http server out of our application and get a socket bound to an unused port. We then ask the server to accept on the created socket. Don’t forget the <code>super</code> call, it ensures that the ioloop gets created. <code>unittest</code> will now ensure that a server and an ioloop is up and running before running tests.</p>
-<p>Moving forward, we need to define a helper for creating a websocket connection to the server. Tornado websocket provides a handly websocket client. It can be created with <code>websocket.websocket_connect</code>.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="kw">def</span> _mk_connection(<span class="va">self</span>):
-        <span class="cf">return</span> websocket.websocket_connect(
-            <span class="st">&#39;ws://localhost:</span><span class="sc">{}</span><span class="st">/&#39;</span>.<span class="bu">format</span>(<span class="va">self</span>.port)
-        )</code></pre></div>
-<p>We can write a simple test for this:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="at">@testing.gen_test</span>
-    <span class="kw">def</span> test_hello(<span class="va">self</span>):
-        c <span class="op">=</span> <span class="cf">yield</span> <span class="va">self</span>._mk_connection()
-        <span class="co"># Get the initial hello from the server.</span>
-        response <span class="op">=</span> <span class="cf">yield</span> c.read_message()
-        <span class="co"># Make sure that we got a &#39;hello&#39; not &#39;bye&#39;</span>
-        <span class="va">self</span>.assertEqual(<span class="st">&#39;hello&#39;</span>, response)</code></pre></div>
-<p><code>testing.gen_test</code> is a wrapper over tornado’s <code>gen.coroutine</code>. It runs the test synchronously under the ioloop that <code>testing.AsyncTestCase</code> creates in <code>setUp</code>. The test checks for the ‘hello’ message that we expect from the server on connection. <code>yield</code> makes sure that we for the response from the server. Note that if you write a <code>yield c.read_message()</code> when a message from server isn’t expected, the coroutine will keep waiting, eventually raising <code>tornado.ioloop.TimeoutError</code> (5 seconds by default). Great, we can write lot of tests using just what we have now.</p>
-<p>The tests can be run via:</p>
-<pre><code>python -m tornado.testing discover</code></pre>
-<p>This could still be further improved. We need to yield and ignore the ‘hello’ message in every test, for every client. And in your application, it may be a more complicated handshake - possibly a few initial messages. Once you write a test for that handshake, it needn’t be re-written in every test. To avoid that, we will write an an abstraction over this:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="at">@gen.coroutine</span>
-    <span class="kw">def</span> _mk_client(<span class="va">self</span>):
-        c <span class="op">=</span> <span class="cf">yield</span> <span class="va">self</span>._mk_connection()
-
-        <span class="co"># Discard the hello</span>
-        <span class="co"># This could be any initial handshake, which needs to be generalized</span>
-        <span class="co"># for most of the tests.</span>
-        _ <span class="op">=</span> <span class="cf">yield</span> c.read_message()
-
-        <span class="cf">raise</span> gen.Return(c)</code></pre></div>
-<p><code>_mk_client</code> here is a method in which you could place all the boilerplate. The key point here is the exception <code>gen.Return(c)</code> we raise in the end. <code>return</code> with a value is allowed only after Python <code>3.3</code>, so <code>tornado.gen</code> uses the value associated with this exception as the coroutine’s result.</p>
-<p>With <code>_mk_client</code> available, we can write tests which only include the relevant code:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">    <span class="at">@testing.gen_test</span>
-    <span class="kw">def</span> test_echo(<span class="va">self</span>):
-        <span class="co"># A client with the hello taken care of.</span>
-        c <span class="op">=</span> <span class="cf">yield</span> <span class="va">self</span>._mk_client()
-
-        <span class="co"># Send a &#39;foo&#39; to the server.</span>
-        c.write_message(<span class="st">&quot;foo&quot;</span>)
-        <span class="co"># Get the &#39;foo&#39; back.</span>
-        response <span class="op">=</span> <span class="cf">yield</span> c.read_message()
-        <span class="co"># Make sure that we got a &#39;foo&#39; back and not &#39;bar&#39;.</span>
-        <span class="va">self</span>.assertEqual(<span class="st">&#39;foo&#39;</span>, response)</code></pre></div>
-<p>The application built out of this post is available <a href="https://gist.github.com/crodjer/1e9989ab30fdc32db926">as a gist</a>.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Using pulseaudio to play system beeps</title>
-    <link href="http://www.rohanjain.in/bell/" />
-    <id>http://www.rohanjain.in/bell/</id>
-    <published>2015-08-20T00:00:00Z</published>
-    <updated>2015-08-20T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Recently, I built a new desktop. After receiving everything, I realized that I was missing the onboard speaker (which creates the annoying beep sound). Ideally, the computer case should have had it, but they don’t come with a buzzer anymore. My various applications rely on the system beep, hence I needed to find a software alternative. Turns out it is fairly trivial to configure it to capture alerts with pulseaudio:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">start-pulseaudio-x11</span>
-<span class="ex">pactl</span> upload-sample /usr/share/sounds/freedesktop/stereo/message.oga beep
-<span class="ex">pactl</span> load-module module-x11-bell sample=beep
-<span class="fu">xset</span> b 100</code></pre></div>
-<p>To automatically do it on X11 start, I placed the above in my <a href="https://github.com/crodjer/configs/blob/121caa22d4b7c6324fa9a5b22e2d2fcc334afc96/.xsessionrc#L31">xsessionrc</a>.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Switch between networks based on availability</title>
-    <link href="http://www.rohanjain.in/route-to/" />
-    <id>http://www.rohanjain.in/route-to/</id>
-    <published>2015-08-19T00:00:00Z</published>
-    <updated>2015-08-19T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Having been blessed with an unreliable internet, I always have had the need to change the default route when one goes down. <a href="http://linux.die.net/man/8/ip">ip</a> provides you the required tooling to do that. I had been doing it so often, that I ended up writing a function to do this:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">route_to ()</span> <span class="kw">{</span>
-    <span class="va">interface=$1</span>
-    <span class="va">route=$(</span><span class="ex">ip</span> route <span class="kw">|</span> <span class="fu">grep</span> <span class="va">$interface</span> <span class="kw">|</span> <span class="fu">sed</span> -r <span class="st">&#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39;</span> <span class="kw">|</span> <span class="fu">cut</span> -d <span class="st">&#39; &#39;</span> -f -4<span class="va">)</span>
-    <span class="kw">if</span><span class="bu"> [</span> <span class="ot">-n</span> <span class="st">&quot;</span><span class="va">$route</span><span class="st">&quot;</span><span class="bu"> ]</span>; <span class="kw">then</span>
-        <span class="fu">sudo</span> ip route del default <span class="op">&amp;&gt;</span> /dev/null
-        <span class="fu">sudo</span> ip route replace default via <span class="va">$route</span>
-    <span class="kw">else</span>
-        <span class="bu">echo</span> <span class="st">&quot;No routes match: </span><span class="va">$interface</span><span class="st">&quot;</span> <span class="op">&gt;&amp;2</span>
-    <span class="kw">fi</span>
-<span class="kw">}</span></code></pre></div>
-<p>With this in available in my shell, I can simply do <code>route_to wlan0</code> and my system will start using <code>wlan0</code> as the default interface.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>VNC over reverse SSH</title>
-    <link href="http://www.rohanjain.in/vnc/" />
-    <id>http://www.rohanjain.in/vnc/</id>
-    <published>2015-05-10T00:00:00Z</published>
-    <updated>2015-05-10T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>About a year ago, I switched my parents computer (lets call it <code>P</code>) from the pre-installed OS (Windows) to Ubuntu. The primary reason for this switch was it hard for me to debug and fix issues. Things have been smooth after the switch with no issues which I found hard to fix remotely. What specially has worked is my ability to log in to the computer when its on through my VPS and service it.</p>
-<h2 id="reverse-ssh">Reverse SSH</h2>
-<p>Whenever <code>P</code> starts, it makes a reverse SSH connection to my VPS. I use <a href="https://www.archlinux.org/packages/community/x86_64/autossh/">autossh</a> to monitor and make sure that it is eventually always connected.</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">autossh</span> -M 10001 -f -NXYR 10000:localhost:22 vps</code></pre></div>
-<p>Here <code>vps</code> is a SSH alias for my personal VPS.</p>
-<p>I can tunnel through the VPS and login to <code>P</code> via VPS using the following SSH configuration:</p>
-<pre class="config"><code>Host home
-     Hostname localhost
-     User username
-     Port 10000
-     ProxyCommand ssh -e none -W %h:%p vps</code></pre>
-<p>To log in to <code>P</code> transparently, I can simply do:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">ssh</span> home</code></pre></div>
-<p>I use this to resolve most of the issues. Of course it does have the requirement that the system be booted up and connected to a network.</p>
-<h2 id="vnc">VNC</h2>
-<p>There also can be issues which have to do with the GUI (say browser maintenance) and cannot be done easily over a text SSH session. For those cases, VNC is to rescue. I create a VNC server on <code>P</code> using <a href="https://wiki.archlinux.org/index.php/X11vnc">x11vnc</a> and tunnel the VNC port to my local through SSH. Now, I can access <code>P</code>’s graphical session remotely via a vnc client (mine is <a href="https://www.archlinux.org/packages/community/x86_64/tigervnc/">tigervnc</a>).</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">ssh</span> home -L 5900:localhost:5900 <span class="st">&quot;x11vnc -rfbauth ~/.vnc/passwd -display :0 -noxdamage&quot;</span>
-$ <span class="ex">vncviewer</span> localhost::5900 -QualityLevel 3 -CompressLevel 6</code></pre></div>
-<p>This method is much better compared to the more common solutions such has Google’s VNC chrome extension or other proprietary services. But they are slow and untrustable 3rd parties. With this way of setting up VNC, everything is protected under SSH connections.</p>
 ]]></summary>
 </entry>
 
