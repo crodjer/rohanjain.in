@@ -1,12 +1,1 @@
-_cache
-site.hi
-site.ho
-site.o
-site
-_site
-_deploy
-tmp
-.cabal-sandbox
-cabal.sandbox.config
-dist
-.stack-work
+public
