@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 project_root=$(git rev-parse --show-toplevel)
-export GIT_DEPLOY_DIR=$project_root/_site
+export GIT_DEPLOY_DIR=$project_root/public
 
 $project_root/scripts/deploy.sh && \
     git push origin master && \
