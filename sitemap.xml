@@ -2,102 +2,102 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://pi.rohanjain.in/decentralized-twitter/</loc>
+    <loc>/decentralized-twitter/</loc>
     <lastmod>2017-02-11T15:20:45+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/code/</loc>
+    <loc>/code/</loc>
     <lastmod>2017-02-11T09:48:44+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/telescope/</loc>
+    <loc>/telescope/</loc>
     <lastmod>2016-05-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/sky/</loc>
+    <loc>/sky/</loc>
     <lastmod>2016-05-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/infi-mail/</loc>
+    <loc>/infi-mail/</loc>
     <lastmod>2016-04-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/hakyll-years/</loc>
+    <loc>/hakyll-years/</loc>
     <lastmod>2015-08-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/hakyll-clean-urls/</loc>
+    <loc>/hakyll-clean-urls/</loc>
     <lastmod>2015-08-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/hakyll-sitemap/</loc>
+    <loc>/hakyll-sitemap/</loc>
     <lastmod>2015-08-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/ws-test/</loc>
+    <loc>/ws-test/</loc>
     <lastmod>2015-08-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/bell/</loc>
+    <loc>/bell/</loc>
     <lastmod>2015-08-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/route-to/</loc>
+    <loc>/route-to/</loc>
     <lastmod>2015-08-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/vnc/</loc>
+    <loc>/vnc/</loc>
     <lastmod>2015-05-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/bash/</loc>
+    <loc>/bash/</loc>
     <lastmod>2015-03-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/emacs-flymake-with-virtualenvs-in-python-mode/</loc>
+    <loc>/emacs-flymake-with-virtualenvs-in-python-mode/</loc>
     <lastmod>2014-01-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/yet-another-vim-productivity-post-server-client/</loc>
+    <loc>/yet-another-vim-productivity-post-server-client/</loc>
     <lastmod>2012-04-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</loc>
+    <loc>/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</loc>
     <lastmod>2011-08-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/about/</loc>
+    <loc>/about/</loc>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/blog/</loc>
+    <loc>/blog/</loc>
     <lastmod>2017-02-11T15:20:45+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/fixed/</loc>
+    <loc>/fixed/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pi.rohanjain.in/</loc>
+    <loc>/</loc>
     <lastmod>2017-02-11T15:20:45+00:00</lastmod>
     <priority>0</priority>
   </url>
