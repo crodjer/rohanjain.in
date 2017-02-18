@@ -1,109 +1,105 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-    <url>
-        <loc>http://www.rohanjain.in/about/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2016-12-12</lastmod>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://www.rohanjain.in/telescope/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2016-12-12</lastmod>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://www.rohanjain.in/sky/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2016-12-12</lastmod>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://www.rohanjain.in/infi-mail/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2016-12-12</lastmod>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://www.rohanjain.in/hakyll-years/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2016-12-12</lastmod>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://www.rohanjain.in/hakyll-sitemap/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2016-12-12</lastmod>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://www.rohanjain.in/hakyll-clean-urls/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2016-12-12</lastmod>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://www.rohanjain.in/ws-test/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2016-12-12</lastmod>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://www.rohanjain.in/bell/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2016-12-12</lastmod>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://www.rohanjain.in/route-to/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2016-12-12</lastmod>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://www.rohanjain.in/vnc/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2016-12-12</lastmod>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://www.rohanjain.in/bash/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2016-12-12</lastmod>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://www.rohanjain.in/emacs-flymake-with-virtualenvs-in-python-mode/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2016-12-12</lastmod>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://www.rohanjain.in/yet-another-vim-productivity-post-server-client/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2016-12-12</lastmod>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://www.rohanjain.in/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</loc>
-        <changefreq>weekly</changefreq>
-        <lastmod>2016-12-12</lastmod>
-        <priority>0.8</priority>
-    </url>
-
+  
+  <url>
+    <loc>https://pi.rohanjain.in/decentralized-twitter/</loc>
+    <lastmod>2017-02-11T15:20:45+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/code/</loc>
+    <lastmod>2017-02-11T09:48:44+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/telescope/</loc>
+    <lastmod>2016-05-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/sky/</loc>
+    <lastmod>2016-05-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/infi-mail/</loc>
+    <lastmod>2016-04-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/hakyll-years/</loc>
+    <lastmod>2015-08-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/hakyll-clean-urls/</loc>
+    <lastmod>2015-08-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/hakyll-sitemap/</loc>
+    <lastmod>2015-08-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/ws-test/</loc>
+    <lastmod>2015-08-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/bell/</loc>
+    <lastmod>2015-08-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/route-to/</loc>
+    <lastmod>2015-08-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/vnc/</loc>
+    <lastmod>2015-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/bash/</loc>
+    <lastmod>2015-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/emacs-flymake-with-virtualenvs-in-python-mode/</loc>
+    <lastmod>2014-01-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/yet-another-vim-productivity-post-server-client/</loc>
+    <lastmod>2012-04-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</loc>
+    <lastmod>2011-08-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/blog/</loc>
+    <lastmod>2017-02-11T15:20:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/fixed/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pi.rohanjain.in/</loc>
+    <lastmod>2017-02-11T15:20:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
 </urlset>

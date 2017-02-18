@@ -1,4 +1,0 @@
-AddDefaultCharset UTF-8
-RewriteEngine On
-RewriteRule ^\w+/\d{4}/\d{2}/\d{2}/(.*)$ /$1 [R=permanent]
-ErrorDocument 404 /static/html/404.html

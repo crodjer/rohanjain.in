@@ -14,10 +14,10 @@
 <title>
 
 
-     The ubiquitous shell 
+     Decentralized Twitter 
 
 </title>
-<link rel="canonical" href="https://pi.rohanjain.in/bash/">
+<link rel="canonical" href="https://pi.rohanjain.in/decentralized-twitter/">
 
 
 
@@ -124,7 +124,7 @@
                 <div class="title-container">
                     <div class="page-heading">
 
-    The ubiquitous shell
+    Decentralized Twitter
 
 </div>
 
@@ -132,7 +132,7 @@
                 </div>
                 <div class="meta">
                     
-                    <div class="date" title='Thu Mar 5 2015 00:00:00 UTC'>Mar 5, 2015</div>
+                    <div class="date" title='Sat Feb 11 2017 15:20:45 UTC'>Feb 11, 2017</div>
                     
                     
                     <div class="reading-time"><div class="middot"></div>2 minutes read</div>
@@ -140,49 +140,38 @@
                 </div>
             </div>
             <div class="markdown">
-                <p>Nothing makes a terminal feel more like home as one&rsquo;s own shell
-configuration. My shell is bash, configured through a <a href="https://github.com/crodjer/configs/blob/master/.bashrc">.bashrc</a> and
-<a href="https://github.com/crodjer/configs/blob/master/.profile">.profile</a>. Bash is likely to be present in any Unix machine one
-uses.</p>
-
-<p>Bash is also my primary IDE. This allows for keeping a relatively simple set of
-utilities and tools to internalize. Coupled with a reliable window manager,
-workflows can be quickly scripted in the head. Shell scripts are an option as
-well for more complex flows. This can be done at multiple levels: using uniquely
-identifiable comments in commands , bash functions, complete bash script.</p>
-
-<p>Apart from the standard utilities (sed, cut, cat, tr etc.), I use a few tools as
-an aid:</p>
+                <p>As a social network, twitter has a few fairly unique characteristics:</p>
 
 <ul>
-<li><strong><a href="https://github.com/ggreer/the_silver_searcher">ag</a></strong> for amazingly fast lookup in files.</li>
-<li><strong><a href="https://wiki.archlinux.org/index.php/rsync">rsync</a></strong>, to keep the files synchronized with remote servers.</li>
-<li><strong><a href="https://github.com/ggreer/the_silver_searcher">entr</a></strong> to run build/test commands on a file change. Or, with
-rsync, synchronize on modifications.</li>
-<li><strong><a href="https://www.archlinux.org/packages/community/any/autojump/">autojump</a></strong> to jump directly to frequently used directories.</li>
-<li><strong><a href="https://stedolan.github.io/jq/">jq</a></strong> to process JSON output of a command.</li>
+<li>It forces people to be more creative in trying to express the idea within 140
+characters.</li>
+<li>Ability to control the content that you receive. Stricter filtering is
+possible based on one&rsquo;s interests.</li>
+<li>On platforms such as Quora/Facebook, the feed is not deterministic. That&rsquo;s
+not the case with twitter. You see tweets in order and as they happen.
+Twitter doesn&rsquo;t try to decide what is important and what is not.</li>
 </ul>
 
-<p>Tools are designed for the console first, and then bound to editors or
-IDEs. Familiarizing oneself to the command line interface makes the maximum
-amount of functionality accessible. For example, <a href="https://github.com/magit/magit">magit</a> is a powerful git
-interface for Emacs, but can be limiting for complex git operations such as an
-interactive rebase.</p>
+<p>But Twitter has been bleeding money since I have known about it. It has
+seemingly created a lot of value in sharing of ideas and news. If it were to go
+away, it&rsquo;ll have an (at least temporary) impact on its users.</p>
 
-<p>Composibility of the various commands can be useful as well, allowing one to
-build complex, repeatable commands. For example, the following uses <code>ip</code> to
-change a system&rsquo;s default route, given the interface:</p>
+<p>Are there any alternatives to Twitter? Sometime back, I started a casual
+discussion about this with a friend. There isn&rsquo;t an obvious service that
+currently exists which would fill in the void that Twitter might leave. Other
+than what Twitter what already provides, we needed something more resilient. So,
+it could be de-centralized, i.e. not dependent on a single server to provide
+content.</p>
 
-<pre><code class="language-bash">ip route del default &amp;&gt; /dev/null
-ip route replace default via $(ip route
-     | grep ppp0 # Change this filter as per need.
-     | sed -r 's/\.0\/[[:digit:]]{2,3} /.1 /'
-     | cut -d ' ' -f -4)
-</code></pre>
+<p>Hmm, we want a client-server architecture. It could be a standardized protocol.
+Services would spin up for non-tech people so that they could host their content
+on them. Then because of the standardized protocol, people could innovate on
+clients as well! Continue the discussion on this for a few more seconds and
+then&hellip;wait! This already exists. The world already uses it, and quiet
+successfully. And, it is an open standard. We were trying to invent blogs and
+RSS!</p>
 
-<p>A great piece of literature on the Unix Philosophy is
-<a href="http://amzn.to/1qFlKCz">The Art of Unix Programming</a> by Eric S. Raymond. It also talks about the
-Unix interface design.</p>
+<p>And there was an end to a short brainstorming session.</p>
 
                 <br>
                 <p><a href="https://pi.rohanjain.in/blog/">Back to posts</a></p>

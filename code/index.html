@@ -14,10 +14,10 @@
 <title>
 
 
-     The ubiquitous shell 
+     Find my code at Github 
 
 </title>
-<link rel="canonical" href="https://pi.rohanjain.in/bash/">
+<link rel="canonical" href="https://pi.rohanjain.in/code/">
 
 
 
@@ -116,85 +116,23 @@
     </div>
 </section>
 
-
-<section class="main post non-narrow zero-top-spacing">
+<section class="main">
     <div class="container">
         <div class="content">
-            <div class="front-matter">
-                <div class="title-container">
-                    <div class="page-heading">
+            <div class="page-heading">
 
-    The ubiquitous shell
+    Find my code at Github
 
 </div>
 
-                    <div class="initials"><a href="https://pi.rohanjain.in/">RJ</a></div>
-                </div>
-                <div class="meta">
-                    
-                    <div class="date" title='Thu Mar 5 2015 00:00:00 UTC'>Mar 5, 2015</div>
-                    
-                    
-                    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
-                    
-                </div>
-            </div>
             <div class="markdown">
-                <p>Nothing makes a terminal feel more like home as one&rsquo;s own shell
-configuration. My shell is bash, configured through a <a href="https://github.com/crodjer/configs/blob/master/.bashrc">.bashrc</a> and
-<a href="https://github.com/crodjer/configs/blob/master/.profile">.profile</a>. Bash is likely to be present in any Unix machine one
-uses.</p>
+                <p>You can find most of the public code I have written at
+<a href="https://github.com/crodjer">Github</a>.</p>
 
-<p>Bash is also my primary IDE. This allows for keeping a relatively simple set of
-utilities and tools to internalize. Coupled with a reliable window manager,
-workflows can be quickly scripted in the head. Shell scripts are an option as
-well for more complex flows. This can be done at multiple levels: using uniquely
-identifiable comments in commands , bash functions, complete bash script.</p>
-
-<p>Apart from the standard utilities (sed, cut, cat, tr etc.), I use a few tools as
-an aid:</p>
-
-<ul>
-<li><strong><a href="https://github.com/ggreer/the_silver_searcher">ag</a></strong> for amazingly fast lookup in files.</li>
-<li><strong><a href="https://wiki.archlinux.org/index.php/rsync">rsync</a></strong>, to keep the files synchronized with remote servers.</li>
-<li><strong><a href="https://github.com/ggreer/the_silver_searcher">entr</a></strong> to run build/test commands on a file change. Or, with
-rsync, synchronize on modifications.</li>
-<li><strong><a href="https://www.archlinux.org/packages/community/any/autojump/">autojump</a></strong> to jump directly to frequently used directories.</li>
-<li><strong><a href="https://stedolan.github.io/jq/">jq</a></strong> to process JSON output of a command.</li>
-</ul>
-
-<p>Tools are designed for the console first, and then bound to editors or
-IDEs. Familiarizing oneself to the command line interface makes the maximum
-amount of functionality accessible. For example, <a href="https://github.com/magit/magit">magit</a> is a powerful git
-interface for Emacs, but can be limiting for complex git operations such as an
-interactive rebase.</p>
-
-<p>Composibility of the various commands can be useful as well, allowing one to
-build complex, repeatable commands. For example, the following uses <code>ip</code> to
-change a system&rsquo;s default route, given the interface:</p>
-
-<pre><code class="language-bash">ip route del default &amp;&gt; /dev/null
-ip route replace default via $(ip route
-     | grep ppp0 # Change this filter as per need.
-     | sed -r 's/\.0\/[[:digit:]]{2,3} /.1 /'
-     | cut -d ' ' -f -4)
-</code></pre>
-
-<p>A great piece of literature on the Unix Philosophy is
-<a href="http://amzn.to/1qFlKCz">The Art of Unix Programming</a> by Eric S. Raymond. It also talks about the
-Unix interface design.</p>
-
-                <br>
-                <p><a href="https://pi.rohanjain.in/blog/">Back to posts</a></p>
-            </div>
-            <br>
-            <div class="disqus">
-                
             </div>
         </div>
     </div>
 </section>
-
 
 
 <script>

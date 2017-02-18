@@ -14,10 +14,10 @@
 <title>
 
 
-     Using pulseaudio to play system beeps 
+     Fixed 
 
 </title>
-<link rel="canonical" href="https://pi.rohanjain.in/bell/">
+<link rel="canonical" href="https://pi.rohanjain.in/fixed/">
 
 
 
@@ -59,6 +59,8 @@
 >
 
 
+
+  <link href="https://pi.rohanjain.in/fixed/index.xml" rel="alternate" type="application/rss+xml" title="Rohan Jain" />
 
 
 
@@ -116,57 +118,24 @@
     </div>
 </section>
 
-
-<section class="main post non-narrow zero-top-spacing">
+<section class="main">
     <div class="container">
         <div class="content">
-            <div class="front-matter">
-                <div class="title-container">
-                    <div class="page-heading">
-
-    Using pulseaudio to play system beeps
-
-</div>
-
-                    <div class="initials"><a href="https://pi.rohanjain.in/">RJ</a></div>
-                </div>
-                <div class="meta">
-                    
-                    <div class="date" title='Thu Aug 20 2015 00:00:00 UTC'>Aug 20, 2015</div>
-                    
-                    
-                    <div class="reading-time"><div class="middot"></div>1 minute read</div>
-                    
-                </div>
-            </div>
-            <div class="markdown">
-                <p>Recently, I built a new desktop. After receiving everything, I realized that I
-was missing the onboard speaker (which creates the annoying beep sound).
-Ideally, the computer case should have had it, but they don&rsquo;t come with a buzzer
-anymore. My various applications rely on the system beep, hence I needed to find
-a software alternative. Turns out it is fairly trivial to configure it to
-capture alerts with pulseaudio:</p>
-
-<pre><code class="language-bash">start-pulseaudio-x11
-pactl upload-sample /usr/share/sounds/freedesktop/stereo/message.oga beep
-pactl load-module module-x11-bell sample=beep
-xset b 100
-</code></pre>
-
-<p>To automatically do it on X11 start, I placed the above in my
-<a href="https://github.com/crodjer/configs/blob/121caa22d4b7c6324fa9a5b22e2d2fcc334afc96/.xsessionrc#L31">xsessionrc</a>.</p>
-
-                <br>
-                <p><a href="https://pi.rohanjain.in/blog/">Back to posts</a></p>
-            </div>
-            <br>
-            <div class="disqus">
+            <div class="page-heading">Blog</div>
+            <ul>
                 
-            </div>
+                <li class="post-item">
+    
+    <span class="meta"><time datetime='0001-01-01T00:00:00Z'>Jan 1, 0001</time></span>
+    
+    <a href="https://pi.rohanjain.in/about/"><span>About</span></a>
+</li>
+
+                
+            </ul>
         </div>
     </div>
 </section>
-
 
 
 <script>
@@ -189,4 +158,5 @@ ga('send', 'pageview');
 
 </body>
 </html>
+
 
