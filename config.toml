@@ -1,4 +1,4 @@
-baseurl             = "https://pi.rohanjain.in/"
+baseurl             = "/"
 builddrafts         = true
 canonifyurls        = true
 contentdir          = "content"
