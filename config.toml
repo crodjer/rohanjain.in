@@ -16,6 +16,7 @@ theme               = "cocoa"
 [permalinks]
 blog  = ":slug/"
 fixed = ":slug/"
+old = ":slug/"
 
 [params]
 author       = "Rohan Jain"
