@@ -1,8 +1,6 @@
 +++
 title = "Decentralized Twitter"
 date = "2017-02-11T15:20:45Z"
-draft = false
-
 +++
 
 As a social network, twitter has a few fairly unique characteristics:
