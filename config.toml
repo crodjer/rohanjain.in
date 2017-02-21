@@ -1,12 +1,12 @@
 baseurl             = "/"
-builddrafts         = true
+builddrafts         = false
 canonifyurls        = true
 contentdir          = "content"
 languageCode        = "en-US"
 layoutdir           = "layouts"
 publishdir          = "public"
 author              = "Rohan Jain"
-title               = "Rohan Jain"
+title               = "The Perpetual Amature"
 pygmentsuseclasses  = true
 # disqusshortname     = "cocoaexamplesite" # Comment out to disable Disqus.
 pluralizelisttitles = false
