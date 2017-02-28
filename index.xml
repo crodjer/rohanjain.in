@@ -18,32 +18,31 @@
       <description>&lt;p&gt;I was introduced to OSX for the first time in September, 2015. Coming from a
 XMonad/Linux based setup, I was accustomed to powerful and fast window
 management. Any OSX based solution for window management system I tried, lacked
-these quality. I tried:&lt;/p&gt;
+these qualities. I tried:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Amethyst which follows most of the basic XMonad operations.&lt;/li&gt;
-&lt;li&gt;Alfred for deterministic window switching for a while. Initially there was
-the lag for me in typing the program name, but that went away pretty quickly
-with habits.&lt;/li&gt;
-&lt;li&gt;Mjolinr, which is configured in Lua and can actually be quite powerful.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Amethyst&lt;/em&gt;, window manager with basic XMonad bindings.&lt;/li&gt;
+&lt;li&gt;Just type the application name in &lt;em&gt;Alfred&lt;/em&gt;. Initially this was slow, but
+quickly became habitual.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Mjolinr&lt;/em&gt;, which is configured in Lua and can actually be quite powerful.&lt;/li&gt;
+&lt;li&gt;Numerous other programs out there which try to solve the same problem in
+similar fashion.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;These programs sort of worked, but they are appallingly slow and unresponsive.
-OSX is full of unnecessary animations and bloat which causes me to lose context
-while window switching (say between Emacs and the terminal). Alfred based
-switching doesn&amp;rsquo;t work because OSX doesn&amp;rsquo;t work on window level, but application
-level. So, good luck tracking multiple terminal/browser windows with this
-method.&lt;/p&gt;
+OSX is full of unnecessary animations and bloat which makes everything feel
+laggy and slow. Alfred based switching works on application level and not window
+level.&lt;/p&gt;
 
-&lt;p&gt;Eventually, I noticed that &lt;code&gt;Cmd-Tab&lt;/code&gt; based window switching is very fast. So,
-for last 6 months, I have been using a two window strategy. That is:&lt;/p&gt;
+&lt;p&gt;Eventually, I noticed that &lt;code&gt;Cmd-Tab&lt;/code&gt; based window switching is fast. So, for
+last 6 months, I have been using a two window strategy. That is:&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;The primary workflow should be dependent only two windows.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The primary workflow must be dependent on only two windows.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;This means that any application I want to have in my workflow must run in either
-of these two windows.&lt;/p&gt;
+of those windows.&lt;/p&gt;
 
-&lt;p&gt;In my case, those windows are:&lt;/p&gt;
+&lt;p&gt;Those windows in my case are:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;iTerm2&lt;/em&gt;&lt;br /&gt;
@@ -52,23 +51,33 @@ run a in-terminal emacs client and the rest all windows will various shell
 sessions and split configurations of their own. This way, I&amp;rsquo;ll spend most of
 my time within a tmux session.&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;Browser&lt;/em&gt;&lt;br /&gt;
-The browser here works like an OS i.e. place to have various applications:
-Mail/Slack/Calender run. Plus of course, to function as a browser.&lt;/li&gt;
+Apart from functioning as a browser, it serves as an host for applications
+such as: Mail, Slack, Calender.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;There are multiple benefits of this setup that I notice:&lt;/p&gt;
+&lt;p&gt;There are multiple benefits of this setup:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Quick window switching. It is fast enough so that the continuity is
-maintained.&lt;/li&gt;
-&lt;li&gt;Keystrokes are deterministic. This, actually is very important. At times,
-computers may get unresponsive. Meanwhile, you don&amp;rsquo;t want to be blocked
-yourself. So, with this system, just queue in the keystrokes (given you know
-well as to what will happen) and let the computer execute things at its own
-pace. This also is my major complaint against touch phones (compared to say,
-an old Nokia QWERTY phone).&lt;/li&gt;
+&lt;li&gt;Quick window switching. Way faster than any solutions out there.&lt;/li&gt;
 &lt;li&gt;This flow is much more universal and works on most systems: RaspberryPi,
 remote machines, Linux TTY.&lt;/li&gt;
+&lt;li&gt;Keystrokes are deterministic. When computer gets unresponsive, you don&amp;rsquo;t want
+to be blocked. Just queue in the keystrokes and let the computer execute
+things at its own pace. This also is my major complaint against touch phones
+(compared to say, an old Nokia QWERTY phone).&lt;/li&gt;
+&lt;li&gt;I use Vim as a text editor for anything non Clojure. With this, I can have a
+vertical split (Vim on left and multiple accompanying terminals on right).
+This is a further reduction in context switch.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There are drawbacks too:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Not every application can run in the browser/terminal. Because of this, you
+end up negotiating for alternates.&lt;/li&gt;
+&lt;li&gt;Although most of Emacs works well in terminal, some bindings at times won&amp;rsquo;t
+work. This isn&amp;rsquo;t a issue for me particularly.&lt;/li&gt;
+&lt;li&gt;This doesn&amp;rsquo;t solve all of the OSX related annoyances.&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

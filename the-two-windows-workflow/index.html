@@ -145,32 +145,31 @@
                 <p>I was introduced to OSX for the first time in September, 2015. Coming from a
 XMonad/Linux based setup, I was accustomed to powerful and fast window
 management. Any OSX based solution for window management system I tried, lacked
-these quality. I tried:</p>
+these qualities. I tried:</p>
 
 <ul>
-<li>Amethyst which follows most of the basic XMonad operations.</li>
-<li>Alfred for deterministic window switching for a while. Initially there was
-the lag for me in typing the program name, but that went away pretty quickly
-with habits.</li>
-<li>Mjolinr, which is configured in Lua and can actually be quite powerful.</li>
+<li><em>Amethyst</em>, window manager with basic XMonad bindings.</li>
+<li>Just type the application name in <em>Alfred</em>. Initially this was slow, but
+quickly became habitual.</li>
+<li><em>Mjolinr</em>, which is configured in Lua and can actually be quite powerful.</li>
+<li>Numerous other programs out there which try to solve the same problem in
+similar fashion.</li>
 </ul>
 
 <p>These programs sort of worked, but they are appallingly slow and unresponsive.
-OSX is full of unnecessary animations and bloat which causes me to lose context
-while window switching (say between Emacs and the terminal). Alfred based
-switching doesn&rsquo;t work because OSX doesn&rsquo;t work on window level, but application
-level. So, good luck tracking multiple terminal/browser windows with this
-method.</p>
+OSX is full of unnecessary animations and bloat which makes everything feel
+laggy and slow. Alfred based switching works on application level and not window
+level.</p>
 
-<p>Eventually, I noticed that <code>Cmd-Tab</code> based window switching is very fast. So,
-for last 6 months, I have been using a two window strategy. That is:</p>
+<p>Eventually, I noticed that <code>Cmd-Tab</code> based window switching is fast. So, for
+last 6 months, I have been using a two window strategy. That is:</p>
 
-<p><strong>The primary workflow should be dependent only two windows.</strong></p>
+<p><strong>The primary workflow must be dependent on only two windows.</strong></p>
 
 <p>This means that any application I want to have in my workflow must run in either
-of these two windows.</p>
+of those windows.</p>
 
-<p>In my case, those windows are:</p>
+<p>Those windows in my case are:</p>
 
 <ul>
 <li><em>iTerm2</em><br />
@@ -179,23 +178,33 @@ run a in-terminal emacs client and the rest all windows will various shell
 sessions and split configurations of their own. This way, I&rsquo;ll spend most of
 my time within a tmux session.</li>
 <li><em>Browser</em><br />
-The browser here works like an OS i.e. place to have various applications:
-Mail/Slack/Calender run. Plus of course, to function as a browser.</li>
+Apart from functioning as a browser, it serves as an host for applications
+such as: Mail, Slack, Calender.</li>
 </ul>
 
-<p>There are multiple benefits of this setup that I notice:</p>
+<p>There are multiple benefits of this setup:</p>
 
 <ul>
-<li>Quick window switching. It is fast enough so that the continuity is
-maintained.</li>
-<li>Keystrokes are deterministic. This, actually is very important. At times,
-computers may get unresponsive. Meanwhile, you don&rsquo;t want to be blocked
-yourself. So, with this system, just queue in the keystrokes (given you know
-well as to what will happen) and let the computer execute things at its own
-pace. This also is my major complaint against touch phones (compared to say,
-an old Nokia QWERTY phone).</li>
+<li>Quick window switching. Way faster than any solutions out there.</li>
 <li>This flow is much more universal and works on most systems: RaspberryPi,
 remote machines, Linux TTY.</li>
+<li>Keystrokes are deterministic. When computer gets unresponsive, you don&rsquo;t want
+to be blocked. Just queue in the keystrokes and let the computer execute
+things at its own pace. This also is my major complaint against touch phones
+(compared to say, an old Nokia QWERTY phone).</li>
+<li>I use Vim as a text editor for anything non Clojure. With this, I can have a
+vertical split (Vim on left and multiple accompanying terminals on right).
+This is a further reduction in context switch.</li>
+</ul>
+
+<p>There are drawbacks too:</p>
+
+<ul>
+<li>Not every application can run in the browser/terminal. Because of this, you
+end up negotiating for alternates.</li>
+<li>Although most of Emacs works well in terminal, some bindings at times won&rsquo;t
+work. This isn&rsquo;t a issue for me particularly.</li>
+<li>This doesn&rsquo;t solve all of the OSX related annoyances.</li>
 </ul>
 
                 <br>
