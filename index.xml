@@ -21,7 +21,7 @@ management. Any OSX based solution for window management system I tried, lacked
 these qualities. I tried:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;em&gt;Amethyst&lt;/em&gt;, window manager with basic XMonad bindings.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Amethyst&lt;/em&gt;, a window manager with basic XMonad bindings.&lt;/li&gt;
 &lt;li&gt;Just type the application name in &lt;em&gt;Alfred&lt;/em&gt;. Initially this was slow, but
 quickly became habitual.&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;Mjolinr&lt;/em&gt;, which is configured in Lua and can actually be quite powerful.&lt;/li&gt;
