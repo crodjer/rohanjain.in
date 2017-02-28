@@ -67,7 +67,7 @@ things at its own pace. This also is my major complaint against touch phones
 (compared to say, an old Nokia QWERTY phone).&lt;/li&gt;
 &lt;li&gt;I use Vim as a text editor for anything non Clojure. With this, I can have a
 vertical split (Vim on left and multiple accompanying terminals on right).
-This is a further reduction in context switch.&lt;/li&gt;
+Hence, all of the context stays in the same tmux window.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;There are drawbacks too:&lt;/p&gt;
