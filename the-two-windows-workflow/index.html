@@ -15,11 +15,11 @@
 
 
     
-    Decentralized Twitter | The Perpetual Amature
+    The two windows workflow | The Perpetual Amature
     
 
 </title>
-<link rel="canonical" href="/decentralized-twitter/">
+<link rel="canonical" href="/the-two-windows-workflow/">
 
 
 
@@ -126,7 +126,7 @@
                 <div class="title-container">
                     <div class="page-heading">
 
-    Decentralized Twitter
+    The two windows workflow
 
 </div>
 
@@ -134,7 +134,7 @@
                 </div>
                 <div class="meta">
                     
-                    <div class="date" title='Sat Feb 11 2017 15:20:45 UTC'>Feb 11, 2017</div>
+                    <div class="date" title='Mon Feb 27 2017 06:15:12 UTC'>Feb 27, 2017</div>
                     
                     
                     <div class="reading-time"><div class="middot"></div>2 minutes read</div>
@@ -142,38 +142,61 @@
                 </div>
             </div>
             <div class="markdown">
-                <p>As a social network, twitter has a few fairly unique characteristics:</p>
+                <p>I was introduced to OSX for the first time in September, 2015. Coming from a
+XMonad/Linux based setup, I was accustomed to powerful and fast window
+management. Any OSX based solution for window management system I tried, lacked
+these quality. I tried:</p>
 
 <ul>
-<li>It forces people to be more creative in trying to express the idea within 140
-characters.</li>
-<li>Ability to control the content that you receive. Stricter filtering is
-possible based on one&rsquo;s interests.</li>
-<li>On platforms such as Quora/Facebook, the feed is not deterministic. That&rsquo;s
-not the case with twitter. You see tweets in order and as they happen.
-Twitter doesn&rsquo;t try to decide what is important and what is not.</li>
+<li>Amethyst which follows most of the basic XMonad operations.</li>
+<li>Alfred for deterministic window switching for a while. Initially there was
+the lag for me in typing the program name, but that went away pretty quickly
+with habits.</li>
+<li>Mjolinr, which is configured in Lua and can actually be quite powerful.</li>
 </ul>
 
-<p>But Twitter has been bleeding money since I have known about it. It has
-seemingly created a lot of value in sharing of ideas and news. If it were to go
-away, it&rsquo;ll have an (at least temporary) impact on its users.</p>
+<p>These programs sort of worked, but they are appallingly slow and unresponsive.
+OSX is full of unnecessary animations and bloat which causes me to lose context
+while window switching (say between Emacs and the terminal). Alfred based
+switching doesn&rsquo;t work because OSX doesn&rsquo;t work on window level, but application
+level. So, good luck tracking multiple terminal/browser windows with this
+method.</p>
 
-<p>Are there any alternatives to Twitter? Sometime back, I started a casual
-discussion about this with a friend. There isn&rsquo;t an obvious service that
-currently exists which would fill in the void that Twitter might leave. Other
-than what Twitter what already provides, we needed something more resilient. So,
-it could be de-centralized, i.e. not dependent on a single server to provide
-content.</p>
+<p>Eventually, I noticed that <code>Cmd-Tab</code> based window switching is very fast. So,
+for last 6 months, I have been using a two window strategy. That is:</p>
 
-<p>Hmm, we want a client-server architecture. It could be a standardized protocol.
-Services would spin up for non-tech people so that they could host their content
-on them. Then because of the standardized protocol, people could innovate on
-clients as well! Continue the discussion on this for a few more seconds and
-then&hellip;wait! This already exists. The world already uses it, and quiet
-successfully. And, it is an open standard. We were trying to invent blogs and
-RSS!</p>
+<p><strong>The primary workflow should be dependent only two windows.</strong></p>
 
-<p>And there was an end to a short brainstorming session.</p>
+<p>This means that any application I want to have in my workflow must run in either
+of these two windows.</p>
+
+<p>In my case, those windows are:</p>
+
+<ul>
+<li><em>iTerm2</em><br />
+This includes a <code>tmux</code> session, with multiple windows. The first window will
+run a in-terminal emacs client and the rest all windows will various shell
+sessions and split configurations of their own. This way, I&rsquo;ll spend most of
+my time within a tmux session.</li>
+<li><em>Browser</em><br />
+The browser here works like an OS i.e. place to have various applications:
+Mail/Slack/Calender run. Plus of course, to function as a browser.</li>
+</ul>
+
+<p>There are multiple benefits of this setup that I notice:</p>
+
+<ul>
+<li>Quick window switching. It is fast enough so that the continuity is
+maintained.</li>
+<li>Keystrokes are deterministic. This, actually is very important. At times,
+computers may get unresponsive. Meanwhile, you don&rsquo;t want to be blocked
+yourself. So, with this system, just queue in the keystrokes (given you know
+well as to what will happen) and let the computer execute things at its own
+pace. This also is my major complaint against touch phones (compared to say,
+an old Nokia QWERTY phone).</li>
+<li>This flow is much more universal and works on most systems: RaspberryPi,
+remote machines, Linux TTY.</li>
+</ul>
 
                 <br>
                 <p><a href="/blog/">Back to posts</a></p>

@@ -1,13 +1,77 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rohan Jain</title>
+    <title>The Perpetual Amature</title>
     <link>/index.xml</link>
-    <description>Recent content on Rohan Jain</description>
+    <description>Recent content on The Perpetual Amature</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sat, 11 Feb 2017 15:20:45 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 27 Feb 2017 06:15:12 +0000</lastBuildDate>
     <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>The two windows workflow</title>
+      <link>/the-two-windows-workflow/</link>
+      <pubDate>Mon, 27 Feb 2017 06:15:12 +0000</pubDate>
+      
+      <guid>/the-two-windows-workflow/</guid>
+      <description>&lt;p&gt;I was introduced to OSX for the first time in September, 2015. Coming from a
+XMonad/Linux based setup, I was accustomed to powerful and fast window
+management. Any OSX based solution for window management system I tried, lacked
+these quality. I tried:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Amethyst which follows most of the basic XMonad operations.&lt;/li&gt;
+&lt;li&gt;Alfred for deterministic window switching for a while. Initially there was
+the lag for me in typing the program name, but that went away pretty quickly
+with habits.&lt;/li&gt;
+&lt;li&gt;Mjolinr, which is configured in Lua and can actually be quite powerful.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These programs sort of worked, but they are appallingly slow and unresponsive.
+OSX is full of unnecessary animations and bloat which causes me to lose context
+while window switching (say between Emacs and the terminal). Alfred based
+switching doesn&amp;rsquo;t work because OSX doesn&amp;rsquo;t work on window level, but application
+level. So, good luck tracking multiple terminal/browser windows with this
+method.&lt;/p&gt;
+
+&lt;p&gt;Eventually, I noticed that &lt;code&gt;Cmd-Tab&lt;/code&gt; based window switching is very fast. So,
+for last 6 months, I have been using a two window strategy. That is:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The primary workflow should be dependent only two windows.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This means that any application I want to have in my workflow must run in either
+of these two windows.&lt;/p&gt;
+
+&lt;p&gt;In my case, those windows are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;iTerm2&lt;/em&gt;&lt;br /&gt;
+This includes a &lt;code&gt;tmux&lt;/code&gt; session, with multiple windows. The first window will
+run a in-terminal emacs client and the rest all windows will various shell
+sessions and split configurations of their own. This way, I&amp;rsquo;ll spend most of
+my time within a tmux session.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Browser&lt;/em&gt;&lt;br /&gt;
+The browser here works like an OS i.e. place to have various applications:
+Mail/Slack/Calender run. Plus of course, to function as a browser.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There are multiple benefits of this setup that I notice:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Quick window switching. It is fast enough so that the continuity is
+maintained.&lt;/li&gt;
+&lt;li&gt;Keystrokes are deterministic. This, actually is very important. At times,
+computers may get unresponsive. Meanwhile, you don&amp;rsquo;t want to be blocked
+yourself. So, with this system, just queue in the keystrokes (given you know
+well as to what will happen) and let the computer execute things at its own
+pace. This also is my major complaint against touch phones (compared to say,
+an old Nokia QWERTY phone).&lt;/li&gt;
+&lt;li&gt;This flow is much more universal and works on most systems: RaspberryPi,
+remote machines, Linux TTY.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Decentralized Twitter</title>
@@ -1086,97 +1150,6 @@ commands.&amp;quot;
 (add-hook &#39;hack-local-variables-hook #&#39;flymake-mode-hook-function)
 (setq virtualenv-workon-starts-python nil)
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>A productive workflow with vim sessions and servers</title>
-      <link>/yet-another-vim-productivity-post-server-client/</link>
-      <pubDate>Sun, 15 Apr 2012 00:00:00 +0000</pubDate>
-      
-      <guid>/yet-another-vim-productivity-post-server-client/</guid>
-      <description>&lt;p&gt;You can find lot of posts on the internet which try to tell you how to improve
-the ways in which Vim is used. Well, here is another one.&lt;/p&gt;
-
-&lt;p&gt;#Vim Server, ZSH and Tiles&lt;/p&gt;
-
-&lt;p&gt;A Vim instance behaves as a server in which files can be opened through remote
-applications. Read &lt;code&gt;:help client-server&lt;/code&gt; of Vim to know more about this. I
-generally keep multiple Vim sessions running, described by task they are related
-to.&lt;/p&gt;
-
-&lt;p&gt;A typical workspace has one instance of Vim running and multiple terminals
-around it.  Lets call this workspace for project &lt;em&gt;foo&lt;/em&gt;. So the name of Vim
-instance server will be &lt;em&gt;foo&lt;/em&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;vim --servername foo
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And any file will be open in this server, using this command:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;vim --servername foo --remote-silent bar.hs
-
-
-+-----------------------+
-|           |~$         |
-|           |           |
-|           |-----------+
-|    Vim    |~$         |
-|   Server  |           |
-|           |-----------+
-|           |~$         |
-|           |           |
-+-----------------------+
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;How this helps:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Lets me keep a well defined separation on various projects I am working on.
-The list of files in the buffer per instance remains short and manageable.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Also each instance can have its own project specific environment - current
-directory, python virtual environments etc.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;For easing all this up, I use a set of helper functions in my &lt;em&gt;zshrc&lt;/em&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Set the name of vim session the terminal is tied up to
-eset(){
-    export VI_SERVER=$1
-}
-
-# Fire up a new server according to the argument supplied
-vs(){
-    eset $1
-    vim --servername $VI_SERVER
-}
-
-# Open up the files in the environment Vim server.
-es(){
-    vim --servername $VI_SERVER --remote-silent $*
-}
-
-# Reuse Vim ZSH completions for vim completions
-compdef _vim es
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;#Vim Sessions&lt;/p&gt;
-
-&lt;p&gt;Having multiple instances is great, but I don&amp;rsquo;t want to set each up every time I
-need resume working. For this I use &lt;em&gt;Vim Sessions&lt;/em&gt;, which allow the current Vim
-state to be stored over the disk.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/xolox/vim-session&#34;&gt;vim-session&lt;/a&gt; plugin will help you manage sessions easily. It is
-well integrated with Vim client-server.&lt;/p&gt;
-
-&lt;p&gt;From docs:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;When you start Vim with a custom server name that matches one of the existing
-session names then the matching session will be automatically restored.&lt;/p&gt;
-&lt;/blockquote&gt;
 </description>
     </item>
     
