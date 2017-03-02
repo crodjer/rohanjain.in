@@ -17,8 +17,8 @@
       <guid>/the-two-windows-workflow/</guid>
       <description>&lt;p&gt;I was introduced to OSX for the first time in September, 2015. Coming from a
 XMonad/Linux based setup, I was accustomed to powerful and fast window
-management. Any OSX based solution for window management system I tried, lacked
-these qualities. I tried:&lt;/p&gt;
+management. Most available solutions for OSX did not have these qualities. I
+tried:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;em&gt;Amethyst&lt;/em&gt;, a window manager with basic XMonad bindings.&lt;/li&gt;
@@ -29,15 +29,14 @@ quickly became habitual.&lt;/li&gt;
 similar fashion.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;These programs sort of worked, but they are appallingly slow and unresponsive.
-OSX is full of unnecessary animations and bloat which makes everything feel
-laggy and slow. Alfred based switching works on application level and not window
-level.&lt;/p&gt;
+&lt;p&gt;These programs sort of worked, but they are slow and unresponsive. Alfred based
+switching works on application level and not window level. So, I needed some
+simpler alternatives.&lt;/p&gt;
 
 &lt;p&gt;Eventually, I noticed that &lt;code&gt;Cmd-Tab&lt;/code&gt; based window switching is fast. So, for
 last 6 months, I have been using a two window strategy. That is:&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;The primary workflow must be dependent on only two windows.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The primary workflow must be dependent on at max two windows.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;This means that any application I want to have in my workflow must run in either
 of those windows.&lt;/p&gt;
@@ -58,16 +57,13 @@ such as: Mail, Slack, Calender.&lt;/li&gt;
 &lt;p&gt;There are multiple benefits of this setup:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Quick window switching. Way faster than any solutions out there.&lt;/li&gt;
-&lt;li&gt;This flow is much more universal and works on most systems: RaspberryPi,
-remote machines, Linux TTY.&lt;/li&gt;
-&lt;li&gt;Keystrokes are deterministic. When computer gets unresponsive, you don&amp;rsquo;t want
-to be blocked. Just queue in the keystrokes and let the computer execute
-things at its own pace. This also is my major complaint against touch phones
-(compared to say, an old Nokia QWERTY phone).&lt;/li&gt;
-&lt;li&gt;I use Vim as a text editor for anything non Clojure. With this, I can have a
-vertical split (Vim on left and multiple accompanying terminals on right).
-Hence, all of the context stays in the same tmux window.&lt;/li&gt;
+&lt;li&gt;Quick window switching.&lt;/li&gt;
+&lt;li&gt;Universal workflow. Use it on RaspberryPi, remote machines, Linux TTY.&lt;/li&gt;
+&lt;li&gt;Keystrokes are deterministic. Just queue in the keystrokes and let the
+computer execute things at its own pace. This also is my major complaint
+against touch phones (compared to say, an old Nokia QWERTY phone).&lt;/li&gt;
+&lt;li&gt;I use Vim as a text editor for anything non Clojure. With tmux splits panes,
+all of the context stays in the same tmux window.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;There are drawbacks too:&lt;/p&gt;
@@ -77,7 +73,6 @@ Hence, all of the context stays in the same tmux window.&lt;/li&gt;
 end up negotiating for alternates.&lt;/li&gt;
 &lt;li&gt;Although most of Emacs works well in terminal, some bindings at times won&amp;rsquo;t
 work. This isn&amp;rsquo;t a issue for me particularly.&lt;/li&gt;
-&lt;li&gt;This doesn&amp;rsquo;t solve all of the OSX related annoyances.&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
