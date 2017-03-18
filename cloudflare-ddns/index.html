@@ -146,20 +146,20 @@
 
 <p>It is hard to maintain a regular internet uptime with home connections. <sup>1</sup>&frasl;<sub>2</sub>
 router re-connections per week can be fairly common. When that happens, the
-public IP changes with most ISPs. This can be annoying if you want to be able to
-access your computers remotely (possibly to SSH into the home computer). Dynamic
-DNS is a solution that exists to solve just that.</p>
+public IP changes with most ISPs. This can be annoying if you want access your
+computer remotely (possibly to SSH home). Dynamic DNS is a solution that exists
+to solve just that.</p>
 
 <p>I maintain DNS entries for my domain at
 <a href="https://www.cloudflare.com/">Clouflare</a>. The latest version of
 <a href="https://sourceforge.net/p/ddclient/wiki/Home/"><code>ddclient</code></a> supports Cloudflare
-API, which is what I use as well with my ArchLinux box. But ddclient bundled
-with Raspbian, is yet to get that update. Cloudflare&rsquo;s API is fairly straight
-forward, so I decided to use a curl/systemd based solution on my RaspberryPi.</p>
+API, which works well with my ArchLinux box. But ddclient bundled with Raspbian,
+is yet to get that update. Cloudflare&rsquo;s API is fairly straight forward, so I
+decided to use a curl/systemd based solution on my RaspberryPi.</p>
 
 <h1 id="configuration-information">Configuration information</h1>
 
-<p>If you want to set Dynamic DNS with Cloudflare as well, you need to acquire some
+<p>If you too want to set Dynamic DNS with Cloudflare, you need to acquire some
 configuration information first:</p>
 
 <h2 id="cloudflare-configuration-details">Cloudflare configuration details</h2>
@@ -194,8 +194,8 @@ package on most systems).</p>
 
 <h1 id="the-script">The script</h1>
 
-<p>All this information can now be plugged in this bash script to update the DNS
-entry on Cloudflare. I have placed it at <code>/usr/local/bin/cloudflare-ddns.sh</code></p>
+<p>All the above information can now be plugged in this bash script to update the
+DNS entry on Cloudflare. I placed it at <code>/usr/local/bin/cloudflare-ddns.sh</code></p>
 
 <pre><code class="language-bash">#/usr/bin/env sh
 
@@ -251,7 +251,7 @@ curl &quot;https://api.cloudflare.com/client/v4/zones/$DNS_ZONE/dns_records/$IDE
 </code></pre>
 
 <p>Try running <code>cloudflare-ddns.sh</code> to see if DNS records get updated on
-Cloudflare. For debugging purposes, I store the Cloudflare response at:
+Cloudflare. For debugging purposes, I store the Cloudflare response at
 <code>/tmp/cloudflare-ddns-update.json</code>.</p>
 
 <h1 id="systemd">Systemd</h1>
