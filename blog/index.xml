@@ -6,8 +6,177 @@
     <description>Recent content in Blog on The Perpetual Amature</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 27 Feb 2017 06:15:12 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 18 Mar 2017 05:28:10 +0000</lastBuildDate>
     <atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Dynamic DNS with Cloudflare</title>
+      <link>/cloudflare-ddns/</link>
+      <pubDate>Sat, 18 Mar 2017 05:28:10 +0000</pubDate>
+      
+      <guid>/cloudflare-ddns/</guid>
+      <description>
+
+&lt;p&gt;It is hard to maintain a regular internet uptime with home connections. &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt;
+router re-connections per week can be fairly common. When that happens, the
+public IP for a computer changes with most ISPs. This can be annoying if you
+want to be able to access your computers remotely (possibly to SSH into the home
+computer). Dynamic DNS is a solution that exists to solve just that.&lt;/p&gt;
+
+&lt;p&gt;I maintain DNS entries for my domain at
+&lt;a href=&#34;https://www.cloudflare.com/&#34;&gt;Clouflare&lt;/a&gt;. The latest version of
+&lt;a href=&#34;https://sourceforge.net/p/ddclient/wiki/Home/&#34;&gt;&lt;code&gt;ddclient&lt;/code&gt;&lt;/a&gt; supports Cloudflare
+API, which is what I use as well with my ArchLinux box. But ddclient bundled
+with Raspbian, is yet to get that update. Cloudflare&amp;rsquo;s API is fairly straight
+forward, so I decided to use a curl/systemd based solution on my RaspberryPi.&lt;/p&gt;
+
+&lt;h1 id=&#34;configuration-information&#34;&gt;Configuration information&lt;/h1&gt;
+
+&lt;p&gt;If you want to set Dynamic DNS with Cloudflare as well, you need to acquire some
+configuration information first:&lt;/p&gt;
+
+&lt;h2 id=&#34;cloudflare-configuration-details&#34;&gt;Cloudflare configuration details&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;DNS Zone&lt;/code&gt;&lt;br /&gt;
+You can get it by visiting the overview page of Cloudflare dashboard (called
+Zone ID):
+&lt;a href=&#34;https://www.cloudflare.com/a/overview/&#34;&gt;https://www.cloudflare.com/a/overview/&lt;/a&gt;&lt;your-domain&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Auth Email&lt;/code&gt;: This is your cloudflare account email.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Auth Key&lt;/code&gt;: This is your &lt;em&gt;Global API Key&lt;/em&gt; under Cloudflare account settings:
+&lt;a href=&#34;https://www.cloudflare.com/a/account/my-account&#34;&gt;https://www.cloudflare.com/a/account/my-account&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;IDENTIFIER&lt;/code&gt;&lt;br /&gt;
+To get the identifier, you need to first set an A record for the subdomain you
+want to manage with Dynamic DNS. Then, plug in the subdomain in this curl
+query to obtain the identifier:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;  curl &amp;quot;https://api.cloudflare.com/client/v4/zones/&amp;lt;your-dns-zone&amp;gt;/dns_records?name=&amp;lt;subdomain&amp;gt;.&amp;lt;your-domain&amp;gt;&amp;quot; \
+       --silent -X GET \
+       -H &amp;quot;X-Auth-Email: &amp;lt;cloudflare-auth-email&amp;gt;&amp;quot; \
+       -H &amp;quot;X-Auth-Key: &amp;lt;cloudflare-auth-key&amp;gt;&amp;quot; \
+       -H &amp;quot;Content-Type: application/json&amp;quot; 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;ip-address&#34;&gt;IP Address&lt;/h2&gt;
+
+&lt;p&gt;I use &lt;code&gt;dig&lt;/code&gt; with OpenDNS to get the current public IP and
+&lt;a href=&#34;https://www.ipify.org/&#34;&gt;https://www.ipify.org/&lt;/a&gt; as a fallback if &lt;code&gt;dig&lt;/code&gt; isn&amp;rsquo;t installed. Using &lt;code&gt;dig&lt;/code&gt; is
+faster though and you can install it via &lt;code&gt;dnsutils&lt;/code&gt; (available as an official
+package on most systems).&lt;/p&gt;
+
+&lt;h1 id=&#34;the-script&#34;&gt;The script&lt;/h1&gt;
+
+&lt;p&gt;All this information can now be plugged in this bash script to update the DNS
+entry on Cloudflare. I have placed it at &lt;code&gt;/usr/local/bin/cloudflare-ddns.sh&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#/usr/bin/env sh
+
+# Get the Zone ID from: https://www.cloudflare.com/a/overview/&amp;lt;your-domain&amp;gt;
+DNS_ZONE=&amp;lt;your-dns-zone&amp;gt;
+
+# Get the existing identifier for DNS entry:
+# https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records
+IDENTIFIER=&amp;lt;your-domain-dns-entry-identifier&amp;gt;
+
+# Get these from: https://www.cloudflare.com/a/account/my-account
+AUTH_EMAIL=&amp;lt;cloudflare-auth-email&amp;gt;
+AUTH_KEY=&amp;lt;cloudflare-auth-key&amp;gt;
+
+# Desired domain name
+DOMAIN_NAME=&amp;quot;&amp;lt;subdomain&amp;gt;.&amp;lt;your-domain&amp;gt;&amp;quot;
+
+# Get previous IP address
+_PREV_IP_FILE=&amp;quot;/tmp/public-ip.txt&amp;quot;
+_PREV_IP=$(cat $_PREV_IP_FILE &amp;amp;&amp;gt; /dev/null)
+
+# Install `dig` via `dnsutils` for faster IP lookup.
+command -v dig &amp;amp;&amp;gt; /dev/null &amp;amp;&amp;amp; {
+    _IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
+} || {
+    _IP=$(curl --silent https://api.ipify.org)
+} || {
+    exit 1
+}
+
+# If new/previous IPs match, no need for an update.
+if [ &amp;quot;$_IP&amp;quot; = &amp;quot;$_PREV_IP&amp;quot; ]; then
+    exit 0
+fi
+
+_UPDATE=$(cat &amp;lt;&amp;lt;EOF
+{ &amp;quot;type&amp;quot;: &amp;quot;A&amp;quot;,
+  &amp;quot;name&amp;quot;: &amp;quot;$DOMAIN_NAME&amp;quot;,
+  &amp;quot;content&amp;quot;: &amp;quot;$_IP&amp;quot;,
+  &amp;quot;ttl&amp;quot;: 120,
+  &amp;quot;proxied&amp;quot;: false }
+EOF
+)
+
+curl &amp;quot;https://api.cloudflare.com/client/v4/zones/$DNS_ZONE/dns_records/$IDENTIFIER&amp;quot; \
+     --silent \
+     -X PUT \
+     -H &amp;quot;Content-Type: application/json&amp;quot; \
+     -H &amp;quot;X-Auth-Email: $AUTH_EMAIL&amp;quot; \
+     -H &amp;quot;X-Auth-Key: $AUTH_KEY&amp;quot; \
+     -d &amp;quot;$_UPDATE&amp;quot; &amp;gt; /tmp/cloudflare-ddns-update.json &amp;amp;&amp;amp; \
+     echo $_IP &amp;gt; $_PREV_IP_FILE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Try running &lt;code&gt;cloudflare-ddns.sh&lt;/code&gt; to see if DNS records get updated on
+Cloudflare. For debugging purposes, I store the Cloudflare response at:
+&lt;code&gt;/tmp/cloudflare-ddns-update.json&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;systemd&#34;&gt;Systemd&lt;/h1&gt;
+
+&lt;p&gt;We&amp;rsquo;ll automate this execution by writing a systemd service and a timer.&lt;/p&gt;
+
+&lt;h2 id=&#34;configuring-the-service&#34;&gt;Configuring the service&lt;/h2&gt;
+
+&lt;p&gt;My systemd service unit looks like this:
+&lt;code&gt;/etc/systemd/system/cloudflare-ddns.service&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[Unit]
+Description=Update DNS entry for this host to current IP
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh /usr/local/bin/cloudflare-ddns.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Test the service by running:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo systemctl start cloudflare-ddns.service
+# Check the results:
+sudo journalctl -u cloudflare-ddns
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;setting-up-a-timer&#34;&gt;Setting up a timer&lt;/h2&gt;
+
+&lt;p&gt;Set up a timer, so that DNS update is attempted every 2 minutes:
+&lt;code&gt;/etc/systemd/system/cloudflare-ddns.timer&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[Unit]
+Description=Update DNS entry in cloudflare every 2 minutes
+
+[Timer]
+OnBootSec=1min
+OnCalendar=*:0/2
+Unit=cloudflare-ddns.service
+
+[Install]
+WantedBy=basic.target
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To enable the timer, run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo systemctl enable cloudflare-ddns.timer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And that&amp;rsquo;s it, now the system&amp;rsquo;s IP will be kept up to date (within 2 minutes)
+for remote access.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>The two windows workflow</title>

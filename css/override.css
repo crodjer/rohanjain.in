@@ -16,3 +16,7 @@ section.main .content .front-matter .word-count,
 section.main .content .front-matter .reading-time .middot {
   display: initial;
 }
+
+section.main .content .markdown code {
+    white-space: pre;
+}

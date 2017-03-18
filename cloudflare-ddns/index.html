@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Rohan&#39;s personal web blog.">
+
+<base href="/">
+<title>
+
+
+    
+    Dynamic DNS with Cloudflare | The Perpetual Amature
+    
+
+</title>
+<link rel="canonical" href="/cloudflare-ddns/">
+
+
+
+<script type="text/javascript">
+    var baseURL = '\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/pygments.css">
+    <link rel="stylesheet" href="/css/main.css">
+    
+        <link rel="stylesheet" href="/css/override.css">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="/static/img/favicon.ico"
+
+>
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+              <a href="/"><img class="avatar" src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" /></a>
+            
+            <a href="/"><div class="name">Rohan Jain</div></a>
+            
+            <nav>
+                <ul>
+                    <li class="nav-blog"><a href="/blog/">Blog</a></li>
+                    <li class="nav-about"><a href="/about/">About</a></li>
+                    <li class="nav-code"><a href="/code/">Code</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/__crodjer__" target="_blank" rel="noopener"><img class="icon" src="/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+            <a href="//linkedin.com/in/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/linkedin.svg" alt="linkedin" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="/index.xml"><img class="icon" src="/img/rss.svg" alt="rss" /></a>
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    Dynamic DNS with Cloudflare
+
+</div>
+
+                    <div class="initials"><a href="/">RJ</a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Sat Mar 18 2017 05:28:10 UTC'>Mar 18, 2017</div>
+                    
+                    
+                    <div class="reading-time"><div class="middot"></div>3 minutes read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p>It is hard to maintain a regular internet uptime with home connections. <sup>1</sup>&frasl;<sub>2</sub>
+router re-connections per week can be fairly common. When that happens, the
+public IP for a computer changes with most ISPs. This can be annoying if you
+want to be able to access your computers remotely (possibly to SSH into the home
+computer). Dynamic DNS is a solution that exists to solve just that.</p>
+
+<p>I maintain DNS entries for my domain at
+<a href="https://www.cloudflare.com/">Clouflare</a>. The latest version of
+<a href="https://sourceforge.net/p/ddclient/wiki/Home/"><code>ddclient</code></a> supports Cloudflare
+API, which is what I use as well with my ArchLinux box. But ddclient bundled
+with Raspbian, is yet to get that update. Cloudflare&rsquo;s API is fairly straight
+forward, so I decided to use a curl/systemd based solution on my RaspberryPi.</p>
+
+<h1 id="configuration-information">Configuration information</h1>
+
+<p>If you want to set Dynamic DNS with Cloudflare as well, you need to acquire some
+configuration information first:</p>
+
+<h2 id="cloudflare-configuration-details">Cloudflare configuration details</h2>
+
+<ul>
+<li><code>DNS Zone</code><br />
+You can get it by visiting the overview page of Cloudflare dashboard (called
+Zone ID):
+<a href="https://www.cloudflare.com/a/overview/">https://www.cloudflare.com/a/overview/</a><your-domain></li>
+<li><code>Auth Email</code>: This is your cloudflare account email.</li>
+<li><code>Auth Key</code>: This is your <em>Global API Key</em> under Cloudflare account settings:
+<a href="https://www.cloudflare.com/a/account/my-account">https://www.cloudflare.com/a/account/my-account</a></li>
+<li><code>IDENTIFIER</code><br />
+To get the identifier, you need to first set an A record for the subdomain you
+want to manage with Dynamic DNS. Then, plug in the subdomain in this curl
+query to obtain the identifier:</li>
+</ul>
+
+<pre><code class="language-bash">  curl &quot;https://api.cloudflare.com/client/v4/zones/&lt;your-dns-zone&gt;/dns_records?name=&lt;subdomain&gt;.&lt;your-domain&gt;&quot; \
+       --silent -X GET \
+       -H &quot;X-Auth-Email: &lt;cloudflare-auth-email&gt;&quot; \
+       -H &quot;X-Auth-Key: &lt;cloudflare-auth-key&gt;&quot; \
+       -H &quot;Content-Type: application/json&quot; 
+</code></pre>
+
+<h2 id="ip-address">IP Address</h2>
+
+<p>I use <code>dig</code> with OpenDNS to get the current public IP and
+<a href="https://www.ipify.org/">https://www.ipify.org/</a> as a fallback if <code>dig</code> isn&rsquo;t installed. Using <code>dig</code> is
+faster though and you can install it via <code>dnsutils</code> (available as an official
+package on most systems).</p>
+
+<h1 id="the-script">The script</h1>
+
+<p>All this information can now be plugged in this bash script to update the DNS
+entry on Cloudflare. I have placed it at <code>/usr/local/bin/cloudflare-ddns.sh</code></p>
+
+<pre><code class="language-bash">#/usr/bin/env sh
+
+# Get the Zone ID from: https://www.cloudflare.com/a/overview/&lt;your-domain&gt;
+DNS_ZONE=&lt;your-dns-zone&gt;
+
+# Get the existing identifier for DNS entry:
+# https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records
+IDENTIFIER=&lt;your-domain-dns-entry-identifier&gt;
+
+# Get these from: https://www.cloudflare.com/a/account/my-account
+AUTH_EMAIL=&lt;cloudflare-auth-email&gt;
+AUTH_KEY=&lt;cloudflare-auth-key&gt;
+
+# Desired domain name
+DOMAIN_NAME=&quot;&lt;subdomain&gt;.&lt;your-domain&gt;&quot;
+
+# Get previous IP address
+_PREV_IP_FILE=&quot;/tmp/public-ip.txt&quot;
+_PREV_IP=$(cat $_PREV_IP_FILE &amp;&gt; /dev/null)
+
+# Install `dig` via `dnsutils` for faster IP lookup.
+command -v dig &amp;&gt; /dev/null &amp;&amp; {
+    _IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
+} || {
+    _IP=$(curl --silent https://api.ipify.org)
+} || {
+    exit 1
+}
+
+# If new/previous IPs match, no need for an update.
+if [ &quot;$_IP&quot; = &quot;$_PREV_IP&quot; ]; then
+    exit 0
+fi
+
+_UPDATE=$(cat &lt;&lt;EOF
+{ &quot;type&quot;: &quot;A&quot;,
+  &quot;name&quot;: &quot;$DOMAIN_NAME&quot;,
+  &quot;content&quot;: &quot;$_IP&quot;,
+  &quot;ttl&quot;: 120,
+  &quot;proxied&quot;: false }
+EOF
+)
+
+curl &quot;https://api.cloudflare.com/client/v4/zones/$DNS_ZONE/dns_records/$IDENTIFIER&quot; \
+     --silent \
+     -X PUT \
+     -H &quot;Content-Type: application/json&quot; \
+     -H &quot;X-Auth-Email: $AUTH_EMAIL&quot; \
+     -H &quot;X-Auth-Key: $AUTH_KEY&quot; \
+     -d &quot;$_UPDATE&quot; &gt; /tmp/cloudflare-ddns-update.json &amp;&amp; \
+     echo $_IP &gt; $_PREV_IP_FILE
+</code></pre>
+
+<p>Try running <code>cloudflare-ddns.sh</code> to see if DNS records get updated on
+Cloudflare. For debugging purposes, I store the Cloudflare response at:
+<code>/tmp/cloudflare-ddns-update.json</code>.</p>
+
+<h1 id="systemd">Systemd</h1>
+
+<p>We&rsquo;ll automate this execution by writing a systemd service and a timer.</p>
+
+<h2 id="configuring-the-service">Configuring the service</h2>
+
+<p>My systemd service unit looks like this:
+<code>/etc/systemd/system/cloudflare-ddns.service</code></p>
+
+<pre><code>[Unit]
+Description=Update DNS entry for this host to current IP
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh /usr/local/bin/cloudflare-ddns.sh
+</code></pre>
+
+<p>Test the service by running:</p>
+
+<pre><code class="language-bash">sudo systemctl start cloudflare-ddns.service
+# Check the results:
+sudo journalctl -u cloudflare-ddns
+</code></pre>
+
+<h2 id="setting-up-a-timer">Setting up a timer</h2>
+
+<p>Set up a timer, so that DNS update is attempted every 2 minutes:
+<code>/etc/systemd/system/cloudflare-ddns.timer</code></p>
+
+<pre><code>[Unit]
+Description=Update DNS entry in cloudflare every 2 minutes
+
+[Timer]
+OnBootSec=1min
+OnCalendar=*:0/2
+Unit=cloudflare-ddns.service
+
+[Install]
+WantedBy=basic.target
+</code></pre>
+
+<p>To enable the timer, run:</p>
+
+<pre><code class="language-bash">sudo systemctl enable cloudflare-ddns.timer
+</code></pre>
+
+<p>And that&rsquo;s it, now the system&rsquo;s IP will be kept up to date (within 2 minutes)
+for remote access.</p>
+
+                <br>
+                <p><a href="/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-15806710-5', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+</body>
+</html>
+
