@@ -2,11 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fixed on The Perpetual Amature</title>
-    <link>/fixed/index.xml</link>
+    <link>/fixed/</link>
     <description>Recent content in Fixed on The Perpetual Amature</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <atom:link href="/fixed/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="/fixed/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>About</title>
@@ -14,18 +16,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
-      <description>&lt;p&gt;Hi, I am Rohan. I read and write code. I frequently read about physics, energy
-and climate change. After getting depressed enough of the latter, I read fiction
-or annoy my friends with my ideas or just code.&lt;/p&gt;
-
-&lt;p&gt;I like to play table tennis, cricket and chess. I also bought a harmonica. Keep
-your hands on ears if you see me holding it. And yeah, I maintain a blog, which
-is so devoid of activity that it should have cobwebs on
-it.&lt;/p&gt;
-
-&lt;p&gt;On the days with clear skies, I take out my telescope and observe star clusters
-and nebulae. I am trying to go through the Messier catalog.&lt;/p&gt;
-</description>
+      <description>Hi, I am Rohan. I read and write code. I frequently read about physics, energy and climate change. After getting depressed enough of the latter, I read fiction or annoy my friends with my ideas or just code.
+I like to play table tennis, cricket and chess. I also bought a harmonica. Keep your hands on ears if you see me holding it. And yeah, I maintain a blog, which is so devoid of activity that it should have cobwebs on it.</description>
     </item>
     
   </channel>
