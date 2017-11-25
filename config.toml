@@ -32,7 +32,7 @@ lang         = "en"
 linkedin     = "//linkedin.com/in/crodjer"
 twitter      = "//twitter.com/__crodjer__"
 selfIntro    = "" # appears in the site header when set to a non-empty string
-forcehttps   = true # use a script to detect whether visitors should be redirected to https
+forcehttps   = false # use a script to detect whether visitors should be redirected to https
 bloglink     = false
 codelink     = false
 
