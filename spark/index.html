@@ -8,7 +8,31 @@
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer">
-<meta name="description" content="Rohan&#39;s personal web blog.">
+<meta name="author" content="Rohan Jain">
+<meta name="description" content="I am a big fan of deterministic access to applications windows. That is, to be able to open them without needing any visual feedback from the screen. Tiling window managers do this well. On OSX, this can be tricky.
+For a long time, I used a two windows workflow i.e. all the applications I need should run in just two windows (applications): the browser (mail, slack etc.) or the terminal (emacs, tmux, bash).">
+
+<meta property="og:title" content="Automating Window Management in OSX with Spark" />
+<meta property="og:description" content="I am a big fan of deterministic access to applications windows. That is, to be able to open them without needing any visual feedback from the screen. Tiling window managers do this well. On OSX, this can be tricky.
+For a long time, I used a two windows workflow i.e. all the applications I need should run in just two windows (applications): the browser (mail, slack etc.) or the terminal (emacs, tmux, bash)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/spark/" />
+
+
+
+<meta property="article:published_time" content="2017-12-06T12:44:55&#43;00:00"/>
+<meta property="article:modified_time" content="2017-12-06T12:44:55&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
 
 <base href="/">
 <title>
@@ -27,7 +51,7 @@
 
 
 
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
 
 
 
@@ -57,6 +81,8 @@
 
 
 
+
+
 </head>
 
 
@@ -66,15 +92,13 @@
     <div class="container">
         <div class="content">
             
-              <a href="/"><img class="avatar" src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" /></a>
+            <a href="/"><img class="avatar" src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" rcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
             
             <a href="/"><div class="name">Rohan Jain</div></a>
             
             <nav>
                 <ul>
-                    <li class="nav-blog"><a href="/blog/">Blog</a></li>
-                    <li class="nav-about"><a href="/about/">About</a></li>
-                    <li class="nav-code"><a href="/code/">Code</a></li>
+                    
                 </ul>
             </nav>
         </div>
@@ -94,9 +118,17 @@
         
 
         
+
+        
+
+        
             <a href="//linkedin.com/in/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/linkedin.svg" alt="linkedin" /></a>
         
 
+        
+
+        
+            
         
 
         
@@ -105,6 +137,7 @@
 
         
             <a href="/index.xml"><img class="icon" src="/img/rss.svg" alt="rss" /></a>
+        
         
         </div>
     </div>
@@ -129,29 +162,29 @@
                     <div class="date" title='Wed Dec 6 2017 12:44:55 UTC'>Dec 6, 2017</div>
                     
                     
-                    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
+		    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
                     
                 </div>
             </div>
             <div class="markdown">
-                <p>I am a big fan of deterministic access to application. By that, I mean I should
-be able to reach a window/application without needing visual feedback from the
-screen. Doing this on OSX can be tricky.</p>
+                <p>I am a big fan of deterministic access to applications windows. That is, to be
+able to open them without needing any visual feedback from the screen. Tiling
+window managers do this well. On OSX, this can be tricky.</p>
 
 <p>For a long time, I used a <a href="/two-windows/">two windows</a> workflow i.e. all the
-applications I need should fit in just two windows: the browser (mail, slack
-etc.) or the terminal (emacs, tmux, bash).  This works, but is restrictive.</p>
+applications I need should run in just two windows (applications): the browser
+(mail, slack etc.) or the terminal (emacs, tmux, bash).  This works, but is
+restrictive.</p>
 
-<p>An alternate approach I have been trying out now is to have a global shortcut
-to reach each application. For example, in my setup: Cmd-Ctrl-E is <code>emacs</code>,
-Cmd-Ctrl-C is <code>chrome</code> and so on. Now, wherever I may be, I can
-deterministically open a desired window/application. I do this with
-<a href="https://www.shadowlab.org/softwares/spark.php">Spark</a> and an <code>AppleScript</code> per
-application.</p>
+<p>I have switched to an alternative approach now. I have a global shortcut for
+each application I use frequently. For example: <code>Cmd-Ctrl-E</code> is <code>emacs</code>,
+<code>Cmd-Ctrl-C</code> is <code>chrome</code>. Now, wherever I may be, I can deterministically open
+Emacs. I do this with <a href="https://www.shadowlab.org/softwares/spark.php">Spark</a> and
+an <code>AppleScript</code> per application.</p>
 
-<p>I wrote <code>AppleScript</code>s instead of simply pointing to the application the
-so that the window is resized to the maximum before being focused. This is what
-the <code>AppleScript</code> to open (and resize) <code>Emacs</code> looks like.</p>
+<p>I had to write <code>AppleScript</code>s instead of simply pointing to the application
+because I need the window to be resized to the maximum as well. This is what
+the <code>AppleScript</code> to open (and resize) <code>Emacs</code> looks like:</p>
 
 <pre><code class="language-applescript">tell application &quot;Emacs&quot;
 	-- Get bounds from the desktop.
@@ -169,12 +202,13 @@ provided by <code>Finder</code> will span all of them and so will the applicatio
 </blockquote>
 
                 <br>
-                <p><a href="/blog/">Back to posts</a></p>
+		<p class="back-to-posts"><a href="/blog/">Back to posts</a></p>
             </div>
             <br>
             <div class="disqus">
                 
             </div>
+            
         </div>
     </div>
 </section>
@@ -190,12 +224,14 @@ ga('send', 'pageview');
 
 
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
   
 
   <script type="text/javascript">
     hljs.initHighlightingOnLoad();
   </script>
+
+
 
 
 
