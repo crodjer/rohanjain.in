@@ -2,12 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Old on The Perpetual Amature</title>
-    <link>/old/index.xml</link>
+    <link>/old/</link>
     <description>Recent content in Old on The Perpetual Amature</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Mon, 31 Aug 2015 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/old/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="/old/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Categorizing archives by year with Hakyll</title>
@@ -15,111 +17,7 @@
       <pubDate>Mon, 31 Aug 2015 00:00:00 +0000</pubDate>
       
       <guid>/hakyll-years/</guid>
-      <description>&lt;p&gt;Recently, I decided to categorize my posts under directories named by
-the year they were created in. For example, this post is placed at:
-&lt;code&gt;posts/2015/hakyll-years.mkd&lt;/code&gt;. I decided to utilize this structure to
-also group how archives are listed. Inspired from
-&lt;a href=&#34;http://jaspervdj.be/hakyll/reference/src/Hakyll-Web-Tags.html&#34;&gt;Hakyll&amp;rsquo;s tag functionality&lt;/a&gt;
-I wrote my own group by years functionality. This post tries to
-explain that. Also, I don&amp;rsquo;t see why a similar logic cannot be used to
-do simple pagination.&lt;/p&gt;
-
-&lt;p&gt;First, like tags, we need to build the list of years. &lt;code&gt;buildYears&lt;/code&gt;
-(like &lt;code&gt;buildTags&lt;/code&gt;) will do that:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;buildYears :: MonadMetadata m =&amp;gt; Pattern -&amp;gt; m [(Year, Int)]
-buildYears pattern = do
-    ids &amp;lt;- getMatches pattern
-    return . frequency . (map getYear) $ ids
-  where
-    frequency xs =  M.toList (M.fromListWith (+) [(x, 1) | x &amp;lt;- xs])
-
-getYear :: Identifier -&amp;gt; Year
-getYear = takeBaseName . takeDirectory . toFilePath
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This now can be used in the site &lt;code&gt;Rules&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;  years &amp;lt;- buildYears &amp;quot;posts/*/*&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;With this, you have a list of years available for other rules to use.
-Now, we build an index of posts by years (similar to &lt;code&gt;tagsRules&lt;/code&gt;):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;  forM_ years $ \(year, _)-&amp;gt;
-      create [yearId year] $ do
-         route   idRoute
-         compile $ do
-           -- Only the posts published in &#39;year&#39;
-           posts &amp;lt;- recentFirst =&amp;lt;&amp;lt; loadAll (fromGlob $ &amp;quot;posts/&amp;quot; ++ year ++&amp;quot;/*&amp;quot;)
-           let postsCtx = mconcat
-                          [ listField &amp;quot;posts&amp;quot; postCtx (return posts)
-                          , constField &amp;quot;title&amp;quot; (&amp;quot;Posts published in &amp;quot; ++ year)
-                          , defaultContext
-                          ]
-           makeItem &amp;quot;&amp;quot;
-            &amp;gt;&amp;gt;= loadAndApplyTemplate &amp;quot;templates/posts.html&amp;quot; postsCtx
-            &amp;gt;&amp;gt;= loadAndApplyTemplate &amp;quot;templates/default.html&amp;quot; postsCtx
-            &amp;gt;&amp;gt;= relativizeUrls
-            &amp;gt;&amp;gt;= cleanIndexUrls
-
-yearPath :: Year -&amp;gt; FilePath
-yearPath year = &amp;quot;archive/&amp;quot; ++ year ++ &amp;quot;/index.html&amp;quot;
-
-yearId :: Year -&amp;gt; Identifier
-yearId = fromFilePath . yearPath
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We now have year wise archives which can be accessed through paths
-like: &lt;code&gt;/archive/2015/&lt;/code&gt;. Similar to tags, we need to support browsing
-through posts by years. &lt;code&gt;renderYears&lt;/code&gt; does that:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;-- Extra blaze related imports
-import           Text.Blaze.Html                 (toHtml, toValue, (!))
-import           Text.Blaze.Html.Renderer.String (renderHtml)
-import qualified Text.Blaze.Html5                as H
-import qualified Text.Blaze.Html5.Attributes     as A
-
-
-renderYears :: [(Year, Int)] -&amp;gt; Compiler String
-renderYears years = do
-  years&#39; &amp;lt;- forM (reverse . sort $ years) $ \(year, count) -&amp;gt; do
-      route&#39; &amp;lt;- getRoute $ yearId year
-      return (year, route&#39;, count)
-  return . intercalate &amp;quot;, &amp;quot; $ map makeLink years&#39;
-
-  where
-    makeLink (year, route&#39;, count) =
-      (renderHtml (H.a ! A.href (yearUrl year) $ toHtml year)) ++
-      &amp;quot; (&amp;quot; ++ show count ++ &amp;quot;)&amp;quot;
-    yearUrl = toValue . toUrl . yearPath
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Add this to a pages context like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;  create [&amp;quot;index.html&amp;quot;] $ do
-         route   idRoute
-         compile $ do
-           -- rest of the compiler context
-           let indexCtx = mconcat
-                          [ -- some context
-                          , field &amp;quot;years&amp;quot; (\_ -&amp;gt; renderYears years)
-                          , defaultContext
-                          ]
-           -- rest of the compiler
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;$years$&lt;/code&gt; will be available in the template which will link to year
-wise archives with their corresponding per year count.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;See this functionality being used by &lt;a href=&#34;https://github.com/crodjer/rohanjain.in/blob/master/site.hs&#34;&gt;this blog&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Also, you&amp;rsquo;d notice that years here could easily have been various
-categories you may want to have in your blog.&lt;/p&gt;
-</description>
+      <description>Recently, I decided to categorize my posts under directories named by the year they were created in. For example, this post is placed at: posts/2015/hakyll-years.mkd. I decided to utilize this structure to also group how archives are listed. Inspired from Hakyll&amp;rsquo;s tag functionality I wrote my own group by years functionality. This post tries to explain that. Also, I don&amp;rsquo;t see why a similar logic cannot be used to do simple pagination.</description>
     </item>
     
     <item>
@@ -128,71 +26,8 @@ categories you may want to have in your blog.&lt;/p&gt;
       <pubDate>Sun, 30 Aug 2015 00:00:00 +0000</pubDate>
       
       <guid>/hakyll-clean-urls/</guid>
-      <description>&lt;p&gt;The URLs generated by &lt;a href=&#34;http://jaspervdj.be/hakyll/&#34;&gt;Hakyll&lt;/a&gt;, by default also include a
-&lt;code&gt;.html&lt;/code&gt; extension. I have never been a fan of this. When things in
-reality are driven by the &lt;code&gt;Content-Type&lt;/code&gt; header, it is absolutely
-redundant.&lt;/p&gt;
-
-&lt;p&gt;Hakyll provides all the utilities with which we can get cleaner URLs,
-like &lt;a href=&#34;.&#34;&gt;this page&amp;rsquo;s&lt;/a&gt;. For this, I rely on the fact that most of the
-web servers automatically serve &lt;code&gt;/foo/index.html&lt;/code&gt; for the URL
-&lt;code&gt;/foo/&lt;/code&gt;. To generate &lt;em&gt;clean&lt;/em&gt; paths, I define a custom route -
-&lt;code&gt;cleanRoute&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;cleanRoute :: Routes
-cleanRoute = customRoute createIndexRoute
-  where
-    createIndexRoute ident = takeDirectory p &amp;lt;/&amp;gt; takeBaseName p &amp;lt;/&amp;gt; &amp;quot;index.html&amp;quot;
-                            where p = toFilePath ident
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This can now be used in in rule definition:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;  match &amp;quot;pages/*&amp;quot; $ do
-         route   $ cleanRoute
-         -- the compiler follows
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;With this, a path say &lt;code&gt;/pages/about.html&lt;/code&gt; will be generated as
-&lt;code&gt;/pages/about/index.html&lt;/code&gt;, hence solving the generation problem. We
-are only partially done though. The links that Hakyll generates will
-also include the &lt;code&gt;/index.html&lt;/code&gt; suffix in every URL. To get rid of that
-we define a set of functions:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;cleanIndexUrls :: Item String -&amp;gt; Compiler (Item String)
-cleanIndexUrls = return . fmap (withUrls cleanIndex)
-
-cleanIndexHtmls :: Item String -&amp;gt; Compiler (Item String)
-cleanIndexHtmls = return . fmap (replaceAll pattern replacement)
-    where
-      pattern = &amp;quot;/index.html&amp;quot;
-      replacement = const &amp;quot;/&amp;quot;
-
-cleanIndex :: String -&amp;gt; String
-cleanIndex url
-    | idx `isSuffixOf` url = take (length url - length idx) url
-    | otherwise            = url
-  where idx = &amp;quot;index.html&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;cleanIndexUrls&lt;/code&gt; and &lt;code&gt;cleanIndexHtmls&lt;/code&gt; strip out &lt;code&gt;/index.html&lt;/code&gt; from
-all the anchor tags and complete text respectively. These can be used
-over a page&amp;rsquo;s compiler like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;         compile $ pandocCompiler
-            &amp;gt;&amp;gt;= loadAndApplyTemplate &amp;quot;templates/page.html&amp;quot; pageCtx
-            &amp;gt;&amp;gt;= saveSnapshot &amp;quot;content&amp;quot;
-            &amp;gt;&amp;gt;= loadAndApplyTemplate &amp;quot;templates/default.html&amp;quot; pageCtx
-            &amp;gt;&amp;gt;= relativizeUrls
-            &amp;gt;&amp;gt;= cleanIndexUrls -- cleanup href in all anchor tags.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;This functionality is being used by &lt;a href=&#34;https://github.com/crodjer/rohanjain.in/blob/master/site.hs&#34;&gt;this blog&lt;/a&gt; and
-&lt;a href=&#34;https://github.com/irneh/workforpizza/blob/master/site.hs&#34;&gt;irneh/workforpizza&lt;/a&gt; off which this blog is actually
-based.&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
+      <description>The URLs generated by Hakyll, by default also include a .html extension. I have never been a fan of this. When things in reality are driven by the Content-Type header, it is absolutely redundant.
+Hakyll provides all the utilities with which we can get cleaner URLs, like this page&amp;rsquo;s. For this, I rely on the fact that most of the web servers automatically serve /foo/index.html for the URL /foo/. To generate clean paths, I define a custom route - cleanRoute:</description>
     </item>
     
     <item>
@@ -201,45 +36,9 @@ based.&lt;/p&gt;
       <pubDate>Sun, 30 Aug 2015 00:00:00 +0000</pubDate>
       
       <guid>/hakyll-sitemap/</guid>
-      <description>&lt;p&gt;Its fairly trivial to configure &lt;a href=&#34;http://jaspervdj.be/hakyll/&#34;&gt;Hakyll&lt;/a&gt; to generate
-sitemaps. Sitemaps helps search engines websites. Similar to any
-typical html page, create a template - &lt;code&gt;templates/sitemap.xml&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-xml&#34;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
-&amp;lt;urlset xmlns=&amp;quot;http://www.sitemaps.org/schemas/sitemap/0.9&amp;quot;&amp;gt;
-$for(entries)$
-    &amp;lt;url&amp;gt;
-        &amp;lt;loc&amp;gt;$host$$url$&amp;lt;/loc&amp;gt;
-        &amp;lt;changefreq&amp;gt;weekly&amp;lt;/changefreq&amp;gt;
-        $if(lastmod)$&amp;lt;lastmod&amp;gt;$lastmod$&amp;lt;/lastmod&amp;gt;$endif$
-        &amp;lt;priority&amp;gt;0.8&amp;lt;/priority&amp;gt;
-    &amp;lt;/url&amp;gt;
-$endfor$
-&amp;lt;/urlset&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then, using the templates, create a rule which uses all the pages from
-the site as entries. Here is what I do:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-haskell&#34;&gt;  create [&amp;quot;sitemap.xml&amp;quot;] $ do
-         route   idRoute
-         compile $ do
-           posts &amp;lt;- recentFirst =&amp;lt;&amp;lt; loadAll &amp;quot;posts/*/*&amp;quot;
-           pages &amp;lt;- loadAll &amp;quot;pages/*&amp;quot;
-           let allPosts = (return (pages ++ posts))
-           let sitemapCtx = mconcat
-                            [ listField &amp;quot;entries&amp;quot; pageCtx allPosts
-                            , constField &amp;quot;host&amp;quot; host
-                            , defaultContext
-                            ]
-           makeItem &amp;quot;&amp;quot;
-            &amp;gt;&amp;gt;= loadAndApplyTemplate &amp;quot;templates/sitemap.xml&amp;quot; sitemapCtx
-            &amp;gt;&amp;gt;= cleanIndexHtmls
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This generates &lt;a href=&#34;/sitemap.xml&#34;&gt;/sitemap.xml&lt;/a&gt; which can be submitted to
-search engines for indexing.&lt;/p&gt;
-</description>
+      <description>Its fairly trivial to configure Hakyll to generate sitemaps. Sitemaps helps search engines websites. Similar to any typical html page, create a template - templates/sitemap.xml:
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt; &amp;lt;urlset xmlns=&amp;quot;http://www.sitemaps.org/schemas/sitemap/0.9&amp;quot;&amp;gt; $for(entries)$ &amp;lt;url&amp;gt; &amp;lt;loc&amp;gt;$host$$url$&amp;lt;/loc&amp;gt; &amp;lt;changefreq&amp;gt;weekly&amp;lt;/changefreq&amp;gt; $if(lastmod)$&amp;lt;lastmod&amp;gt;$lastmod$&amp;lt;/lastmod&amp;gt;$endif$ &amp;lt;priority&amp;gt;0.8&amp;lt;/priority&amp;gt; &amp;lt;/url&amp;gt; $endfor$ &amp;lt;/urlset&amp;gt;  Then, using the templates, create a rule which uses all the pages from the site as entries. Here is what I do:
+create [&amp;quot;sitemap.xml&amp;quot;] $ do route idRoute compile $ do posts &amp;lt;- recentFirst =&amp;lt;&amp;lt; loadAll &amp;quot;posts/*/*&amp;quot; pages &amp;lt;- loadAll &amp;quot;pages/*&amp;quot; let allPosts = (return (pages ++ posts)) let sitemapCtx = mconcat [ listField &amp;quot;entries&amp;quot; pageCtx allPosts , constField &amp;quot;host&amp;quot; host , defaultContext ] makeItem &amp;quot;&amp;quot; &amp;gt;&amp;gt;= loadAndApplyTemplate &amp;quot;templates/sitemap.</description>
     </item>
     
     <item>
@@ -248,147 +47,8 @@ search engines for indexing.&lt;/p&gt;
       <pubDate>Sat, 22 Aug 2015 00:00:00 +0000</pubDate>
       
       <guid>/ws-test/</guid>
-      <description>&lt;p&gt;Recently, I built an encrypted &lt;a href=&#34;http://github.com/crodjer/qotr/&#34;&gt;chat service&lt;/a&gt;, which was based on
-&lt;a href=&#34;http://www.tornadoweb.org/&#34;&gt;tornado&lt;/a&gt; and &lt;a href=&#34;http://emberjs.com/&#34;&gt;ember.js&lt;/a&gt;. The project itself had grave security issues, so I
-shut it down, but while working on it I learned a few new things and testing
-websockets with tornado is one of them.&lt;/p&gt;
-
-&lt;p&gt;Most of the material out there for this suggests developing separate client
-based tests, which I didn&amp;rsquo;t want to do. Eventually, I figured out that tornado
-already provides all the utilities to do unit/integration tests for websockets.&lt;/p&gt;
-
-&lt;p&gt;First, we will need a websockets based echo server to test, lets call it
-&lt;code&gt;ws.py&lt;/code&gt;. The websocket handler would be:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tornado import web, websocket
-
-class Echo(websocket.WebSocketHandler):
-
-    # Open allows for any number arguments, unlike what pylint thinks.
-    # pylint: disable=W0221
-    def open(self):
-        self.write_message(&#39;hello&#39;)
-
-    def on_message(self, message):
-        self.write_message(message)
-
-    def on_close(self):
-        self.write_message(&#39;bye&#39;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Lets define an application which uses the above handler:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;APP = web.Application([
-    (r&amp;quot;/&amp;quot;, Echo),
-])
-
-if __name__ == &amp;quot;__main__&amp;quot;:
-    APP.listen(5000)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now, we will test the application out. Create a file, say &lt;code&gt;test_ws.py&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from tornado import testing, httpserver, gen, websocket
-from ws import APP
-
-class TestChatHandler(testing.AsyncTestCase):
-    pass
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We use tornado&amp;rsquo;s testing wrapper for the integration it provides with the event
-loop. Lets tell unittest how to setup the tests:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;class TestChatHandler(testing.AsyncTestCase):
-
-    def setUp(self):
-        super(TestChatHandler, self).setUp()
-        server = httpserver.HTTPServer(APP)
-        socket, self.port = testing.bind_unused_port()
-        server.add_socket(socket)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We create a http server out of our application and get a socket bound to an
-unused port. We then ask the server to accept on the created socket. Don&amp;rsquo;t
-forget the &lt;code&gt;super&lt;/code&gt; call, it ensures that the ioloop gets created. &lt;code&gt;unittest&lt;/code&gt;
-will now ensure that a server and an ioloop is up and running before running
-tests.&lt;/p&gt;
-
-&lt;p&gt;Moving forward, we need to define a helper for creating a websocket connection
-to the server. Tornado websocket provides a handly websocket client. It can be
-created with &lt;code&gt;websocket.websocket_connect&lt;/code&gt;.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;    def _mk_connection(self):
-        return websocket.websocket_connect(
-            &#39;ws://localhost:{}/&#39;.format(self.port)
-        )
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We can write a simple test for this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;    @testing.gen_test
-    def test_hello(self):
-        c = yield self._mk_connection()
-        # Get the initial hello from the server.
-        response = yield c.read_message()
-        # Make sure that we got a &#39;hello&#39; not &#39;bye&#39;
-        self.assertEqual(&#39;hello&#39;, response)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;testing.gen_test&lt;/code&gt; is a wrapper over tornado&amp;rsquo;s &lt;code&gt;gen.coroutine&lt;/code&gt;. It runs the test
-synchronously under the ioloop that &lt;code&gt;testing.AsyncTestCase&lt;/code&gt; creates in
-&lt;code&gt;setUp&lt;/code&gt;. The test checks for the &amp;lsquo;hello&amp;rsquo; message that we expect from the server
-on connection.  &lt;code&gt;yield&lt;/code&gt; makes sure that we for the response from the
-server. Note that if you write a &lt;code&gt;yield c.read_message()&lt;/code&gt; when a message from
-server isn&amp;rsquo;t expected, the coroutine will keep waiting, eventually raising
-&lt;code&gt;tornado.ioloop.TimeoutError&lt;/code&gt; (5 seconds by default). Great, we can write lot of
-tests using just what we have now.&lt;/p&gt;
-
-&lt;p&gt;The tests can be run via:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;python -m tornado.testing discover
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This could still be further improved. We need to yield and ignore the &amp;lsquo;hello&amp;rsquo;
-message in every test, for every client. And in your application, it may be a
-more complicated handshake - possibly a few initial messages. Once you write a
-test for that handshake, it needn&amp;rsquo;t be re-written in every test. To avoid that,
-we will write an an abstraction over this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;    @gen.coroutine
-    def _mk_client(self):
-        c = yield self._mk_connection()
-
-        # Discard the hello
-        # This could be any initial handshake, which needs to be generalized
-        # for most of the tests.
-        _ = yield c.read_message()
-
-        raise gen.Return(c)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;_mk_client&lt;/code&gt; here is a method in which you could place all the boilerplate. The
-key point here is the exception &lt;code&gt;gen.Return(c)&lt;/code&gt; we raise in the end. &lt;code&gt;return&lt;/code&gt;
-with a value is allowed only after Python &lt;code&gt;3.3&lt;/code&gt;, so &lt;code&gt;tornado.gen&lt;/code&gt; uses the value
-associated with this exception as the coroutine&amp;rsquo;s result.&lt;/p&gt;
-
-&lt;p&gt;With &lt;code&gt;_mk_client&lt;/code&gt; available, we can write tests which only include the relevant
-code:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;    @testing.gen_test
-    def test_echo(self):
-        # A client with the hello taken care of.
-        c = yield self._mk_client()
-
-        # Send a &#39;foo&#39; to the server.
-        c.write_message(&amp;quot;foo&amp;quot;)
-        # Get the &#39;foo&#39; back.
-        response = yield c.read_message()
-        # Make sure that we got a &#39;foo&#39; back and not &#39;bar&#39;.
-        self.assertEqual(&#39;foo&#39;, response)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The application built out of this post is available &lt;a href=&#34;https://gist.github.com/crodjer/1e9989ab30fdc32db926&#34;&gt;as a gist&lt;/a&gt;.&lt;/p&gt;
-</description>
+      <description>Recently, I built an encrypted chat service, which was based on tornado and ember.js. The project itself had grave security issues, so I shut it down, but while working on it I learned a few new things and testing websockets with tornado is one of them.
+Most of the material out there for this suggests developing separate client based tests, which I didn&amp;rsquo;t want to do. Eventually, I figured out that tornado already provides all the utilities to do unit/integration tests for websockets.</description>
     </item>
     
     <item>
@@ -397,22 +57,7 @@ code:&lt;/p&gt;
       <pubDate>Thu, 20 Aug 2015 00:00:00 +0000</pubDate>
       
       <guid>/bell/</guid>
-      <description>&lt;p&gt;Recently, I built a new desktop. After receiving everything, I realized that I
-was missing the onboard speaker (which creates the annoying beep sound).
-Ideally, the computer case should have had it, but they don&amp;rsquo;t come with a buzzer
-anymore. My various applications rely on the system beep, hence I needed to find
-a software alternative. Turns out it is fairly trivial to configure it to
-capture alerts with pulseaudio:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;start-pulseaudio-x11
-pactl upload-sample /usr/share/sounds/freedesktop/stereo/message.oga beep
-pactl load-module module-x11-bell sample=beep
-xset b 100
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To automatically do it on X11 start, I placed the above in my
-&lt;a href=&#34;https://github.com/crodjer/configs/blob/121caa22d4b7c6324fa9a5b22e2d2fcc334afc96/.xsessionrc#L31&#34;&gt;xsessionrc&lt;/a&gt;.&lt;/p&gt;
-</description>
+      <description>Recently, I built a new desktop. After receiving everything, I realized that I was missing the onboard speaker (which creates the annoying beep sound). Ideally, the computer case should have had it, but they don&amp;rsquo;t come with a buzzer anymore. My various applications rely on the system beep, hence I needed to find a software alternative. Turns out it is fairly trivial to configure it to capture alerts with pulseaudio:</description>
     </item>
     
     <item>
@@ -421,50 +66,8 @@ xset b 100
       <pubDate>Thu, 05 Mar 2015 00:00:00 +0000</pubDate>
       
       <guid>/bash/</guid>
-      <description>&lt;p&gt;Nothing makes a terminal feel more like home as one&amp;rsquo;s own shell
-configuration. My shell is bash, configured through a &lt;a href=&#34;https://github.com/crodjer/configs/blob/master/.bashrc&#34;&gt;.bashrc&lt;/a&gt; and
-&lt;a href=&#34;https://github.com/crodjer/configs/blob/master/.profile&#34;&gt;.profile&lt;/a&gt;. Bash is likely to be present in any Unix machine one
-uses.&lt;/p&gt;
-
-&lt;p&gt;Bash is also my primary IDE. This allows for keeping a relatively simple set of
-utilities and tools to internalize. Coupled with a reliable window manager,
-workflows can be quickly scripted in the head. Shell scripts are an option as
-well for more complex flows. This can be done at multiple levels: using uniquely
-identifiable comments in commands , bash functions, complete bash script.&lt;/p&gt;
-
-&lt;p&gt;Apart from the standard utilities (sed, cut, cat, tr etc.), I use a few tools as
-an aid:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/ggreer/the_silver_searcher&#34;&gt;ag&lt;/a&gt;&lt;/strong&gt; for amazingly fast lookup in files.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/rsync&#34;&gt;rsync&lt;/a&gt;&lt;/strong&gt;, to keep the files synchronized with remote servers.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/ggreer/the_silver_searcher&#34;&gt;entr&lt;/a&gt;&lt;/strong&gt; to run build/test commands on a file change. Or, with
-rsync, synchronize on modifications.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://www.archlinux.org/packages/community/any/autojump/&#34;&gt;autojump&lt;/a&gt;&lt;/strong&gt; to jump directly to frequently used directories.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://stedolan.github.io/jq/&#34;&gt;jq&lt;/a&gt;&lt;/strong&gt; to process JSON output of a command.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Tools are designed for the console first, and then bound to editors or
-IDEs. Familiarizing oneself to the command line interface makes the maximum
-amount of functionality accessible. For example, &lt;a href=&#34;https://github.com/magit/magit&#34;&gt;magit&lt;/a&gt; is a powerful git
-interface for Emacs, but can be limiting for complex git operations such as an
-interactive rebase.&lt;/p&gt;
-
-&lt;p&gt;Composibility of the various commands can be useful as well, allowing one to
-build complex, repeatable commands. For example, the following uses &lt;code&gt;ip&lt;/code&gt; to
-change a system&amp;rsquo;s default route, given the interface:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ip route del default &amp;amp;&amp;gt; /dev/null
-ip route replace default via $(ip route
-     | grep ppp0 # Change this filter as per need.
-     | sed -r &#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39;
-     | cut -d &#39; &#39; -f -4)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;A great piece of literature on the Unix Philosophy is
-&lt;a href=&#34;http://amzn.to/1qFlKCz&#34;&gt;The Art of Unix Programming&lt;/a&gt; by Eric S. Raymond. It also talks about the
-Unix interface design.&lt;/p&gt;
-</description>
+      <description>Nothing makes a terminal feel more like home as one&amp;rsquo;s own shell configuration. My shell is bash, configured through a .bashrc and .profile. Bash is likely to be present in any Unix machine one uses.
+Bash is also my primary IDE. This allows for keeping a relatively simple set of utilities and tools to internalize. Coupled with a reliable window manager, workflows can be quickly scripted in the head. Shell scripts are an option as well for more complex flows.</description>
     </item>
     
     <item>
@@ -473,70 +76,8 @@ Unix interface design.&lt;/p&gt;
       <pubDate>Tue, 28 Jan 2014 00:00:00 +0000</pubDate>
       
       <guid>/emacs-flymake-with-virtualenvs-in-python-mode/</guid>
-      <description>&lt;p&gt;Lately, I have been writing some python with emacs. So, I have been trying to
-get the popular checkers (&lt;code&gt;pylint&lt;/code&gt;/&lt;code&gt;pyflakes&lt;/code&gt;) to work with flymake and
-virtualenvs. The issues with existing solutions to get flymake working with the
-checkers is that most of them assume a global version of executable (which would
-be fine if it weren&amp;rsquo;t for the whole python 2 and 3 incompatibility).&lt;/p&gt;
-
-&lt;p&gt;The &lt;code&gt;python-mode&lt;/code&gt; in the latest emacs versions (mine is &lt;code&gt;24.3.1&lt;/code&gt;) includes a
-basic support for &lt;code&gt;virtualenvs&lt;/code&gt;. I run &lt;code&gt;pylint/pyflakes&lt;/code&gt; through the command
-&lt;code&gt;env&lt;/code&gt; with the environment variables calculated from the functions provided by
-&lt;code&gt;python-mode&lt;/code&gt;. Here is the code extracted from my
-&lt;a href=&#34;https://github.com/crodjer/configs/blob/master/.emacs&#34;&gt;emacs configuration&lt;/a&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-elisp&#34;&gt;(defun python-calculate-env ()
-  &amp;quot;Calculate env variables for current python virtualenv.&amp;quot;
-  ;; ;; This also overrides PYTHONHOME to &amp;quot;&amp;quot;, which breaks the process
-  ;; ;; environment. Otherwise, a neat idea.
-  ;; (mapcar
-  ;;  (lambda (string)
-  ;;    (let ((splitted-string (split-string string &amp;quot;=&amp;quot;)))
-  ;;      (format
-  ;;       &amp;quot;%s=\&amp;quot;%s\&amp;quot;&amp;quot;
-  ;;       (car splitted-string)
-  ;;       (or (cadr splitted-string)
-  ;;           &amp;quot;&amp;quot;))))
-  ;; (python-shell-calculate-process-environment)))
-  (remove-if
-   (lambda (x)
-     (or
-      ;; If environment
-      (string-match &amp;quot; &amp;quot; x)
-      (not (string-match &amp;quot;=&amp;quot; x))))
-   (python-shell-calculate-process-environment)))
-
-(defun python-virtualenv-exec (command args)
-  &amp;quot;Generate a flymake friendly list executable in virtualenv, for provided
-commands.&amp;quot;
-  (list &amp;quot;env&amp;quot; (append (python-calculate-env) (list command) args)))
-
-(when (load &amp;quot;flymake&amp;quot; t)
-  (defun flymake-python-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       &#39;flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (python-virtualenv-exec
-       &amp;quot;pylint&amp;quot;
-       (list
-        ;; Pylint args. Will depend on the checker being used.
-        &amp;quot;-r&amp;quot; &amp;quot;n&amp;quot;
-        &amp;quot;--msg-template=&#39;{path}:{line}:{category} [{msg_id} {obj}] {msg}&#39;&amp;quot;
-        local-file))))
-  (add-to-list &#39;flymake-allowed-file-name-masks
-             &#39;(&amp;quot;\\.py\\&#39;&amp;quot; flymake-python-init)))
-
-(defun flymake-mode-hook-function ()
-  (when (derived-mode-p &#39;python-mode)
-    (flymake-mode t)))
-;; Run flymake mode hook function after the local variables are set (eg: through
-;; .dir-locals.el
-(add-hook &#39;hack-local-variables-hook #&#39;flymake-mode-hook-function)
-(setq virtualenv-workon-starts-python nil)
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>Lately, I have been writing some python with emacs. So, I have been trying to get the popular checkers (pylint/pyflakes) to work with flymake and virtualenvs. The issues with existing solutions to get flymake working with the checkers is that most of them assume a global version of executable (which would be fine if it weren&amp;rsquo;t for the whole python 2 and 3 incompatibility).
+The python-mode in the latest emacs versions (mine is 24.</description>
     </item>
     
     <item>
@@ -545,89 +86,9 @@ commands.&amp;quot;
       <pubDate>Sun, 15 Apr 2012 00:00:00 +0000</pubDate>
       
       <guid>/yet-another-vim-productivity-post-server-client/</guid>
-      <description>&lt;p&gt;You can find lot of posts on the internet which try to tell you how to improve
-the ways in which Vim is used. Well, here is another one.&lt;/p&gt;
-
-&lt;p&gt;#Vim Server, ZSH and Tiles&lt;/p&gt;
-
-&lt;p&gt;A Vim instance behaves as a server in which files can be opened through remote
-applications. Read &lt;code&gt;:help client-server&lt;/code&gt; of Vim to know more about this. I
-generally keep multiple Vim sessions running, described by task they are related
-to.&lt;/p&gt;
-
-&lt;p&gt;A typical workspace has one instance of Vim running and multiple terminals
-around it.  Lets call this workspace for project &lt;em&gt;foo&lt;/em&gt;. So the name of Vim
-instance server will be &lt;em&gt;foo&lt;/em&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;vim --servername foo
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And any file will be open in this server, using this command:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;vim --servername foo --remote-silent bar.hs
-
-
-+-----------------------+
-|           |~$         |
-|           |           |
-|           |-----------+
-|    Vim    |~$         |
-|   Server  |           |
-|           |-----------+
-|           |~$         |
-|           |           |
-+-----------------------+
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;How this helps:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Lets me keep a well defined separation on various projects I am working on.
-The list of files in the buffer per instance remains short and manageable.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Also each instance can have its own project specific environment - current
-directory, python virtual environments etc.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;For easing all this up, I use a set of helper functions in my &lt;em&gt;zshrc&lt;/em&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Set the name of vim session the terminal is tied up to
-eset(){
-    export VI_SERVER=$1
-}
-
-# Fire up a new server according to the argument supplied
-vs(){
-    eset $1
-    vim --servername $VI_SERVER
-}
-
-# Open up the files in the environment Vim server.
-es(){
-    vim --servername $VI_SERVER --remote-silent $*
-}
-
-# Reuse Vim ZSH completions for vim completions
-compdef _vim es
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;#Vim Sessions&lt;/p&gt;
-
-&lt;p&gt;Having multiple instances is great, but I don&amp;rsquo;t want to set each up every time I
-need resume working. For this I use &lt;em&gt;Vim Sessions&lt;/em&gt;, which allow the current Vim
-state to be stored over the disk.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://github.com/xolox/vim-session&#34;&gt;vim-session&lt;/a&gt; plugin will help you manage sessions easily. It is
-well integrated with Vim client-server.&lt;/p&gt;
-
-&lt;p&gt;From docs:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;When you start Vim with a custom server name that matches one of the existing
-session names then the matching session will be automatically restored.&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
+      <description>You can find lot of posts on the internet which try to tell you how to improve the ways in which Vim is used. Well, here is another one.
+#Vim Server, ZSH and Tiles
+A Vim instance behaves as a server in which files can be opened through remote applications. Read :help client-server of Vim to know more about this. I generally keep multiple Vim sessions running, described by task they are related to.</description>
     </item>
     
     <item>
@@ -636,46 +97,8 @@ session names then the matching session will be automatically restored.&lt;/p&gt
       <pubDate>Sat, 27 Aug 2011 00:00:00 +0000</pubDate>
       
       <guid>/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</guid>
-      <description>&lt;p&gt;Recently I opened up on the port &lt;em&gt;443&lt;/em&gt; over my EC2 instance (more or less like
-a VPS), so that I can access it through any firewalled proxy too. Apart from
-getting SSH running to a machine from outside world, I did some cool
-configuration to have ssh deal with with various remote hosts automatically. It
-uses &lt;em&gt;the right&lt;/em&gt; proxy settings according the host being accessed.&lt;/p&gt;
-
-&lt;p&gt;All the stuff which runs over ssh (like &lt;em&gt;scp&lt;/em&gt;, &lt;em&gt;git&lt;/em&gt; etc.) also work the way
-they are supposed to, following the ssh configuration.&lt;/p&gt;
-
-&lt;p&gt;To get this to work you need to have &lt;em&gt;corkscrew&lt;/em&gt; and &lt;em&gt;netcat&lt;/em&gt; (the swiss army
-knife) already installed.&lt;/p&gt;
-
-&lt;p&gt;Here is how it goes:&lt;br /&gt;
-&lt;code&gt;File ~/.ssh/config:&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-apache&#34;&gt;# Let me access local remotes directly.
-Host 127.0.0.1, 10.*
-    ProxyCommand none
-
-# Github lets you ssh over port 443 too, utilize that instead of tunneling
-# through remote computer
-Host github.com
-    Hostname ssh.github.com
-    User git
-    ProxyCommand corkscrew 10.3.100.211 8080 %h %p
-    Port 443
-    Hostname ssh.github.com
-
-# Let me ssh onto my ec2 instance, which has full network access, through a
-# http proxy.
-Host ecc.rohanjain.in
-    ProxyCommand corkscrew 10.3.100.211 8080 %h %p
-    Port 443
-    ServerAliveInterval 600
-
-# All the rest should connect through an ssh connection over the ec2 instance.
-Host *
-    ProxyCommand ssh -q -a -x -p 443 ecc.rohanjain.in nc %h %p
-&lt;/code&gt;&lt;/pre&gt;
-</description>
+      <description>Recently I opened up on the port 443 over my EC2 instance (more or less like a VPS), so that I can access it through any firewalled proxy too. Apart from getting SSH running to a machine from outside world, I did some cool configuration to have ssh deal with with various remote hosts automatically. It uses the right proxy settings according the host being accessed.
+All the stuff which runs over ssh (like scp, git etc.</description>
     </item>
     
   </channel>

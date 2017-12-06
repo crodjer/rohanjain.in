@@ -9,18 +9,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer">
 <meta name="author" content="Rohan Jain">
-<meta name="description" content="About a year ago, I switched my parents computer (lets call it P) from the pre-installed OS (Windows) to Ubuntu. The primary reason for this switch was it hard for me to debug and fix issues. Things have been smooth after the switch with no issues which I found hard to fix remotely. What specially has worked is my ability to log in to the computer when its on through my VPS and service it.">
+<meta name="description" content="I am a big fan of deterministic access to application. By that, I mean I should be able to reach a window/application without needing visual feedback from the screen. Doing this on OSX can be tricky.
+For a long time, I used a two windows workflow i.e. all the applications I need should fit in just two windows: the browser (mail, slack etc.) or the terminal (emacs, tmux, bash). This works, but is restrictive.">
 
-<meta property="og:title" content="VNC over reverse SSH" />
-<meta property="og:description" content="About a year ago, I switched my parents computer (lets call it P) from the pre-installed OS (Windows) to Ubuntu. The primary reason for this switch was it hard for me to debug and fix issues. Things have been smooth after the switch with no issues which I found hard to fix remotely. What specially has worked is my ability to log in to the computer when its on through my VPS and service it." />
+<meta property="og:title" content="Automating Window Management in OSX with Spark" />
+<meta property="og:description" content="I am a big fan of deterministic access to application. By that, I mean I should be able to reach a window/application without needing visual feedback from the screen. Doing this on OSX can be tricky.
+For a long time, I used a two windows workflow i.e. all the applications I need should fit in just two windows: the browser (mail, slack etc.) or the terminal (emacs, tmux, bash). This works, but is restrictive." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/vnc/" />
+<meta property="og:url" content="/spark/" />
 
 
 
-<meta property="article:published_time" content="2015-05-10T00:00:00&#43;00:00"/>
+<meta property="article:published_time" content="2017-12-06T12:44:55&#43;00:00"/>
 
-<meta property="article:modified_time" content="2015-05-10T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2017-12-06T12:44:55&#43;00:00"/>
 
 
 
@@ -38,11 +40,11 @@
 
 
     
-    VNC over reverse SSH | The Perpetual Amature
+    Automating Window Management in OSX with Spark | The Perpetual Amature
     
 
 </title>
-<link rel="canonical" href="/vnc/">
+<link rel="canonical" href="/spark/">
 
 
 
@@ -150,7 +152,7 @@
                 <div class="title-container">
                     <div class="page-heading">
 
-    VNC over reverse SSH
+    Automating Window Management in OSX with Spark
 
 </div>
 
@@ -158,7 +160,7 @@
                 </div>
                 <div class="meta">
                     
-                    <div class="date" title='Sun May 10 2015 00:00:00 UTC'>May 10, 2015</div>
+                    <div class="date" title='Wed Dec 6 2017 12:44:55 UTC'>Dec 6, 2017</div>
                     
                     
 		    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
@@ -166,59 +168,39 @@
                 </div>
             </div>
             <div class="markdown">
-                
+                <p>I am a big fan of deterministic access to application. By that, I mean I should
+be able to reach a window/application without needing visual feedback from the
+screen. Doing this on OSX can be tricky.</p>
 
-<p>About a year ago, I switched my parents computer (lets call it <code>P</code>) from the
-pre-installed OS (Windows) to Ubuntu. The primary reason for this switch was it
-hard for me to debug and fix issues. Things have been smooth after the switch
-with no issues which I found hard to fix remotely. What specially has worked is
-my ability to log in to the computer when its on through my VPS and service it.</p>
+<p>For a long time, I used a <a href="/two-windows/">two windows</a> workflow i.e. all the
+applications I need should fit in just two windows: the browser (mail, slack
+etc.) or the terminal (emacs, tmux, bash).  This works, but is restrictive.</p>
 
-<h2 id="reverse-ssh">Reverse SSH</h2>
+<p>An alternate approach I have been trying out now is to have a global shortcut
+to reach each application. For example, in my setup: Cmd-Ctrl-E is <code>emacs</code>,
+Cmd-Ctrl-C is <code>chrome</code> and so on. Now, wherever I may be, I can
+deterministically open a desired window/application. I do this with
+<a href="https://www.shadowlab.org/softwares/spark.php">Spark</a> and an <code>AppleScript</code> per
+application.</p>
 
-<p>Whenever <code>P</code> starts, it makes a reverse SSH connection to my VPS. I use
-<a href="https://www.archlinux.org/packages/community/x86_64/autossh/">autossh</a> to monitor and make sure that it is eventually always
-connected.</p>
+<p>I wrote <code>AppleScript</code>s instead of simply pointing to the application the
+so that the window is resized to the maximum before being focused. This is what
+the <code>AppleScript</code> to open (and resize) <code>Emacs</code> looks like.</p>
 
-<pre><code class="language-bash">$ autossh -M 10001 -f -NXYR 10000:localhost:22 vps
+<pre><code class="language-applescript">tell application &quot;Emacs&quot;
+	-- Get bounds from the desktop.
+	tell application &quot;Finder&quot; to bounds of window of desktop
+	-- Set the window bounds to the ones we just fetched.
+	set bounds of window 1 to result
+	-- Focus the editor window.
+	activate
+end tell
 </code></pre>
 
-<p>Here <code>vps</code> is a SSH alias for my personal VPS.</p>
-
-<p>I can tunnel through the VPS and login to <code>P</code> via VPS using the following SSH
-configuration:</p>
-
-<pre><code class="language-config">Host home
-     Hostname localhost
-     User username
-     Port 10000
-     ProxyCommand ssh -e none -W %h:%p vps
-</code></pre>
-
-<p>To log in to <code>P</code> transparently, I can simply do:</p>
-
-<pre><code class="language-bash">$ ssh home
-</code></pre>
-
-<p>I use this to resolve most of the issues. Of course it does have the requirement
-that the system be booted up and connected to a network.</p>
-
-<h2 id="vnc">VNC</h2>
-
-<p>There also can be issues which have to do with the GUI (say browser maintenance)
-and cannot be done easily over a text SSH session. For those cases, VNC is to
-rescue. I create a VNC server on <code>P</code> using <a href="https://wiki.archlinux.org/index.php/X11vnc">x11vnc</a> and tunnel the VNC
-port to my local through SSH. Now, I can access <code>P</code>&rsquo;s graphical session remotely
-via a vnc client (mine is <a href="https://www.archlinux.org/packages/community/x86_64/tigervnc/">tigervnc</a>).</p>
-
-<pre><code class="language-bash">$ ssh home -L 5900:localhost:5900 &quot;x11vnc -rfbauth ~/.vnc/passwd -display :0 -noxdamage&quot;
-$ vncviewer localhost::5900 -QualityLevel 3 -CompressLevel 6
-</code></pre>
-
-<p>This method is much better compared to the more common solutions such has
-Google&rsquo;s VNC chrome extension or other proprietary services. But they are slow
-and untrustable 3rd parties. With this way of setting up VNC, everything is
-protected under SSH connections.</p>
+<blockquote>
+<p>This way of resizing cannot be used with multiple screens because the bounds
+provided by <code>Finder</code> will span all of them and so will the application window.</p>
+</blockquote>
 
                 <br>
 		<p class="back-to-posts"><a href="/blog/">Back to posts</a></p>

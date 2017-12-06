@@ -2,12 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blog on The Perpetual Amature</title>
-    <link>/blog/index.xml</link>
+    <link>/blog/</link>
     <description>Recent content in Blog on The Perpetual Amature</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 10 May 2017 02:34:01 +0000</lastBuildDate>
-    <atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 06 Dec 2017 12:44:55 +0000</lastBuildDate>
+    
+	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Automating Window Management in OSX with Spark</title>
+      <link>/spark/</link>
+      <pubDate>Wed, 06 Dec 2017 12:44:55 +0000</pubDate>
+      
+      <guid>/spark/</guid>
+      <description>I am a big fan of deterministic access to application. By that, I mean I should be able to reach a window/application without needing visual feedback from the screen. Doing this on OSX can be tricky.
+For a long time, I used a two windows workflow i.e. all the applications I need should fit in just two windows: the browser (mail, slack etc.) or the terminal (emacs, tmux, bash). This works, but is restrictive.</description>
+    </item>
     
     <item>
       <title>The Purpose Of It All</title>
@@ -15,41 +27,10 @@
       <pubDate>Wed, 10 May 2017 02:34:01 +0000</pubDate>
       
       <guid>/42/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;If you have some time, I&amp;rsquo;d recommend reading &lt;a href=&#34;https://www.goodreads.com/book/show/11987.The_Myth_of_Sisyphus_and_Other_Essays?ac=1&amp;amp;from_search=true&#34;&gt;The Myth of
-Sysiphus&lt;/a&gt;
-instead.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The mind is free, with not much to worry about and starts to wander. It lands on
-the question: &amp;ldquo;What is the meaning of it all?&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;Its not difficult to arrive at the answer: &amp;ldquo;There isn&amp;rsquo;t a meaning, really&amp;rdquo;, and
-sets in an existential crisis.&lt;/p&gt;
-
-&lt;p&gt;But, I&amp;rsquo;d argue that there is a flaw in the question. Meaning isn&amp;rsquo;t something one
-should try to look for at all. Maybe, purpose is the right quest. And if you try
-to observe (or just use Camus&amp;rsquo; observations), the apparent purpose can be
-inferred.&lt;/p&gt;
-
-&lt;p&gt;Universe is hostile, destructive and doesn&amp;rsquo;t really care about things.
-Statistically speaking, that makes sense. There are usually many more possible
-configuration for (what we call) disorder than (what we call) order. So, things
-naturally tend toward disorder and seemingly, destruction.&lt;/p&gt;
-
-&lt;p&gt;Life, on the other hand, behaves strangely. It has somehow figured out a way to,
-in a limited sense, continue order. Organisms are able to replicate very
-unlikely combinations of chemicals over and over again. Going at a macro level
-and thinking in an anthropocentric way, that is what humans seem to do as well -
-build complex structures and ideas which would be fairly unlikely to just
-randomly show up naturally otherwise.&lt;/p&gt;
-
-&lt;p&gt;And this is what can be taken as the &lt;strong&gt;purpose&lt;/strong&gt;. To revolt against nature,
-fight against destruction, defy the rise of entropy. Life&amp;rsquo;s been trying to
-attempt bringing some predictability and organisation (at one level anyway) to
-the world. This experiment was most likely started ~4.5 billion years on Earth.
-Lets try to prolong it - just for the sake of curiosity if not anything else.&lt;/p&gt;
-</description>
+      <description>If you have some time, I&amp;rsquo;d recommend reading The Myth of Sysiphus instead.
+ The mind is free, with not much to worry about and starts to wander. It lands on the question: &amp;ldquo;What is the meaning of it all?&amp;rdquo;.
+Its not difficult to arrive at the answer: &amp;ldquo;There isn&amp;rsquo;t a meaning, really&amp;rdquo;, and sets in an existential crisis.
+But, I&amp;rsquo;d argue that there is a flaw in the question.</description>
     </item>
     
     <item>
@@ -58,167 +39,8 @@ Lets try to prolong it - just for the sake of curiosity if not anything else.&lt
       <pubDate>Sat, 18 Mar 2017 05:28:10 +0000</pubDate>
       
       <guid>/cloudflare-ddns/</guid>
-      <description>
-
-&lt;p&gt;It is hard to maintain a regular internet uptime with home connections. &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;2&lt;/sub&gt;
-router re-connections per week can be fairly common. When that happens, the
-public IP changes with most ISPs. This can be annoying if you want access your
-computer remotely (possibly to SSH home). Dynamic DNS is a solution that exists
-to solve just that.&lt;/p&gt;
-
-&lt;p&gt;I maintain DNS entries for my domain at
-&lt;a href=&#34;https://www.cloudflare.com/&#34;&gt;Clouflare&lt;/a&gt;. The latest version of
-&lt;a href=&#34;https://sourceforge.net/p/ddclient/wiki/Home/&#34;&gt;&lt;code&gt;ddclient&lt;/code&gt;&lt;/a&gt; supports Cloudflare
-API, which works well with my ArchLinux box. But ddclient bundled with Raspbian,
-is yet to get that update. Cloudflare&amp;rsquo;s API is fairly straight forward, so I
-decided to use a curl/systemd based solution on my RaspberryPi.&lt;/p&gt;
-
-&lt;h1 id=&#34;configuration-information&#34;&gt;Configuration information&lt;/h1&gt;
-
-&lt;p&gt;If you too want to set Dynamic DNS with Cloudflare, you need to acquire some
-configuration information first:&lt;/p&gt;
-
-&lt;h2 id=&#34;cloudflare-configuration-details&#34;&gt;Cloudflare configuration details&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;DNS Zone&lt;/code&gt;&lt;br /&gt;
-You can get it by visiting the overview page of Cloudflare dashboard (called
-Zone ID):
-&lt;a href=&#34;https://www.cloudflare.com/a/overview/&#34;&gt;https://www.cloudflare.com/a/overview/&lt;/a&gt;&lt;your-domain&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Auth Email&lt;/code&gt;: This is your cloudflare account email.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Auth Key&lt;/code&gt;: This is your &lt;em&gt;Global API Key&lt;/em&gt; under Cloudflare account settings:
-&lt;a href=&#34;https://www.cloudflare.com/a/account/my-account&#34;&gt;https://www.cloudflare.com/a/account/my-account&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;IDENTIFIER&lt;/code&gt;&lt;br /&gt;
-To get the identifier, you need to first set an A record for the subdomain you
-want to manage with Dynamic DNS. Then, plug in the subdomain in this curl
-query to obtain the identifier:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;  curl &amp;quot;https://api.cloudflare.com/client/v4/zones/&amp;lt;your-dns-zone&amp;gt;/dns_records?name=&amp;lt;subdomain&amp;gt;.&amp;lt;your-domain&amp;gt;&amp;quot; \
-       --silent -X GET \
-       -H &amp;quot;X-Auth-Email: &amp;lt;cloudflare-auth-email&amp;gt;&amp;quot; \
-       -H &amp;quot;X-Auth-Key: &amp;lt;cloudflare-auth-key&amp;gt;&amp;quot; \
-       -H &amp;quot;Content-Type: application/json&amp;quot; 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;ip-address&#34;&gt;IP Address&lt;/h2&gt;
-
-&lt;p&gt;I use &lt;code&gt;dig&lt;/code&gt; with OpenDNS to get the current public IP and
-&lt;a href=&#34;https://www.ipify.org/&#34;&gt;https://www.ipify.org/&lt;/a&gt; as a fallback if &lt;code&gt;dig&lt;/code&gt; isn&amp;rsquo;t installed. Using &lt;code&gt;dig&lt;/code&gt; is
-faster though and you can install it via &lt;code&gt;dnsutils&lt;/code&gt; (available as an official
-package on most systems).&lt;/p&gt;
-
-&lt;h1 id=&#34;the-script&#34;&gt;The script&lt;/h1&gt;
-
-&lt;p&gt;All the above information can now be plugged in this bash script to update the
-DNS entry on Cloudflare. I placed it at &lt;code&gt;/usr/local/bin/cloudflare-ddns.sh&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#/usr/bin/env sh
-
-# Get the Zone ID from: https://www.cloudflare.com/a/overview/&amp;lt;your-domain&amp;gt;
-DNS_ZONE=&amp;lt;your-dns-zone&amp;gt;
-
-# Get the existing identifier for DNS entry:
-# https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records
-IDENTIFIER=&amp;lt;your-domain-dns-entry-identifier&amp;gt;
-
-# Get these from: https://www.cloudflare.com/a/account/my-account
-AUTH_EMAIL=&amp;lt;cloudflare-auth-email&amp;gt;
-AUTH_KEY=&amp;lt;cloudflare-auth-key&amp;gt;
-
-# Desired domain name
-DOMAIN_NAME=&amp;quot;&amp;lt;subdomain&amp;gt;.&amp;lt;your-domain&amp;gt;&amp;quot;
-
-# Get previous IP address
-_PREV_IP_FILE=&amp;quot;/tmp/public-ip.txt&amp;quot;
-_PREV_IP=$(cat $_PREV_IP_FILE &amp;amp;&amp;gt; /dev/null)
-
-# Install `dig` via `dnsutils` for faster IP lookup.
-command -v dig &amp;amp;&amp;gt; /dev/null &amp;amp;&amp;amp; {
-    _IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
-} || {
-    _IP=$(curl --silent https://api.ipify.org)
-} || {
-    exit 1
-}
-
-# If new/previous IPs match, no need for an update.
-if [ &amp;quot;$_IP&amp;quot; = &amp;quot;$_PREV_IP&amp;quot; ]; then
-    exit 0
-fi
-
-_UPDATE=$(cat &amp;lt;&amp;lt;EOF
-{ &amp;quot;type&amp;quot;: &amp;quot;A&amp;quot;,
-  &amp;quot;name&amp;quot;: &amp;quot;$DOMAIN_NAME&amp;quot;,
-  &amp;quot;content&amp;quot;: &amp;quot;$_IP&amp;quot;,
-  &amp;quot;ttl&amp;quot;: 120,
-  &amp;quot;proxied&amp;quot;: false }
-EOF
-)
-
-curl &amp;quot;https://api.cloudflare.com/client/v4/zones/$DNS_ZONE/dns_records/$IDENTIFIER&amp;quot; \
-     --silent \
-     -X PUT \
-     -H &amp;quot;Content-Type: application/json&amp;quot; \
-     -H &amp;quot;X-Auth-Email: $AUTH_EMAIL&amp;quot; \
-     -H &amp;quot;X-Auth-Key: $AUTH_KEY&amp;quot; \
-     -d &amp;quot;$_UPDATE&amp;quot; &amp;gt; /tmp/cloudflare-ddns-update.json &amp;amp;&amp;amp; \
-     echo $_IP &amp;gt; $_PREV_IP_FILE
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Try running &lt;code&gt;cloudflare-ddns.sh&lt;/code&gt; to see if DNS records get updated on
-Cloudflare. For debugging purposes, I store the Cloudflare response at
-&lt;code&gt;/tmp/cloudflare-ddns-update.json&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h1 id=&#34;systemd&#34;&gt;Systemd&lt;/h1&gt;
-
-&lt;p&gt;We&amp;rsquo;ll automate this execution by writing a systemd service and a timer.&lt;/p&gt;
-
-&lt;h2 id=&#34;configuring-the-service&#34;&gt;Configuring the service&lt;/h2&gt;
-
-&lt;p&gt;My systemd service unit looks like this:
-&lt;code&gt;/etc/systemd/system/cloudflare-ddns.service&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[Unit]
-Description=Update DNS entry for this host to current IP
-
-[Service]
-Type=oneshot
-ExecStart=/bin/sh /usr/local/bin/cloudflare-ddns.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Test the service by running:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo systemctl start cloudflare-ddns.service
-# Check the results:
-sudo journalctl -u cloudflare-ddns
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;setting-up-a-timer&#34;&gt;Setting up a timer&lt;/h2&gt;
-
-&lt;p&gt;Set up a timer, so that DNS update is attempted every 2 minutes:
-&lt;code&gt;/etc/systemd/system/cloudflare-ddns.timer&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[Unit]
-Description=Update DNS entry in cloudflare every 2 minutes
-
-[Timer]
-OnBootSec=1min
-OnCalendar=*:0/2
-Unit=cloudflare-ddns.service
-
-[Install]
-WantedBy=basic.target
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To enable the timer, run:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;sudo systemctl enable cloudflare-ddns.timer
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And that&amp;rsquo;s it, now the system&amp;rsquo;s IP will be kept up to date (within 2 minutes)
-for remote access.&lt;/p&gt;
-</description>
+      <description>It is hard to maintain a regular internet uptime with home connections. 1&amp;frasl;2 router re-connections per week can be fairly common. When that happens, the public IP changes with most ISPs. This can be annoying if you want access your computer remotely (possibly to SSH home). Dynamic DNS is a solution that exists to solve just that.
+I maintain DNS entries for my domain at Clouflare. The latest version of ddclient supports Cloudflare API, which works well with my ArchLinux box.</description>
     </item>
     
     <item>
@@ -227,66 +49,8 @@ for remote access.&lt;/p&gt;
       <pubDate>Mon, 27 Feb 2017 06:15:12 +0000</pubDate>
       
       <guid>/two-windows/</guid>
-      <description>&lt;p&gt;I was introduced to OSX for the first time in September, 2015. Coming from a
-XMonad/Linux based setup, I was accustomed to powerful and fast window
-management. Most available solutions for OSX did not have these qualities. I
-tried:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;Amethyst&lt;/em&gt;, a window manager with basic XMonad bindings.&lt;/li&gt;
-&lt;li&gt;Just type the application name in &lt;em&gt;Alfred&lt;/em&gt;. Initially this was slow, but
-quickly became habitual.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Mjolinr&lt;/em&gt;, which is configured in Lua and can actually be quite powerful.&lt;/li&gt;
-&lt;li&gt;Numerous other programs out there which try to solve the same problem in
-similar fashion.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;These programs sort of worked, but they are slow and unresponsive. Alfred based
-switching works on application level and not window level. So, I needed some
-simpler alternatives.&lt;/p&gt;
-
-&lt;p&gt;Eventually, I noticed that &lt;code&gt;Cmd-Tab&lt;/code&gt; based window switching is fast. So, for
-last 6 months, I have been using a two window strategy. That is:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;The primary workflow must be dependent on at max two windows.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This means that any application I want to have in my workflow must run in either
-of those windows.&lt;/p&gt;
-
-&lt;p&gt;Those windows in my case are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;iTerm2&lt;/em&gt;&lt;br /&gt;
-This includes a &lt;code&gt;tmux&lt;/code&gt; session, with multiple windows. The first window will
-run a in-terminal emacs client and the rest all windows will various shell
-sessions and split configurations of their own. This way, I&amp;rsquo;ll spend most of
-my time within a tmux session.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Browser&lt;/em&gt;&lt;br /&gt;
-Apart from functioning as a browser, it serves as an host for applications
-such as: Mail, Slack, Calender.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;There are multiple benefits of this setup:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Quick window switching.&lt;/li&gt;
-&lt;li&gt;Universal workflow. Use it on RaspberryPi, remote machines, Linux TTY.&lt;/li&gt;
-&lt;li&gt;Keystrokes are deterministic. Just queue in the keystrokes and let the
-computer execute things at its own pace. This also is my major complaint
-against touch phones (compared to say, an old Nokia QWERTY phone).&lt;/li&gt;
-&lt;li&gt;I use Vim as a text editor for anything non Clojure. With tmux splits panes,
-all of the context stays in the same tmux window.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;There are drawbacks too:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Not every application can run in the browser/terminal. Because of this, you
-end up negotiating for alternates.&lt;/li&gt;
-&lt;li&gt;Although most of Emacs works well in terminal, some bindings at times won&amp;rsquo;t
-work. This isn&amp;rsquo;t a issue for me particularly.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>I was introduced to OSX for the first time in September, 2015. Coming from a XMonad/Linux based setup, I was accustomed to powerful and fast window management. Most available solutions for OSX did not have these qualities. I tried:
+ Amethyst, a window manager with basic XMonad bindings. Just type the application name in Alfred. Initially this was slow, but quickly became habitual. Mjolinr, which is configured in Lua and can actually be quite powerful.</description>
     </item>
     
     <item>
@@ -295,39 +59,8 @@ work. This isn&amp;rsquo;t a issue for me particularly.&lt;/li&gt;
       <pubDate>Sat, 11 Feb 2017 15:20:45 +0000</pubDate>
       
       <guid>/decentralized-twitter/</guid>
-      <description>&lt;p&gt;As a social network, twitter has a few fairly unique characteristics:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;It forces people to be more creative in trying to express the idea within 140
-characters.&lt;/li&gt;
-&lt;li&gt;Ability to control the content that you receive. Stricter filtering is
-possible based on one&amp;rsquo;s interests.&lt;/li&gt;
-&lt;li&gt;On platforms such as Quora/Facebook, the feed is not deterministic. That&amp;rsquo;s
-not the case with twitter. You see tweets in order and as they happen.
-Twitter doesn&amp;rsquo;t try to decide what is important and what is not.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;But Twitter has been bleeding money since I have known about it. It has
-seemingly created a lot of value in sharing of ideas and news. If it were to go
-away, it&amp;rsquo;ll have an (at least temporary) impact on its users.&lt;/p&gt;
-
-&lt;p&gt;Are there any alternatives to Twitter? Sometime back, I started a casual
-discussion about this with a friend. There isn&amp;rsquo;t an obvious service that
-currently exists which would fill in the void that Twitter might leave. Other
-than what Twitter what already provides, we needed something more resilient. So,
-it could be de-centralized, i.e. not dependent on a single server to provide
-content.&lt;/p&gt;
-
-&lt;p&gt;Hmm, we want a client-server architecture. It could be a standardized protocol.
-Services would spin up for non-tech people so that they could host their content
-on them. Then because of the standardized protocol, people could innovate on
-clients as well! Continue the discussion on this for a few more seconds and
-then&amp;hellip;wait! This already exists. The world already uses it, and quiet
-successfully. And, it is an open standard. We were trying to invent blogs and
-RSS!&lt;/p&gt;
-
-&lt;p&gt;And there was an end to a short brainstorming session.&lt;/p&gt;
-</description>
+      <description>As a social network, twitter has a few fairly unique characteristics:
+ It forces people to be more creative in trying to express the idea within 140 characters. Ability to control the content that you receive. Stricter filtering is possible based on one&amp;rsquo;s interests. On platforms such as Quora/Facebook, the feed is not deterministic. That&amp;rsquo;s not the case with twitter. You see tweets in order and as they happen. Twitter doesn&amp;rsquo;t try to decide what is important and what is not.</description>
     </item>
     
     <item>
@@ -336,175 +69,9 @@ RSS!&lt;/p&gt;
       <pubDate>Thu, 12 May 2016 00:00:00 +0000</pubDate>
       
       <guid>/telescope/</guid>
-      <description>
-
-&lt;p&gt;In my &lt;a href=&#34;/sky/&#34;&gt;previous post&lt;/a&gt;, I wrote about my initial experiences with stargazing -
-primarily to demonstrate that it can be fascinating without fancy
-equipment. After those initial sessions, I bought a telescope which magnified my
-experience significantly.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Stars. Stars everywhere!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;the-telescope&#34;&gt;The Telescope&lt;/h2&gt;
-
-&lt;p&gt;The primary purpose of an (astronomical) telescope, unlike popular belief, is
-not actually magnification. They act as light collectors (think burning a paper
-with a converging lens and sunlight).&lt;/p&gt;
-
-&lt;p&gt;Because the aperture of our eye is very small (7mm at best), we don&amp;rsquo;t capture
-enough light to see faint stars. Telescopes (and binoculars) can have much
-larger objectives and hence more surface area where the photon can hit.&lt;/p&gt;
-
-&lt;p&gt;Buying a telescope (or anything?) on an impulse is a bad idea. There are
-multiple articles/guides (like &lt;a href=&#34;http://www.skyandtelescope.com/astronomy-equipment/how-to-choose-a-telescope/&#34;&gt;this one&lt;/a&gt;) that talk about various
-telescopes and their purposes. I&amp;rsquo;d recommend going through a few of those while
-having some direct gazing sessions, helps in setting up the preferences and
-expectations.&lt;/p&gt;
-
-&lt;p&gt;I personally enjoy looking at faint stars and deep sky objects or DSOs (star
-clusters, galaxies, nebulae) more compared to planets/moon. To start with, the
-objects that Charles Messier &lt;a href=&#34;https://en.wikipedia.org/wiki/List_of_Messier_objects&#34;&gt;catalogued&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;My telescope is a Newtonian reflector with a &lt;strong&gt;114mm&lt;/strong&gt; aperture and &lt;strong&gt;900mm&lt;/strong&gt;
-focal length. I have 3 kellner eyepieces of sizes (and magnifications) &lt;strong&gt;25mm
-(36x)&lt;/strong&gt;, &lt;strong&gt;10mm (90x)&lt;/strong&gt; and &lt;strong&gt;4mm (225x)&lt;/strong&gt;. It has a &lt;strong&gt;6x24&lt;/strong&gt; (i.e. 6x
-magnification and 24mm aperture) finder. To keep the weight (and price) at a
-minimum, I got an Altazimuth mount.&lt;/p&gt;
-
-&lt;p&gt;On the web, &lt;a href=&#34;http://www.amazon.com/gp/product/B0000Y8C2Y/ref=as_li_tl?ie=UTF8&amp;amp;camp=1789&amp;amp;creative=9325&amp;amp;creativeASIN=B0000Y8C2Y&amp;amp;linkCode=as2&amp;amp;tag=crodjer-20&amp;amp;linkId=H3RLG5OMNQX6ZMOH&#34;&gt;this scope&lt;/a&gt; is similar to mine. But I&amp;rsquo;d actually
-recommend &lt;a href=&#34;http://www.amazon.com/gp/product/B001DDW9UW/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=1789&amp;amp;creative=9325&amp;amp;creativeASIN=B001DDW9UW&amp;amp;linkCode=as2&amp;amp;tag=crodjer-20&amp;amp;linkId=U6A22R7IFLTDIBPQ.amazon.com/gp/product/B001DDW9UW&#34;&gt;Orion XT6&lt;/a&gt; for much better observations or &lt;a href=&#34;http://www.amazon.com/gp/product/B00D12U1IK/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=1789&amp;amp;creative=9325&amp;amp;creativeASIN=B00D12U1IK&amp;amp;linkCode=as2&amp;amp;tag=crodjer-20&amp;amp;linkId=XUNVRD64WYTFUT6U&#34;&gt;Orion StarBlast 4.5&lt;/a&gt;
-for its portability.&lt;/p&gt;
-
-&lt;h2 id=&#34;finding-things&#34;&gt;Finding things&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Star_hopping#The_technique&#34;&gt;Star hopping&lt;/a&gt; is the technique that is conventionally used by armature
-astronomers. But with star charts, I also have &lt;a href=&#34;http://stellarium.org/&#34;&gt;Stellarium&lt;/a&gt;, with which I get
-precise details of much fainter stars. Once having pointed the scope to a bright
-star, I synchronize my path with Stellarium. Because I am comparing stars in sky
-to a star in telescope, it is possible for me to end up at the exact locations
-of a DSO even if I can&amp;rsquo;t discern it because of light pollution.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;ll write more about this in a future post.&lt;/p&gt;
-
-&lt;h2 id=&#34;orion-nebula-m42&#34;&gt;Orion Nebula (M42)&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Orion_Nebula&#34;&gt;Orion Nebula&lt;/a&gt; is the brightest diffuse nebula in the sky and lies in the
-constellation Orion (which also hosts my favorite star, Betelgeuse). Although it
-looks nothing like the colourful and detailed photos on the internet. I see it
-as a fuzzy extended grey object, similar to
-&lt;a href=&#34;http://messier.seds.org/Pics/History/m42m.jpg&#34;&gt;Charles Messier&amp;rsquo;s sketch&lt;/a&gt;. It is remarkable, nevertheless. The four
-young stars in its heart are distinctly noticeable. When Orion was accessible,
-it was a ritual for me spend a few minutes on it before anything else.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The Orion Nebula is an example of a stellar nursery where new stars are being
-born.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;open-star-clusters&#34;&gt;Open star clusters&lt;/h2&gt;
-
-&lt;p&gt;Of all the DSOs, I find open star clusters the most exciting. I like to examine
-their finer details, matching each star with Stellarium&amp;rsquo;s rendering.&lt;/p&gt;
-
-&lt;p&gt;The constellation &lt;strong&gt;Canis Major&lt;/strong&gt; hosts a few prominent clusters. &lt;strong&gt;M41&lt;/strong&gt; was
-the first cluster I ever saw. It is fairly bright. I even sketched the star
-pattern on paper, which now stays on my table at work. &lt;strong&gt;NGC 2362 (Canis Major
-cluster)&lt;/strong&gt;, although not actually from the Messier catalogue, is also
-interesting. Most of its brightness comes from the star τ Canis Majoris. I
-noticed it when I was meandering around the lower part of the constellation.&lt;/p&gt;
-
-&lt;p&gt;I saw a few clusters in and around the &lt;strong&gt;Puppis&lt;/strong&gt; constellation. &lt;strong&gt;M93&lt;/strong&gt; is a
-nice and bright cluster. At the time of my observation, M93 was straight above
-the star &lt;strong&gt;Asmidiske (ξ Pup)&lt;/strong&gt;. Asmidiske, being yellow, is a sight in
-itself. It has two companion stars nearby. &lt;strong&gt;M47&lt;/strong&gt; and &lt;strong&gt;M46&lt;/strong&gt; are categorized
-to be in Puppis, but I used Canis Major, Hydra and Monoceros as reference for
-them. M47 is bright, but M46 isn&amp;rsquo;t as noticeable with my setup.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Taurus&lt;/strong&gt; had a significance for me as the host to &lt;strong&gt;Pleiades (M45)&lt;/strong&gt;. It is a
-cluster of very bright stars, with the brightest few visible without any optical
-instruments.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;M35&lt;/strong&gt; in &lt;strong&gt;Gemini&lt;/strong&gt; is yet another bright cluster that I observed.&lt;/p&gt;
-
-&lt;h2 id=&#34;planets&#34;&gt;Planets&lt;/h2&gt;
-
-&lt;p&gt;Planets are like stars but brighter and without the twinkling. With a telescope,
-a few more details may be seen.&lt;/p&gt;
-
-&lt;p&gt;The planet I have most observed is &lt;strong&gt;Jupiter&lt;/strong&gt;. Initially, to my disappointment,
-I could only make out an extend bright white disk. Eventually, my skills
-improved (Jupiter moved toward opposition as well) and I could actually make out
-the colors and the stripes. By coincidence I even got to see the great red
-spot. Jupiter rotates about its axis very fast (8 hour days), and I never had
-actually planned a sighting.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;By Jupiter&amp;rsquo;s moving toward opposition, its the Earth&amp;rsquo;s movement in between the
-Sun and Jupiter which has significance.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Of all the planets, I was most interested in &lt;strong&gt;Saturn&lt;/strong&gt;. Having straightened my
-expectations, I was not disappointed on first sight. The ring is indeed present
-and looks beautiful. I haven&amp;rsquo;t been able to see the Cassini&amp;rsquo;s division yet
-though. More sitting of Saturn gazing are upcoming.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Mars&lt;/strong&gt; is a red/orange disk with no other features visible (yet). I saw
-&lt;strong&gt;Venus&lt;/strong&gt; only for a few minutes. Its unlikely that I&amp;rsquo;d be able to see
-&lt;strong&gt;Mercury&lt;/strong&gt; from where I am.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Moon&lt;/strong&gt; (although not a planet) can be seen in fine details. It is the only
-object which is bright enough to take photos of with my phone&amp;rsquo;s camera. But
-other than that, I find it uninteresting. Moreover, it obliterates my eye&amp;rsquo;s dark
-adjustment. Moonless nights are the best for stargazing.&lt;/p&gt;
-
-&lt;h2 id=&#34;nebulae-globular-clusters-and-galaxies&#34;&gt;Nebulae, Globular clusters and Galaxies&lt;/h2&gt;
-
-&lt;p&gt;These tend to be faint and the city lights takes away the required contrast for
-their visibility. My eyes probably caught photons originating from even the ones
-I couldn&amp;rsquo;t identify, because I verify the location I am pointing at based on the
-nearby faint stars.&lt;/p&gt;
-
-&lt;p&gt;The DSO which took up most of my time is &lt;strong&gt;M1 (Crab nebula)&lt;/strong&gt;. It is a supernova
-remnant in &lt;strong&gt;Taurus&lt;/strong&gt;. I must have put in 6+ hours cumulative in attempts to
-observe it. Infact, I remember much of the star patterns near the nebula. But,
-wouldn&amp;rsquo;t claim to have seen the nebula itself.&lt;/p&gt;
-
-&lt;p&gt;Another such object is &lt;strong&gt;M78&lt;/strong&gt;, a reflection nebula in &lt;strong&gt;Orion&lt;/strong&gt;. I have the
-nearby star patterns for it memorized as well. If at all, I saw a very dark grey
-and fuzzy object. &lt;strong&gt;M43&lt;/strong&gt; is nebula right beside Orion nebula. I couldn&amp;rsquo;t
-discern it at all though, because of the imposing adjacent nebula.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;M53&lt;/strong&gt;, a globular cluster in Coma Berenices, is visible as a dim round grey
-object. &lt;strong&gt;M68&lt;/strong&gt; is a globular cluster in Hydra. But I could not clearly
-distinguish it.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;M104&lt;/strong&gt; (Sombrero Galaxy) lies near Virgo. I recently started observing it. I
-did notice the presence of something, but may just be an illusion. The view
-should improve in the future sightings.&lt;/p&gt;
-
-&lt;h2 id=&#34;limiting-magnitude&#34;&gt;Limiting Magnitude&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;In astronomy, &lt;a href=&#34;https://en.wikipedia.org/wiki/Limiting_magnitude&#34;&gt;limiting magnitude&lt;/a&gt; is the faintest apparent magnitude of a
-celestial body that is detectable or detected by a given instrument.&lt;br /&gt;
-- Wikipedia&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I find figuring out the limiting magnitude for my telescope interesting.
-Theoretically, I should be able to see stars up to an apparent magnitude of
-&lt;strong&gt;12.8&lt;/strong&gt;, but I can&amp;rsquo;t actually. The lower the apparent magnitude of on object,
-the brighter it is. My skills, light pollution, quality of optics and the
-atmosphere bring this down significantly. The faintest stars I have seen, with
-significant effort, are roughly of magnitude &lt;strong&gt;11.2&lt;/strong&gt;. Usually, I can
-conveniently see stars upto &lt;strong&gt;10&lt;/strong&gt; and with a bit of effort (a second or so of
-concentration), &lt;strong&gt;10.5&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;Because of how our eye are designed, moving it during observations and using
-&lt;a href=&#34;https://en.wikipedia.org/wiki/Averted_vision&#34;&gt;averted vision&lt;/a&gt; improves the ability to distinguish very low contrast
-objects.&lt;/p&gt;
-</description>
+      <description>In my previous post, I wrote about my initial experiences with stargazing - primarily to demonstrate that it can be fascinating without fancy equipment. After those initial sessions, I bought a telescope which magnified my experience significantly.
+ Stars. Stars everywhere!
+ The Telescope The primary purpose of an (astronomical) telescope, unlike popular belief, is not actually magnification. They act as light collectors (think burning a paper with a converging lens and sunlight).</description>
     </item>
     
     <item>
@@ -513,146 +80,8 @@ objects.&lt;/p&gt;
       <pubDate>Wed, 04 May 2016 00:00:00 +0000</pubDate>
       
       <guid>/sky/</guid>
-      <description>
-
-&lt;p&gt;About 6 months ago, I picked up a new hobby: Stargazing. Starting off with just
-naked eyes, I quickly realized that there is actually quite a lot to see without
-any optical equipment. &lt;a href=&#34;https://play.google.com/store/apps/details?id=com.google.android.stardroid&amp;amp;hl=en&#34;&gt;Sky Map&lt;/a&gt; and &lt;a href=&#34;http://stellarium.org/&#34;&gt;Stellarium&lt;/a&gt; are incredibly useful
-applications for a dilettante like me.&lt;/p&gt;
-
-&lt;h2 id=&#34;dark-adjustment&#34;&gt;Dark adjustment&lt;/h2&gt;
-
-&lt;p&gt;Before any stargazing session, dark adjustment i.e. dilating the pupils
-completely to improve night vision, is essential. I turn off all kinds of lights
-in the house and listen to podcasts for a while (at least 30 minutes).  I go out
-to stargaze when the outside looks brighter than inside.&lt;/p&gt;
-
-&lt;p&gt;Avoiding the bright lights from neighbours can be a challenge though. Moon&amp;rsquo;s an
-issue as well.&lt;/p&gt;
-
-&lt;h2 id=&#34;constellations&#34;&gt;Constellations&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;The &lt;a href=&#34;https://en.wikipedia.org/wiki/Apparent_magnitude&#34;&gt;apparent magnitude&lt;/a&gt; (m) of a celestial object is a number that is a
-measure of its brightness as seen by an observer on Earth. The smaller the
-number, the
-brighter a star appears.&lt;br /&gt;
-- Wikipedia&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;At the time I started, the most identifiable constellation was
-&lt;a href=&#34;https://en.wikipedia.org/wiki/Orion_(constellation)&#34;&gt;Orion&lt;/a&gt;. &lt;a href=&#34;https://en.wikipedia.org/wiki/Betelgeuse&#34;&gt;Betelgeuse&lt;/a&gt;, reddish orange star in Orion, very quickly became my
-favorite star. It gets the designation α Orionis even though Rigel is the
-brightest star in Orion (β Orionis). Betelgeuse&amp;rsquo;s &lt;a href=&#34;https://en.wikipedia.org/wiki/Apparent_magnitude&#34;&gt;apparent magnitude&lt;/a&gt; varies
-between 0-1.3, making it at times the brightest star in Orion. The star is
-huge - 630 times the radius of the sun. It was the first star (other than the
-Sun) to be imaged beyond a point source.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Taurus_(constellation)&#34;&gt;Taurus&lt;/a&gt; is another constellation that I observed in my initial stargazing
-period. It extends over a large area, so not as identifiable. But it is a host
-for a unique star cluster: &lt;a href=&#34;https://en.wikipedia.org/wiki/Pleiades&#34;&gt;Pleiades&lt;/a&gt;. The 5-6 bright stars in the cluster are
-a singular sight with naked eyes.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Canis_Major&#34;&gt;Canis Major&lt;/a&gt; also has a significance for me as the host for &lt;a href=&#34;https://en.wikipedia.org/wiki/Sirius&#34;&gt;Sirius&lt;/a&gt; (the
-brightest star). Its relatively close, being only about 8.6 light years away.&lt;/p&gt;
-
-&lt;p&gt;There were some other constellations as well, but I haven&amp;rsquo;t paid them too much
-attention. Listing some off the top of my head: Gemini, Puppis, Hydra and
-Virgo. But I couldn&amp;rsquo;t identify them without Orion / Canis Major as anchors.&lt;/p&gt;
-
-&lt;h2 id=&#34;moon&#34;&gt;Moon&lt;/h2&gt;
-
-&lt;p&gt;Moon&amp;rsquo;s the most noticeable and obvious site in the sky. At times, based on the
-shape of the moon&amp;rsquo;s bright portion, I&amp;rsquo;d try to visualize how the Sun, the Moon
-and the Earth are positioned relative to each other. The &lt;a href=&#34;https://en.wikipedia.org/wiki/22°_halo&#34;&gt;22° halo&lt;/a&gt; around
-the moon is also nice to look at. To be honest though, I am always more
-interested in the Moon&amp;rsquo;s absence, since it impacts the visibility of stars
-significantly. It also damages my eye&amp;rsquo;s dark adjustment.&lt;/p&gt;
-
-&lt;h2 id=&#34;planets&#34;&gt;Planets&lt;/h2&gt;
-
-&lt;p&gt;The first 6 planets are readily visible to the naked eye. Although, Earth&amp;rsquo;s
-little too close to have an astronomical perspective. Because planets are at a
-distance and visible as extend objects, they don&amp;rsquo;t twinkle. This makes it easy
-to differentiate them from stars. Even &lt;a href=&#34;http://apod.nasa.gov/apod/ap000725.html&#34;&gt;Betelgeuse&lt;/a&gt;
-twinkles.&lt;/p&gt;
-
-&lt;p&gt;March this year, Jupiter was at the opposition (Earth being roughly in between
-the Sun and Jupiter) and had its closest approach to us. Hence, it was at its
-brightest.&lt;/p&gt;
-
-&lt;p&gt;Venus is always very bright (3rd brightest after the Sun and the Moon), but is
-visible near the Sunrise and the Sunset (hence called the morning/evening star).&lt;/p&gt;
-
-&lt;p&gt;Mars and Saturn as of now are located nearby. Mars is bright reddish in color
-and Saturn is yellowish in color.&lt;/p&gt;
-
-&lt;p&gt;22nd January 2016 was a interesting day for planet watching. The 5 planets were
-&lt;a href=&#34;http://news.nationalgeographic.com/2015/12/160120-planet-parade-stargazing-astronomy/&#34;&gt;all aligned&lt;/a&gt; for the first time in over a decade.&lt;/p&gt;
-
-&lt;p&gt;The path that the Sun and the planets take also point toward the flatness of the
-solar system. Feels nice to get some empirical evidence of this, against just
-having this told.&lt;/p&gt;
-
-&lt;h2 id=&#34;artificial-objects&#34;&gt;Artificial objects&lt;/h2&gt;
-
-&lt;p&gt;A few artificial objects orbiting the Earth can be seen as well. For them, the
-sunset happens later (or sunrise earlier) than us, providing us with the dark
-background and enough contrast for the sunlight they reflect. The International
-Space Station (ISS), because of its size ends up being brighter than even
-Venus. &lt;a href=&#34;https://spotthestation.nasa.gov/&#34;&gt;This NASA&amp;rsquo;s site&lt;/a&gt; can be used to plan an ISS sighting.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Satellite_flare#Iridium_flares&#34;&gt;Iridium&lt;/a&gt; satellites&amp;rsquo; flares are also noticeable at times. There are ways to
-plan their sightings, but I haven&amp;rsquo;t done that yet.&lt;/p&gt;
-
-&lt;h2 id=&#34;limiting-magnitude-lm&#34;&gt;Limiting Magnitude (LM)&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;In astronomy, &lt;a href=&#34;https://en.wikipedia.org/wiki/Limiting_magnitude&#34;&gt;limiting magnitude&lt;/a&gt; is the faintest apparent magnitude of a
-celestial body that is detectable or detected by a given instrument.&lt;br /&gt;
-- Wikipedia&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I like to calculate the limiting magnitude. This would give me an idea of the
-light pollution and what I should expect to see. I notice light pollution in
-Pune is (unsurprisingly) more than that in Jaipur. From
-&lt;a href=&#34;http://www.imo.net/visual/major/observation/lm&#34;&gt;these charts&lt;/a&gt;, I calculated the LM at Pune to be about 4.5. I came
-to doubt that when I eventually started using &lt;a href=&#34;http://stellarium.org/&#34;&gt;Stellarium&lt;/a&gt;. The naked eye LM
-at my place is roughly 3.5 - 3.8.&lt;/p&gt;
-
-&lt;p&gt;I should give using the charts another try. At the time, I had used the Tau
-(using stars in/near Taurus) chart which has a magnitude gap of 1.62 between 3
-and 4 visible stars.&lt;/p&gt;
-
-&lt;h2 id=&#34;wonders&#34;&gt;Wonders&lt;/h2&gt;
-
-&lt;p&gt;Stargazing results in multiple interesting and unsettling thoughts:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;When I see a star, the photons hitting my eyes are 1000s of year old. For
-example: Light from Betelgeuse travels for roughly 643 years to reach us.&lt;/li&gt;
-&lt;li&gt;I are literally looking at the past of those stars. But again, at these
-scales, the concept of present can be doubted. Einstein talks about the &lt;em&gt;The
-relativity of simultaneity&lt;/em&gt; in &lt;a href=&#34;http://www.amazon.com/gp/product/1420946331/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=1789&amp;amp;creative=9325&amp;amp;creativeASIN=1420946331&amp;amp;linkCode=as2&amp;amp;tag=crodjer-20&amp;amp;linkId=CY4F7W7SQWMXRNIL&#34;&gt;his book&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;The insignificance of the Earth&amp;rsquo;s and us with it in the universe.&lt;/li&gt;
-&lt;li&gt;We most probably aren&amp;rsquo;t alone.&lt;/li&gt;
-&lt;li&gt;How amazingly useful constellations are in navigating the sky.&lt;/li&gt;
-&lt;li&gt;How made up constellations are and the irrational significance humans give to
-them.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;telescope&#34;&gt;Telescope&lt;/h2&gt;
-
-&lt;p&gt;After a month of naked eye stargazing, I bought a telescope (similar to
-&lt;a href=&#34;http://www.amazon.com/gp/product/B0000Y8C2Y/ref=as_li_tl?ie=UTF8&amp;amp;camp=1789&amp;amp;creative=9325&amp;amp;creativeASIN=B0000Y8C2Y&amp;amp;linkCode=as2&amp;amp;tag=crodjer-20&amp;amp;linkId=H3RLG5OMNQX6ZMOH&#34;&gt;this one&lt;/a&gt; but with better eyepieces) from a local
-provider. I&amp;rsquo;ll write about my observations with that over the next few days.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Edit&lt;/strong&gt;&lt;br /&gt;
-The post on my experience with a telescope has now been published
-&lt;a href=&#34;/telescope/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
+      <description>About 6 months ago, I picked up a new hobby: Stargazing. Starting off with just naked eyes, I quickly realized that there is actually quite a lot to see without any optical equipment. Sky Map and Stellarium are incredibly useful applications for a dilettante like me.
+Dark adjustment Before any stargazing session, dark adjustment i.e. dilating the pupils completely to improve night vision, is essential. I turn off all kinds of lights in the house and listen to podcasts for a while (at least 30 minutes).</description>
     </item>
     
     <item>
@@ -661,81 +90,9 @@ The post on my experience with a telescope has now been published
       <pubDate>Sat, 02 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/infi-mail/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;tl;dr&lt;/strong&gt;&lt;br /&gt;
-You can add arbitrary tags to your email address. Any email sent to
-&lt;code&gt;your-email+tag@your-provider.ext&lt;/code&gt; will land in the inbox for
-&lt;code&gt;your-email@your-provider.ext&lt;/code&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Emails are important. They are your identity on the web. Just like on phone,
-you&amp;rsquo;d want to control who can contact you via email. This warrants caution in
-signing up at places on the internet. It can be unsafe to register with the
-personal email address on new services for multiple reasons:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Bulk data breaches &lt;a href=&#34;http://www.huffingtonpost.com/entry/biggest-worst-data-breaches-hacks_us_55d4b5a5e4b07addcb44fd9e&#34;&gt;are fairly common&lt;/a&gt;. You don&amp;rsquo;t want your
-email address out there for bots around the world to feed on.&lt;/li&gt;
-&lt;li&gt;The service you are signing up for may itself be malicious. Or worse, it may
-be Facebook!&lt;/li&gt;
-&lt;li&gt;Same email address on every service can make it simpler for bots to break
-into your accounts once they succeed in attacking one.&lt;/li&gt;
-&lt;li&gt;There &lt;a href=&#34;https://www.fullcontact.com/gmail/&#34;&gt;are actual services&lt;/a&gt; dedicated for creating single
-points of catastrophic failures utilizing email addresses.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;These sound upsetting, but are indeed manageable to an extent. One trick that I
-use is &lt;em&gt;tagging the email address&lt;/em&gt;. It is a fairly common practice among
-programmers. Most popular email services support this.&lt;/p&gt;
-
-&lt;p&gt;What do I mean by tagging? Lets take Jon&amp;rsquo;s email: &lt;code&gt;jon.snow@email.wf&lt;/code&gt;. His
-sister, Arya, will know this address as is. But for the untrustworthy
-Lannisters, he tags the email: &lt;code&gt;jon.snow+lannister@email.wf&lt;/code&gt;. When someone
-writes to this address: he will receive the mails knowing that Lannisters were
-involved.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;email.wf&lt;/code&gt; here is a fictional service, analogous to &lt;code&gt;gmail.com&lt;/code&gt;. I didn&amp;rsquo;t
-want to accidentally use an actual email address.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;One may use a similar technique while signing up for services on the
-internet. Say Jon wants to register on &lt;code&gt;nightswatch.got&lt;/code&gt;.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;In &lt;em&gt;Night&amp;rsquo;s Watch&lt;/em&gt; registration form, he&amp;rsquo;d use
-&lt;code&gt;jon.snow+nighstwatch@email.wf&lt;/code&gt; as the email. The tag &lt;code&gt;+nighstwatch&lt;/code&gt; here is
-arbitrarily chosen.&lt;/li&gt;
-&lt;li&gt;Jon will get the confirmation mail in the original account. Being prudent,
-he&amp;rsquo;ll verify that the mail it does have the correct tag in the &lt;em&gt;to address&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;Also, &lt;code&gt;email.wf&lt;/code&gt; lets Jon send emails with the tagged address. This is useful
-for talking to the customer care. GMail users can go to:&lt;br /&gt;
-&lt;code&gt;Settings -&amp;gt; Accounts and Import -&amp;gt; Add another email address you own&lt;/code&gt;.&lt;br /&gt;
-and filling up the form with the tagged address.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;This means Jon can have practically infinite email addresses. Why is this
-helpful?&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Jon can collect all the mails from &lt;em&gt;Night&amp;rsquo;s Watch&lt;/em&gt; at one place, specially
-when their mails aren&amp;rsquo;t consistent enough to write filters.&lt;/li&gt;
-&lt;li&gt;If the credentials for the &lt;em&gt;Night&amp;rsquo;s Watch&lt;/em&gt; account were to be leaked, say
-through Phishing, other more important services like the email account itself
-would not be as vulnerable.&lt;/li&gt;
-&lt;li&gt;One cannot track Jon&amp;rsquo;s movements across various accounts/profiles through his
-email.&lt;/li&gt;
-&lt;li&gt;Sites which don&amp;rsquo;t allow tags in the email address can be a red flags for
-Jon. He can assume that they&amp;rsquo;d have terrible developers/management and look
-for alternates.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Making this into a habit will require a bit of discipline. But eventually, it
-gets instinctive.&lt;/p&gt;
-
-&lt;p&gt;On a related note, &lt;a href=&#34;http://www.amazon.com/gp/product/1118958470/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;amp;camp=1789&amp;amp;creative=9325&amp;amp;creativeASIN=1118958470&amp;amp;linkCode=as2&amp;amp;tag=crodjer-20&amp;amp;linkId=244BG6VSA5AT2K5S&#34;&gt;this&lt;/a&gt; is an interesting book, that talks
-about Phishing through email in the real world.&lt;/p&gt;
-</description>
+      <description>tl;dr
+You can add arbitrary tags to your email address. Any email sent to your-email+tag@your-provider.ext will land in the inbox for your-email@your-provider.ext.
+ Emails are important. They are your identity on the web. Just like on phone, you&amp;rsquo;d want to control who can contact you via email. This warrants caution in signing up at places on the internet. It can be unsafe to register with the personal email address on new services for multiple reasons:</description>
     </item>
     
     <item>
@@ -744,26 +101,8 @@ about Phishing through email in the real world.&lt;/p&gt;
       <pubDate>Wed, 19 Aug 2015 00:00:00 +0000</pubDate>
       
       <guid>/route-to/</guid>
-      <description>&lt;p&gt;Having been blessed with an unreliable internet, I always have had the need to
-change the default route when one goes down. &lt;a href=&#34;http://linux.die.net/man/8/ip&#34;&gt;ip&lt;/a&gt; provides you the required
-tooling to do that. I had been doing it so often, that I ended up writing a
-function to do this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;route_to () {
-    interface=$1
-    route=$(ip route | grep $interface | sed -r &#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39; | cut -d &#39; &#39; -f -4)
-    if [ -n &amp;quot;$route&amp;quot; ]; then
-        sudo ip route del default &amp;amp;&amp;gt; /dev/null
-        sudo ip route replace default via $route
-    else
-        echo &amp;quot;No routes match: $interface&amp;quot; &amp;gt;&amp;amp;2
-    fi
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;With this in available in my shell, I can simply do &lt;code&gt;route_to wlan0&lt;/code&gt; and my
-system will start using &lt;code&gt;wlan0&lt;/code&gt; as the default interface.&lt;/p&gt;
-</description>
+      <description>Having been blessed with an unreliable internet, I always have had the need to change the default route when one goes down. ip provides you the required tooling to do that. I had been doing it so often, that I ended up writing a function to do this:
+route_to () { interface=$1 route=$(ip route | grep $interface | sed -r &#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39; | cut -d &#39; &#39; -f -4) if [ -n &amp;quot;$route&amp;quot; ]; then sudo ip route del default &amp;amp;&amp;gt; /dev/null sudo ip route replace default via $route else echo &amp;quot;No routes match: $interface&amp;quot; &amp;gt;&amp;amp;2 fi }  With this in available in my shell, I can simply do route_to wlan0 and my system will start using wlan0 as the default interface.</description>
     </item>
     
     <item>
@@ -772,60 +111,7 @@ system will start using &lt;code&gt;wlan0&lt;/code&gt; as the default interface.
       <pubDate>Sun, 10 May 2015 00:00:00 +0000</pubDate>
       
       <guid>/vnc/</guid>
-      <description>
-
-&lt;p&gt;About a year ago, I switched my parents computer (lets call it &lt;code&gt;P&lt;/code&gt;) from the
-pre-installed OS (Windows) to Ubuntu. The primary reason for this switch was it
-hard for me to debug and fix issues. Things have been smooth after the switch
-with no issues which I found hard to fix remotely. What specially has worked is
-my ability to log in to the computer when its on through my VPS and service it.&lt;/p&gt;
-
-&lt;h2 id=&#34;reverse-ssh&#34;&gt;Reverse SSH&lt;/h2&gt;
-
-&lt;p&gt;Whenever &lt;code&gt;P&lt;/code&gt; starts, it makes a reverse SSH connection to my VPS. I use
-&lt;a href=&#34;https://www.archlinux.org/packages/community/x86_64/autossh/&#34;&gt;autossh&lt;/a&gt; to monitor and make sure that it is eventually always
-connected.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ autossh -M 10001 -f -NXYR 10000:localhost:22 vps
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Here &lt;code&gt;vps&lt;/code&gt; is a SSH alias for my personal VPS.&lt;/p&gt;
-
-&lt;p&gt;I can tunnel through the VPS and login to &lt;code&gt;P&lt;/code&gt; via VPS using the following SSH
-configuration:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-config&#34;&gt;Host home
-     Hostname localhost
-     User username
-     Port 10000
-     ProxyCommand ssh -e none -W %h:%p vps
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To log in to &lt;code&gt;P&lt;/code&gt; transparently, I can simply do:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ ssh home
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I use this to resolve most of the issues. Of course it does have the requirement
-that the system be booted up and connected to a network.&lt;/p&gt;
-
-&lt;h2 id=&#34;vnc&#34;&gt;VNC&lt;/h2&gt;
-
-&lt;p&gt;There also can be issues which have to do with the GUI (say browser maintenance)
-and cannot be done easily over a text SSH session. For those cases, VNC is to
-rescue. I create a VNC server on &lt;code&gt;P&lt;/code&gt; using &lt;a href=&#34;https://wiki.archlinux.org/index.php/X11vnc&#34;&gt;x11vnc&lt;/a&gt; and tunnel the VNC
-port to my local through SSH. Now, I can access &lt;code&gt;P&lt;/code&gt;&amp;rsquo;s graphical session remotely
-via a vnc client (mine is &lt;a href=&#34;https://www.archlinux.org/packages/community/x86_64/tigervnc/&#34;&gt;tigervnc&lt;/a&gt;).&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ ssh home -L 5900:localhost:5900 &amp;quot;x11vnc -rfbauth ~/.vnc/passwd -display :0 -noxdamage&amp;quot;
-$ vncviewer localhost::5900 -QualityLevel 3 -CompressLevel 6
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This method is much better compared to the more common solutions such has
-Google&amp;rsquo;s VNC chrome extension or other proprietary services. But they are slow
-and untrustable 3rd parties. With this way of setting up VNC, everything is
-protected under SSH connections.&lt;/p&gt;
-</description>
+      <description>About a year ago, I switched my parents computer (lets call it P) from the pre-installed OS (Windows) to Ubuntu. The primary reason for this switch was it hard for me to debug and fix issues. Things have been smooth after the switch with no issues which I found hard to fix remotely. What specially has worked is my ability to log in to the computer when its on through my VPS and service it.</description>
     </item>
     
   </channel>
