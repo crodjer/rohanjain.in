@@ -8,27 +8,7 @@
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer">
-<meta name="author" content="Rohan Jain">
 <meta name="description" content="Rohan&#39;s personal web blog.">
-
-<meta property="og:title" content="Old" />
-<meta property="og:description" content="Rohan&#39;s personal web blog." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="/old/" />
-
-
-
-<meta property="og:updated_time" content="2015-08-31T00:00:00&#43;00:00"/>
-
-
-
-
-
-
-
-
-
-
 
 <base href="/">
 <title>
@@ -47,7 +27,7 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
 
 
 
@@ -79,8 +59,6 @@
 
 
 
-
-
 </head>
 
 
@@ -90,13 +68,15 @@
     <div class="container">
         <div class="content">
             
-            <a href="/"><img class="avatar" src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" rcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
+              <a href="/"><img class="avatar" src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" /></a>
             
             <a href="/"><div class="name">Rohan Jain</div></a>
             
             <nav>
                 <ul>
-                    
+                    <li class="nav-blog"><a href="/blog/">Blog</a></li>
+                    <li class="nav-about"><a href="/about/">About</a></li>
+                    <li class="nav-code"><a href="/code/">Code</a></li>
                 </ul>
             </nav>
         </div>
@@ -116,17 +96,9 @@
         
 
         
-
-        
-
-        
             <a href="//linkedin.com/in/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/linkedin.svg" alt="linkedin" /></a>
         
 
-        
-
-        
-            
         
 
         
@@ -136,7 +108,6 @@
         
             <a href="/index.xml"><img class="icon" src="/img/rss.svg" alt="rss" /></a>
         
-        
         </div>
     </div>
 </section>
@@ -144,40 +115,82 @@
 <section class="main">
     <div class="container">
         <div class="content">
-            <div class="page-heading">
+            <div class="page-heading">Blog</div>
+            <ul>
+                
+                <li class="post-item">
+    
+    <span class="meta"><time datetime='2015-08-31T00:00:00Z'>Aug 31, 2015</time></span>
+    
+    <a href="/hakyll-years/"><span>Categorizing archives by year with Hakyll</span></a>
+</li>
 
-    Old
+                
+                <li class="post-item">
+    
+    <span class="meta"><time datetime='2015-08-30T00:00:00Z'>Aug 30, 2015</time></span>
+    
+    <a href="/hakyll-clean-urls/"><span>Clean URLs with Hakyll</span></a>
+</li>
 
-</div>
+                
+                <li class="post-item">
+    
+    <span class="meta"><time datetime='2015-08-30T00:00:00Z'>Aug 30, 2015</time></span>
+    
+    <a href="/hakyll-sitemap/"><span>Sitemap with Hakyll</span></a>
+</li>
 
-            <div class="markdown">
                 
-            </div>
-            
-            <nav class="section-items">
-                <ul>
+                <li class="post-item">
+    
+    <span class="meta"><time datetime='2015-08-22T00:00:00Z'>Aug 22, 2015</time></span>
+    
+    <a href="/ws-test/"><span>Testing tornado websockets without third party clients</span></a>
+</li>
+
                 
-                    <li><a href="/hakyll-years/">Categorizing archives by year with Hakyll</a></li>
+                <li class="post-item">
+    
+    <span class="meta"><time datetime='2015-08-20T00:00:00Z'>Aug 20, 2015</time></span>
+    
+    <a href="/bell/"><span>Using pulseaudio to play system beeps</span></a>
+</li>
+
                 
-                    <li><a href="/hakyll-clean-urls/">Clean URLs with Hakyll</a></li>
+                <li class="post-item">
+    
+    <span class="meta"><time datetime='2015-03-05T00:00:00Z'>Mar 5, 2015</time></span>
+    
+    <a href="/bash/"><span>The ubiquitous shell</span></a>
+</li>
+
                 
-                    <li><a href="/hakyll-sitemap/">Sitemap with Hakyll</a></li>
+                <li class="post-item">
+    
+    <span class="meta"><time datetime='2014-01-28T00:00:00Z'>Jan 28, 2014</time></span>
+    
+    <a href="/emacs-flymake-with-virtualenvs-in-python-mode/"><span>Emacs: Flymake with virtualenvs in python-mode</span></a>
+</li>
+
                 
-                    <li><a href="/ws-test/">Testing tornado websockets without third party clients</a></li>
+                <li class="post-item">
+    
+    <span class="meta"><time datetime='2012-04-15T00:00:00Z'>Apr 15, 2012</time></span>
+    
+    <a href="/yet-another-vim-productivity-post-server-client/"><span>A productive workflow with vim sessions and servers</span></a>
+</li>
+
                 
-                    <li><a href="/bell/">Using pulseaudio to play system beeps</a></li>
+                <li class="post-item">
+    
+    <span class="meta"><time datetime='2011-08-27T00:00:00Z'>Aug 27, 2011</time></span>
+    
+    <a href="/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/"><span>Configure ssh to handle proxies and tunnels seamlessly</span></a>
+</li>
+
                 
-                    <li><a href="/bash/">The ubiquitous shell</a></li>
-                
-                    <li><a href="/emacs-flymake-with-virtualenvs-in-python-mode/">Emacs: Flymake with virtualenvs in python-mode</a></li>
-                
-                    <li><a href="/yet-another-vim-productivity-post-server-client/">A productive workflow with vim sessions and servers</a></li>
-                
-                    <li><a href="/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/">Configure ssh to handle proxies and tunnels seamlessly</a></li>
-                
-                </ul>
-            </nav>
-            
+            </ul>
         </div>
     </div>
 </section>
@@ -192,7 +205,7 @@ ga('send', 'pageview');
 
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
   
 
   <script type="text/javascript">
@@ -201,8 +214,7 @@ ga('send', 'pageview');
 
 
 
-
-
 </body>
 </html>
+
 
