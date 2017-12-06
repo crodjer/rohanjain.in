@@ -1,27 +1,27 @@
 +++
-title = "Automating Window Management in OSX with Spark"
+title = "Window Management in OSX with Spark"
 date = "2017-12-06T12:44:55Z"
 slug = "spark"
 +++
 
-I am a big fan of deterministic access to application. By that, I mean I should
-be able to reach a window/application without needing visual feedback from the
-screen. Doing this on OSX can be tricky.
+I am a big fan of deterministic access to applications windows. That is, to be
+able to open them without needing any visual feedback from the screen. Tiling
+window managers do this well. On OSX, this can be tricky.
 
 For a long time, I used a [two windows](/two-windows/) workflow i.e. all the
-applications I need should fit in just two windows: the browser (mail, slack
-etc.) or the terminal (emacs, tmux, bash).  This works, but is restrictive.
+applications I need should run in just two windows (applications): the browser
+(mail, slack etc.) or the terminal (emacs, tmux, bash).  This works, but is
+restrictive.
 
-An alternate approach I have been trying out now is to have a global shortcut
-to reach each application. For example, in my setup: Cmd-Ctrl-E is `emacs`,
-Cmd-Ctrl-C is `chrome` and so on. Now, wherever I may be, I can
-deterministically open a desired window/application. I do this with
-[Spark](https://www.shadowlab.org/softwares/spark.php) and an `AppleScript` per
-application.
+I have switched to an alternative approach now. I have a global shortcut for
+each application I use frequently. For example: `Cmd-Ctrl-E` is `emacs`,
+`Cmd-Ctrl-C` is `chrome`. Now, wherever I may be, I can deterministically open
+Emacs. I do this with [Spark](https://www.shadowlab.org/softwares/spark.php) and
+an `AppleScript` per application.
 
-I wrote `AppleScript`s instead of simply pointing to the application the
-so that the window is resized to the maximum before being focused. This is what
-the `AppleScript` to open (and resize) `Emacs` looks like.
+I had to write `AppleScript`s instead of simply pointing to the application
+because I need the window to be resized to the maximum as well. This is what
+the `AppleScript` to open (and resize) `Emacs` looks like:
 
 ```applescript
 tell application "Emacs"
