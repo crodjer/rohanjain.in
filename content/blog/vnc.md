@@ -26,7 +26,7 @@ Here `vps` is a SSH alias for my personal VPS.
 I can tunnel through the VPS and login to `P` via VPS using the following SSH
 configuration:
 
-```config
+```
 Host home
      Hostname localhost
      User username
