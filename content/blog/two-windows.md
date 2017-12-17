@@ -1,5 +1,6 @@
 +++
 date = "2017-02-27T06:15:12Z"
+publishdate = "2017-02-27T06:15:12Z"
 title = "The two windows workflow"
 slug = "two-windows"
 +++

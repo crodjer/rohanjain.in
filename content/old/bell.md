@@ -2,6 +2,7 @@
 title = "Using pulseaudio to play system beeps"
 slug = "bell"
 date = "2015-08-20T00:00:00Z"
+publishdate = "2015-08-20T00:00:00Z"
 +++
 
 Recently, I built a new desktop. After receiving everything, I realized that I

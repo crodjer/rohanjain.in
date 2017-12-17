@@ -1,6 +1,7 @@
 +++
 title = "Window Management in OSX with Spark"
 date = "2017-12-06T12:44:55Z"
+publishdate = "2017-12-06T12:44:55Z"
 slug = "spark"
 +++
 

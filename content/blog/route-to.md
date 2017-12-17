@@ -2,6 +2,7 @@
 title = "Switch between networks based on availability"
 slug = "route-to"
 date = "2015-08-19T00:00:00Z"
+publishdate = "2015-08-19T00:00:00Z"
 +++
 
 Having been blessed with an unreliable internet, I always have had the need to

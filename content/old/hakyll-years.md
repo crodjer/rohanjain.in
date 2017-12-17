@@ -2,6 +2,7 @@
 title = "Categorizing archives by year with Hakyll"
 slug = "hakyll-years"
 date = "2015-08-31T00:00:00Z"
+publishdate = "2015-08-31T00:00:00Z"
 +++
 
 Recently, I decided to categorize my posts under directories named by

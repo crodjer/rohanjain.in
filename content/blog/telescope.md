@@ -2,6 +2,7 @@
 title = "Navigating with the first telescope"
 slug = "telescope"
 date = "2016-05-12T00:00:00Z"
+publishdate = "2016-05-12T00:00:00Z"
 +++
 
 In my [previous post][], I wrote about my initial experiences with stargazing -

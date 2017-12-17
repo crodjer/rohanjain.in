@@ -2,6 +2,7 @@
 title = "Gazing in the night sky"
 slug = "sky"
 date = "2016-05-04T00:00:00Z"
+publishdate = "2016-05-04T00:00:00Z"
 +++
 
 About 6 months ago, I picked up a new hobby: Stargazing. Starting off with just
