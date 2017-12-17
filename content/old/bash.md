@@ -2,6 +2,7 @@
 title = "The ubiquitous shell"
 slug = "bash"
 date = "2015-03-05T00:00:00Z"
+publishdate = "2015-03-05T00:00:00Z"
 +++
 
 Nothing makes a terminal feel more like home as one's own shell

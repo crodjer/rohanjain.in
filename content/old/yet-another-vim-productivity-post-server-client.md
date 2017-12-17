@@ -2,6 +2,7 @@
 title = "A productive workflow with vim sessions and servers"
 slug = "yet-another-vim-productivity-post-server-client"
 date = "2012-04-15T00:00:00Z"
+publishdate = "2012-04-15T00:00:00Z"
 +++
 
 You can find lot of posts on the internet which try to tell you how to improve

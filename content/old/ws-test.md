@@ -2,6 +2,7 @@
 title = "Testing tornado websockets without third party clients"
 slug = "ws-test"
 date = "2015-08-22T00:00:00Z"
+publishdate = "2015-08-22T00:00:00Z"
 +++
 
 Recently, I built an encrypted [chat service][qotr], which was based on

@@ -2,6 +2,7 @@
 title = "Emacs: Flymake with virtualenvs in python-mode"
 slug = "emacs-flymake-with-virtualenvs-in-python-mode"
 date = "2014-01-28T00:00:00Z"
+publishdate = "2014-01-28T00:00:00Z"
 +++
 
 Lately, I have been writing some python with emacs. So, I have been trying to

@@ -2,6 +2,7 @@
 title = "Sitemap with Hakyll"
 slug = "hakyll-sitemap"
 date = "2015-08-30T00:00:00Z"
+publishdate = "2015-08-30T00:00:00Z"
 +++
 
 Its fairly trivial to configure [Hakyll][hakyll] to generate

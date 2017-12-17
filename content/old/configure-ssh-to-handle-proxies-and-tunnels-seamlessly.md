@@ -2,6 +2,7 @@
 title = "Configure ssh to handle proxies and tunnels seamlessly"
 slug = "configure-ssh-to-handle-proxies-and-tunnels-seamlessly"
 date = "2011-08-27T00:00:00Z"
+publishdate = "2011-08-27T00:00:00Z"
 +++
 
 Recently I opened up on the port *443* over my EC2 instance (more or less like

@@ -2,6 +2,7 @@
 title = "VNC over reverse SSH"
 slug = "vnc"
 date = "2015-05-10T00:00:00Z"
+publishdate = "2015-05-10T00:00:00Z"
 +++
 
 About a year ago, I switched my parents computer (lets call it `P`) from the
