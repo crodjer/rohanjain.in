@@ -1,15 +1,15 @@
 baseurl             = "/"
-builddrafts         = false
-canonifyurls        = true
-contentdir          = "content"
+buildDrafts         = true
+canonifyUrls        = true
+contentDir          = "content"
 languageCode        = "en-US"
 layoutdir           = "layouts"
 publishdir          = "public"
 author              = "Rohan Jain"
 title               = "The Perpetual Amature"
-pygmentsuseclasses  = true
-# disqusshortname     = "cocoaexamplesite" # Comment out to disable Disqus.
-pluralizelisttitles = false
+pygmentsUseClasses  = true
+pygmentsCodeFences  = true
+pluralizeListTitles = false
 googleAnalytics     = "UA-15806710-5"
 theme               = "cocoa"
 
@@ -21,26 +21,23 @@ old = ":slug/"
 [params]
 author       = "Rohan Jain"
 # cachebuster  = true # add the current unix timestamp in query string for cache busting css assets
-dateform     = "Jan 2, 2006"
-dateformfull = "Mon Jan 2 2006 15:04:05 MST"
+dateForm     = "Jan 2, 2006"
+dateFormFull = "Mon Jan 2 2006 15:04:05 MST"
 description  = "Rohan's personal web blog."
 # email        = "roh@example.space"
-faviconfile  = "static/img/favicon.ico"
+faviconFile  = "static/img/favicon.ico"
 github       = "//github.com/crodjer"
-highlightjs  = true
+# highlightjs  = true
+# highlightjslanguages = ["rust", "applescript", "haskell"]
 lang         = "en"
 linkedin     = "//linkedin.com/in/crodjer"
 twitter      = "//twitter.com/__crodjer__"
 selfIntro    = "" # appears in the site header when set to a non-empty string
 forcehttps   = false # use a script to detect whether visitors should be redirected to https
-bloglink     = false
-codelink     = false
+blogLink     = false
+codeLink     = false
+blogGroupBy  = "year"
 
 gravatar     = "564e7aa79de47cdf3a094da1d4ac13cd"                # do not use in the same time as avatar
 # avatar                 = "img/profile.png" # path to image in static dir e.g img/avatar.png (do not use in the same time as gravatar)
-# highlightjslanguages = ["go"]            # additional languages not included in the "common" set
-extracssfiles = [ "/css/override.css" ] # In your `static` directory, add/remove files as necessary.
-
-# The following are DEPRECATED.
-# gatracker              = "XYZ" # use googleAnalytics instead
-initials               = "RJ"  # displayed on single post page; deprecated in v0.3.0.
+extraCssFiles = [ "/css/override.css" ] # In your `static` directory, add/remove files as necessary.
