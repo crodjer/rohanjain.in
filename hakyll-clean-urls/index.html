@@ -21,6 +21,7 @@ Hakyll provides all the utilities with which we can get cleaner URLs, like this 
 
 
 <meta property="article:published_time" content="2015-08-30T00:00:00&#43;00:00"/>
+
 <meta property="article:modified_time" content="2015-08-30T00:00:00&#43;00:00"/>
 
 
@@ -34,13 +35,10 @@ Hakyll provides all the utilities with which we can get cleaner URLs, like this 
 
 
 
-<base href="/">
 <title>
 
 
-    
-    Clean URLs with Hakyll | The Perpetual Amature
-    
+     Clean URLs with Hakyll 
 
 </title>
 <link rel="canonical" href="/hakyll-clean-urls/">
@@ -50,8 +48,6 @@ Hakyll provides all the utilities with which we can get cleaner URLs, like this 
 
 
 
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
 
 
 
@@ -98,6 +94,8 @@ Hakyll provides all the utilities with which we can get cleaner URLs, like this 
             
             <nav>
                 <ul>
+                    
+                        <li class="nav-about"><a href="/about/"><span>About</span></a></li>
                     
                 </ul>
             </nav>
@@ -163,54 +161,50 @@ like <a href=".">this page&rsquo;s</a>. For this, I rely on the fact that most o
 web servers automatically serve <code>/foo/index.html</code> for the URL
 <code>/foo/</code>. To generate <em>clean</em> paths, I define a custom route -
 <code>cleanRoute</code>:</p>
-
-<pre><code class="language-haskell">cleanRoute :: Routes
-cleanRoute = customRoute createIndexRoute
-  where
-    createIndexRoute ident = takeDirectory p &lt;/&gt; takeBaseName p &lt;/&gt; &quot;index.html&quot;
-                            where p = toFilePath ident
-</code></pre>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">cleanRoute</span> <span class="ow">::</span> <span class="kt">Routes</span>
+<span class="nf">cleanRoute</span> <span class="ow">=</span> <span class="n">customRoute</span> <span class="n">createIndexRoute</span>
+  <span class="kr">where</span>
+    <span class="n">createIndexRoute</span> <span class="n">ident</span> <span class="ow">=</span> <span class="n">takeDirectory</span> <span class="n">p</span> <span class="o">&lt;/&gt;</span> <span class="n">takeBaseName</span> <span class="n">p</span> <span class="o">&lt;/&gt;</span> <span class="s">&quot;index.html&quot;</span>
+                            <span class="kr">where</span> <span class="n">p</span> <span class="ow">=</span> <span class="n">toFilePath</span> <span class="n">ident</span>
+</code></pre></div>
 
 <p>This can now be used in in rule definition:</p>
-
-<pre><code class="language-haskell">  match &quot;pages/*&quot; $ do
-         route   $ cleanRoute
-         -- the compiler follows
-</code></pre>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>  <span class="n">match</span> <span class="s">&quot;pages/*&quot;</span> <span class="o">$</span> <span class="kr">do</span>
+         <span class="n">route</span>   <span class="o">$</span> <span class="n">cleanRoute</span>
+         <span class="c1">-- the compiler follows</span>
+</code></pre></div>
 
 <p>With this, a path say <code>/pages/about.html</code> will be generated as
 <code>/pages/about/index.html</code>, hence solving the generation problem. We
 are only partially done though. The links that Hakyll generates will
 also include the <code>/index.html</code> suffix in every URL. To get rid of that
 we define a set of functions:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span><span class="nf">cleanIndexUrls</span> <span class="ow">::</span> <span class="kt">Item</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">Compiler</span> <span class="p">(</span><span class="kt">Item</span> <span class="kt">String</span><span class="p">)</span>
+<span class="nf">cleanIndexUrls</span> <span class="ow">=</span> <span class="n">return</span> <span class="o">.</span> <span class="n">fmap</span> <span class="p">(</span><span class="n">withUrls</span> <span class="n">cleanIndex</span><span class="p">)</span>
 
-<pre><code class="language-haskell">cleanIndexUrls :: Item String -&gt; Compiler (Item String)
-cleanIndexUrls = return . fmap (withUrls cleanIndex)
+<span class="nf">cleanIndexHtmls</span> <span class="ow">::</span> <span class="kt">Item</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">Compiler</span> <span class="p">(</span><span class="kt">Item</span> <span class="kt">String</span><span class="p">)</span>
+<span class="nf">cleanIndexHtmls</span> <span class="ow">=</span> <span class="n">return</span> <span class="o">.</span> <span class="n">fmap</span> <span class="p">(</span><span class="n">replaceAll</span> <span class="n">pattern</span> <span class="n">replacement</span><span class="p">)</span>
+    <span class="kr">where</span>
+      <span class="n">pattern</span> <span class="ow">=</span> <span class="s">&quot;/index.html&quot;</span>
+      <span class="n">replacement</span> <span class="ow">=</span> <span class="n">const</span> <span class="s">&quot;/&quot;</span>
 
-cleanIndexHtmls :: Item String -&gt; Compiler (Item String)
-cleanIndexHtmls = return . fmap (replaceAll pattern replacement)
-    where
-      pattern = &quot;/index.html&quot;
-      replacement = const &quot;/&quot;
-
-cleanIndex :: String -&gt; String
-cleanIndex url
-    | idx `isSuffixOf` url = take (length url - length idx) url
-    | otherwise            = url
-  where idx = &quot;index.html&quot;
-</code></pre>
+<span class="nf">cleanIndex</span> <span class="ow">::</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">String</span>
+<span class="nf">cleanIndex</span> <span class="n">url</span>
+    <span class="o">|</span> <span class="n">idx</span> <span class="p">`</span><span class="n">isSuffixOf</span><span class="p">`</span> <span class="n">url</span> <span class="ow">=</span> <span class="n">take</span> <span class="p">(</span><span class="n">length</span> <span class="n">url</span> <span class="o">-</span> <span class="n">length</span> <span class="n">idx</span><span class="p">)</span> <span class="n">url</span>
+    <span class="o">|</span> <span class="n">otherwise</span>            <span class="ow">=</span> <span class="n">url</span>
+  <span class="kr">where</span> <span class="n">idx</span> <span class="ow">=</span> <span class="s">&quot;index.html&quot;</span>
+</code></pre></div>
 
 <p><code>cleanIndexUrls</code> and <code>cleanIndexHtmls</code> strip out <code>/index.html</code> from
 all the anchor tags and complete text respectively. These can be used
 over a page&rsquo;s compiler like this:</p>
-
-<pre><code class="language-haskell">         compile $ pandocCompiler
-            &gt;&gt;= loadAndApplyTemplate &quot;templates/page.html&quot; pageCtx
-            &gt;&gt;= saveSnapshot &quot;content&quot;
-            &gt;&gt;= loadAndApplyTemplate &quot;templates/default.html&quot; pageCtx
-            &gt;&gt;= relativizeUrls
-            &gt;&gt;= cleanIndexUrls -- cleanup href in all anchor tags.
-</code></pre>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>         <span class="n">compile</span> <span class="o">$</span> <span class="n">pandocCompiler</span>
+            <span class="o">&gt;&gt;=</span> <span class="n">loadAndApplyTemplate</span> <span class="s">&quot;templates/page.html&quot;</span> <span class="n">pageCtx</span>
+            <span class="o">&gt;&gt;=</span> <span class="n">saveSnapshot</span> <span class="s">&quot;content&quot;</span>
+            <span class="o">&gt;&gt;=</span> <span class="n">loadAndApplyTemplate</span> <span class="s">&quot;templates/default.html&quot;</span> <span class="n">pageCtx</span>
+            <span class="o">&gt;&gt;=</span> <span class="n">relativizeUrls</span>
+            <span class="o">&gt;&gt;=</span> <span class="n">cleanIndexUrls</span> <span class="c1">-- cleanup href in all anchor tags.</span>
+</code></pre></div>
 
 <blockquote>
 <p>This functionality is being used by <a href="https://github.com/crodjer/rohanjain.in/blob/master/site.hs">this blog</a> and
@@ -232,13 +226,6 @@ ga('send', 'pageview');
 <script async src='//www.google-analytics.com/analytics.js'></script>
 
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-  
-
-  <script type="text/javascript">
-    hljs.initHighlightingOnLoad();
-  </script>
 
 
 

@@ -23,6 +23,7 @@ A Vim instance behaves as a server in which files can be opened through remote a
 
 
 <meta property="article:published_time" content="2012-04-15T00:00:00&#43;00:00"/>
+
 <meta property="article:modified_time" content="2012-04-15T00:00:00&#43;00:00"/>
 
 
@@ -36,13 +37,10 @@ A Vim instance behaves as a server in which files can be opened through remote a
 
 
 
-<base href="/">
 <title>
 
 
-    
-    A productive workflow with vim sessions and servers | The Perpetual Amature
-    
+     A productive workflow with vim sessions and servers 
 
 </title>
 <link rel="canonical" href="/yet-another-vim-productivity-post-server-client/">
@@ -52,8 +50,6 @@ A Vim instance behaves as a server in which files can be opened through remote a
 
 
 
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
 
 
 
@@ -100,6 +96,8 @@ A Vim instance behaves as a server in which files can be opened through remote a
             
             <nav>
                 <ul>
+                    
+                        <li class="nav-about"><a href="/about/"><span>About</span></a></li>
                     
                 </ul>
             </nav>
@@ -200,27 +198,25 @@ directory, python virtual environments etc.</p></li>
 </ul>
 
 <p>For easing all this up, I use a set of helper functions in my <em>zshrc</em>:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># Set the name of vim session the terminal is tied up to</span>
+eset<span class="o">(){</span>
+    <span class="nb">export</span> <span class="nv">VI_SERVER</span><span class="o">=</span><span class="nv">$1</span>
+<span class="o">}</span>
 
-<pre><code class="language-bash"># Set the name of vim session the terminal is tied up to
-eset(){
-    export VI_SERVER=$1
-}
+<span class="c1"># Fire up a new server according to the argument supplied</span>
+vs<span class="o">(){</span>
+    eset <span class="nv">$1</span>
+    vim --servername <span class="nv">$VI_SERVER</span>
+<span class="o">}</span>
 
-# Fire up a new server according to the argument supplied
-vs(){
-    eset $1
-    vim --servername $VI_SERVER
-}
+<span class="c1"># Open up the files in the environment Vim server.</span>
+es<span class="o">(){</span>
+    vim --servername <span class="nv">$VI_SERVER</span> --remote-silent <span class="nv">$*</span>
+<span class="o">}</span>
 
-# Open up the files in the environment Vim server.
-es(){
-    vim --servername $VI_SERVER --remote-silent $*
-}
-
-# Reuse Vim ZSH completions for vim completions
+<span class="c1"># Reuse Vim ZSH completions for vim completions</span>
 compdef _vim es
-
-</code></pre>
+</code></pre></div>
 
 <p>#Vim Sessions</p>
 
@@ -252,13 +248,6 @@ ga('send', 'pageview');
 <script async src='//www.google-analytics.com/analytics.js'></script>
 
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-  
-
-  <script type="text/javascript">
-    hljs.initHighlightingOnLoad();
-  </script>
 
 
 

@@ -21,6 +21,7 @@ Bash is also my primary IDE. This allows for keeping a relatively simple set of 
 
 
 <meta property="article:published_time" content="2015-03-05T00:00:00&#43;00:00"/>
+
 <meta property="article:modified_time" content="2015-03-05T00:00:00&#43;00:00"/>
 
 
@@ -34,13 +35,10 @@ Bash is also my primary IDE. This allows for keeping a relatively simple set of 
 
 
 
-<base href="/">
 <title>
 
 
-    
-    The ubiquitous shell | The Perpetual Amature
-    
+     The ubiquitous shell 
 
 </title>
 <link rel="canonical" href="/bash/">
@@ -50,8 +48,6 @@ Bash is also my primary IDE. This allows for keeping a relatively simple set of 
 
 
 
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
 
 
 
@@ -98,6 +94,8 @@ Bash is also my primary IDE. This allows for keeping a relatively simple set of 
             
             <nav>
                 <ul>
+                    
+                        <li class="nav-about"><a href="/about/"><span>About</span></a></li>
                     
                 </ul>
             </nav>
@@ -185,13 +183,12 @@ interactive rebase.</p>
 <p>Composibility of the various commands can be useful as well, allowing one to
 build complex, repeatable commands. For example, the following uses <code>ip</code> to
 change a system&rsquo;s default route, given the interface:</p>
-
-<pre><code class="language-bash">ip route del default &amp;&gt; /dev/null
-ip route replace default via $(ip route
-     | grep ppp0 # Change this filter as per need.
-     | sed -r 's/\.0\/[[:digit:]]{2,3} /.1 /'
-     | cut -d ' ' -f -4)
-</code></pre>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>ip route del default <span class="p">&amp;</span>&gt; /dev/null
+ip route replace default via <span class="k">$(</span>ip route
+     <span class="p">|</span> grep ppp0 <span class="c1"># Change this filter as per need.</span>
+     <span class="p">|</span> sed -r <span class="s1">&#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39;</span>
+     <span class="p">|</span> cut -d <span class="s1">&#39; &#39;</span> -f -4<span class="k">)</span>
+</code></pre></div>
 
 <p>A great piece of literature on the Unix Philosophy is
 <a href="http://amzn.to/1qFlKCz">The Art of Unix Programming</a> by Eric S. Raymond. It also talks about the
@@ -211,13 +208,6 @@ ga('send', 'pageview');
 <script async src='//www.google-analytics.com/analytics.js'></script>
 
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-  
-
-  <script type="text/javascript">
-    hljs.initHighlightingOnLoad();
-  </script>
 
 
 

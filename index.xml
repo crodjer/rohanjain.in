@@ -131,7 +131,7 @@ Hakyll provides all the utilities with which we can get cleaner URLs, like this 
       <guid>/hakyll-sitemap/</guid>
       <description>Its fairly trivial to configure Hakyll to generate sitemaps. Sitemaps helps search engines websites. Similar to any typical html page, create a template - templates/sitemap.xml:
 &amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt; &amp;lt;urlset xmlns=&amp;quot;http://www.sitemaps.org/schemas/sitemap/0.9&amp;quot;&amp;gt; $for(entries)$ &amp;lt;url&amp;gt; &amp;lt;loc&amp;gt;$host$$url$&amp;lt;/loc&amp;gt; &amp;lt;changefreq&amp;gt;weekly&amp;lt;/changefreq&amp;gt; $if(lastmod)$&amp;lt;lastmod&amp;gt;$lastmod$&amp;lt;/lastmod&amp;gt;$endif$ &amp;lt;priority&amp;gt;0.8&amp;lt;/priority&amp;gt; &amp;lt;/url&amp;gt; $endfor$ &amp;lt;/urlset&amp;gt;  Then, using the templates, create a rule which uses all the pages from the site as entries. Here is what I do:
-create [&amp;quot;sitemap.xml&amp;quot;] $ do route idRoute compile $ do posts &amp;lt;- recentFirst =&amp;lt;&amp;lt; loadAll &amp;quot;posts/*/*&amp;quot; pages &amp;lt;- loadAll &amp;quot;pages/*&amp;quot; let allPosts = (return (pages ++ posts)) let sitemapCtx = mconcat [ listField &amp;quot;entries&amp;quot; pageCtx allPosts , constField &amp;quot;host&amp;quot; host , defaultContext ] makeItem &amp;quot;&amp;quot; &amp;gt;&amp;gt;= loadAndApplyTemplate &amp;quot;templates/sitemap.</description>
+ create [&amp;quot;sitemap.xml&amp;quot;] $ do route idRoute compile $ do posts &amp;lt;- recentFirst =&amp;lt;&amp;lt; loadAll &amp;quot;posts/*/*&amp;quot; pages &amp;lt;- loadAll &amp;quot;pages/*&amp;quot; let allPosts = (return (pages ++ posts)) let sitemapCtx = mconcat [ listField &amp;quot;entries&amp;quot; pageCtx allPosts , constField &amp;quot;host&amp;quot; host , defaultContext ] makeItem &amp;quot;&amp;quot; &amp;gt;&amp;gt;= loadAndApplyTemplate &amp;quot;templates/sitemap.</description>
     </item>
     
     <item>
@@ -160,7 +160,7 @@ Most of the material out there for this suggests developing separate client base
       
       <guid>/route-to/</guid>
       <description>Having been blessed with an unreliable internet, I always have had the need to change the default route when one goes down. ip provides you the required tooling to do that. I had been doing it so often, that I ended up writing a function to do this:
-route_to () { interface=$1 route=$(ip route | grep $interface | sed -r &#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39; | cut -d &#39; &#39; -f -4) if [ -n &amp;quot;$route&amp;quot; ]; then sudo ip route del default &amp;amp;&amp;gt; /dev/null sudo ip route replace default via $route else echo &amp;quot;No routes match: $interface&amp;quot; &amp;gt;&amp;amp;2 fi }  With this in available in my shell, I can simply do route_to wlan0 and my system will start using wlan0 as the default interface.</description>
+route_to () { interface=$1 route=$(ip route | grep $interface | sed -r &amp;#39;s/\.0\/[[:digit:]]{2,3} /.1 /&amp;#39; | cut -d &amp;#39; &amp;#39; -f -4) if [ -n &amp;quot;$route&amp;quot; ]; then sudo ip route del default &amp;amp;&amp;gt; /dev/null sudo ip route replace default via $route else echo &amp;quot;No routes match: $interface&amp;quot; &amp;gt;&amp;amp;2 fi }  With this in available in my shell, I can simply do route_to wlan0 and my system will start using wlan0 as the default interface.</description>
     </item>
     
     <item>
@@ -204,6 +204,16 @@ A Vim instance behaves as a server in which files can be opened through remote a
     </item>
     
     <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Sun, 01 Apr 2012 12:21:25 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>Hi, I am Rohan. I read and write code. I frequently read about physics, energy and climate change. After getting depressed enough of the latter, I read fiction or annoy my friends with my ideas or just code.
+I like to play table tennis, cricket and chess. I also bought a harmonica. Keep your hands on ears if you see me holding it. And yeah, I maintain a blog, which is so devoid of activity that it should have cobwebs on it.</description>
+    </item>
+    
+    <item>
       <title>Configure ssh to handle proxies and tunnels seamlessly</title>
       <link>/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</link>
       <pubDate>Sat, 27 Aug 2011 00:00:00 +0000</pubDate>
@@ -211,16 +221,6 @@ A Vim instance behaves as a server in which files can be opened through remote a
       <guid>/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</guid>
       <description>Recently I opened up on the port 443 over my EC2 instance (more or less like a VPS), so that I can access it through any firewalled proxy too. Apart from getting SSH running to a machine from outside world, I did some cool configuration to have ssh deal with with various remote hosts automatically. It uses the right proxy settings according the host being accessed.
 All the stuff which runs over ssh (like scp, git etc.</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/about/</guid>
-      <description>Hi, I am Rohan. I read and write code. I frequently read about physics, energy and climate change. After getting depressed enough of the latter, I read fiction or annoy my friends with my ideas or just code.
-I like to play table tennis, cricket and chess. I also bought a harmonica. Keep your hands on ears if you see me holding it. And yeah, I maintain a blog, which is so devoid of activity that it should have cobwebs on it.</description>
     </item>
     
   </channel>

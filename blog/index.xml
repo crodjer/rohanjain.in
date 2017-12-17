@@ -102,7 +102,7 @@ You can add arbitrary tags to your email address. Any email sent to your-email+t
       
       <guid>/route-to/</guid>
       <description>Having been blessed with an unreliable internet, I always have had the need to change the default route when one goes down. ip provides you the required tooling to do that. I had been doing it so often, that I ended up writing a function to do this:
-route_to () { interface=$1 route=$(ip route | grep $interface | sed -r &#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39; | cut -d &#39; &#39; -f -4) if [ -n &amp;quot;$route&amp;quot; ]; then sudo ip route del default &amp;amp;&amp;gt; /dev/null sudo ip route replace default via $route else echo &amp;quot;No routes match: $interface&amp;quot; &amp;gt;&amp;amp;2 fi }  With this in available in my shell, I can simply do route_to wlan0 and my system will start using wlan0 as the default interface.</description>
+route_to () { interface=$1 route=$(ip route | grep $interface | sed -r &amp;#39;s/\.0\/[[:digit:]]{2,3} /.1 /&amp;#39; | cut -d &amp;#39; &amp;#39; -f -4) if [ -n &amp;quot;$route&amp;quot; ]; then sudo ip route del default &amp;amp;&amp;gt; /dev/null sudo ip route replace default via $route else echo &amp;quot;No routes match: $interface&amp;quot; &amp;gt;&amp;amp;2 fi }  With this in available in my shell, I can simply do route_to wlan0 and my system will start using wlan0 as the default interface.</description>
     </item>
     
     <item>

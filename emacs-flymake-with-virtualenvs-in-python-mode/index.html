@@ -21,6 +21,7 @@ The python-mode in the latest emacs versions (mine is 24." />
 
 
 <meta property="article:published_time" content="2014-01-28T00:00:00&#43;00:00"/>
+
 <meta property="article:modified_time" content="2014-01-28T00:00:00&#43;00:00"/>
 
 
@@ -34,13 +35,10 @@ The python-mode in the latest emacs versions (mine is 24." />
 
 
 
-<base href="/">
 <title>
 
 
-    
-    Emacs: Flymake with virtualenvs in python-mode | The Perpetual Amature
-    
+     Emacs: Flymake with virtualenvs in python-mode 
 
 </title>
 <link rel="canonical" href="/emacs-flymake-with-virtualenvs-in-python-mode/">
@@ -50,8 +48,6 @@ The python-mode in the latest emacs versions (mine is 24." />
 
 
 
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
 
 
 
@@ -98,6 +94,8 @@ The python-mode in the latest emacs versions (mine is 24." />
             
             <nav>
                 <ul>
+                    
+                        <li class="nav-about"><a href="/about/"><span>About</span></a></li>
                     
                 </ul>
             </nav>
@@ -164,58 +162,57 @@ basic support for <code>virtualenvs</code>. I run <code>pylint/pyflakes</code> t
 <code>env</code> with the environment variables calculated from the functions provided by
 <code>python-mode</code>. Here is the code extracted from my
 <a href="https://github.com/crodjer/configs/blob/master/.emacs">emacs configuration</a>:</p>
+<div class="highlight"><pre><code class="language-elisp" data-lang="elisp"><span></span><span class="p">(</span><span class="nb">defun</span> <span class="nv">python-calculate-env</span> <span class="p">()</span>
+  <span class="s">&quot;Calculate env variables for current python virtualenv.&quot;</span>
+  <span class="c1">;; ;; This also overrides PYTHONHOME to &quot;&quot;, which breaks the process</span>
+  <span class="c1">;; ;; environment. Otherwise, a neat idea.</span>
+  <span class="c1">;; (mapcar</span>
+  <span class="c1">;;  (lambda (string)</span>
+  <span class="c1">;;    (let ((splitted-string (split-string string &quot;=&quot;)))</span>
+  <span class="c1">;;      (format</span>
+  <span class="c1">;;       &quot;%s=\&quot;%s\&quot;&quot;</span>
+  <span class="c1">;;       (car splitted-string)</span>
+  <span class="c1">;;       (or (cadr splitted-string)</span>
+  <span class="c1">;;           &quot;&quot;))))</span>
+  <span class="c1">;; (python-shell-calculate-process-environment)))</span>
+  <span class="p">(</span><span class="nv">remove-if</span>
+   <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="nv">x</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">or</span>
+      <span class="c1">;; If environment</span>
+      <span class="p">(</span><span class="nf">string-match</span> <span class="s">&quot; &quot;</span> <span class="nv">x</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nf">string-match</span> <span class="s">&quot;=&quot;</span> <span class="nv">x</span><span class="p">))))</span>
+   <span class="p">(</span><span class="nv">python-shell-calculate-process-environment</span><span class="p">)))</span>
 
-<pre><code class="language-elisp">(defun python-calculate-env ()
-  &quot;Calculate env variables for current python virtualenv.&quot;
-  ;; ;; This also overrides PYTHONHOME to &quot;&quot;, which breaks the process
-  ;; ;; environment. Otherwise, a neat idea.
-  ;; (mapcar
-  ;;  (lambda (string)
-  ;;    (let ((splitted-string (split-string string &quot;=&quot;)))
-  ;;      (format
-  ;;       &quot;%s=\&quot;%s\&quot;&quot;
-  ;;       (car splitted-string)
-  ;;       (or (cadr splitted-string)
-  ;;           &quot;&quot;))))
-  ;; (python-shell-calculate-process-environment)))
-  (remove-if
-   (lambda (x)
-     (or
-      ;; If environment
-      (string-match &quot; &quot; x)
-      (not (string-match &quot;=&quot; x))))
-   (python-shell-calculate-process-environment)))
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">python-virtualenv-exec</span> <span class="p">(</span><span class="nv">command</span> <span class="nv">args</span><span class="p">)</span>
+  <span class="s">&quot;Generate a flymake friendly list executable in virtualenv, for provided</span>
+<span class="s">commands.&quot;</span>
+  <span class="p">(</span><span class="nf">list</span> <span class="s">&quot;env&quot;</span> <span class="p">(</span><span class="nf">append</span> <span class="p">(</span><span class="nv">python-calculate-env</span><span class="p">)</span> <span class="p">(</span><span class="nf">list</span> <span class="nv">command</span><span class="p">)</span> <span class="nv">args</span><span class="p">)))</span>
 
-(defun python-virtualenv-exec (command args)
-  &quot;Generate a flymake friendly list executable in virtualenv, for provided
-commands.&quot;
-  (list &quot;env&quot; (append (python-calculate-env) (list command) args)))
+<span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">load</span> <span class="s">&quot;flymake&quot;</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">flymake-python-init</span> <span class="p">()</span>
+    <span class="p">(</span><span class="k">let*</span> <span class="p">((</span><span class="nv">temp-file</span> <span class="p">(</span><span class="nv">flymake-init-create-temp-buffer-copy</span>
+                       <span class="ss">&#39;flymake-create-temp-inplace</span><span class="p">))</span>
+           <span class="p">(</span><span class="nv">local-file</span> <span class="p">(</span><span class="nv">file-relative-name</span>
+                        <span class="nv">temp-file</span>
+                        <span class="p">(</span><span class="nf">file-name-directory</span> <span class="nf">buffer-file-name</span><span class="p">))))</span>
+      <span class="p">(</span><span class="nv">python-virtualenv-exec</span>
+       <span class="s">&quot;pylint&quot;</span>
+       <span class="p">(</span><span class="nf">list</span>
+        <span class="c1">;; Pylint args. Will depend on the checker being used.</span>
+        <span class="s">&quot;-r&quot;</span> <span class="s">&quot;n&quot;</span>
+        <span class="s">&quot;--msg-template=&#39;{path}:{line}:{category} [{msg_id} {obj}] {msg}&#39;&quot;</span>
+        <span class="nv">local-file</span><span class="p">))))</span>
+  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;flymake-allowed-file-name-masks</span>
+             <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;\\.py\\&#39;&quot;</span> <span class="nv">flymake-python-init</span><span class="p">)))</span>
 
-(when (load &quot;flymake&quot; t)
-  (defun flymake-python-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (python-virtualenv-exec
-       &quot;pylint&quot;
-       (list
-        ;; Pylint args. Will depend on the checker being used.
-        &quot;-r&quot; &quot;n&quot;
-        &quot;--msg-template='{path}:{line}:{category} [{msg_id} {obj}] {msg}'&quot;
-        local-file))))
-  (add-to-list 'flymake-allowed-file-name-masks
-             '(&quot;\\.py\\'&quot; flymake-python-init)))
-
-(defun flymake-mode-hook-function ()
-  (when (derived-mode-p 'python-mode)
-    (flymake-mode t)))
-;; Run flymake mode hook function after the local variables are set (eg: through
-;; .dir-locals.el
-(add-hook 'hack-local-variables-hook #'flymake-mode-hook-function)
-(setq virtualenv-workon-starts-python nil)
-</code></pre>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">flymake-mode-hook-function</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">derived-mode-p</span> <span class="ss">&#39;python-mode</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">flymake-mode</span> <span class="no">t</span><span class="p">)))</span>
+<span class="c1">;; Run flymake mode hook function after the local variables are set (eg: through</span>
+<span class="c1">;; .dir-locals.el</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;hack-local-variables-hook</span> <span class="nf">#&#39;</span><span class="nv">flymake-mode-hook-function</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">virtualenv-workon-starts-python</span> <span class="no">nil</span><span class="p">)</span>
+</code></pre></div>
 
             </div>
         </div>
@@ -231,13 +228,6 @@ ga('send', 'pageview');
 <script async src='//www.google-analytics.com/analytics.js'></script>
 
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-  
-
-  <script type="text/javascript">
-    hljs.initHighlightingOnLoad();
-  </script>
 
 
 

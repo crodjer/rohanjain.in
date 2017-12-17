@@ -21,6 +21,7 @@ For a long time, I used a two windows workflow i.e. all the applications I need 
 
 
 <meta property="article:published_time" content="2017-12-06T12:44:55&#43;00:00"/>
+
 <meta property="article:modified_time" content="2017-12-06T12:44:55&#43;00:00"/>
 
 
@@ -34,13 +35,10 @@ For a long time, I used a two windows workflow i.e. all the applications I need 
 
 
 
-<base href="/">
 <title>
 
 
-    
-    Window Management in OSX with Spark | The Perpetual Amature
-    
+     Window Management in OSX with Spark 
 
 </title>
 <link rel="canonical" href="/spark/">
@@ -50,8 +48,6 @@ For a long time, I used a two windows workflow i.e. all the applications I need 
 
 
 
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
 
 
 
@@ -98,6 +94,8 @@ For a long time, I used a two windows workflow i.e. all the applications I need 
             
             <nav>
                 <ul>
+                    
+                        <li class="nav-about"><a href="/about/"><span>About</span></a></li>
                     
                 </ul>
             </nav>
@@ -155,7 +153,7 @@ For a long time, I used a two windows workflow i.e. all the applications I need 
 
 </div>
 
-                    <div class="initials"><a href="/">RJ</a></div>
+                    <div class="initials"><a href="/"></a></div>
                 </div>
                 <div class="meta">
                     
@@ -185,16 +183,15 @@ an <code>AppleScript</code> per application.</p>
 <p>I had to write <code>AppleScript</code>s instead of simply pointing to the application
 because I need the window to be resized to the maximum as well. This is what
 the <code>AppleScript</code> to open (and resize) <code>Emacs</code> looks like:</p>
-
-<pre><code class="language-applescript">tell application &quot;Emacs&quot;
-	-- Get bounds from the desktop.
-	tell application &quot;Finder&quot; to bounds of window of desktop
-	-- Set the window bounds to the ones we just fetched.
-	set bounds of window 1 to result
-	-- Focus the editor window.
-	activate
-end tell
-</code></pre>
+<div class="highlight"><pre><code class="language-applescript" data-lang="applescript"><span></span><span class="k">tell</span> <span class="nb">application</span> <span class="s2">&quot;Emacs&quot;</span>
+	<span class="c">-- Get bounds from the desktop.</span>
+	<span class="k">tell</span> <span class="nb">application</span> <span class="s2">&quot;Finder&quot;</span> <span class="k">to</span> <span class="na">bounds</span> <span class="k">of</span> <span class="na">window</span> <span class="k">of</span> <span class="nv">desktop</span>
+	<span class="c">-- Set the window bounds to the ones we just fetched.</span>
+	<span class="k">set</span> <span class="na">bounds</span> <span class="k">of</span> <span class="na">window</span> <span class="mi">1</span> <span class="k">to</span> <span class="no">result</span>
+	<span class="c">-- Focus the editor window.</span>
+	<span class="nb">activate</span>
+<span class="k">end</span> <span class="k">tell</span>
+</code></pre></div>
 
 <blockquote>
 <p>This way of resizing cannot be used with multiple screens because the bounds
@@ -223,13 +220,6 @@ ga('send', 'pageview');
 <script async src='//www.google-analytics.com/analytics.js'></script>
 
 
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
-  
-
-  <script type="text/javascript">
-    hljs.initHighlightingOnLoad();
-  </script>
 
 
 

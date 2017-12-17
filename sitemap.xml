@@ -98,12 +98,13 @@
   </url>
   
   <url>
-    <loc>/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</loc>
-    <lastmod>2011-08-27T00:00:00+00:00</lastmod>
+    <loc>/about/</loc>
+    <lastmod>2012-04-01T12:21:25+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/about/</loc>
+    <loc>/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</loc>
+    <lastmod>2011-08-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -119,6 +120,7 @@
   
   <url>
     <loc>/fixed/</loc>
+    <lastmod>2012-04-01T12:21:25+00:00</lastmod>
     <priority>0</priority>
   </url>
   
