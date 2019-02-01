@@ -106,14 +106,17 @@ I maintain DNS entries for my domain at Clouflare. The latest version of ddclien
 <section class="icons">
     <div class="container">
         <div class="content">
-
         
             <a href="//github.com/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/github.svg" alt="github" /></a>
         
 
         
+
+        
             <a href="//twitter.com/__crodjer__" target="_blank" rel="noopener"><img class="icon" src="/img/twitter.svg" alt="twitter" /></a>
         
+
+	
 
         
 
@@ -126,16 +129,17 @@ I maintain DNS entries for my domain at Clouflare. The latest version of ddclien
         
 
         
-            
-        
 
         
 
         
 
         
-            <a href="/index.xml"><img class="icon" src="/img/rss.svg" alt="rss" /></a>
+
         
+
+        
+
         
         </div>
     </div>
@@ -200,13 +204,11 @@ To get the identifier, you need to first set an A record for the subdomain you
 want to manage with Dynamic DNS. Then, plug in the subdomain in this curl
 query to obtain the identifier:</li>
 </ul>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>  curl <span class="s2">&quot;https://api.cloudflare.com/client/v4/zones/&lt;your-dns-zone&gt;/dns_records?name=&lt;subdomain&gt;.&lt;your-domain&gt;&quot;</span> <span class="se">\</span>
-       --silent -X GET <span class="se">\</span>
-       -H <span class="s2">&quot;X-Auth-Email: &lt;cloudflare-auth-email&gt;&quot;</span> <span class="se">\</span>
-       -H <span class="s2">&quot;X-Auth-Key: &lt;cloudflare-auth-key&gt;&quot;</span> <span class="se">\</span>
-       -H <span class="s2">&quot;Content-Type: application/json&quot;</span> 
-</code></pre></div>
-
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">  curl <span class="s2">&#34;https://api.cloudflare.com/client/v4/zones/&lt;your-dns-zone&gt;/dns_records?name=&lt;subdomain&gt;.&lt;your-domain&gt;&#34;</span> <span class="se">\
+</span><span class="se"></span>       --silent -X GET <span class="se">\
+</span><span class="se"></span>       -H <span class="s2">&#34;X-Auth-Email: &lt;cloudflare-auth-email&gt;&#34;</span> <span class="se">\
+</span><span class="se"></span>       -H <span class="s2">&#34;X-Auth-Key: &lt;cloudflare-auth-key&gt;&#34;</span> <span class="se">\
+</span><span class="se"></span>       -H <span class="s2">&#34;Content-Type: application/json&#34;</span> </code></pre></div>
 <h2 id="ip-address">IP Address</h2>
 
 <p>I use <code>dig</code> with OpenDNS to get the current public IP and
@@ -218,28 +220,28 @@ package on most systems).</p>
 
 <p>All the above information can now be plugged in this bash script to update the
 DNS entry on Cloudflare. I placed it at <code>/usr/local/bin/cloudflare-ddns.sh</code></p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1">#/usr/bin/env sh</span>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#/usr/bin/env sh
+</span><span class="c1"></span>
+<span class="c1"># Get the Zone ID from: https://www.cloudflare.com/a/overview/&lt;your-domain&gt;
+</span><span class="c1"></span><span class="nv">DNS_ZONE</span><span class="o">=</span>&lt;your-dns-zone&gt;
 
-<span class="c1"># Get the Zone ID from: https://www.cloudflare.com/a/overview/&lt;your-domain&gt;</span>
-<span class="nv">DNS_ZONE</span><span class="o">=</span>&lt;your-dns-zone&gt;
+<span class="c1"># Get the existing identifier for DNS entry:
+</span><span class="c1"># https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records
+</span><span class="c1"></span><span class="nv">IDENTIFIER</span><span class="o">=</span>&lt;your-domain-dns-entry-identifier&gt;
 
-<span class="c1"># Get the existing identifier for DNS entry:</span>
-<span class="c1"># https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records</span>
-<span class="nv">IDENTIFIER</span><span class="o">=</span>&lt;your-domain-dns-entry-identifier&gt;
-
-<span class="c1"># Get these from: https://www.cloudflare.com/a/account/my-account</span>
-<span class="nv">AUTH_EMAIL</span><span class="o">=</span>&lt;cloudflare-auth-email&gt;
+<span class="c1"># Get these from: https://www.cloudflare.com/a/account/my-account
+</span><span class="c1"></span><span class="nv">AUTH_EMAIL</span><span class="o">=</span>&lt;cloudflare-auth-email&gt;
 <span class="nv">AUTH_KEY</span><span class="o">=</span>&lt;cloudflare-auth-key&gt;
 
-<span class="c1"># Desired domain name</span>
-<span class="nv">DOMAIN_NAME</span><span class="o">=</span><span class="s2">&quot;&lt;subdomain&gt;.&lt;your-domain&gt;&quot;</span>
+<span class="c1"># Desired domain name
+</span><span class="c1"></span><span class="nv">DOMAIN_NAME</span><span class="o">=</span><span class="s2">&#34;&lt;subdomain&gt;.&lt;your-domain&gt;&#34;</span>
 
-<span class="c1"># Get previous IP address</span>
-<span class="nv">_PREV_IP_FILE</span><span class="o">=</span><span class="s2">&quot;/tmp/public-ip.txt&quot;</span>
+<span class="c1"># Get previous IP address
+</span><span class="c1"></span><span class="nv">_PREV_IP_FILE</span><span class="o">=</span><span class="s2">&#34;/tmp/public-ip.txt&#34;</span>
 <span class="nv">_PREV_IP</span><span class="o">=</span><span class="k">$(</span>cat <span class="nv">$_PREV_IP_FILE</span> <span class="p">&amp;</span>&gt; /dev/null<span class="k">)</span>
 
-<span class="c1"># Install `dig` via `dnsutils` for faster IP lookup.</span>
-<span class="nb">command</span> -v dig <span class="p">&amp;</span>&gt; /dev/null <span class="o">&amp;&amp;</span> <span class="o">{</span>
+<span class="c1"># Install `dig` via `dnsutils` for faster IP lookup.
+</span><span class="c1"></span><span class="nb">command</span> -v dig <span class="p">&amp;</span>&gt; /dev/null <span class="o">&amp;&amp;</span> <span class="o">{</span>
     <span class="nv">_IP</span><span class="o">=</span><span class="k">$(</span>dig +short myip.opendns.com @resolver1.opendns.com<span class="k">)</span>
 <span class="o">}</span> <span class="o">||</span> <span class="o">{</span>
     <span class="nv">_IP</span><span class="o">=</span><span class="k">$(</span>curl --silent https://api.ipify.org<span class="k">)</span>
@@ -247,30 +249,28 @@ DNS entry on Cloudflare. I placed it at <code>/usr/local/bin/cloudflare-ddns.sh<
     <span class="nb">exit</span> <span class="m">1</span>
 <span class="o">}</span>
 
-<span class="c1"># If new/previous IPs match, no need for an update.</span>
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$_IP</span><span class="s2">&quot;</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="nv">$_PREV_IP</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+<span class="c1"># If new/previous IPs match, no need for an update.
+</span><span class="c1"></span><span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$_IP</span><span class="s2">&#34;</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="nv">$_PREV_IP</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
     <span class="nb">exit</span> <span class="m">0</span>
 <span class="k">fi</span>
 
-<span class="nv">_UPDATE</span><span class="o">=</span><span class="k">$(</span>cat <span class="s">&lt;&lt;EOF</span>
-<span class="s">{ &quot;type&quot;: &quot;A&quot;,</span>
-<span class="s">  &quot;name&quot;: &quot;$DOMAIN_NAME&quot;,</span>
-<span class="s">  &quot;content&quot;: &quot;$_IP&quot;,</span>
-<span class="s">  &quot;ttl&quot;: 120,</span>
-<span class="s">  &quot;proxied&quot;: false }</span>
-<span class="s">EOF</span>
+<span class="nv">_UPDATE</span><span class="o">=</span><span class="k">$(</span>cat <span class="s">&lt;&lt;EOF
+</span><span class="s">{ &#34;type&#34;: &#34;A&#34;,
+</span><span class="s">  &#34;name&#34;: &#34;$DOMAIN_NAME&#34;,
+</span><span class="s">  &#34;content&#34;: &#34;$_IP&#34;,
+</span><span class="s">  &#34;ttl&#34;: 120,
+</span><span class="s">  &#34;proxied&#34;: false }
+</span><span class="s">EOF</span>
 <span class="k">)</span>
 
-curl <span class="s2">&quot;https://api.cloudflare.com/client/v4/zones/</span><span class="nv">$DNS_ZONE</span><span class="s2">/dns_records/</span><span class="nv">$IDENTIFIER</span><span class="s2">&quot;</span> <span class="se">\</span>
-     --silent <span class="se">\</span>
-     -X PUT <span class="se">\</span>
-     -H <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="se">\</span>
-     -H <span class="s2">&quot;X-Auth-Email: </span><span class="nv">$AUTH_EMAIL</span><span class="s2">&quot;</span> <span class="se">\</span>
-     -H <span class="s2">&quot;X-Auth-Key: </span><span class="nv">$AUTH_KEY</span><span class="s2">&quot;</span> <span class="se">\</span>
-     -d <span class="s2">&quot;</span><span class="nv">$_UPDATE</span><span class="s2">&quot;</span> &gt; /tmp/cloudflare-ddns-update.json <span class="o">&amp;&amp;</span> <span class="se">\</span>
-     <span class="nb">echo</span> <span class="nv">$_IP</span> &gt; <span class="nv">$_PREV_IP_FILE</span>
-</code></pre></div>
-
+curl <span class="s2">&#34;https://api.cloudflare.com/client/v4/zones/</span><span class="nv">$DNS_ZONE</span><span class="s2">/dns_records/</span><span class="nv">$IDENTIFIER</span><span class="s2">&#34;</span> <span class="se">\
+</span><span class="se"></span>     --silent <span class="se">\
+</span><span class="se"></span>     -X PUT <span class="se">\
+</span><span class="se"></span>     -H <span class="s2">&#34;Content-Type: application/json&#34;</span> <span class="se">\
+</span><span class="se"></span>     -H <span class="s2">&#34;X-Auth-Email: </span><span class="nv">$AUTH_EMAIL</span><span class="s2">&#34;</span> <span class="se">\
+</span><span class="se"></span>     -H <span class="s2">&#34;X-Auth-Key: </span><span class="nv">$AUTH_KEY</span><span class="s2">&#34;</span> <span class="se">\
+</span><span class="se"></span>     -d <span class="s2">&#34;</span><span class="nv">$_UPDATE</span><span class="s2">&#34;</span> &gt; /tmp/cloudflare-ddns-update.json <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>     <span class="nb">echo</span> <span class="nv">$_IP</span> &gt; <span class="nv">$_PREV_IP_FILE</span></code></pre></div>
 <p>Try running <code>cloudflare-ddns.sh</code> to see if DNS records get updated on
 Cloudflare. For debugging purposes, I store the Cloudflare response at
 <code>/tmp/cloudflare-ddns-update.json</code>.</p>
@@ -293,11 +293,9 @@ ExecStart=/bin/sh /usr/local/bin/cloudflare-ddns.sh
 </code></pre>
 
 <p>Test the service by running:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>sudo systemctl start cloudflare-ddns.service
-<span class="c1"># Check the results:</span>
-sudo journalctl -u cloudflare-ddns
-</code></pre></div>
-
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">sudo systemctl start cloudflare-ddns.service
+<span class="c1"># Check the results:
+</span><span class="c1"></span>sudo journalctl -u cloudflare-ddns</code></pre></div>
 <h2 id="setting-up-a-timer">Setting up a timer</h2>
 
 <p>Set up a timer, so that DNS update is attempted every 2 minutes:
@@ -316,14 +314,13 @@ WantedBy=basic.target
 </code></pre>
 
 <p>To enable the timer, run:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>sudo systemctl <span class="nb">enable</span> cloudflare-ddns.timer
-</code></pre></div>
-
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">sudo systemctl <span class="nb">enable</span> cloudflare-ddns.timer</code></pre></div>
 <p>And that&rsquo;s it, now the system&rsquo;s IP will be kept up to date (within 2 minutes)
 for remote access.</p>
 
                 <br>
-		<p class="back-to-posts"><a href="/blog/">Back to posts</a></p>
+                
+                <p class="back-to-posts"><a href="/blog">Back to posts</a></p>
             </div>
             <br>
             <div class="disqus">

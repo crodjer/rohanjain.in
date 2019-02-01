@@ -106,14 +106,17 @@ For a long time, I used a two windows workflow i.e. all the applications I need 
 <section class="icons">
     <div class="container">
         <div class="content">
-
         
             <a href="//github.com/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/github.svg" alt="github" /></a>
         
 
         
+
+        
             <a href="//twitter.com/__crodjer__" target="_blank" rel="noopener"><img class="icon" src="/img/twitter.svg" alt="twitter" /></a>
         
+
+	
 
         
 
@@ -126,16 +129,17 @@ For a long time, I used a two windows workflow i.e. all the applications I need 
         
 
         
-            
-        
 
         
 
         
 
         
-            <a href="/index.xml"><img class="icon" src="/img/rss.svg" alt="rss" /></a>
+
         
+
+        
+
         
         </div>
     </div>
@@ -183,23 +187,22 @@ an <code>AppleScript</code> per application.</p>
 <p>I had to write <code>AppleScript</code>s instead of simply pointing to the application
 because I need the window to be resized to the maximum as well. This is what
 the <code>AppleScript</code> to open (and resize) <code>Emacs</code> looks like:</p>
-<div class="highlight"><pre><code class="language-applescript" data-lang="applescript"><span></span><span class="k">tell</span> <span class="nb">application</span> <span class="s2">&quot;Emacs&quot;</span>
+<div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="k">tell</span> <span class="nb">application</span> <span class="s2">&#34;Emacs&#34;</span>
 	<span class="c">-- Get bounds from the desktop.</span>
-	<span class="k">tell</span> <span class="nb">application</span> <span class="s2">&quot;Finder&quot;</span> <span class="k">to</span> <span class="na">bounds</span> <span class="k">of</span> <span class="na">window</span> <span class="k">of</span> <span class="nv">desktop</span>
+	<span class="k">tell</span> <span class="nb">application</span> <span class="s2">&#34;Finder&#34;</span> <span class="k">to</span> <span class="na">bounds</span> <span class="k">of</span> <span class="na">window</span> <span class="k">of</span> <span class="nv">desktop</span>
 	<span class="c">-- Set the window bounds to the ones we just fetched.</span>
 	<span class="k">set</span> <span class="na">bounds</span> <span class="k">of</span> <span class="na">window</span> <span class="mi">1</span> <span class="k">to</span> <span class="no">result</span>
 	<span class="c">-- Focus the editor window.</span>
 	<span class="nb">activate</span>
-<span class="k">end</span> <span class="k">tell</span>
-</code></pre></div>
-
+<span class="k">end</span> <span class="k">tell</span></code></pre></div>
 <blockquote>
 <p>This way of resizing cannot be used with multiple screens because the bounds
 provided by <code>Finder</code> will span all of them and so will the application window.</p>
 </blockquote>
 
                 <br>
-		<p class="back-to-posts"><a href="/blog/">Back to posts</a></p>
+                
+                <p class="back-to-posts"><a href="/blog">Back to posts</a></p>
             </div>
             <br>
             <div class="disqus">

@@ -106,14 +106,17 @@ All the stuff which runs over ssh (like scp, git etc." />
 <section class="icons">
     <div class="container">
         <div class="content">
-
         
             <a href="//github.com/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/github.svg" alt="github" /></a>
         
 
         
+
+        
             <a href="//twitter.com/__crodjer__" target="_blank" rel="noopener"><img class="icon" src="/img/twitter.svg" alt="twitter" /></a>
         
+
+	
 
         
 
@@ -126,16 +129,17 @@ All the stuff which runs over ssh (like scp, git etc." />
         
 
         
-            
-        
 
         
 
         
 
         
-            <a href="/index.xml"><img class="icon" src="/img/rss.svg" alt="rss" /></a>
+
         
+
+        
+
         
         </div>
     </div>
@@ -165,7 +169,7 @@ knife) already installed.</p>
 
 <p>Here is how it goes:<br />
 <code>File ~/.ssh/config:</code></p>
-<div class="highlight"><pre><code class="language-apache" data-lang="apache"><span></span><span class="c"># Let me access local remotes directly.</span>
+<div class="highlight"><pre class="chroma"><code class="language-apache" data-lang="apache"><span class="c"># Let me access local remotes directly.</span>
 <span class="nb">Host</span> <span class="m">127.0.0.1</span>, <span class="m">10</span>.*
     <span class="nb">ProxyCommand</span> <span class="k">none</span>
 
@@ -187,9 +191,7 @@ knife) already installed.</p>
 
 <span class="c"># All the rest should connect through an ssh connection over the ec2 instance.</span>
 <span class="nb">Host</span> *
-    <span class="nb">ProxyCommand</span> ssh -q -a -x -p <span class="m">443</span> ecc.rohanjain.in nc %h %p
-</code></pre></div>
-
+    <span class="nb">ProxyCommand</span> ssh -q -a -x -p <span class="m">443</span> ecc.rohanjain.in nc %h %p</code></pre></div>
             </div>
         </div>
     </div>

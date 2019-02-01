@@ -10,11 +10,11 @@
 <meta name="referrer" content="no-referrer">
 <meta name="author" content="Rohan Jain">
 <meta name="description" content="Having been blessed with an unreliable internet, I always have had the need to change the default route when one goes down. ip provides you the required tooling to do that. I had been doing it so often, that I ended up writing a function to do this:
-route_to () { interface=$1 route=$(ip route | grep $interface | sed -r &#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39; | cut -d &#39; &#39; -f -4) if [ -n &quot;$route&quot; ]; then sudo ip route del default &amp;&gt; /dev/null sudo ip route replace default via $route else echo &quot;No routes match: $interface&quot; &gt;&amp;2 fi }  With this in available in my shell, I can simply do route_to wlan0 and my system will start using wlan0 as the default interface.">
+route_to () { interface=$1 route=$(ip route | grep $interface | sed -r &#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39; | cut -d &#39; &#39; -f -4) if [ -n &#34;$route&#34; ]; then sudo ip route del default &amp;&gt; /dev/null sudo ip route replace default via $route else echo &#34;No routes match: $interface&#34; &gt;&amp;2 fi } With this in available in my shell, I can simply do route_to wlan0 and my system will start using wlan0 as the default interface.">
 
 <meta property="og:title" content="Switch between networks based on availability" />
 <meta property="og:description" content="Having been blessed with an unreliable internet, I always have had the need to change the default route when one goes down. ip provides you the required tooling to do that. I had been doing it so often, that I ended up writing a function to do this:
-route_to () { interface=$1 route=$(ip route | grep $interface | sed -r &#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39; | cut -d &#39; &#39; -f -4) if [ -n &quot;$route&quot; ]; then sudo ip route del default &amp;&gt; /dev/null sudo ip route replace default via $route else echo &quot;No routes match: $interface&quot; &gt;&amp;2 fi }  With this in available in my shell, I can simply do route_to wlan0 and my system will start using wlan0 as the default interface." />
+route_to () { interface=$1 route=$(ip route | grep $interface | sed -r &#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39; | cut -d &#39; &#39; -f -4) if [ -n &#34;$route&#34; ]; then sudo ip route del default &amp;&gt; /dev/null sudo ip route replace default via $route else echo &#34;No routes match: $interface&#34; &gt;&amp;2 fi } With this in available in my shell, I can simply do route_to wlan0 and my system will start using wlan0 as the default interface." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/route-to/" />
 
@@ -106,14 +106,17 @@ route_to () { interface=$1 route=$(ip route | grep $interface | sed -r &#39;s/\.
 <section class="icons">
     <div class="container">
         <div class="content">
-
         
             <a href="//github.com/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/github.svg" alt="github" /></a>
         
 
         
+
+        
             <a href="//twitter.com/__crodjer__" target="_blank" rel="noopener"><img class="icon" src="/img/twitter.svg" alt="twitter" /></a>
         
+
+	
 
         
 
@@ -126,16 +129,17 @@ route_to () { interface=$1 route=$(ip route | grep $interface | sed -r &#39;s/\.
         
 
         
-            
-        
 
         
 
         
 
         
-            <a href="/index.xml"><img class="icon" src="/img/rss.svg" alt="rss" /></a>
+
         
+
+        
+
         
         </div>
     </div>
@@ -169,23 +173,22 @@ route_to () { interface=$1 route=$(ip route | grep $interface | sed -r &#39;s/\.
 change the default route when one goes down. <a href="http://linux.die.net/man/8/ip">ip</a> provides you the required
 tooling to do that. I had been doing it so often, that I ended up writing a
 function to do this:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>route_to <span class="o">()</span> <span class="o">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">route_to <span class="o">()</span> <span class="o">{</span>
     <span class="nv">interface</span><span class="o">=</span><span class="nv">$1</span>
     <span class="nv">route</span><span class="o">=</span><span class="k">$(</span>ip route <span class="p">|</span> grep <span class="nv">$interface</span> <span class="p">|</span> sed -r <span class="s1">&#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39;</span> <span class="p">|</span> cut -d <span class="s1">&#39; &#39;</span> -f -4<span class="k">)</span>
-    <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$route</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&#34;</span><span class="nv">$route</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
         sudo ip route del default <span class="p">&amp;</span>&gt; /dev/null
         sudo ip route replace default via <span class="nv">$route</span>
     <span class="k">else</span>
-        <span class="nb">echo</span> <span class="s2">&quot;No routes match: </span><span class="nv">$interface</span><span class="s2">&quot;</span> &gt;<span class="p">&amp;</span><span class="m">2</span>
+        <span class="nb">echo</span> <span class="s2">&#34;No routes match: </span><span class="nv">$interface</span><span class="s2">&#34;</span> &gt;<span class="p">&amp;</span><span class="m">2</span>
     <span class="k">fi</span>
-<span class="o">}</span>
-</code></pre></div>
-
+<span class="o">}</span></code></pre></div>
 <p>With this in available in my shell, I can simply do <code>route_to wlan0</code> and my
 system will start using <code>wlan0</code> as the default interface.</p>
 
                 <br>
-		<p class="back-to-posts"><a href="/blog/">Back to posts</a></p>
+                
+                <p class="back-to-posts"><a href="/blog">Back to posts</a></p>
             </div>
             <br>
             <div class="disqus">

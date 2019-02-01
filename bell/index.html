@@ -104,14 +104,17 @@
 <section class="icons">
     <div class="container">
         <div class="content">
-
         
             <a href="//github.com/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/github.svg" alt="github" /></a>
         
 
         
+
+        
             <a href="//twitter.com/__crodjer__" target="_blank" rel="noopener"><img class="icon" src="/img/twitter.svg" alt="twitter" /></a>
         
+
+	
 
         
 
@@ -124,16 +127,17 @@
         
 
         
-            
-        
 
         
 
         
 
         
-            <a href="/index.xml"><img class="icon" src="/img/rss.svg" alt="rss" /></a>
+
         
+
+        
+
         
         </div>
     </div>
@@ -155,12 +159,10 @@ Ideally, the computer case should have had it, but they don&rsquo;t come with a 
 anymore. My various applications rely on the system beep, hence I needed to find
 a software alternative. Turns out it is fairly trivial to configure it to
 capture alerts with pulseaudio:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>start-pulseaudio-x11
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">start-pulseaudio-x11
 pactl upload-sample /usr/share/sounds/freedesktop/stereo/message.oga beep
 pactl load-module module-x11-bell <span class="nv">sample</span><span class="o">=</span>beep
-xset b <span class="m">100</span>
-</code></pre></div>
-
+xset b <span class="m">100</span></code></pre></div>
 <p>To automatically do it on X11 start, I placed the above in my
 <a href="https://github.com/crodjer/configs/blob/121caa22d4b7c6324fa9a5b22e2d2fcc334afc96/.xsessionrc#L31">xsessionrc</a>.</p>
 

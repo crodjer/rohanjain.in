@@ -10,13 +10,13 @@
 <meta name="referrer" content="no-referrer">
 <meta name="author" content="Rohan Jain">
 <meta name="description" content="Its fairly trivial to configure Hakyll to generate sitemaps. Sitemaps helps search engines websites. Similar to any typical html page, create a template - templates/sitemap.xml:
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; &lt;urlset xmlns=&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;&gt; $for(entries)$ &lt;url&gt; &lt;loc&gt;$host$$url$&lt;/loc&gt; &lt;changefreq&gt;weekly&lt;/changefreq&gt; $if(lastmod)$&lt;lastmod&gt;$lastmod$&lt;/lastmod&gt;$endif$ &lt;priority&gt;0.8&lt;/priority&gt; &lt;/url&gt; $endfor$ &lt;/urlset&gt;  Then, using the templates, create a rule which uses all the pages from the site as entries. Here is what I do:
- create [&quot;sitemap.xml&quot;] $ do route idRoute compile $ do posts &lt;- recentFirst =&lt;&lt; loadAll &quot;posts/*/*&quot; pages &lt;- loadAll &quot;pages/*&quot; let allPosts = (return (pages &#43;&#43; posts)) let sitemapCtx = mconcat [ listField &quot;entries&quot; pageCtx allPosts , constField &quot;host&quot; host , defaultContext ] makeItem &quot;&quot; &gt;&gt;= loadAndApplyTemplate &quot;templates/sitemap.">
+&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt; &lt;urlset xmlns=&#34;http://www.sitemaps.org/schemas/sitemap/0.9&#34;&gt; $for(entries)$ &lt;url&gt; &lt;loc&gt;$host$$url$&lt;/loc&gt; &lt;changefreq&gt;weekly&lt;/changefreq&gt; $if(lastmod)$&lt;lastmod&gt;$lastmod$&lt;/lastmod&gt;$endif$ &lt;priority&gt;0.8&lt;/priority&gt; &lt;/url&gt; $endfor$ &lt;/urlset&gt; Then, using the templates, create a rule which uses all the pages from the site as entries. Here is what I do:
+create [&#34;sitemap.xml&#34;] $ do route idRoute compile $ do posts &lt;- recentFirst =&lt;&lt; loadAll &#34;posts/*/*&#34; pages &lt;- loadAll &#34;pages/*&#34; let allPosts = (return (pages &#43;&#43; posts)) let sitemapCtx = mconcat [ listField &#34;entries&#34; pageCtx allPosts , constField &#34;host&#34; host , defaultContext ] makeItem &#34;&#34; &gt;&gt;= loadAndApplyTemplate &#34;templates/sitemap.">
 
 <meta property="og:title" content="Sitemap with Hakyll" />
 <meta property="og:description" content="Its fairly trivial to configure Hakyll to generate sitemaps. Sitemaps helps search engines websites. Similar to any typical html page, create a template - templates/sitemap.xml:
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; &lt;urlset xmlns=&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;&gt; $for(entries)$ &lt;url&gt; &lt;loc&gt;$host$$url$&lt;/loc&gt; &lt;changefreq&gt;weekly&lt;/changefreq&gt; $if(lastmod)$&lt;lastmod&gt;$lastmod$&lt;/lastmod&gt;$endif$ &lt;priority&gt;0.8&lt;/priority&gt; &lt;/url&gt; $endfor$ &lt;/urlset&gt;  Then, using the templates, create a rule which uses all the pages from the site as entries. Here is what I do:
- create [&quot;sitemap.xml&quot;] $ do route idRoute compile $ do posts &lt;- recentFirst =&lt;&lt; loadAll &quot;posts/*/*&quot; pages &lt;- loadAll &quot;pages/*&quot; let allPosts = (return (pages &#43;&#43; posts)) let sitemapCtx = mconcat [ listField &quot;entries&quot; pageCtx allPosts , constField &quot;host&quot; host , defaultContext ] makeItem &quot;&quot; &gt;&gt;= loadAndApplyTemplate &quot;templates/sitemap." />
+&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt; &lt;urlset xmlns=&#34;http://www.sitemaps.org/schemas/sitemap/0.9&#34;&gt; $for(entries)$ &lt;url&gt; &lt;loc&gt;$host$$url$&lt;/loc&gt; &lt;changefreq&gt;weekly&lt;/changefreq&gt; $if(lastmod)$&lt;lastmod&gt;$lastmod$&lt;/lastmod&gt;$endif$ &lt;priority&gt;0.8&lt;/priority&gt; &lt;/url&gt; $endfor$ &lt;/urlset&gt; Then, using the templates, create a rule which uses all the pages from the site as entries. Here is what I do:
+create [&#34;sitemap.xml&#34;] $ do route idRoute compile $ do posts &lt;- recentFirst =&lt;&lt; loadAll &#34;posts/*/*&#34; pages &lt;- loadAll &#34;pages/*&#34; let allPosts = (return (pages &#43;&#43; posts)) let sitemapCtx = mconcat [ listField &#34;entries&#34; pageCtx allPosts , constField &#34;host&#34; host , defaultContext ] makeItem &#34;&#34; &gt;&gt;= loadAndApplyTemplate &#34;templates/sitemap." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/hakyll-sitemap/" />
 
@@ -108,14 +108,17 @@
 <section class="icons">
     <div class="container">
         <div class="content">
-
         
             <a href="//github.com/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/github.svg" alt="github" /></a>
         
 
         
+
+        
             <a href="//twitter.com/__crodjer__" target="_blank" rel="noopener"><img class="icon" src="/img/twitter.svg" alt="twitter" /></a>
         
+
+	
 
         
 
@@ -128,16 +131,17 @@
         
 
         
-            
-        
 
         
 
         
 
         
-            <a href="/index.xml"><img class="icon" src="/img/rss.svg" alt="rss" /></a>
+
         
+
+        
+
         
         </div>
     </div>
@@ -156,8 +160,8 @@
                 <p>Its fairly trivial to configure <a href="http://jaspervdj.be/hakyll/">Hakyll</a> to generate
 sitemaps. Sitemaps helps search engines websites. Similar to any
 typical html page, create a template - <code>templates/sitemap.xml</code>:</p>
-<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-<span class="nt">&lt;urlset</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span class="nt">&lt;urlset</span> <span class="na">xmlns=</span><span class="s">&#34;http://www.sitemaps.org/schemas/sitemap/0.9&#34;</span><span class="nt">&gt;</span>
 $for(entries)$
     <span class="nt">&lt;url&gt;</span>
         <span class="nt">&lt;loc&gt;</span>$host$$url$<span class="nt">&lt;/loc&gt;</span>
@@ -166,27 +170,23 @@ $for(entries)$
         <span class="nt">&lt;priority&gt;</span>0.8<span class="nt">&lt;/priority&gt;</span>
     <span class="nt">&lt;/url&gt;</span>
 $endfor$
-<span class="nt">&lt;/urlset&gt;</span>
-</code></pre></div>
-
+<span class="nt">&lt;/urlset&gt;</span></code></pre></div>
 <p>Then, using the templates, create a rule which uses all the pages from
 the site as entries. Here is what I do:</p>
-<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span></span>  <span class="n">create</span> <span class="p">[</span><span class="s">&quot;sitemap.xml&quot;</span><span class="p">]</span> <span class="o">$</span> <span class="kr">do</span>
-         <span class="n">route</span>   <span class="n">idRoute</span>
-         <span class="n">compile</span> <span class="o">$</span> <span class="kr">do</span>
-           <span class="n">posts</span> <span class="ow">&lt;-</span> <span class="n">recentFirst</span> <span class="o">=&lt;&lt;</span> <span class="n">loadAll</span> <span class="s">&quot;posts/*/*&quot;</span>
-           <span class="n">pages</span> <span class="ow">&lt;-</span> <span class="n">loadAll</span> <span class="s">&quot;pages/*&quot;</span>
-           <span class="kr">let</span> <span class="n">allPosts</span> <span class="ow">=</span> <span class="p">(</span><span class="n">return</span> <span class="p">(</span><span class="n">pages</span> <span class="o">++</span> <span class="n">posts</span><span class="p">))</span>
-           <span class="kr">let</span> <span class="n">sitemapCtx</span> <span class="ow">=</span> <span class="n">mconcat</span>
-                            <span class="p">[</span> <span class="n">listField</span> <span class="s">&quot;entries&quot;</span> <span class="n">pageCtx</span> <span class="n">allPosts</span>
-                            <span class="p">,</span> <span class="n">constField</span> <span class="s">&quot;host&quot;</span> <span class="n">host</span>
-                            <span class="p">,</span> <span class="n">defaultContext</span>
+<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell">  <span class="nf">create</span> <span class="p">[</span><span class="s">&#34;sitemap.xml&#34;</span><span class="p">]</span> <span class="o">$</span> <span class="kr">do</span>
+         <span class="nf">route</span>   <span class="nf">idRoute</span>
+         <span class="nf">compile</span> <span class="o">$</span> <span class="kr">do</span>
+           <span class="nf">posts</span> <span class="ow">&lt;-</span> <span class="nf">recentFirst</span> <span class="o">=&lt;&lt;</span> <span class="nf">loadAll</span> <span class="s">&#34;posts/*/*&#34;</span>
+           <span class="nf">pages</span> <span class="ow">&lt;-</span> <span class="nf">loadAll</span> <span class="s">&#34;pages/*&#34;</span>
+           <span class="kr">let</span> <span class="nf">allPosts</span> <span class="ow">=</span> <span class="p">(</span><span class="nf">return</span> <span class="p">(</span><span class="nf">pages</span> <span class="o">++</span> <span class="nf">posts</span><span class="p">))</span>
+           <span class="kr">let</span> <span class="nf">sitemapCtx</span> <span class="ow">=</span> <span class="nf">mconcat</span>
+                            <span class="p">[</span> <span class="nf">listField</span> <span class="s">&#34;entries&#34;</span> <span class="nf">pageCtx</span> <span class="nf">allPosts</span>
+                            <span class="p">,</span> <span class="nf">constField</span> <span class="s">&#34;host&#34;</span> <span class="nf">host</span>
+                            <span class="p">,</span> <span class="nf">defaultContext</span>
                             <span class="p">]</span>
-           <span class="n">makeItem</span> <span class="s">&quot;&quot;</span>
-            <span class="o">&gt;&gt;=</span> <span class="n">loadAndApplyTemplate</span> <span class="s">&quot;templates/sitemap.xml&quot;</span> <span class="n">sitemapCtx</span>
-            <span class="o">&gt;&gt;=</span> <span class="n">cleanIndexHtmls</span>
-</code></pre></div>
-
+           <span class="nf">makeItem</span> <span class="s">&#34;&#34;</span>
+            <span class="o">&gt;&gt;=</span> <span class="nf">loadAndApplyTemplate</span> <span class="s">&#34;templates/sitemap.xml&#34;</span> <span class="nf">sitemapCtx</span>
+            <span class="o">&gt;&gt;=</span> <span class="nf">cleanIndexHtmls</span></code></pre></div>
 <p>This generates <a href="/sitemap.xml">/sitemap.xml</a> which can be submitted to
 search engines for indexing.</p>
 

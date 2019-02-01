@@ -104,14 +104,17 @@
 <section class="icons">
     <div class="container">
         <div class="content">
-
         
             <a href="//github.com/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/github.svg" alt="github" /></a>
         
 
         
+
+        
             <a href="//twitter.com/__crodjer__" target="_blank" rel="noopener"><img class="icon" src="/img/twitter.svg" alt="twitter" /></a>
         
+
+	
 
         
 
@@ -124,16 +127,17 @@
         
 
         
-            
-        
 
         
 
         
 
         
-            <a href="/index.xml"><img class="icon" src="/img/rss.svg" alt="rss" /></a>
+
         
+
+        
+
         
         </div>
     </div>
@@ -176,9 +180,7 @@ my ability to log in to the computer when its on through my VPS and service it.<
 <p>Whenever <code>P</code> starts, it makes a reverse SSH connection to my VPS. I use
 <a href="https://www.archlinux.org/packages/community/x86_64/autossh/">autossh</a> to monitor and make sure that it is eventually always
 connected.</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ autossh -M <span class="m">10001</span> -f -NXYR <span class="m">10000</span>:localhost:22 vps
-</code></pre></div>
-
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ autossh -M <span class="m">10001</span> -f -NXYR <span class="m">10000</span>:localhost:22 vps</code></pre></div>
 <p>Here <code>vps</code> is a SSH alias for my personal VPS.</p>
 
 <p>I can tunnel through the VPS and login to <code>P</code> via VPS using the following SSH
@@ -192,9 +194,7 @@ configuration:</p>
 </code></pre>
 
 <p>To log in to <code>P</code> transparently, I can simply do:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ ssh home
-</code></pre></div>
-
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ ssh home</code></pre></div>
 <p>I use this to resolve most of the issues. Of course it does have the requirement
 that the system be booted up and connected to a network.</p>
 
@@ -205,17 +205,16 @@ and cannot be done easily over a text SSH session. For those cases, VNC is to
 rescue. I create a VNC server on <code>P</code> using <a href="https://wiki.archlinux.org/index.php/X11vnc">x11vnc</a> and tunnel the VNC
 port to my local through SSH. Now, I can access <code>P</code>&rsquo;s graphical session remotely
 via a vnc client (mine is <a href="https://www.archlinux.org/packages/community/x86_64/tigervnc/">tigervnc</a>).</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ ssh home -L <span class="m">5900</span>:localhost:5900 <span class="s2">&quot;x11vnc -rfbauth ~/.vnc/passwd -display :0 -noxdamage&quot;</span>
-$ vncviewer localhost::5900 -QualityLevel <span class="m">3</span> -CompressLevel <span class="m">6</span>
-</code></pre></div>
-
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ ssh home -L <span class="m">5900</span>:localhost:5900 <span class="s2">&#34;x11vnc -rfbauth ~/.vnc/passwd -display :0 -noxdamage&#34;</span>
+$ vncviewer localhost::5900 -QualityLevel <span class="m">3</span> -CompressLevel <span class="m">6</span></code></pre></div>
 <p>This method is much better compared to the more common solutions such has
 Google&rsquo;s VNC chrome extension or other proprietary services. But they are slow
 and untrustable 3rd parties. With this way of setting up VNC, everything is
 protected under SSH connections.</p>
 
                 <br>
-		<p class="back-to-posts"><a href="/blog/">Back to posts</a></p>
+                
+                <p class="back-to-posts"><a href="/blog">Back to posts</a></p>
             </div>
             <br>
             <div class="disqus">

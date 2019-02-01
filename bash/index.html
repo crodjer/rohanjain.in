@@ -106,14 +106,17 @@ Bash is also my primary IDE. This allows for keeping a relatively simple set of 
 <section class="icons">
     <div class="container">
         <div class="content">
-
         
             <a href="//github.com/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/github.svg" alt="github" /></a>
         
 
         
+
+        
             <a href="//twitter.com/__crodjer__" target="_blank" rel="noopener"><img class="icon" src="/img/twitter.svg" alt="twitter" /></a>
         
+
+	
 
         
 
@@ -126,16 +129,17 @@ Bash is also my primary IDE. This allows for keeping a relatively simple set of 
         
 
         
-            
-        
 
         
 
         
 
         
-            <a href="/index.xml"><img class="icon" src="/img/rss.svg" alt="rss" /></a>
+
         
+
+        
+
         
         </div>
     </div>
@@ -183,13 +187,11 @@ interactive rebase.</p>
 <p>Composibility of the various commands can be useful as well, allowing one to
 build complex, repeatable commands. For example, the following uses <code>ip</code> to
 change a system&rsquo;s default route, given the interface:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>ip route del default <span class="p">&amp;</span>&gt; /dev/null
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">ip route del default <span class="p">&amp;</span>&gt; /dev/null
 ip route replace default via <span class="k">$(</span>ip route
-     <span class="p">|</span> grep ppp0 <span class="c1"># Change this filter as per need.</span>
-     <span class="p">|</span> sed -r <span class="s1">&#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39;</span>
-     <span class="p">|</span> cut -d <span class="s1">&#39; &#39;</span> -f -4<span class="k">)</span>
-</code></pre></div>
-
+     <span class="p">|</span> grep ppp0 <span class="c1"># Change this filter as per need.
+</span><span class="c1"></span>     <span class="p">|</span> sed -r <span class="s1">&#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39;</span>
+     <span class="p">|</span> cut -d <span class="s1">&#39; &#39;</span> -f -4<span class="k">)</span></code></pre></div>
 <p>A great piece of literature on the Unix Philosophy is
 <a href="http://amzn.to/1qFlKCz">The Art of Unix Programming</a> by Eric S. Raymond. It also talks about the
 Unix interface design.</p>

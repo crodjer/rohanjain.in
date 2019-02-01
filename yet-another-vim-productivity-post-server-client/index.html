@@ -108,14 +108,17 @@ A Vim instance behaves as a server in which files can be opened through remote a
 <section class="icons">
     <div class="container">
         <div class="content">
-
         
             <a href="//github.com/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/github.svg" alt="github" /></a>
         
 
         
+
+        
             <a href="//twitter.com/__crodjer__" target="_blank" rel="noopener"><img class="icon" src="/img/twitter.svg" alt="twitter" /></a>
         
+
+	
 
         
 
@@ -128,16 +131,17 @@ A Vim instance behaves as a server in which files can be opened through remote a
         
 
         
-            
-        
 
         
 
         
 
         
-            <a href="/index.xml"><img class="icon" src="/img/rss.svg" alt="rss" /></a>
+
         
+
+        
+
         
         </div>
     </div>
@@ -198,26 +202,24 @@ directory, python virtual environments etc.</p></li>
 </ul>
 
 <p>For easing all this up, I use a set of helper functions in my <em>zshrc</em>:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="c1"># Set the name of vim session the terminal is tied up to</span>
-eset<span class="o">(){</span>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Set the name of vim session the terminal is tied up to
+</span><span class="c1"></span>eset<span class="o">(){</span>
     <span class="nb">export</span> <span class="nv">VI_SERVER</span><span class="o">=</span><span class="nv">$1</span>
 <span class="o">}</span>
 
-<span class="c1"># Fire up a new server according to the argument supplied</span>
-vs<span class="o">(){</span>
+<span class="c1"># Fire up a new server according to the argument supplied
+</span><span class="c1"></span>vs<span class="o">(){</span>
     eset <span class="nv">$1</span>
     vim --servername <span class="nv">$VI_SERVER</span>
 <span class="o">}</span>
 
-<span class="c1"># Open up the files in the environment Vim server.</span>
-es<span class="o">(){</span>
+<span class="c1"># Open up the files in the environment Vim server.
+</span><span class="c1"></span>es<span class="o">(){</span>
     vim --servername <span class="nv">$VI_SERVER</span> --remote-silent <span class="nv">$*</span>
 <span class="o">}</span>
 
-<span class="c1"># Reuse Vim ZSH completions for vim completions</span>
-compdef _vim es
-</code></pre></div>
-
+<span class="c1"># Reuse Vim ZSH completions for vim completions
+</span><span class="c1"></span>compdef _vim es</code></pre></div>
 <p>#Vim Sessions</p>
 
 <p>Having multiple instances is great, but I don&rsquo;t want to set each up every time I
