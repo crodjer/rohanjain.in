@@ -6,10 +6,21 @@
     <description>Recent content in Blog on The Perpetual Amature</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 06 Dec 2017 12:44:55 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 15 Apr 2020 09:22:34 +0530</lastBuildDate>
     
 	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Some Light in the Background</title>
+      <link>/light/</link>
+      <pubDate>Wed, 15 Apr 2020 09:22:34 +0530</pubDate>
+      
+      <guid>/light/</guid>
+      <description>tl;dr
+We love dark backgrounds. They are easier on the eyes, comfortable to use in the dark. Comfortable to work with in the night/dark rooms. So, we&amp;rsquo;d like everything that we see on the screen to be dark. And that&amp;rsquo;s the key, everything must be dark.
+Imagine working on the computer with a completely dark environment. Every app configured to be at its darkest. You find the need to look something up on the web.</description>
+    </item>
     
     <item>
       <title>Window Management in OSX with Spark</title>
