@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="Rohan Jain">
+<meta name="description" content="Recently, I built a new desktop. After receiving everything, I realized that I was missing the onboard speaker (which creates the annoying beep sound). Ideally, the computer case should have had it, but they don&rsquo;t come with a buzzer anymore. My various applications rely on the system beep, hence I needed to find a software alternative. Turns out it is fairly trivial to configure it to capture alerts with pulseaudio:">
+
+<meta property="og:title" content="Using pulseaudio to play system beeps" />
+<meta property="og:description" content="Recently, I built a new desktop. After receiving everything, I realized that I was missing the onboard speaker (which creates the annoying beep sound). Ideally, the computer case should have had it, but they don&rsquo;t come with a buzzer anymore. My various applications rely on the system beep, hence I needed to find a software alternative. Turns out it is fairly trivial to configure it to capture alerts with pulseaudio:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/bell/" />
+
+
+
+<meta property="article:published_time" content="2015-08-20T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2015-08-20T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+
+<title>
+
+
+     Using pulseaudio to play system beeps 
+
+</title>
+<link rel="canonical" href="/bell/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/pygments.css">
+    <link rel="stylesheet" href="/css/main.css">
+    
+        <link rel="stylesheet" href="/css/override.css">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="/static/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+            <a href="/"><img class="avatar" src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" rcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
+            
+            <a href="/"><div class="name">Rohan Jain</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-about"><a href="/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/__crodjer__" target="_blank" rel="noopener"><img class="icon" src="/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+            <a href="//linkedin.com/in/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/linkedin.svg" alt="linkedin" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+<section class="main">
+    <div class="container">
+        <div class="content">
+            <div class="page-heading">
+
+    Using pulseaudio to play system beeps
+
+</div>
+
+            <div class="markdown">
+                <p>Recently, I built a new desktop. After receiving everything, I realized that I
+was missing the onboard speaker (which creates the annoying beep sound).
+Ideally, the computer case should have had it, but they don&rsquo;t come with a buzzer
+anymore. My various applications rely on the system beep, hence I needed to find
+a software alternative. Turns out it is fairly trivial to configure it to
+capture alerts with pulseaudio:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">start-pulseaudio-x11
+pactl upload-sample /usr/share/sounds/freedesktop/stereo/message.oga beep
+pactl load-module module-x11-bell <span class="nv">sample</span><span class="o">=</span>beep
+xset b <span class="m">100</span></code></pre></div>
+<p>To automatically do it on X11 start, I placed the above in my
+<a href="https://github.com/crodjer/configs/blob/121caa22d4b7c6324fa9a5b22e2d2fcc334afc96/.xsessionrc#L31">xsessionrc</a>.</p>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-15806710-5', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
+

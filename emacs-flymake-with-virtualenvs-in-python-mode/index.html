@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="author" content="Rohan Jain">
+<meta name="description" content="Lately, I have been writing some python with emacs. So, I have been trying to get the popular checkers (pylint/pyflakes) to work with flymake and virtualenvs. The issues with existing solutions to get flymake working with the checkers is that most of them assume a global version of executable (which would be fine if it weren&rsquo;t for the whole python 2 and 3 incompatibility).
+The python-mode in the latest emacs versions (mine is 24.">
+
+<meta property="og:title" content="Emacs: Flymake with virtualenvs in python-mode" />
+<meta property="og:description" content="Lately, I have been writing some python with emacs. So, I have been trying to get the popular checkers (pylint/pyflakes) to work with flymake and virtualenvs. The issues with existing solutions to get flymake working with the checkers is that most of them assume a global version of executable (which would be fine if it weren&rsquo;t for the whole python 2 and 3 incompatibility).
+The python-mode in the latest emacs versions (mine is 24." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/emacs-flymake-with-virtualenvs-in-python-mode/" />
+
+
+
+<meta property="article:published_time" content="2014-01-28T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2014-01-28T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+
+<title>
+
+
+     Emacs: Flymake with virtualenvs in python-mode 
+
+</title>
+<link rel="canonical" href="/emacs-flymake-with-virtualenvs-in-python-mode/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/pygments.css">
+    <link rel="stylesheet" href="/css/main.css">
+    
+        <link rel="stylesheet" href="/css/override.css">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="/static/img/favicon.ico"
+
+>
+
+
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+            <a href="/"><img class="avatar" src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" rcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
+            
+            <a href="/"><div class="name">Rohan Jain</div></a>
+            
+            <nav>
+                <ul>
+                    
+                        <li class="nav-about"><a href="/about/"><span>About</span></a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+        
+            <a href="//github.com/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/github.svg" alt="github" /></a>
+        
+
+        
+
+        
+            <a href="//twitter.com/__crodjer__" target="_blank" rel="noopener"><img class="icon" src="/img/twitter.svg" alt="twitter" /></a>
+        
+
+	
+
+        
+
+        
+
+        
+            <a href="//linkedin.com/in/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/linkedin.svg" alt="linkedin" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+        </div>
+    </div>
+</section>
+
+<section class="main">
+    <div class="container">
+        <div class="content">
+            <div class="page-heading">
+
+    Emacs: Flymake with virtualenvs in python-mode
+
+</div>
+
+            <div class="markdown">
+                <p>Lately, I have been writing some python with emacs. So, I have been trying to
+get the popular checkers (<code>pylint</code>/<code>pyflakes</code>) to work with flymake and
+virtualenvs. The issues with existing solutions to get flymake working with the
+checkers is that most of them assume a global version of executable (which would
+be fine if it weren&rsquo;t for the whole python 2 and 3 incompatibility).</p>
+
+<p>The <code>python-mode</code> in the latest emacs versions (mine is <code>24.3.1</code>) includes a
+basic support for <code>virtualenvs</code>. I run <code>pylint/pyflakes</code> through the command
+<code>env</code> with the environment variables calculated from the functions provided by
+<code>python-mode</code>. Here is the code extracted from my
+<a href="https://github.com/crodjer/configs/blob/master/.emacs">emacs configuration</a>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-elisp" data-lang="elisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">python-calculate-env</span> <span class="p">()</span>
+  <span class="s">&#34;Calculate env variables for current python virtualenv.&#34;</span>
+  <span class="c1">;; ;; This also overrides PYTHONHOME to &#34;&#34;, which breaks the process</span>
+  <span class="c1">;; ;; environment. Otherwise, a neat idea.</span>
+  <span class="c1">;; (mapcar</span>
+  <span class="c1">;;  (lambda (string)</span>
+  <span class="c1">;;    (let ((splitted-string (split-string string &#34;=&#34;)))</span>
+  <span class="c1">;;      (format</span>
+  <span class="c1">;;       &#34;%s=\&#34;%s\&#34;&#34;</span>
+  <span class="c1">;;       (car splitted-string)</span>
+  <span class="c1">;;       (or (cadr splitted-string)</span>
+  <span class="c1">;;           &#34;&#34;))))</span>
+  <span class="c1">;; (python-shell-calculate-process-environment)))</span>
+  <span class="p">(</span><span class="nv">remove-if</span>
+   <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="nv">x</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">or</span>
+      <span class="c1">;; If environment</span>
+      <span class="p">(</span><span class="nf">string-match</span> <span class="s">&#34; &#34;</span> <span class="nv">x</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">not</span> <span class="p">(</span><span class="nf">string-match</span> <span class="s">&#34;=&#34;</span> <span class="nv">x</span><span class="p">))))</span>
+   <span class="p">(</span><span class="nv">python-shell-calculate-process-environment</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">python-virtualenv-exec</span> <span class="p">(</span><span class="nv">command</span> <span class="nv">args</span><span class="p">)</span>
+  <span class="s">&#34;Generate a flymake friendly list executable in virtualenv, for provided
+</span><span class="s">commands.&#34;</span>
+  <span class="p">(</span><span class="nf">list</span> <span class="s">&#34;env&#34;</span> <span class="p">(</span><span class="nf">append</span> <span class="p">(</span><span class="nv">python-calculate-env</span><span class="p">)</span> <span class="p">(</span><span class="nf">list</span> <span class="nv">command</span><span class="p">)</span> <span class="nv">args</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">load</span> <span class="s">&#34;flymake&#34;</span> <span class="no">t</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">defun</span> <span class="nv">flymake-python-init</span> <span class="p">()</span>
+    <span class="p">(</span><span class="nb">let*</span> <span class="p">((</span><span class="nv">temp-file</span> <span class="p">(</span><span class="nv">flymake-init-create-temp-buffer-copy</span>
+                       <span class="ss">&#39;flymake-create-temp-inplace</span><span class="p">))</span>
+           <span class="p">(</span><span class="nv">local-file</span> <span class="p">(</span><span class="nv">file-relative-name</span>
+                        <span class="nv">temp-file</span>
+                        <span class="p">(</span><span class="nf">file-name-directory</span> <span class="nf">buffer-file-name</span><span class="p">))))</span>
+      <span class="p">(</span><span class="nv">python-virtualenv-exec</span>
+       <span class="s">&#34;pylint&#34;</span>
+       <span class="p">(</span><span class="nf">list</span>
+        <span class="c1">;; Pylint args. Will depend on the checker being used.</span>
+        <span class="s">&#34;-r&#34;</span> <span class="s">&#34;n&#34;</span>
+        <span class="s">&#34;--msg-template=&#39;{path}:{line}:{category} [{msg_id} {obj}] {msg}&#39;&#34;</span>
+        <span class="nv">local-file</span><span class="p">))))</span>
+  <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;flymake-allowed-file-name-masks</span>
+             <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;\\.py\\&#39;&#34;</span> <span class="nv">flymake-python-init</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">flymake-mode-hook-function</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">derived-mode-p</span> <span class="ss">&#39;python-mode</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">flymake-mode</span> <span class="no">t</span><span class="p">)))</span>
+<span class="c1">;; Run flymake mode hook function after the local variables are set (eg: through</span>
+<span class="c1">;; .dir-locals.el</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;hack-local-variables-hook</span> <span class="nf">#&#39;</span><span class="nv">flymake-mode-hook-function</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">setq</span> <span class="nv">virtualenv-workon-starts-python</span> <span class="no">nil</span><span class="p">)</span></code></pre></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-15806710-5', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
+
