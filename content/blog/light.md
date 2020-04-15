@@ -8,9 +8,9 @@ slug = "light"
 
 
 We love dark backgrounds. They are easier on the eyes, comfortable to
-use in the dark. Comfortable to work with in the night/dark rooms. So,
-we'd like **everything** that we see on the screen to be dark. And that's
-the key, _everything_ must be dark.
+work with in the night/dark rooms. So, we'd like **everything** that
+we see on the screen to be dark. And that's the key, _everything_ must
+be dark.
 
 Imagine working on the computer with a completely dark environment.
 Every app configured to be at its darkest. You find the need to look
