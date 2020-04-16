@@ -8,7 +8,7 @@ slug = "light"
 
 
 We love dark backgrounds. They are easier on the eyes, comfortable to
-work with in the night/dark rooms. So, we'd like **everything** that
+work with in the night/dark rooms. So, we'd like everything that
 we see on the screen to be dark. And that's the key, _everything_ must
 be dark.
 
@@ -21,30 +21,15 @@ hard. The article is built with a white background, in a way that all
 your hacks to make (_most_) websites dark doesn't work. The eyes hurt,
 the head hurts a bit.
 
-You feel annoyed. You want to let the website developer know what they
-did to you. How they derailed your mind while working. But is it their
-fault? In fact, they just helped you out solve a problem you were
-facing.
+I have faced this, multiple times. As someone who is extremely
+sensitive to brightness, sudden change is extra annoying. So, a few
+years ago, I had to switch everything to be light. With that, such
+events never happen.
 
-I have faced this. Multiple times, a long long time back. Why a long
-time back? Because at one point, I realize that we aren't ready for
-the darkness and switched all applications to be light.
-
-Now, I can happily browse around the web without the worry that
-something I visit may accidentally just hit my eyes. I am extremely
-sensitive to bright light. So much so that almost everyone near me
-finds it hard to see any of my screens. In fact, I make everything
-_matte_, even my phone screen, at a cost of display quality just to
-reduce the glare.
-
-I love the dark background. I hope at some point it becomes the
-default everywhere. But for now, light backgrounds the default.
-Users should be able to tell the browsers their dark/light mode
-preference, which can then be forwarded to websites - just like time
-zone information is.
-
-Interestingly, light backgrounds with extremely low brightness
-settings, save energy in LCD displays.
+I hope at some point dark backgrounds become the default everywhere.
+Or, users should be able to tell the browsers their dark/light mode
+preference, which can then be forwarded to websites. With that, I'd
+happily switch back to making everything dark.
 
 _[Solarized](https://ethanschoonover.com/solarized/) dark is awesome.
 But Solarized light is great too!_
