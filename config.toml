@@ -41,7 +41,12 @@ gravatar     = "564e7aa79de47cdf3a094da1d4ac13cd"                # do not use in
 extraCssFiles = [ "/css/override.css" ] # In your `static` directory, add/remove files as necessary.
 
 [[menu.main]]
-name                   = "About"
+name                   = "Home"
 weight                 = -9
+identifier             = "home"
+url                    = "/"
+[[menu.main]]
+name                   = "About"
+weight                 = -8
 identifier             = "about"
 url                    = "/about/"
