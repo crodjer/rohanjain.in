@@ -15,22 +15,8 @@
 <meta property="og:description" content="Recently, I decided to categorize my posts under directories named by the year they were created in. For example, this post is placed at: posts/2015/hakyll-years.mkd. I decided to utilize this structure to also group how archives are listed. Inspired from Hakyll&rsquo;s tag functionality I wrote my own group by years functionality. This post tries to explain that. Also, I don&rsquo;t see why a similar logic cannot be used to do simple pagination." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/hakyll-years/" />
-
-
-
-<meta property="article:published_time" content="2015-08-31T00:00:00&#43;00:00"/>
-
-<meta property="article:modified_time" content="2015-08-31T00:00:00&#43;00:00"/>
-
-
-
-
-
-
-
-
-
-
+<meta property="article:published_time" content="2015-08-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2015-08-31T00:00:00+00:00" />
 
 
 <title>
@@ -77,6 +63,8 @@
 
 
 
+
+
 </head>
 
 
@@ -93,6 +81,10 @@
             <nav>
                 <ul>
                     
+                        
+                        <li class="nav-home"><a href="/"><span>Home</span></a></li>
+                    
+                        
                         <li class="nav-about"><a href="/about/"><span>About</span></a></li>
                     
                 </ul>
@@ -137,6 +129,8 @@
         
 
         
+        
+        
 
         
         </div>
@@ -161,45 +155,45 @@ also group how archives are listed. Inspired from
 I wrote my own group by years functionality. This post tries to
 explain that. Also, I don&rsquo;t see why a similar logic cannot be used to
 do simple pagination.</p>
-
 <p>First, like tags, we need to build the list of years. <code>buildYears</code>
 (like <code>buildTags</code>) will do that:</p>
-<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">buildYears</span> <span class="ow">::</span> <span class="kt">MonadMetadata</span> <span class="nf">m</span> <span class="ow">=&gt;</span> <span class="kt">Pattern</span> <span class="ow">-&gt;</span> <span class="nf">m</span> <span class="p">[(</span><span class="kt">Year</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)]</span>
-<span class="nf">buildYears</span> <span class="nf">pattern</span> <span class="ow">=</span> <span class="kr">do</span>
-    <span class="nf">ids</span> <span class="ow">&lt;-</span> <span class="nf">getMatches</span> <span class="nf">pattern</span>
-    <span class="nf">return</span> <span class="o">.</span> <span class="nf">frequency</span> <span class="o">.</span> <span class="p">(</span><span class="nf">map</span> <span class="nf">getYear</span><span class="p">)</span> <span class="o">$</span> <span class="nf">ids</span>
+<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">buildYears</span> <span class="ow">::</span> <span class="kt">MonadMetadata</span> <span class="n">m</span> <span class="ow">=&gt;</span> <span class="kt">Pattern</span> <span class="ow">-&gt;</span> <span class="n">m</span> <span class="p">[(</span><span class="kt">Year</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)]</span>
+<span class="nf">buildYears</span> <span class="n">pattern</span> <span class="ow">=</span> <span class="kr">do</span>
+    <span class="n">ids</span> <span class="ow">&lt;-</span> <span class="n">getMatches</span> <span class="n">pattern</span>
+    <span class="n">return</span> <span class="o">.</span> <span class="n">frequency</span> <span class="o">.</span> <span class="p">(</span><span class="n">map</span> <span class="n">getYear</span><span class="p">)</span> <span class="o">$</span> <span class="n">ids</span>
   <span class="kr">where</span>
-    <span class="nf">frequency</span> <span class="nf">xs</span> <span class="ow">=</span>  <span class="kt">M</span><span class="o">.</span><span class="nf">toList</span> <span class="p">(</span><span class="kt">M</span><span class="o">.</span><span class="nf">fromListWith</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="p">[(</span><span class="nf">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="nf">x</span> <span class="ow">&lt;-</span> <span class="nf">xs</span><span class="p">])</span>
+    <span class="n">frequency</span> <span class="n">xs</span> <span class="ow">=</span>  <span class="kt">M</span><span class="o">.</span><span class="n">toList</span> <span class="p">(</span><span class="kt">M</span><span class="o">.</span><span class="n">fromListWith</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="n">x</span> <span class="ow">&lt;-</span> <span class="n">xs</span><span class="p">])</span>
 
 <span class="nf">getYear</span> <span class="ow">::</span> <span class="kt">Identifier</span> <span class="ow">-&gt;</span> <span class="kt">Year</span>
-<span class="nf">getYear</span> <span class="ow">=</span> <span class="nf">takeBaseName</span> <span class="o">.</span> <span class="nf">takeDirectory</span> <span class="o">.</span> <span class="nf">toFilePath</span></code></pre></div>
-<p>This now can be used in the site <code>Rules</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell">  <span class="nf">years</span> <span class="ow">&lt;-</span> <span class="nf">buildYears</span> <span class="s">&#34;posts/*/*&#34;</span></code></pre></div>
-<p>With this, you have a list of years available for other rules to use.
+<span class="nf">getYear</span> <span class="ow">=</span> <span class="n">takeBaseName</span> <span class="o">.</span> <span class="n">takeDirectory</span> <span class="o">.</span> <span class="n">toFilePath</span>
+
+</code></pre></div><p>This now can be used in the site <code>Rules</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell">  <span class="n">years</span> <span class="ow">&lt;-</span> <span class="n">buildYears</span> <span class="s">&#34;posts/*/*&#34;</span>
+</code></pre></div><p>With this, you have a list of years available for other rules to use.
 Now, we build an index of posts by years (similar to <code>tagsRules</code>):</p>
-<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell">  <span class="nf">forM_</span> <span class="nf">years</span> <span class="o">$</span> <span class="nf">\</span><span class="p">(</span><span class="nf">year</span><span class="p">,</span> <span class="kr">_</span><span class="p">)</span><span class="ow">-&gt;</span>
-      <span class="nf">create</span> <span class="p">[</span><span class="nf">yearId</span> <span class="nf">year</span><span class="p">]</span> <span class="o">$</span> <span class="kr">do</span>
-         <span class="nf">route</span>   <span class="nf">idRoute</span>
-         <span class="nf">compile</span> <span class="o">$</span> <span class="kr">do</span>
+<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell">  <span class="n">forM_</span> <span class="n">years</span> <span class="o">$</span> <span class="nf">\</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="kr">_</span><span class="p">)</span><span class="ow">-&gt;</span>
+      <span class="n">create</span> <span class="p">[</span><span class="n">yearId</span> <span class="n">year</span><span class="p">]</span> <span class="o">$</span> <span class="kr">do</span>
+         <span class="n">route</span>   <span class="n">idRoute</span>
+         <span class="n">compile</span> <span class="o">$</span> <span class="kr">do</span>
            <span class="c1">-- Only the posts published in &#39;year&#39;</span>
-           <span class="nf">posts</span> <span class="ow">&lt;-</span> <span class="nf">recentFirst</span> <span class="o">=&lt;&lt;</span> <span class="nf">loadAll</span> <span class="p">(</span><span class="nf">fromGlob</span> <span class="o">$</span> <span class="s">&#34;posts/&#34;</span> <span class="o">++</span> <span class="nf">year</span> <span class="o">++</span><span class="s">&#34;/*&#34;</span><span class="p">)</span>
-           <span class="kr">let</span> <span class="nf">postsCtx</span> <span class="ow">=</span> <span class="nf">mconcat</span>
-                          <span class="p">[</span> <span class="nf">listField</span> <span class="s">&#34;posts&#34;</span> <span class="nf">postCtx</span> <span class="p">(</span><span class="nf">return</span> <span class="nf">posts</span><span class="p">)</span>
-                          <span class="p">,</span> <span class="nf">constField</span> <span class="s">&#34;title&#34;</span> <span class="p">(</span><span class="s">&#34;Posts published in &#34;</span> <span class="o">++</span> <span class="nf">year</span><span class="p">)</span>
-                          <span class="p">,</span> <span class="nf">defaultContext</span>
+           <span class="n">posts</span> <span class="ow">&lt;-</span> <span class="n">recentFirst</span> <span class="o">=&lt;&lt;</span> <span class="n">loadAll</span> <span class="p">(</span><span class="n">fromGlob</span> <span class="o">$</span> <span class="s">&#34;posts/&#34;</span> <span class="o">++</span> <span class="n">year</span> <span class="o">++</span><span class="s">&#34;/*&#34;</span><span class="p">)</span>
+           <span class="kr">let</span> <span class="n">postsCtx</span> <span class="ow">=</span> <span class="n">mconcat</span>
+                          <span class="p">[</span> <span class="n">listField</span> <span class="s">&#34;posts&#34;</span> <span class="n">postCtx</span> <span class="p">(</span><span class="n">return</span> <span class="n">posts</span><span class="p">)</span>
+                          <span class="p">,</span> <span class="n">constField</span> <span class="s">&#34;title&#34;</span> <span class="p">(</span><span class="s">&#34;Posts published in &#34;</span> <span class="o">++</span> <span class="n">year</span><span class="p">)</span>
+                          <span class="p">,</span> <span class="n">defaultContext</span>
                           <span class="p">]</span>
-           <span class="nf">makeItem</span> <span class="s">&#34;&#34;</span>
-            <span class="o">&gt;&gt;=</span> <span class="nf">loadAndApplyTemplate</span> <span class="s">&#34;templates/posts.html&#34;</span> <span class="nf">postsCtx</span>
-            <span class="o">&gt;&gt;=</span> <span class="nf">loadAndApplyTemplate</span> <span class="s">&#34;templates/default.html&#34;</span> <span class="nf">postsCtx</span>
-            <span class="o">&gt;&gt;=</span> <span class="nf">relativizeUrls</span>
-            <span class="o">&gt;&gt;=</span> <span class="nf">cleanIndexUrls</span>
+           <span class="n">makeItem</span> <span class="s">&#34;&#34;</span>
+            <span class="o">&gt;&gt;=</span> <span class="n">loadAndApplyTemplate</span> <span class="s">&#34;templates/posts.html&#34;</span> <span class="n">postsCtx</span>
+            <span class="o">&gt;&gt;=</span> <span class="n">loadAndApplyTemplate</span> <span class="s">&#34;templates/default.html&#34;</span> <span class="n">postsCtx</span>
+            <span class="o">&gt;&gt;=</span> <span class="n">relativizeUrls</span>
+            <span class="o">&gt;&gt;=</span> <span class="n">cleanIndexUrls</span>
 
 <span class="nf">yearPath</span> <span class="ow">::</span> <span class="kt">Year</span> <span class="ow">-&gt;</span> <span class="kt">FilePath</span>
-<span class="nf">yearPath</span> <span class="nf">year</span> <span class="ow">=</span> <span class="s">&#34;archive/&#34;</span> <span class="o">++</span> <span class="nf">year</span> <span class="o">++</span> <span class="s">&#34;/index.html&#34;</span>
+<span class="nf">yearPath</span> <span class="n">year</span> <span class="ow">=</span> <span class="s">&#34;archive/&#34;</span> <span class="o">++</span> <span class="n">year</span> <span class="o">++</span> <span class="s">&#34;/index.html&#34;</span>
 
 <span class="nf">yearId</span> <span class="ow">::</span> <span class="kt">Year</span> <span class="ow">-&gt;</span> <span class="kt">Identifier</span>
-<span class="nf">yearId</span> <span class="ow">=</span> <span class="nf">fromFilePath</span> <span class="o">.</span> <span class="nf">yearPath</span></code></pre></div>
-<p>We now have year wise archives which can be accessed through paths
+<span class="nf">yearId</span> <span class="ow">=</span> <span class="n">fromFilePath</span> <span class="o">.</span> <span class="n">yearPath</span>
+</code></pre></div><p>We now have year wise archives which can be accessed through paths
 like: <code>/archive/2015/</code>. Similar to tags, we need to support browsing
 through posts by years. <code>renderYears</code> does that:</p>
 <div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="c1">-- Extra blaze related imports</span>
@@ -210,35 +204,33 @@ through posts by years. <code>renderYears</code> does that:</p>
 
 
 <span class="nf">renderYears</span> <span class="ow">::</span> <span class="p">[(</span><span class="kt">Year</span><span class="p">,</span> <span class="kt">Int</span><span class="p">)]</span> <span class="ow">-&gt;</span> <span class="kt">Compiler</span> <span class="kt">String</span>
-<span class="nf">renderYears</span> <span class="nf">years</span> <span class="ow">=</span> <span class="kr">do</span>
-  <span class="nf">years&#39;</span> <span class="ow">&lt;-</span> <span class="nf">forM</span> <span class="p">(</span><span class="nf">reverse</span> <span class="o">.</span> <span class="nf">sort</span> <span class="o">$</span> <span class="nf">years</span><span class="p">)</span> <span class="o">$</span> <span class="nf">\</span><span class="p">(</span><span class="nf">year</span><span class="p">,</span> <span class="nf">count</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="kr">do</span>
-      <span class="nf">route&#39;</span> <span class="ow">&lt;-</span> <span class="nf">getRoute</span> <span class="o">$</span> <span class="nf">yearId</span> <span class="nf">year</span>
-      <span class="nf">return</span> <span class="p">(</span><span class="nf">year</span><span class="p">,</span> <span class="nf">route&#39;</span><span class="p">,</span> <span class="nf">count</span><span class="p">)</span>
-  <span class="nf">return</span> <span class="o">.</span> <span class="nf">intercalate</span> <span class="s">&#34;, &#34;</span> <span class="o">$</span> <span class="nf">map</span> <span class="nf">makeLink</span> <span class="nf">years&#39;</span>
+<span class="nf">renderYears</span> <span class="n">years</span> <span class="ow">=</span> <span class="kr">do</span>
+  <span class="n">years&#39;</span> <span class="ow">&lt;-</span> <span class="n">forM</span> <span class="p">(</span><span class="n">reverse</span> <span class="o">.</span> <span class="n">sort</span> <span class="o">$</span> <span class="n">years</span><span class="p">)</span> <span class="o">$</span> <span class="nf">\</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span> <span class="ow">-&gt;</span> <span class="kr">do</span>
+      <span class="n">route&#39;</span> <span class="ow">&lt;-</span> <span class="n">getRoute</span> <span class="o">$</span> <span class="n">yearId</span> <span class="n">year</span>
+      <span class="n">return</span> <span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">route&#39;</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+  <span class="n">return</span> <span class="o">.</span> <span class="n">intercalate</span> <span class="s">&#34;, &#34;</span> <span class="o">$</span> <span class="n">map</span> <span class="n">makeLink</span> <span class="n">years&#39;</span>
 
   <span class="kr">where</span>
-    <span class="nf">makeLink</span> <span class="p">(</span><span class="nf">year</span><span class="p">,</span> <span class="nf">route&#39;</span><span class="p">,</span> <span class="nf">count</span><span class="p">)</span> <span class="ow">=</span>
-      <span class="p">(</span><span class="nf">renderHtml</span> <span class="p">(</span><span class="kt">H</span><span class="o">.</span><span class="nf">a</span> <span class="o">!</span> <span class="kt">A</span><span class="o">.</span><span class="nf">href</span> <span class="p">(</span><span class="nf">yearUrl</span> <span class="nf">year</span><span class="p">)</span> <span class="o">$</span> <span class="nf">toHtml</span> <span class="nf">year</span><span class="p">))</span> <span class="o">++</span>
-      <span class="s">&#34; (&#34;</span> <span class="o">++</span> <span class="nf">show</span> <span class="nf">count</span> <span class="o">++</span> <span class="s">&#34;)&#34;</span>
-    <span class="nf">yearUrl</span> <span class="ow">=</span> <span class="nf">toValue</span> <span class="o">.</span> <span class="nf">toUrl</span> <span class="o">.</span> <span class="nf">yearPath</span></code></pre></div>
-<p>Add this to a pages context like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell">  <span class="nf">create</span> <span class="p">[</span><span class="s">&#34;index.html&#34;</span><span class="p">]</span> <span class="o">$</span> <span class="kr">do</span>
-         <span class="nf">route</span>   <span class="nf">idRoute</span>
-         <span class="nf">compile</span> <span class="o">$</span> <span class="kr">do</span>
+    <span class="n">makeLink</span> <span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">route&#39;</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span> <span class="ow">=</span>
+      <span class="p">(</span><span class="n">renderHtml</span> <span class="p">(</span><span class="kt">H</span><span class="o">.</span><span class="n">a</span> <span class="o">!</span> <span class="kt">A</span><span class="o">.</span><span class="n">href</span> <span class="p">(</span><span class="n">yearUrl</span> <span class="n">year</span><span class="p">)</span> <span class="o">$</span> <span class="n">toHtml</span> <span class="n">year</span><span class="p">))</span> <span class="o">++</span>
+      <span class="s">&#34; (&#34;</span> <span class="o">++</span> <span class="n">show</span> <span class="n">count</span> <span class="o">++</span> <span class="s">&#34;)&#34;</span>
+    <span class="n">yearUrl</span> <span class="ow">=</span> <span class="n">toValue</span> <span class="o">.</span> <span class="n">toUrl</span> <span class="o">.</span> <span class="n">yearPath</span>
+</code></pre></div><p>Add this to a pages context like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell">  <span class="n">create</span> <span class="p">[</span><span class="s">&#34;index.html&#34;</span><span class="p">]</span> <span class="o">$</span> <span class="kr">do</span>
+         <span class="n">route</span>   <span class="n">idRoute</span>
+         <span class="n">compile</span> <span class="o">$</span> <span class="kr">do</span>
            <span class="c1">-- rest of the compiler context</span>
-           <span class="kr">let</span> <span class="nf">indexCtx</span> <span class="ow">=</span> <span class="nf">mconcat</span>
+           <span class="kr">let</span> <span class="n">indexCtx</span> <span class="ow">=</span> <span class="n">mconcat</span>
                           <span class="p">[</span> <span class="c1">-- some context</span>
-                          <span class="p">,</span> <span class="nf">field</span> <span class="s">&#34;years&#34;</span> <span class="p">(</span><span class="nf">\</span><span class="kr">_</span> <span class="ow">-&gt;</span> <span class="nf">renderYears</span> <span class="nf">years</span><span class="p">)</span>
-                          <span class="p">,</span> <span class="nf">defaultContext</span>
+                          <span class="p">,</span> <span class="n">field</span> <span class="s">&#34;years&#34;</span> <span class="p">(</span><span class="nf">\</span><span class="kr">_</span> <span class="ow">-&gt;</span> <span class="n">renderYears</span> <span class="n">years</span><span class="p">)</span>
+                          <span class="p">,</span> <span class="n">defaultContext</span>
                           <span class="p">]</span>
-           <span class="c1">-- rest of the compiler</span></code></pre></div>
-<p><code>$years$</code> will be available in the template which will link to year
+           <span class="c1">-- rest of the compiler</span>
+</code></pre></div><p><code>$years$</code> will be available in the template which will link to year
 wise archives with their corresponding per year count.</p>
-
 <blockquote>
 <p>See this functionality being used by <a href="https://github.com/crodjer/rohanjain.in/blob/master/site.hs">this blog</a>.</p>
 </blockquote>
-
 <p>Also, you&rsquo;d notice that years here could easily have been various
 categories you may want to have in your blog.</p>
 
@@ -248,12 +240,16 @@ categories you may want to have in your blog.</p>
 </section>
 
 
-<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-15806710-5', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-15806710-5', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
-<script async src='//www.google-analytics.com/analytics.js'></script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 
 

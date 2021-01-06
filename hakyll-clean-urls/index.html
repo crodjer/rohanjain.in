@@ -17,22 +17,8 @@ Hakyll provides all the utilities with which we can get cleaner URLs, like this 
 Hakyll provides all the utilities with which we can get cleaner URLs, like this page&rsquo;s. For this, I rely on the fact that most of the web servers automatically serve /foo/index.html for the URL /foo/. To generate clean paths, I define a custom route - cleanRoute:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/hakyll-clean-urls/" />
-
-
-
-<meta property="article:published_time" content="2015-08-30T00:00:00&#43;00:00"/>
-
-<meta property="article:modified_time" content="2015-08-30T00:00:00&#43;00:00"/>
-
-
-
-
-
-
-
-
-
-
+<meta property="article:published_time" content="2015-08-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2015-08-30T00:00:00+00:00" />
 
 
 <title>
@@ -79,6 +65,8 @@ Hakyll provides all the utilities with which we can get cleaner URLs, like this 
 
 
 
+
+
 </head>
 
 
@@ -95,6 +83,10 @@ Hakyll provides all the utilities with which we can get cleaner URLs, like this 
             <nav>
                 <ul>
                     
+                        
+                        <li class="nav-home"><a href="/"><span>Home</span></a></li>
+                    
+                        
                         <li class="nav-about"><a href="/about/"><span>About</span></a></li>
                     
                 </ul>
@@ -139,6 +131,8 @@ Hakyll provides all the utilities with which we can get cleaner URLs, like this 
         
 
         
+        
+        
 
         
         </div>
@@ -159,50 +153,49 @@ Hakyll provides all the utilities with which we can get cleaner URLs, like this 
 <code>.html</code> extension. I have never been a fan of this. When things in
 reality are driven by the <code>Content-Type</code> header, it is absolutely
 redundant.</p>
-
 <p>Hakyll provides all the utilities with which we can get cleaner URLs,
 like <a href=".">this page&rsquo;s</a>. For this, I rely on the fact that most of the
 web servers automatically serve <code>/foo/index.html</code> for the URL
 <code>/foo/</code>. To generate <em>clean</em> paths, I define a custom route -
 <code>cleanRoute</code>:</p>
 <div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">cleanRoute</span> <span class="ow">::</span> <span class="kt">Routes</span>
-<span class="nf">cleanRoute</span> <span class="ow">=</span> <span class="nf">customRoute</span> <span class="nf">createIndexRoute</span>
+<span class="nf">cleanRoute</span> <span class="ow">=</span> <span class="n">customRoute</span> <span class="n">createIndexRoute</span>
   <span class="kr">where</span>
-    <span class="nf">createIndexRoute</span> <span class="nf">ident</span> <span class="ow">=</span> <span class="nf">takeDirectory</span> <span class="nf">p</span> <span class="o">&lt;/&gt;</span> <span class="nf">takeBaseName</span> <span class="nf">p</span> <span class="o">&lt;/&gt;</span> <span class="s">&#34;index.html&#34;</span>
-                            <span class="kr">where</span> <span class="nf">p</span> <span class="ow">=</span> <span class="nf">toFilePath</span> <span class="nf">ident</span></code></pre></div>
-<p>This can now be used in in rule definition:</p>
-<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell">  <span class="nf">match</span> <span class="s">&#34;pages/*&#34;</span> <span class="o">$</span> <span class="kr">do</span>
-         <span class="nf">route</span>   <span class="o">$</span> <span class="nf">cleanRoute</span>
-         <span class="c1">-- the compiler follows</span></code></pre></div>
-<p>With this, a path say <code>/pages/about.html</code> will be generated as
+    <span class="n">createIndexRoute</span> <span class="n">ident</span> <span class="ow">=</span> <span class="n">takeDirectory</span> <span class="n">p</span> <span class="o">&lt;/&gt;</span> <span class="n">takeBaseName</span> <span class="n">p</span> <span class="o">&lt;/&gt;</span> <span class="s">&#34;index.html&#34;</span>
+                            <span class="kr">where</span> <span class="n">p</span> <span class="ow">=</span> <span class="n">toFilePath</span> <span class="n">ident</span>
+</code></pre></div><p>This can now be used in in rule definition:</p>
+<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell">  <span class="n">match</span> <span class="s">&#34;pages/*&#34;</span> <span class="o">$</span> <span class="kr">do</span>
+         <span class="n">route</span>   <span class="o">$</span> <span class="n">cleanRoute</span>
+         <span class="c1">-- the compiler follows</span>
+</code></pre></div><p>With this, a path say <code>/pages/about.html</code> will be generated as
 <code>/pages/about/index.html</code>, hence solving the generation problem. We
 are only partially done though. The links that Hakyll generates will
 also include the <code>/index.html</code> suffix in every URL. To get rid of that
 we define a set of functions:</p>
 <div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell"><span class="nf">cleanIndexUrls</span> <span class="ow">::</span> <span class="kt">Item</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">Compiler</span> <span class="p">(</span><span class="kt">Item</span> <span class="kt">String</span><span class="p">)</span>
-<span class="nf">cleanIndexUrls</span> <span class="ow">=</span> <span class="nf">return</span> <span class="o">.</span> <span class="nf">fmap</span> <span class="p">(</span><span class="nf">withUrls</span> <span class="nf">cleanIndex</span><span class="p">)</span>
+<span class="nf">cleanIndexUrls</span> <span class="ow">=</span> <span class="n">return</span> <span class="o">.</span> <span class="n">fmap</span> <span class="p">(</span><span class="n">withUrls</span> <span class="n">cleanIndex</span><span class="p">)</span>
 
 <span class="nf">cleanIndexHtmls</span> <span class="ow">::</span> <span class="kt">Item</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">Compiler</span> <span class="p">(</span><span class="kt">Item</span> <span class="kt">String</span><span class="p">)</span>
-<span class="nf">cleanIndexHtmls</span> <span class="ow">=</span> <span class="nf">return</span> <span class="o">.</span> <span class="nf">fmap</span> <span class="p">(</span><span class="nf">replaceAll</span> <span class="nf">pattern</span> <span class="nf">replacement</span><span class="p">)</span>
+<span class="nf">cleanIndexHtmls</span> <span class="ow">=</span> <span class="n">return</span> <span class="o">.</span> <span class="n">fmap</span> <span class="p">(</span><span class="n">replaceAll</span> <span class="n">pattern</span> <span class="n">replacement</span><span class="p">)</span>
     <span class="kr">where</span>
-      <span class="nf">pattern</span> <span class="ow">=</span> <span class="s">&#34;/index.html&#34;</span>
-      <span class="nf">replacement</span> <span class="ow">=</span> <span class="nf">const</span> <span class="s">&#34;/&#34;</span>
+      <span class="n">pattern</span> <span class="ow">=</span> <span class="s">&#34;/index.html&#34;</span>
+      <span class="n">replacement</span> <span class="ow">=</span> <span class="n">const</span> <span class="s">&#34;/&#34;</span>
 
 <span class="nf">cleanIndex</span> <span class="ow">::</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">String</span>
-<span class="nf">cleanIndex</span> <span class="nf">url</span>
-    <span class="o">|</span> <span class="nf">idx</span> <span class="p">`</span><span class="nf">isSuffixOf</span><span class="p">`</span> <span class="nf">url</span> <span class="ow">=</span> <span class="nf">take</span> <span class="p">(</span><span class="nf">length</span> <span class="nf">url</span> <span class="o">-</span> <span class="nf">length</span> <span class="nf">idx</span><span class="p">)</span> <span class="nf">url</span>
-    <span class="o">|</span> <span class="nf">otherwise</span>            <span class="ow">=</span> <span class="nf">url</span>
-  <span class="kr">where</span> <span class="nf">idx</span> <span class="ow">=</span> <span class="s">&#34;index.html&#34;</span></code></pre></div>
-<p><code>cleanIndexUrls</code> and <code>cleanIndexHtmls</code> strip out <code>/index.html</code> from
+<span class="nf">cleanIndex</span> <span class="n">url</span>
+    <span class="o">|</span> <span class="n">idx</span> <span class="p">`</span><span class="n">isSuffixOf</span><span class="p">`</span> <span class="n">url</span> <span class="ow">=</span> <span class="n">take</span> <span class="p">(</span><span class="n">length</span> <span class="n">url</span> <span class="o">-</span> <span class="n">length</span> <span class="n">idx</span><span class="p">)</span> <span class="n">url</span>
+    <span class="o">|</span> <span class="n">otherwise</span>            <span class="ow">=</span> <span class="n">url</span>
+  <span class="kr">where</span> <span class="n">idx</span> <span class="ow">=</span> <span class="s">&#34;index.html&#34;</span>
+</code></pre></div><p><code>cleanIndexUrls</code> and <code>cleanIndexHtmls</code> strip out <code>/index.html</code> from
 all the anchor tags and complete text respectively. These can be used
 over a page&rsquo;s compiler like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell">         <span class="nf">compile</span> <span class="o">$</span> <span class="nf">pandocCompiler</span>
-            <span class="o">&gt;&gt;=</span> <span class="nf">loadAndApplyTemplate</span> <span class="s">&#34;templates/page.html&#34;</span> <span class="nf">pageCtx</span>
-            <span class="o">&gt;&gt;=</span> <span class="nf">saveSnapshot</span> <span class="s">&#34;content&#34;</span>
-            <span class="o">&gt;&gt;=</span> <span class="nf">loadAndApplyTemplate</span> <span class="s">&#34;templates/default.html&#34;</span> <span class="nf">pageCtx</span>
-            <span class="o">&gt;&gt;=</span> <span class="nf">relativizeUrls</span>
-            <span class="o">&gt;&gt;=</span> <span class="nf">cleanIndexUrls</span> <span class="c1">-- cleanup href in all anchor tags.</span></code></pre></div>
-<blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell">         <span class="n">compile</span> <span class="o">$</span> <span class="n">pandocCompiler</span>
+            <span class="o">&gt;&gt;=</span> <span class="n">loadAndApplyTemplate</span> <span class="s">&#34;templates/page.html&#34;</span> <span class="n">pageCtx</span>
+            <span class="o">&gt;&gt;=</span> <span class="n">saveSnapshot</span> <span class="s">&#34;content&#34;</span>
+            <span class="o">&gt;&gt;=</span> <span class="n">loadAndApplyTemplate</span> <span class="s">&#34;templates/default.html&#34;</span> <span class="n">pageCtx</span>
+            <span class="o">&gt;&gt;=</span> <span class="n">relativizeUrls</span>
+            <span class="o">&gt;&gt;=</span> <span class="n">cleanIndexUrls</span> <span class="c1">-- cleanup href in all anchor tags.</span>
+</code></pre></div><blockquote>
 <p>This functionality is being used by <a href="https://github.com/crodjer/rohanjain.in/blob/master/site.hs">this blog</a> and
 <a href="https://github.com/irneh/workforpizza/blob/master/site.hs">irneh/workforpizza</a> off which this blog is actually
 based.</p>
@@ -214,12 +207,16 @@ based.</p>
 </section>
 
 
-<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-15806710-5', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-15806710-5', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
-<script async src='//www.google-analytics.com/analytics.js'></script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 
 

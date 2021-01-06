@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fixed on The Perpetual Amature</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Fixed on The Perpetual Amature</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 01 Apr 2012 12:21:25 +0000</lastBuildDate>
-    
-	<atom:link href="/fixed/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 01 Apr 2012 12:21:25 +0000</lastBuildDate><atom:link href="/fixed/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
       <link>/about/</link>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blog on The Perpetual Amature</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Blog on The Perpetual Amature</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 15 Apr 2020 09:22:34 +0530</lastBuildDate>
-    
-	<atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 15 Apr 2020 09:22:34 +0530</lastBuildDate><atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Some Light in the Background</title>
       <link>/light/</link>
@@ -50,7 +46,7 @@ But, I&amp;rsquo;d argue that there is a flaw in the question.</description>
       <pubDate>Sat, 18 Mar 2017 05:28:10 +0000</pubDate>
       
       <guid>/cloudflare-ddns/</guid>
-      <description>It is hard to maintain a regular internet uptime with home connections. 1&amp;frasl;2 router re-connections per week can be fairly common. When that happens, the public IP changes with most ISPs. This can be annoying if you want access your computer remotely (possibly to SSH home). Dynamic DNS is a solution that exists to solve just that.
+      <description>It is hard to maintain a regular internet uptime with home connections. 1/2 router re-connections per week can be fairly common. When that happens, the public IP changes with most ISPs. This can be annoying if you want access your computer remotely (possibly to SSH home). Dynamic DNS is a solution that exists to solve just that.
 I maintain DNS entries for my domain at Clouflare. The latest version of ddclient supports Cloudflare API, which works well with my ArchLinux box.</description>
     </item>
     

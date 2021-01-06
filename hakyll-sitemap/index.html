@@ -19,22 +19,8 @@ create [&#34;sitemap.xml&#34;] $ do route idRoute compile $ do posts &lt;- recen
 create [&#34;sitemap.xml&#34;] $ do route idRoute compile $ do posts &lt;- recentFirst =&lt;&lt; loadAll &#34;posts/*/*&#34; pages &lt;- loadAll &#34;pages/*&#34; let allPosts = (return (pages &#43;&#43; posts)) let sitemapCtx = mconcat [ listField &#34;entries&#34; pageCtx allPosts , constField &#34;host&#34; host , defaultContext ] makeItem &#34;&#34; &gt;&gt;= loadAndApplyTemplate &#34;templates/sitemap." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/hakyll-sitemap/" />
-
-
-
-<meta property="article:published_time" content="2015-08-30T00:00:00&#43;00:00"/>
-
-<meta property="article:modified_time" content="2015-08-30T00:00:00&#43;00:00"/>
-
-
-
-
-
-
-
-
-
-
+<meta property="article:published_time" content="2015-08-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2015-08-30T00:00:00+00:00" />
 
 
 <title>
@@ -81,6 +67,8 @@ create [&#34;sitemap.xml&#34;] $ do route idRoute compile $ do posts &lt;- recen
 
 
 
+
+
 </head>
 
 
@@ -97,6 +85,10 @@ create [&#34;sitemap.xml&#34;] $ do route idRoute compile $ do posts &lt;- recen
             <nav>
                 <ul>
                     
+                        
+                        <li class="nav-home"><a href="/"><span>Home</span></a></li>
+                    
+                        
                         <li class="nav-about"><a href="/about/"><span>About</span></a></li>
                     
                 </ul>
@@ -141,6 +133,8 @@ create [&#34;sitemap.xml&#34;] $ do route idRoute compile $ do posts &lt;- recen
         
 
         
+        
+        
 
         
         </div>
@@ -170,24 +164,24 @@ $for(entries)$
         <span class="nt">&lt;priority&gt;</span>0.8<span class="nt">&lt;/priority&gt;</span>
     <span class="nt">&lt;/url&gt;</span>
 $endfor$
-<span class="nt">&lt;/urlset&gt;</span></code></pre></div>
-<p>Then, using the templates, create a rule which uses all the pages from
+<span class="nt">&lt;/urlset&gt;</span>
+</code></pre></div><p>Then, using the templates, create a rule which uses all the pages from
 the site as entries. Here is what I do:</p>
-<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell">  <span class="nf">create</span> <span class="p">[</span><span class="s">&#34;sitemap.xml&#34;</span><span class="p">]</span> <span class="o">$</span> <span class="kr">do</span>
-         <span class="nf">route</span>   <span class="nf">idRoute</span>
-         <span class="nf">compile</span> <span class="o">$</span> <span class="kr">do</span>
-           <span class="nf">posts</span> <span class="ow">&lt;-</span> <span class="nf">recentFirst</span> <span class="o">=&lt;&lt;</span> <span class="nf">loadAll</span> <span class="s">&#34;posts/*/*&#34;</span>
-           <span class="nf">pages</span> <span class="ow">&lt;-</span> <span class="nf">loadAll</span> <span class="s">&#34;pages/*&#34;</span>
-           <span class="kr">let</span> <span class="nf">allPosts</span> <span class="ow">=</span> <span class="p">(</span><span class="nf">return</span> <span class="p">(</span><span class="nf">pages</span> <span class="o">++</span> <span class="nf">posts</span><span class="p">))</span>
-           <span class="kr">let</span> <span class="nf">sitemapCtx</span> <span class="ow">=</span> <span class="nf">mconcat</span>
-                            <span class="p">[</span> <span class="nf">listField</span> <span class="s">&#34;entries&#34;</span> <span class="nf">pageCtx</span> <span class="nf">allPosts</span>
-                            <span class="p">,</span> <span class="nf">constField</span> <span class="s">&#34;host&#34;</span> <span class="nf">host</span>
-                            <span class="p">,</span> <span class="nf">defaultContext</span>
+<div class="highlight"><pre class="chroma"><code class="language-haskell" data-lang="haskell">  <span class="n">create</span> <span class="p">[</span><span class="s">&#34;sitemap.xml&#34;</span><span class="p">]</span> <span class="o">$</span> <span class="kr">do</span>
+         <span class="n">route</span>   <span class="n">idRoute</span>
+         <span class="n">compile</span> <span class="o">$</span> <span class="kr">do</span>
+           <span class="n">posts</span> <span class="ow">&lt;-</span> <span class="n">recentFirst</span> <span class="o">=&lt;&lt;</span> <span class="n">loadAll</span> <span class="s">&#34;posts/*/*&#34;</span>
+           <span class="n">pages</span> <span class="ow">&lt;-</span> <span class="n">loadAll</span> <span class="s">&#34;pages/*&#34;</span>
+           <span class="kr">let</span> <span class="n">allPosts</span> <span class="ow">=</span> <span class="p">(</span><span class="n">return</span> <span class="p">(</span><span class="n">pages</span> <span class="o">++</span> <span class="n">posts</span><span class="p">))</span>
+           <span class="kr">let</span> <span class="n">sitemapCtx</span> <span class="ow">=</span> <span class="n">mconcat</span>
+                            <span class="p">[</span> <span class="n">listField</span> <span class="s">&#34;entries&#34;</span> <span class="n">pageCtx</span> <span class="n">allPosts</span>
+                            <span class="p">,</span> <span class="n">constField</span> <span class="s">&#34;host&#34;</span> <span class="n">host</span>
+                            <span class="p">,</span> <span class="n">defaultContext</span>
                             <span class="p">]</span>
-           <span class="nf">makeItem</span> <span class="s">&#34;&#34;</span>
-            <span class="o">&gt;&gt;=</span> <span class="nf">loadAndApplyTemplate</span> <span class="s">&#34;templates/sitemap.xml&#34;</span> <span class="nf">sitemapCtx</span>
-            <span class="o">&gt;&gt;=</span> <span class="nf">cleanIndexHtmls</span></code></pre></div>
-<p>This generates <a href="/sitemap.xml">/sitemap.xml</a> which can be submitted to
+           <span class="n">makeItem</span> <span class="s">&#34;&#34;</span>
+            <span class="o">&gt;&gt;=</span> <span class="n">loadAndApplyTemplate</span> <span class="s">&#34;templates/sitemap.xml&#34;</span> <span class="n">sitemapCtx</span>
+            <span class="o">&gt;&gt;=</span> <span class="n">cleanIndexHtmls</span>
+</code></pre></div><p>This generates <a href="/sitemap.xml">/sitemap.xml</a> which can be submitted to
 search engines for indexing.</p>
 
             </div>
@@ -196,12 +190,16 @@ search engines for indexing.</p>
 </section>
 
 
-<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-15806710-5', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-15806710-5', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
-<script async src='//www.google-analytics.com/analytics.js'></script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 
 

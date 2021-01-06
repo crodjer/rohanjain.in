@@ -1,9 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/blog/</loc>
+    <lastmod>2020-04-15T09:22:34+05:30</lastmod>
+  </url>
+  
+  <url>
     <loc>/light/</loc>
+    <lastmod>2020-04-15T09:22:34+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
     <lastmod>2020-04-15T09:22:34+05:30</lastmod>
   </url>
   
@@ -58,6 +68,11 @@
   </url>
   
   <url>
+    <loc>/old/</loc>
+    <lastmod>2015-08-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/hakyll-clean-urls/</loc>
     <lastmod>2015-08-30T00:00:00+00:00</lastmod>
   </url>
@@ -108,42 +123,21 @@
   </url>
   
   <url>
+    <loc>/fixed/</loc>
+    <lastmod>2012-04-01T12:21:25+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</loc>
     <lastmod>2011-08-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/</loc>
-    <lastmod>2020-04-15T09:22:34+05:30</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/fixed/</loc>
-    <lastmod>2012-04-01T12:21:25+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/old/</loc>
-    <lastmod>2015-08-31T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2020-04-15T09:22:34+05:30</lastmod>
-    <priority>0</priority>
   </url>
   
 </urlset>
