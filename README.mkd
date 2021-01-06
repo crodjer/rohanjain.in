@@ -1,7 +1,7 @@
 My tussles with programming.
 
-##Thanks,
+A personal blog built with,
 
-- Hakyll [jaspervd/hakyll](https://github.com/jaspervdj/hakyll)
-- [irneh/workforpizza](https://github.com/irneh/workforpizza) for
-  clean url functionality base.
+- [Hugo](https://gohugo.io/)
+- [Cocoa Theme](https://github.com/nishanths/cocoa-hugo-theme) for
+  Hugo.
