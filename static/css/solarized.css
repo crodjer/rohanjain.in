@@ -33,6 +33,10 @@ section.main .content p .literal {
     background: #ede6d3;
 }
 
+section.main .content .markdown blockquote {
+  border-left: .25rem solid #ede6d3;
+}
+
 @media (prefers-color-scheme: dark) {
   /*
    * Switch to solarized dark
@@ -67,16 +71,20 @@ section.main .content p .literal {
   section.main .content .markdown h6 {
     color: #859900;
   }
-  
+
   section.main .content .markdown code,
   section.main .content .markdown pre,
   section.main .content p .literal {
-    background-color: #174652;
+    background-color: #053440;
   }
 
   section.icons .content img {
     background-color: #fff8e6;
     padding: 2px;
     border-radius: 5px;
+  }
+
+  section.main .content .markdown blockquote {
+    border-left: .25rem solid #053440;
   }
 }
