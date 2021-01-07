@@ -28,13 +28,11 @@ github       = "//github.com/crodjer"
 lang         = "en"
 linkedin     = "//linkedin.com/in/crodjer"
 twitter      = "//twitter.com/__crodjer__"
-forcehttps   = false # use a script to detect whether visitors should be redirected to https
 blogGroupBy  = "year"
 include_rss  = true
 
-gravatar     = "564e7aa79de47cdf3a094da1d4ac13cd"                # do not use in the same time as avatar
-# avatar                 = "img/profile.png" # path to image in static dir e.g img/avatar.png (do not use in the same time as gravatar)
-extraCssFiles = [ "/css/override.css" ] # In your `static` directory, add/remove files as necessary.
+gravatar     = "564e7aa79de47cdf3a094da1d4ac13cd"
+extraCssFiles = [ "/css/solarized.css" ]
 
 [[menu.main]]
 name                   = "Home"

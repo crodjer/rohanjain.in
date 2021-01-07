@@ -1,18 +1,3 @@
-section.main .container .content .post-item {
-    display: flex;
-    list-style: none;
-}
-
-section.main .container .content .post-item .meta {
-    display: block;
-}
-
-section.main .content .front-matter .date,
-section.main .content .front-matter .word-count,
-section.main .content .front-matter .reading-time .middot {
-  display: initial;
-}
-
-section.main .content .markdown code {
-    white-space: pre;
+section.main .content a:visited {
+    color: #004786;
 }
