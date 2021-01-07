@@ -20,19 +20,14 @@ old = ":slug/"
 
 [params]
 author       = "Rohan Jain"
-# cachebuster  = true # add the current unix timestamp in query string for cache busting css assets
 dateForm     = "Jan 2, 2006"
 dateFormFull = "Mon Jan 2 2006 15:04:05 MST"
-description  = "Rohan's personal web blog."
-# email        = "roh@example.space"
+description  = "Rohan's Personal Web Blog."
 faviconFile  = "static/img/favicon.ico"
 github       = "//github.com/crodjer"
-# highlightjs  = true
-# highlightjslanguages = ["rust", "applescript", "haskell"]
 lang         = "en"
 linkedin     = "//linkedin.com/in/crodjer"
 twitter      = "//twitter.com/__crodjer__"
-selfIntro    = "" # appears in the site header when set to a non-empty string
 forcehttps   = false # use a script to detect whether visitors should be redirected to https
 blogGroupBy  = "year"
 include_rss  = true

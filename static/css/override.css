@@ -1,7 +1,3 @@
-nav .nav-blog, nav .nav-code {
-    display: none;
-}
-
 section.main .container .content .post-item {
     display: flex;
     list-style: none;
