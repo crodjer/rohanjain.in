@@ -55,10 +55,6 @@ section.main .content .markdown blockquote {
   a:hover {
     color: #cb4b16;
   }
-  section.main .content .page-heading, section.header .name, h1 {
-    color: #d33682;
-    color: #859900;
-  }
 
   section.main .content .page-heading,
   section.header .name,
