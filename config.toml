@@ -35,6 +35,7 @@ twitter      = "//twitter.com/__crodjer__"
 selfIntro    = "" # appears in the site header when set to a non-empty string
 forcehttps   = false # use a script to detect whether visitors should be redirected to https
 blogGroupBy  = "year"
+include_rss  = true
 
 gravatar     = "564e7aa79de47cdf3a094da1d4ac13cd"                # do not use in the same time as avatar
 # avatar                 = "img/profile.png" # path to image in static dir e.g img/avatar.png (do not use in the same time as gravatar)
