@@ -1,0 +1,82 @@
+/*
+ * Solarized Light
+ */
+html, body, section.main .content {
+  background-color: #fdf6e3;
+}
+a {
+  color: #b58900;
+}
+a:visited {
+  color: #cb4b16;
+}
+a:hover {
+  color: #cb4b16;
+}
+
+section.main .content .page-heading,
+section.header .name,
+section.main .content .markdown h1,
+section.main .content .markdown h2,
+section.main .content .markdown h2,
+section.main .content .markdown h3,
+section.main .content .markdown h4,
+section.main .content .markdown h5,
+section.main .content .markdown h6 {
+  color: #555;
+}
+
+section.main .content .markdown code,
+section.main .content .markdown pre,
+section.main .content p .literal {
+    border-radius: 5px;
+    background: #ede6d3;
+}
+
+@media (prefers-color-scheme: dark) {
+  /*
+   * Switch to solarized dark
+   */
+  html, body, section.main .content {
+    background-color: #073642;
+    background-color: #002b36;
+    color: #839496;
+  }
+  a {
+    color: #b58900;
+  }
+  a:visited {
+    color: #cb4b16;
+  }
+  a:hover {
+    color: #cb4b16;
+  }
+  section.main .content .page-heading, section.header .name, h1 {
+    color: #d33682;
+    color: #859900;
+  }
+
+  section.main .content .page-heading,
+  section.header .name,
+  section.main .content .markdown h1,
+  section.main .content .markdown h2,
+  section.main .content .markdown h2,
+  section.main .content .markdown h3,
+  section.main .content .markdown h4,
+  section.main .content .markdown h5,
+  section.main .content .markdown h6 {
+    color: #859900;
+  }
+  
+  section.main .content .markdown code,
+  section.main .content .markdown pre,
+  section.main .content p .literal {
+    background-color: #174652;
+  }
+
+  section.icons .content img {
+    background-color: #fff8e6;
+    padding: 2px;
+    border-radius: 5px;
+  }
+}
