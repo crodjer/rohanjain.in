@@ -1,125 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Blog on The Perpetual Amature</title>
-    <link>/blog/</link>
-    <description>Recent content in Blog on The Perpetual Amature</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <lastBuildDate>Wed, 15 Apr 2020 09:22:34 +0530</lastBuildDate><atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Some Light in the Background</title>
-      <link>/light/</link>
-      <pubDate>Wed, 15 Apr 2020 09:22:34 +0530</pubDate>
-      
-      <guid>/light/</guid>
-      <description>tl;dr
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog on The Perpetual Amature</title><link>/blog/</link><description>Recent content in Blog on The Perpetual Amature</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><lastBuildDate>Wed, 15 Apr 2020 09:22:34 +0530</lastBuildDate><atom:link href="/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Some Light in the Background</title><link>/light/</link><pubDate>Wed, 15 Apr 2020 09:22:34 +0530</pubDate><guid>/light/</guid><description>tl;dr
 We love dark backgrounds. They are easier on the eyes, comfortable to work with in the night/dark rooms. So, we&amp;rsquo;d like everything that we see on the screen to be dark. And that&amp;rsquo;s the key, everything must be dark.
-Imagine working on the computer with a completely dark environment. Every app configured to be at its darkest. You find the need to look something up on the web. No worries, the search engine supports dark mode, so that&amp;rsquo;s good.</description>
-    </item>
-    
-    <item>
-      <title>Window Management in OSX with Spark</title>
-      <link>/spark/</link>
-      <pubDate>Wed, 06 Dec 2017 12:44:55 +0000</pubDate>
-      
-      <guid>/spark/</guid>
-      <description>I am a big fan of deterministic access to applications windows. That is, to be able to open them without needing any visual feedback from the screen. Tiling window managers do this well. On OSX, this can be tricky.
-For a long time, I used a two windows workflow i.e. all the applications I need should run in just two windows (applications): the browser (mail, slack etc.) or the terminal (emacs, tmux, bash).</description>
-    </item>
-    
-    <item>
-      <title>The Purpose Of It All</title>
-      <link>/42/</link>
-      <pubDate>Wed, 10 May 2017 02:34:01 +0000</pubDate>
-      
-      <guid>/42/</guid>
-      <description>If you have some time, I&amp;rsquo;d recommend reading The Myth of Sysiphus instead.
- The mind is free, with not much to worry about and starts to wander. It lands on the question: &amp;ldquo;What is the meaning of it all?&amp;rdquo;.
+Imagine working on the computer with a completely dark environment. Every app configured to be at its darkest. You find the need to look something up on the web. No worries, the search engine supports dark mode, so that&amp;rsquo;s good.</description></item><item><title>Window Management in OSX with Spark</title><link>/spark/</link><pubDate>Wed, 06 Dec 2017 12:44:55 +0000</pubDate><guid>/spark/</guid><description>I am a big fan of deterministic access to applications windows. That is, to be able to open them without needing any visual feedback from the screen. Tiling window managers do this well. On OSX, this can be tricky.
+For a long time, I used a two windows workflow i.e. all the applications I need should run in just two windows (applications): the browser (mail, slack etc.) or the terminal (emacs, tmux, bash).</description></item><item><title>The Purpose Of It All</title><link>/42/</link><pubDate>Wed, 10 May 2017 02:34:01 +0000</pubDate><guid>/42/</guid><description>If you have some time, I&amp;rsquo;d recommend reading The Myth of Sysiphus instead.
+The mind is free, with not much to worry about and starts to wander. It lands on the question: &amp;ldquo;What is the meaning of it all?&amp;rdquo;.
 Its not difficult to arrive at the answer: &amp;ldquo;There isn&amp;rsquo;t a meaning, really&amp;rdquo;, and sets in an existential crisis.
-But, I&amp;rsquo;d argue that there is a flaw in the question.</description>
-    </item>
-    
-    <item>
-      <title>Dynamic DNS with Cloudflare</title>
-      <link>/cloudflare-ddns/</link>
-      <pubDate>Sat, 18 Mar 2017 05:28:10 +0000</pubDate>
-      
-      <guid>/cloudflare-ddns/</guid>
-      <description>It is hard to maintain a regular internet uptime with home connections. 1/2 router re-connections per week can be fairly common. When that happens, the public IP changes with most ISPs. This can be annoying if you want access your computer remotely (possibly to SSH home). Dynamic DNS is a solution that exists to solve just that.
-I maintain DNS entries for my domain at Clouflare. The latest version of ddclient supports Cloudflare API, which works well with my ArchLinux box.</description>
-    </item>
-    
-    <item>
-      <title>The two windows workflow</title>
-      <link>/two-windows/</link>
-      <pubDate>Mon, 27 Feb 2017 06:15:12 +0000</pubDate>
-      
-      <guid>/two-windows/</guid>
-      <description>I was introduced to OSX for the first time in September, 2015. Coming from a XMonad/Linux based setup, I was accustomed to powerful and fast window management. Most available solutions for OSX did not have these qualities. I tried:
- Amethyst, a window manager with basic XMonad bindings. Just type the application name in Alfred. Initially this was slow, but quickly became habitual. Mjolinr, which is configured in Lua and can actually be quite powerful.</description>
-    </item>
-    
-    <item>
-      <title>Decentralized Twitter</title>
-      <link>/decentralized-twitter/</link>
-      <pubDate>Sat, 11 Feb 2017 15:20:45 +0000</pubDate>
-      
-      <guid>/decentralized-twitter/</guid>
-      <description>As a social network, twitter has a few fairly unique characteristics:
- It forces people to be more creative in trying to express the idea within 140 characters. Ability to control the content that you receive. Stricter filtering is possible based on one&amp;rsquo;s interests. On platforms such as Quora/Facebook, the feed is not deterministic. That&amp;rsquo;s not the case with twitter. You see tweets in order and as they happen. Twitter doesn&amp;rsquo;t try to decide what is important and what is not.</description>
-    </item>
-    
-    <item>
-      <title>Navigating with the first telescope</title>
-      <link>/telescope/</link>
-      <pubDate>Thu, 12 May 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/telescope/</guid>
-      <description>In my previous post, I wrote about my initial experiences with stargazing - primarily to demonstrate that it can be fascinating without fancy equipment. After those initial sessions, I bought a telescope which magnified my experience significantly.
- Stars. Stars everywhere!
- The Telescope The primary purpose of an (astronomical) telescope, unlike popular belief, is not actually magnification. They act as light collectors (think burning a paper with a converging lens and sunlight).</description>
-    </item>
-    
-    <item>
-      <title>Gazing in the night sky</title>
-      <link>/sky/</link>
-      <pubDate>Wed, 04 May 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/sky/</guid>
-      <description>About 6 months ago, I picked up a new hobby: Stargazing. Starting off with just naked eyes, I quickly realized that there is actually quite a lot to see without any optical equipment. Sky Map and Stellarium are incredibly useful applications for a dilettante like me.
-Dark adjustment Before any stargazing session, dark adjustment i.e. dilating the pupils completely to improve night vision, is essential. I turn off all kinds of lights in the house and listen to podcasts for a while (at least 30 minutes).</description>
-    </item>
-    
-    <item>
-      <title>You have infinite email addresses</title>
-      <link>/infi-mail/</link>
-      <pubDate>Sat, 02 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/infi-mail/</guid>
-      <description>tl;dr
+But, I&amp;rsquo;d argue that there is a flaw in the question.</description></item><item><title>Dynamic DNS with Cloudflare</title><link>/cloudflare-ddns/</link><pubDate>Sat, 18 Mar 2017 05:28:10 +0000</pubDate><guid>/cloudflare-ddns/</guid><description>It is hard to maintain a regular internet uptime with home connections. 1/2 router re-connections per week can be fairly common. When that happens, the public IP changes with most ISPs. This can be annoying if you want access your computer remotely (possibly to SSH home). Dynamic DNS is a solution that exists to solve just that.
+I maintain DNS entries for my domain at Clouflare. The latest version of ddclient supports Cloudflare API, which works well with my ArchLinux box.</description></item><item><title>The two windows workflow</title><link>/two-windows/</link><pubDate>Mon, 27 Feb 2017 06:15:12 +0000</pubDate><guid>/two-windows/</guid><description>I was introduced to OSX for the first time in September, 2015. Coming from a XMonad/Linux based setup, I was accustomed to powerful and fast window management. Most available solutions for OSX did not have these qualities. I tried:
+Amethyst, a window manager with basic XMonad bindings. Just type the application name in Alfred. Initially this was slow, but quickly became habitual. Mjolinr, which is configured in Lua and can actually be quite powerful.</description></item><item><title>Decentralized Twitter</title><link>/decentralized-twitter/</link><pubDate>Sat, 11 Feb 2017 15:20:45 +0000</pubDate><guid>/decentralized-twitter/</guid><description>As a social network, twitter has a few fairly unique characteristics:
+It forces people to be more creative in trying to express the idea within 140 characters. Ability to control the content that you receive. Stricter filtering is possible based on one&amp;rsquo;s interests. On platforms such as Quora/Facebook, the feed is not deterministic. That&amp;rsquo;s not the case with twitter. You see tweets in order and as they happen. Twitter doesn&amp;rsquo;t try to decide what is important and what is not.</description></item><item><title>Navigating with the first telescope</title><link>/telescope/</link><pubDate>Thu, 12 May 2016 00:00:00 +0000</pubDate><guid>/telescope/</guid><description>In my previous post, I wrote about my initial experiences with stargazing - primarily to demonstrate that it can be fascinating without fancy equipment. After those initial sessions, I bought a telescope which magnified my experience significantly.
+Stars. Stars everywhere!
+The Telescope The primary purpose of an (astronomical) telescope, unlike popular belief, is not actually magnification. They act as light collectors (think burning a paper with a converging lens and sunlight).</description></item><item><title>Gazing in the night sky</title><link>/sky/</link><pubDate>Wed, 04 May 2016 00:00:00 +0000</pubDate><guid>/sky/</guid><description>About 6 months ago, I picked up a new hobby: Stargazing. Starting off with just naked eyes, I quickly realized that there is actually quite a lot to see without any optical equipment. Sky Map and Stellarium are incredibly useful applications for a dilettante like me.
+Dark adjustment Before any stargazing session, dark adjustment i.e. dilating the pupils completely to improve night vision, is essential. I turn off all kinds of lights in the house and listen to podcasts for a while (at least 30 minutes).</description></item><item><title>You have infinite email addresses</title><link>/infi-mail/</link><pubDate>Sat, 02 Apr 2016 00:00:00 +0000</pubDate><guid>/infi-mail/</guid><description>tl;dr
 You can add arbitrary tags to your email address. Any email sent to your-email+tag@your-provider.ext will land in the inbox for your-email@your-provider.ext.
- Emails are important. They are your identity on the web. Just like on phone, you&amp;rsquo;d want to control who can contact you via email. This warrants caution in signing up at places on the internet. It can be unsafe to register with the personal email address on new services for multiple reasons:</description>
-    </item>
-    
-    <item>
-      <title>Switch between networks based on availability</title>
-      <link>/route-to/</link>
-      <pubDate>Wed, 19 Aug 2015 00:00:00 +0000</pubDate>
-      
-      <guid>/route-to/</guid>
-      <description>Having been blessed with an unreliable internet, I always have had the need to change the default route when one goes down. ip provides you the required tooling to do that. I had been doing it so often, that I ended up writing a function to do this:
-route_to () { interface=$1 route=$(ip route | grep $interface | sed -r &amp;#39;s/\.0\/[[:digit:]]{2,3} /.1 /&amp;#39; | cut -d &amp;#39; &amp;#39; -f -4) if [ -n &amp;#34;$route&amp;#34; ]; then sudo ip route del default &amp;amp;&amp;gt; /dev/null sudo ip route replace default via $route else echo &amp;#34;No routes match: $interface&amp;#34; &amp;gt;&amp;amp;2 fi } With this in available in my shell, I can simply do route_to wlan0 and my system will start using wlan0 as the default interface.</description>
-    </item>
-    
-    <item>
-      <title>VNC over reverse SSH</title>
-      <link>/vnc/</link>
-      <pubDate>Sun, 10 May 2015 00:00:00 +0000</pubDate>
-      
-      <guid>/vnc/</guid>
-      <description>About a year ago, I switched my parents computer (lets call it P) from the pre-installed OS (Windows) to Ubuntu. The primary reason for this switch was it hard for me to debug and fix issues. Things have been smooth after the switch with no issues which I found hard to fix remotely. What specially has worked is my ability to log in to the computer when its on through my VPS and service it.</description>
-    </item>
-    
-  </channel>
-</rss>
+Emails are important. They are your identity on the web. Just like on phone, you&amp;rsquo;d want to control who can contact you via email. This warrants caution in signing up at places on the internet. It can be unsafe to register with the personal email address on new services for multiple reasons:</description></item><item><title>Switch between networks based on availability</title><link>/route-to/</link><pubDate>Wed, 19 Aug 2015 00:00:00 +0000</pubDate><guid>/route-to/</guid><description>Having been blessed with an unreliable internet, I always have had the need to change the default route when one goes down. ip provides you the required tooling to do that. I had been doing it so often, that I ended up writing a function to do this:
+route_to () { interface=$1 route=$(ip route | grep $interface | sed -r &amp;#39;s/\.0\/[[:digit:]]{2,3} /.1 /&amp;#39; | cut -d &amp;#39; &amp;#39; -f -4) if [ -n &amp;#34;$route&amp;#34; ]; then sudo ip route del default &amp;amp;&amp;gt; /dev/null sudo ip route replace default via $route else echo &amp;#34;No routes match: $interface&amp;#34; &amp;gt;&amp;amp;2 fi } With this in available in my shell, I can simply do route_to wlan0 and my system will start using wlan0 as the default interface.</description></item><item><title>VNC over reverse SSH</title><link>/vnc/</link><pubDate>Sun, 10 May 2015 00:00:00 +0000</pubDate><guid>/vnc/</guid><description>About a year ago, I switched my parents computer (lets call it P) from the pre-installed OS (Windows) to Ubuntu. The primary reason for this switch was it hard for me to debug and fix issues. Things have been smooth after the switch with no issues which I found hard to fix remotely. What specially has worked is my ability to log in to the computer when its on through my VPS and service it.</description></item></channel></rss>

@@ -1,213 +1,28 @@
-<!DOCTYPE html>
-<html lang="en-US">
-
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-<meta name="author" content="Rohan Jain">
-<meta name="description" content="Nothing makes a terminal feel more like home as one&rsquo;s own shell configuration. My shell is bash, configured through a .bashrc and .profile. Bash is likely to be present in any Unix machine one uses.
-Bash is also my primary IDE. This allows for keeping a relatively simple set of utilities and tools to internalize. Coupled with a reliable window manager, workflows can be quickly scripted in the head. Shell scripts are an option as well for more complex flows.">
-
-<meta property="og:title" content="The ubiquitous shell" />
-<meta property="og:description" content="Nothing makes a terminal feel more like home as one&rsquo;s own shell configuration. My shell is bash, configured through a .bashrc and .profile. Bash is likely to be present in any Unix machine one uses.
-Bash is also my primary IDE. This allows for keeping a relatively simple set of utilities and tools to internalize. Coupled with a reliable window manager, workflows can be quickly scripted in the head. Shell scripts are an option as well for more complex flows." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="/bash/" />
-<meta property="article:published_time" content="2015-03-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2015-03-05T00:00:00+00:00" />
-
-
-<title>
-
-
-     The ubiquitous shell 
-
-</title>
-<link rel="canonical" href="/bash/">
-
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
-
-
-
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/pygments.css">
-    <link rel="stylesheet" href="/css/main.css">
-    
-        <link rel="stylesheet" href="/css/override.css">
-    
-
-
-
-
-<link rel="shortcut icon"
-
-    href="/static/img/favicon.ico"
-
->
-
-
-
-
-
-
-
-
-
-
-</head>
-
-
-<body lang="en">
-
-<section class="header">
-    <div class="container">
-        <div class="content">
-            
-            <a href="/"><img class="avatar" src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" rcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
-            
-            <a href="/"><div class="name">Rohan Jain</div></a>
-            
-            <nav>
-                <ul>
-                    
-                        
-                        <li class="nav-home"><a href="/"><span>Home</span></a></li>
-                    
-                        
-                        <li class="nav-about"><a href="/about/"><span>About</span></a></li>
-                    
-                </ul>
-            </nav>
-        </div>
-    </div>
-</section>
-
-<section class="icons">
-    <div class="container">
-        <div class="content">
-        
-            <a href="//github.com/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/github.svg" alt="github" /></a>
-        
-
-        
-
-        
-            <a href="//twitter.com/__crodjer__" target="_blank" rel="noopener"><img class="icon" src="/img/twitter.svg" alt="twitter" /></a>
-        
-
-	
-
-        
-
-        
-
-        
-            <a href="//linkedin.com/in/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/linkedin.svg" alt="linkedin" /></a>
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-        
-        
-
-        
-        </div>
-    </div>
-</section>
-
-<section class="main">
-    <div class="container">
-        <div class="content">
-            <div class="page-heading">
-
-    The ubiquitous shell
-
-</div>
-
-            <div class="markdown">
-                <p>Nothing makes a terminal feel more like home as one&rsquo;s own shell
-configuration. My shell is bash, configured through a <a href="https://github.com/crodjer/configs/blob/master/.bashrc">.bashrc</a> and
-<a href="https://github.com/crodjer/configs/blob/master/.profile">.profile</a>. Bash is likely to be present in any Unix machine one
-uses.</p>
-<p>Bash is also my primary IDE. This allows for keeping a relatively simple set of
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="Nothing makes a terminal feel more like home as one&rsquo;s own shell configuration. My shell is bash, configured through a .bashrc and .profile. Bash is likely to be present in any Unix machine one uses.
+Bash is also my primary IDE. This allows for keeping a relatively simple set of utilities and tools to internalize. Coupled with a reliable window manager, workflows can be quickly scripted in the head. Shell scripts are an option as well for more complex flows."><meta property="og:title" content="The ubiquitous shell"><meta property="og:description" content="Nothing makes a terminal feel more like home as one&rsquo;s own shell configuration. My shell is bash, configured through a .bashrc and .profile. Bash is likely to be present in any Unix machine one uses.
+Bash is also my primary IDE. This allows for keeping a relatively simple set of utilities and tools to internalize. Coupled with a reliable window manager, workflows can be quickly scripted in the head. Shell scripts are an option as well for more complex flows."><meta property="og:type" content="article"><meta property="og:url" content="/bash/"><meta property="article:published_time" content="2015-03-05T00:00:00+00:00"><meta property="article:modified_time" content="2015-03-05T00:00:00+00:00"><title>The ubiquitous shell</title><link rel=canonical href=/bash/><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500"><link rel=stylesheet href=/css/reset.css><link rel=stylesheet href=/css/pygments.css><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/css/override.css><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><section class=header><div class=container><div class=content><a href=/><img class=avatar src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" rcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
+<a href=/><div class=name>Rohan Jain</div></a><nav><ul><li class=nav-home><a href=/><span>Home</span></a></li><li class=nav-about><a href=/about/><span>About</span></a></li></ul></nav></div></div></section><section class=icons><div class=container><div class=content><a href=//github.com/crodjer target=_blank rel=noopener><img class=icon src=/img/github.svg alt=github></a>
+<a href=//twitter.com/__crodjer__ target=_blank rel=noopener><img class=icon src=/img/twitter.svg alt=twitter></a>
+<a href=//linkedin.com/in/crodjer target=_blank rel=noopener><img class=icon src=/img/linkedin.svg alt=linkedin></a></div></div></section><section class=main><div class=container><div class=content><div class=page-heading>The ubiquitous shell</div><div class=markdown><p>Nothing makes a terminal feel more like home as one&rsquo;s own shell
+configuration. My shell is bash, configured through a <a href=https://github.com/crodjer/configs/blob/master/.bashrc>.bashrc</a> and
+<a href=https://github.com/crodjer/configs/blob/master/.profile>.profile</a>. Bash is likely to be present in any Unix machine one
+uses.</p><p>Bash is also my primary IDE. This allows for keeping a relatively simple set of
 utilities and tools to internalize. Coupled with a reliable window manager,
 workflows can be quickly scripted in the head. Shell scripts are an option as
 well for more complex flows. This can be done at multiple levels: using uniquely
-identifiable comments in commands , bash functions, complete bash script.</p>
-<p>Apart from the standard utilities (sed, cut, cat, tr etc.), I use a few tools as
-an aid:</p>
-<ul>
-<li><strong><a href="https://github.com/ggreer/the_silver_searcher">ag</a></strong> for amazingly fast lookup in files.</li>
-<li><strong><a href="https://wiki.archlinux.org/index.php/rsync">rsync</a></strong>, to keep the files synchronized with remote servers.</li>
-<li><strong><a href="https://github.com/ggreer/the_silver_searcher">entr</a></strong> to run build/test commands on a file change. Or, with
-rsync, synchronize on modifications.</li>
-<li><strong><a href="https://www.archlinux.org/packages/community/any/autojump/">autojump</a></strong> to jump directly to frequently used directories.</li>
-<li><strong><a href="https://stedolan.github.io/jq/">jq</a></strong> to process JSON output of a command.</li>
-</ul>
-<p>Tools are designed for the console first, and then bound to editors or
+identifiable comments in commands , bash functions, complete bash script.</p><p>Apart from the standard utilities (sed, cut, cat, tr etc.), I use a few tools as
+an aid:</p><ul><li><strong><a href=https://github.com/ggreer/the_silver_searcher>ag</a></strong> for amazingly fast lookup in files.</li><li><strong><a href=https://wiki.archlinux.org/index.php/rsync>rsync</a></strong>, to keep the files synchronized with remote servers.</li><li><strong><a href=https://github.com/ggreer/the_silver_searcher>entr</a></strong> to run build/test commands on a file change. Or, with
+rsync, synchronize on modifications.</li><li><strong><a href=https://www.archlinux.org/packages/community/any/autojump/>autojump</a></strong> to jump directly to frequently used directories.</li><li><strong><a href=https://stedolan.github.io/jq/>jq</a></strong> to process JSON output of a command.</li></ul><p>Tools are designed for the console first, and then bound to editors or
 IDEs. Familiarizing oneself to the command line interface makes the maximum
-amount of functionality accessible. For example, <a href="https://github.com/magit/magit">magit</a> is a powerful git
+amount of functionality accessible. For example, <a href=https://github.com/magit/magit>magit</a> is a powerful git
 interface for Emacs, but can be limiting for complex git operations such as an
-interactive rebase.</p>
-<p>Composibility of the various commands can be useful as well, allowing one to
+interactive rebase.</p><p>Composibility of the various commands can be useful as well, allowing one to
 build complex, repeatable commands. For example, the following uses <code>ip</code> to
-change a system&rsquo;s default route, given the interface:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">ip route del default <span class="p">&amp;</span>&gt; /dev/null
-ip route replace default via <span class="k">$(</span>ip route
-     <span class="p">|</span> grep ppp0 <span class="c1"># Change this filter as per need.</span>
-     <span class="p">|</span> sed -r <span class="s1">&#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39;</span>
-     <span class="p">|</span> cut -d <span class="s1">&#39; &#39;</span> -f -4<span class="k">)</span>
+change a system&rsquo;s default route, given the interface:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>ip route del default <span class=p>&amp;</span>&gt; /dev/null
+ip route replace default via <span class=k>$(</span>ip route
+     <span class=p>|</span> grep ppp0 <span class=c1># Change this filter as per need.</span>
+     <span class=p>|</span> sed -r <span class=s1>&#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39;</span>
+     <span class=p>|</span> cut -d <span class=s1>&#39; &#39;</span> -f -4<span class=k>)</span>
 </code></pre></div><p>A great piece of literature on the Unix Philosophy is
-<a href="http://amzn.to/1qFlKCz">The Art of Unix Programming</a> by Eric S. Raymond. It also talks about the
-Unix interface design.</p>
-
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-15806710-5', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
-</body>
-</html>
-
+<a href=http://amzn.to/1qFlKCz>The Art of Unix Programming</a> by Eric S. Raymond. It also talks about the
+Unix interface design.</p></div></div></div></section><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-15806710-5','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>

@@ -1,170 +1,18 @@
-<!DOCTYPE html>
-<html lang="en-US">
-
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-<meta name="author" content="Rohan Jain">
-<meta name="description" content="You can find lot of posts on the internet which try to tell you how to improve the ways in which Vim is used. Well, here is another one.
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="You can find lot of posts on the internet which try to tell you how to improve the ways in which Vim is used. Well, here is another one.
 #Vim Server, ZSH and Tiles
-A Vim instance behaves as a server in which files can be opened through remote applications. Read :help client-server of Vim to know more about this. I generally keep multiple Vim sessions running, described by task they are related to.">
-
-<meta property="og:title" content="A productive workflow with vim sessions and servers" />
-<meta property="og:description" content="You can find lot of posts on the internet which try to tell you how to improve the ways in which Vim is used. Well, here is another one.
+A Vim instance behaves as a server in which files can be opened through remote applications. Read :help client-server of Vim to know more about this. I generally keep multiple Vim sessions running, described by task they are related to."><meta property="og:title" content="A productive workflow with vim sessions and servers"><meta property="og:description" content="You can find lot of posts on the internet which try to tell you how to improve the ways in which Vim is used. Well, here is another one.
 #Vim Server, ZSH and Tiles
-A Vim instance behaves as a server in which files can be opened through remote applications. Read :help client-server of Vim to know more about this. I generally keep multiple Vim sessions running, described by task they are related to." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="/yet-another-vim-productivity-post-server-client/" />
-<meta property="article:published_time" content="2012-04-15T00:00:00+00:00" />
-<meta property="article:modified_time" content="2012-04-15T00:00:00+00:00" />
-
-
-<title>
-
-
-     A productive workflow with vim sessions and servers 
-
-</title>
-<link rel="canonical" href="/yet-another-vim-productivity-post-server-client/">
-
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
-
-
-
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/pygments.css">
-    <link rel="stylesheet" href="/css/main.css">
-    
-        <link rel="stylesheet" href="/css/override.css">
-    
-
-
-
-
-<link rel="shortcut icon"
-
-    href="/static/img/favicon.ico"
-
->
-
-
-
-
-
-
-
-
-
-
-</head>
-
-
-<body lang="en">
-
-<section class="header">
-    <div class="container">
-        <div class="content">
-            
-            <a href="/"><img class="avatar" src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" rcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
-            
-            <a href="/"><div class="name">Rohan Jain</div></a>
-            
-            <nav>
-                <ul>
-                    
-                        
-                        <li class="nav-home"><a href="/"><span>Home</span></a></li>
-                    
-                        
-                        <li class="nav-about"><a href="/about/"><span>About</span></a></li>
-                    
-                </ul>
-            </nav>
-        </div>
-    </div>
-</section>
-
-<section class="icons">
-    <div class="container">
-        <div class="content">
-        
-            <a href="//github.com/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/github.svg" alt="github" /></a>
-        
-
-        
-
-        
-            <a href="//twitter.com/__crodjer__" target="_blank" rel="noopener"><img class="icon" src="/img/twitter.svg" alt="twitter" /></a>
-        
-
-	
-
-        
-
-        
-
-        
-            <a href="//linkedin.com/in/crodjer" target="_blank" rel="noopener"><img class="icon" src="/img/linkedin.svg" alt="linkedin" /></a>
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-        
-        
-
-        
-        </div>
-    </div>
-</section>
-
-<section class="main">
-    <div class="container">
-        <div class="content">
-            <div class="page-heading">
-
-    A productive workflow with vim sessions and servers
-
-</div>
-
-            <div class="markdown">
-                <p>You can find lot of posts on the internet which try to tell you how to improve
-the ways in which Vim is used. Well, here is another one.</p>
-<p>#Vim Server, ZSH and Tiles</p>
-<p>A Vim instance behaves as a server in which files can be opened through remote
+A Vim instance behaves as a server in which files can be opened through remote applications. Read :help client-server of Vim to know more about this. I generally keep multiple Vim sessions running, described by task they are related to."><meta property="og:type" content="article"><meta property="og:url" content="/yet-another-vim-productivity-post-server-client/"><meta property="article:published_time" content="2012-04-15T00:00:00+00:00"><meta property="article:modified_time" content="2012-04-15T00:00:00+00:00"><title>A productive workflow with vim sessions and servers</title><link rel=canonical href=/yet-another-vim-productivity-post-server-client/><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500"><link rel=stylesheet href=/css/reset.css><link rel=stylesheet href=/css/pygments.css><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/css/override.css><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><section class=header><div class=container><div class=content><a href=/><img class=avatar src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" rcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
+<a href=/><div class=name>Rohan Jain</div></a><nav><ul><li class=nav-home><a href=/><span>Home</span></a></li><li class=nav-about><a href=/about/><span>About</span></a></li></ul></nav></div></div></section><section class=icons><div class=container><div class=content><a href=//github.com/crodjer target=_blank rel=noopener><img class=icon src=/img/github.svg alt=github></a>
+<a href=//twitter.com/__crodjer__ target=_blank rel=noopener><img class=icon src=/img/twitter.svg alt=twitter></a>
+<a href=//linkedin.com/in/crodjer target=_blank rel=noopener><img class=icon src=/img/linkedin.svg alt=linkedin></a></div></div></section><section class=main><div class=container><div class=content><div class=page-heading>A productive workflow with vim sessions and servers</div><div class=markdown><p>You can find lot of posts on the internet which try to tell you how to improve
+the ways in which Vim is used. Well, here is another one.</p><p>#Vim Server, ZSH and Tiles</p><p>A Vim instance behaves as a server in which files can be opened through remote
 applications. Read <code>:help client-server</code> of Vim to know more about this. I
 generally keep multiple Vim sessions running, described by task they are related
-to.</p>
-<p>A typical workspace has one instance of Vim running and multiple terminals
-around it.  Lets call this workspace for project <em>foo</em>. So the name of Vim
-instance server will be <em>foo</em>:</p>
-<pre><code>vim --servername foo
-</code></pre>
-<p>And any file will be open in this server, using this command:</p>
-<pre><code>vim --servername foo --remote-silent bar.hs
+to.</p><p>A typical workspace has one instance of Vim running and multiple terminals
+around it. Lets call this workspace for project <em>foo</em>. So the name of Vim
+instance server will be <em>foo</em>:</p><pre><code>vim --servername foo
+</code></pre><p>And any file will be open in this server, using this command:</p><pre><code>vim --servername foo --remote-silent bar.hs
 
 
 +-----------------------+
@@ -177,73 +25,29 @@ instance server will be <em>foo</em>:</p>
 |           |~$         |
 |           |           |
 +-----------------------+
-</code></pre>
-<p>How this helps:</p>
-<ul>
-<li>
-<p>Lets me keep a well defined separation on various projects I am working on.
-The list of files in the buffer per instance remains short and manageable.</p>
-</li>
-<li>
-<p>Also each instance can have its own project specific environment - current
-directory, python virtual environments etc.</p>
-</li>
-</ul>
-<p>For easing all this up, I use a set of helper functions in my <em>zshrc</em>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Set the name of vim session the terminal is tied up to</span>
-eset<span class="o">(){</span>
-    <span class="nb">export</span> <span class="nv">VI_SERVER</span><span class="o">=</span><span class="nv">$1</span>
-<span class="o">}</span>
+</code></pre><p>How this helps:</p><ul><li><p>Lets me keep a well defined separation on various projects I am working on.
+The list of files in the buffer per instance remains short and manageable.</p></li><li><p>Also each instance can have its own project specific environment - current
+directory, python virtual environments etc.</p></li></ul><p>For easing all this up, I use a set of helper functions in my <em>zshrc</em>:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash><span class=c1># Set the name of vim session the terminal is tied up to</span>
+eset<span class=o>(){</span>
+    <span class=nb>export</span> <span class=nv>VI_SERVER</span><span class=o>=</span><span class=nv>$1</span>
+<span class=o>}</span>
 
-<span class="c1"># Fire up a new server according to the argument supplied</span>
-vs<span class="o">(){</span>
-    eset <span class="nv">$1</span>
-    vim --servername <span class="nv">$VI_SERVER</span>
-<span class="o">}</span>
+<span class=c1># Fire up a new server according to the argument supplied</span>
+vs<span class=o>(){</span>
+    eset <span class=nv>$1</span>
+    vim --servername <span class=nv>$VI_SERVER</span>
+<span class=o>}</span>
 
-<span class="c1"># Open up the files in the environment Vim server.</span>
-es<span class="o">(){</span>
-    vim --servername <span class="nv">$VI_SERVER</span> --remote-silent <span class="nv">$*</span>
-<span class="o">}</span>
+<span class=c1># Open up the files in the environment Vim server.</span>
+es<span class=o>(){</span>
+    vim --servername <span class=nv>$VI_SERVER</span> --remote-silent <span class=nv>$*</span>
+<span class=o>}</span>
 
-<span class="c1"># Reuse Vim ZSH completions for vim completions</span>
+<span class=c1># Reuse Vim ZSH completions for vim completions</span>
 compdef _vim es
 
-</code></pre></div><p>#Vim Sessions</p>
-<p>Having multiple instances is great, but I don&rsquo;t want to set each up every time I
+</code></pre></div><p>#Vim Sessions</p><p>Having multiple instances is great, but I don&rsquo;t want to set each up every time I
 need resume working. For this I use <em>Vim Sessions</em>, which allow the current Vim
-state to be stored over the disk.</p>
-<p><a href="https://github.com/xolox/vim-session">vim-session</a> plugin will help you manage sessions easily. It is
-well integrated with Vim client-server.</p>
-<p>From docs:</p>
-<blockquote>
-<p>When you start Vim with a custom server name that matches one of the existing
-session names then the matching session will be automatically restored.</p>
-</blockquote>
-
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-15806710-5', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-
-
-
-
-
-
-</body>
-</html>
-
+state to be stored over the disk.</p><p><a href=https://github.com/xolox/vim-session>vim-session</a> plugin will help you manage sessions easily. It is
+well integrated with Vim client-server.</p><p>From docs:</p><blockquote><p>When you start Vim with a custom server name that matches one of the existing
+session names then the matching session will be automatically restored.</p></blockquote></div></div></div></section><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-15806710-5','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>
