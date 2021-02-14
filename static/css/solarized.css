@@ -28,13 +28,20 @@ section.main .content .markdown h6 {
 
 section.main .content .markdown code,
 section.main .content .markdown pre,
-section.main .content p .literal {
+section.main .content p .literal,
+section.main .content .markdown tbody tr:nth-child(2n+1) td,
+section.main .content .markdown tbody tr:nth-child(2n+1) th {
     border-radius: 5px;
     background: #ede6d3;
 }
 
 section.main .content .markdown blockquote {
   border-left: .25rem solid #ede6d3;
+}
+
+section.main .content .markdown td,
+section.main .content .markdown th {
+    border: 1px solid #999;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -70,7 +77,9 @@ section.main .content .markdown blockquote {
 
   section.main .content .markdown code,
   section.main .content .markdown pre,
-  section.main .content p .literal {
+  section.main .content p .literal,
+  section.main .content .markdown tbody tr:nth-child(2n+1) td,
+  section.main .content .markdown tbody tr:nth-child(2n+1) th {
     background-color: #053440;
   }
 
