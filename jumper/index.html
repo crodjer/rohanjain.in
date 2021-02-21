@@ -6,7 +6,7 @@
 <a href=//linkedin.com/in/crodjer target=_blank rel=noopener><img class=icon src=/img/linkedin.svg alt=linkedin></a></div></div></section><section class="main post non-narrow zero-top-spacing"><div class=container><div class=content><div class=front-matter><div class=title-container><div class=page-heading>Hopping across the country with WireGuard</div><div class=initials><a href=/></a></div></div><div class=meta><div class=date title="Sun Feb 21 2021 19:11:38 +0530">Feb 21, 2021</div><div class=reading-time><div class=middot></div>2 minutes read</div></div></div><div class=markdown><p>I need to be able to access all the computers over the
 internet as they are spread across the country:</p><ul><li><code>descartes</code>: My dad&rsquo;s Debian desktop (1800 km away).</li><li><code>kant</code>: RPi 3 running Arch (a NAS, printer, a wormhole).</li><li><code>camus</code>: RPi 4 running Manjaro (my personal work machine).</li><li><code>nietzsche</code>: My wife&rsquo;s Manjaro notebook.</li><li>Phones: <code>newton</code>, <code>feyman</code>, <code>einstine</code> and <code>sagan</code>.</li><li><code>kepler</code>: a tiny Debian on Google Cloud.</li><li><code>webb</code>: a tiny Ubuntu Server on Oracle Cloud.</li></ul><blockquote><p>All the computers actually have different astronomy inspired names.</p></blockquote><p>Additionally, I found my lost RPi 2 hidden in a bag&rsquo;s pocket, so it&rsquo;ll
 also find a place among all the others (likely a second wormhole at
-my parent&rsquo;s).</p><p>For a long time, I was using <a href=/vnc/>reverse SSH based tunnels</a>, which
+my parens').</p><p>For a long time, I was using <a href=/vnc/>reverse SSH based tunnels</a>, which
 worked reliably, but was slow (a US based VM) and not the cleanest. I
 couldn&rsquo;t easily add machines and each machine would need to SSH in
 opening a reverse SSH tunnel which I&rsquo;d need to note somewhere.</p><p>For the last year or so though, I have been using
@@ -18,9 +18,9 @@ WireGuard is surprisingly simple to setup and works reliably. There
 are multiple guides on how to set it up (hence I didn&rsquo;t yet another),
 like <a href=https://wiki.debian.org/SimplePrivateTunnelVPNWithWireGuard>this one</a>.
 The way to administor it is a bit more involved than ZeroTier, but
-once setup, it works transparently. Interestingly, The hop latency
+once setup, it works transparently. Interestingly, the hop latency
 doesn&rsquo;t take much of a hit because the cloud VM sits near the line
-connecting me and my parents.</p><p>I am happy with the setup now with ZeroTier and WireGuard serving as
+connecting me and my parents'.</p><p>I am happy with the setup now with ZeroTier and WireGuard serving as
 each other&rsquo;s redundancy.</p><p>Interestingly, the VPNs aren&rsquo;t even the primary network tool that I
 use. All these devices share most of their data with each other via
 <a href=https://syncthing.net/>syncthing</a>. Syncthing is an awesome piece of technology allowing
