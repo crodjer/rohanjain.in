@@ -9,15 +9,15 @@
 also find a place among all the others (likely a second <code>wormhole</code> at
 my dad&rsquo;s). This makes it a need for me to be able to access all the
 computers over the internet.</p><p>For a long time, I was using <a href=/vnc/>reverse SSH based tunnels</a>, which
-would actually work reliably, but was slow. For the last year or so
-though, I have been using <a href=https://www.zerotier.com/>ZeroTier</a> which
+would actually work reliably, but was slow (a US based VM). For the
+last year or so though, I have been using <a href=https://www.zerotier.com/>ZeroTier</a> which
 works amazingly well. It being peer-to-peer, it is very low latency.
 But I cannot rely it to be forever around for me to use, hence the
 reverse SSH tunnel was a redundancy.</p><p>That is, until now. I finally got around to setup a WireGuard server
 providing me a VPN that I control. WireGuard is surprisingly simple to
 setup and works reliably. There are multiple guides on how to set it
-up (hence I didn&rsquo;t decide to write yet another), like <a href=https://wiki.debian.org/SimplePrivateTunnelVPNWithWireGuard>this one</a>.
-Even latency doesn&rsquo;t take much of a hit because the cloud VM sits
+up (hence I didn&rsquo;t yet another), like <a href=https://wiki.debian.org/SimplePrivateTunnelVPNWithWireGuard>this one</a>.
+The hop latency doesn&rsquo;t take much of a hit because the cloud VM sits
 near the line connecting me and my parents.</p><p>I still use ZeroTier for most work, but I have a piece of mind that
 I&rsquo;ll certainly have a way to service my dad&rsquo;s computer if ZeroTier or
 GCP suddenly decide to vanish.</p><p>All these devices also share data with each other via <a href=https://syncthing.net/>syncthing</a>.
