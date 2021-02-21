@@ -10,7 +10,6 @@ title               = "The Perpetual Amature"
 pygmentsUseClasses  = true
 pygmentsCodeFences  = true
 pluralizeListTitles = false
-googleAnalytics     = "UA-15806710-5"
 theme               = "cocoa"
 
 [permalinks]
