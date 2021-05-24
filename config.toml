@@ -1,5 +1,5 @@
 baseurl             = "/"
-buildDrafts         = true
+buildDrafts         = false
 canonifyUrls        = true
 contentDir          = "content"
 languageCode        = "en-US"
