@@ -1,0 +1,118 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="Compiling rust is slow, specially on low power devices such as a Raspberry Pi. I build all my rust utilities with my RPi 4 and sync to the rest with syncthing. That was true for my project, sysit, as well. I use sysit on all my systems to keep tabs on the resource usage.
+Inspired from how skim utilizes cross compilation to build binaries directly using Github workflows, I incorporated a similar flow in sysit."><meta property="og:title" content="Cross Compiling Rust Binaries with Github Actions"><meta property="og:description" content="Compiling rust is slow, specially on low power devices such as a Raspberry Pi. I build all my rust utilities with my RPi 4 and sync to the rest with syncthing. That was true for my project, sysit, as well. I use sysit on all my systems to keep tabs on the resource usage.
+Inspired from how skim utilizes cross compilation to build binaries directly using Github workflows, I incorporated a similar flow in sysit."><meta property="og:type" content="article"><meta property="og:url" content="/cargo-cross/"><meta property="article:published_time" content="2021-06-27T16:50:00+05:30"><meta property="article:modified_time" content="2021-06-27T16:50:00+05:30"><title>Cross Compiling Rust Binaries with Github Actions</title><link rel=canonical href=/cargo-cross/><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500"><link rel=stylesheet href=/css/reset.css><link rel=stylesheet href=/css/pygments.css><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/css/solarized.css><link rel=stylesheet href=/css/override.css><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><section class=header><div class=container><div class=content><a href=/><img class=avatar src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" rcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
+<a href=/><div class=name>Rohan Jain</div></a><nav><ul><li class=nav-home><a href=/><span>Home</span></a></li><li class=nav-about><a href=/about/><span>About</span></a></li></ul></nav></div></div></section><section class=icons><div class=container><div class=content><a href=//github.com/crodjer target=_blank rel=noopener><img class=icon src=/img/github.svg alt=github></a>
+<a href=//twitter.com/__crodjer__ target=_blank rel=noopener><img class=icon src=/img/twitter.svg alt=twitter></a>
+<a href=//linkedin.com/in/crodjer target=_blank rel=noopener><img class=icon src=/img/linkedin.svg alt=linkedin></a></div></div></section><section class="main post non-narrow zero-top-spacing"><div class=container><div class=content><div class=front-matter><div class=title-container><div class=page-heading>Cross Compiling Rust Binaries with Github Actions</div><div class=initials><a href=/></a></div></div><div class=meta><div class=date title="Sun Jun 27 2021 16:50:00 +0530">Jun 27, 2021</div><div class=reading-time><div class=middot></div>3 minutes read</div></div></div><div class=markdown><p>Compiling <em>rust</em> is slow, specially on low power devices such as a
+<em>Raspberry Pi</em>. I build all my rust utilities with my RPi 4 and sync to
+the rest with <a href=https://syncthing.net/>syncthing</a>. That was true for
+my project, <a href=https://github.com/crodjer/sysit><strong>sysit</strong></a>, as well. I
+use sysit on all my systems to keep tabs on the resource usage.</p><p>Inspired from how <a href=https://github.com/lotabout/skim/blob/master/.github/workflows/publish-github.yml>skim</a>
+utilizes cross compilation to build binaries directly using Github
+workflows, I incorporated a similar flow in sysit.</p><h2 id=the-githu-workflow>The Githu Workflow</h2><p>The <a href=https://github.com/crodjer/sysit/blob/v0.4.0/.github/workflows/release.yml#L39>workflow</a>
+to publish binaries does the following:</p><ol><li>Install the rust toolchain.</li><li>Build a release binary.</li><li>Add the binary as a release asset.</li></ol><h3 id=install-and-build-x86-64>Install and Build: x86-64</h3><p>Supporting <code>x86-64</code> is trivial. All you need to do is specify the OS
+in the matrix:</p><div class=highlight><pre class=chroma><code class=language-yaml data-lang=yaml><span class=nt>strategy</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>matrix</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>include</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span>- <span class=nt>build</span><span class=p>:</span><span class=w> </span><span class=l>linux</span><span class=w>
+</span><span class=w>      </span><span class=nt>os</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span><span class=w>      </span><span class=nt>rust</span><span class=p>:</span><span class=w> </span><span class=l>stable</span><span class=w>
+</span><span class=w>    </span>- <span class=nt>build</span><span class=p>:</span><span class=w> </span><span class=l>macos</span><span class=w>
+</span><span class=w>      </span><span class=nt>os</span><span class=p>:</span><span class=w> </span><span class=l>macos-latest</span><span class=w>
+</span><span class=w>      </span><span class=nt>rust</span><span class=p>:</span><span class=w> </span><span class=l>stable</span><span class=w>
+</span></code></pre></div><p>And build with:</p><div class=highlight><pre class=chroma><code class=language-yaml data-lang=yaml><span class=w> </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Install Rust</span><span class=w>
+</span><span class=w>   </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>rustup install ${{ matrix.rust }}</span><span class=w>
+</span><span class=w> </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build</span><span class=w>
+</span><span class=w>   </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>cargo build --release</span><span class=w>
+</span></code></pre></div><p>to get the binary <code>target/release/sysit</code>.</p><h3 id=install-and-build-arm-v7-and-aarch64>Install and Build: ARM v7 and AARCH64</h3><p>Adding support for ARM targest is a more involved exercise as we
+need cross compilation. This is how the matrix looks:</p><div class=highlight><pre class=chroma><code class=language-yaml data-lang=yaml><span class=w> </span>- <span class=nt>build</span><span class=p>:</span><span class=w> </span><span class=l>arm-v7</span><span class=w>
+</span><span class=w>   </span><span class=nt>os</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span><span class=w>   </span><span class=nt>rust</span><span class=p>:</span><span class=w> </span><span class=l>stable</span><span class=w>
+</span><span class=w>   </span><span class=nt>target</span><span class=p>:</span><span class=w> </span><span class=l>armv7-unknown-linux-gnueabihf</span><span class=w>
+</span><span class=w> </span>- <span class=nt>build</span><span class=p>:</span><span class=w> </span><span class=l>aarch64</span><span class=w>
+</span><span class=w>   </span><span class=nt>os</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span><span class=w>   </span><span class=nt>rust</span><span class=p>:</span><span class=w> </span><span class=l>stable</span><span class=w>
+</span><span class=w>   </span><span class=nt>target</span><span class=p>:</span><span class=w> </span><span class=l>aarch64-unknown-linux-gnu</span><span class=w>
+</span></code></pre></div><p>We need to add the target toolchain to the <em>Install Rust</em> step above:</p><pre><code>rustup target add ${{ matrix.target }}
+</code></pre><p>and then update the <em>Build</em> step with:</p><pre><code>cargo build --release --target ${{ matrix.target }}
+</code></pre><p>to get the binary <code>target/${{ matrix.target }}/release/sysit</code>.</p><h4 id=linking-issues>Linking Issues</h4><p>The above should be enough for most projects. But for some, like
+sysit, it fails:</p><pre><code>/usr/bin/ld: /home/runner/work/sysit/sysit/target/aarch64-unknown-linux-gnu/release/deps/sysinfo-b7d4e594f5eb3b41.sysinfo.4dsxz936-cgu.0.rcgu.o: Relocations in generic ELF (EM: 183)
+/usr/bin/ld: /home/runner/work/sysit/sysit/target/aarch64-unknown-linux-gnu/release/deps/sysinfo-b7d4e594f5eb3b41.sysinfo.4dsxz936-cgu.0.rcgu.o: error adding symbols: file in wrong format
+collect2: error: ld returned 1 exit status
+</code></pre><p>Resolving this was tricky as I had little experience with such errors.
+What I eventually found was that for <code>armv7</code> and <code>aarch64</code>, I needed
+to tell cargo to use their respective linkers. For <code>armv7</code>, the linker
+is <code>arm-linux-gnueabihf-gcc</code> (from package: <code>gcc-arm-linux-gnueabihf</code>)
+and for <code>aarch64</code>, the linker is <code>aarch64-linux-gnu-gcc</code> (from
+package: <code>gcc-aarch64-linux-gnu</code>).</p><p>We need to tell cargo to use these linkers. That can be done by
+adding <code>.cargo/config</code> in the package, with the following content:</p><div class=highlight><pre class=chroma><code class=language-toml data-lang=toml><span class=p>[</span><span class=nx>target</span><span class=p>.</span><span class=nx>aarch64</span><span class=err>-</span><span class=nx>unknown</span><span class=err>-</span><span class=nx>linux</span><span class=err>-</span><span class=nx>gnu</span><span class=p>]</span>
+<span class=nx>linker</span> <span class=p>=</span> <span class=s2>&#34;aarch64-linux-gnu-gcc&#34;</span>
+
+<span class=p>[</span><span class=nx>target</span><span class=p>.</span><span class=nx>armv7</span><span class=err>-</span><span class=nx>unknown</span><span class=err>-</span><span class=nx>linux</span><span class=err>-</span><span class=nx>gnueabihf</span><span class=p>]</span>
+<span class=nx>linker</span> <span class=p>=</span> <span class=s2>&#34;arm-linux-gnueabihf-gcc&#34;</span>
+</code></pre></div><p>Coming back to our workflow, this is our matrix for the two ARM
+targets:</p><div class=highlight><pre class=chroma><code class=language-yaml data-lang=yaml><span class=w> </span>- <span class=nt>build</span><span class=p>:</span><span class=w> </span><span class=l>arm-v7</span><span class=w>
+</span><span class=w>   </span><span class=nt>os</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span><span class=w>   </span><span class=nt>rust</span><span class=p>:</span><span class=w> </span><span class=l>stable</span><span class=w>
+</span><span class=w>   </span><span class=nt>target</span><span class=p>:</span><span class=w> </span><span class=l>armv7-unknown-linux-gnueabihf</span><span class=w>
+</span><span class=w>   </span><span class=nt>linker</span><span class=p>:</span><span class=w> </span><span class=l>gcc-arm-linux-gnueabihf</span><span class=w>
+</span><span class=w>   </span><span class=nt>cross</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w> </span>- <span class=nt>build</span><span class=p>:</span><span class=w> </span><span class=l>aarch64</span><span class=w>
+</span><span class=w>   </span><span class=nt>os</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span><span class=w>   </span><span class=nt>rust</span><span class=p>:</span><span class=w> </span><span class=l>stable</span><span class=w>
+</span><span class=w>   </span><span class=nt>target</span><span class=p>:</span><span class=w> </span><span class=l>aarch64-unknown-linux-gnu</span><span class=w>
+</span><span class=w>   </span><span class=nt>linker</span><span class=p>:</span><span class=w> </span><span class=l>gcc-aarch64-linux-gnu</span><span class=w>
+</span><span class=w>   </span><span class=nt>cross</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></code></pre></div><p>We also need to ask the workflow to install the linkers using this
+additional build step, which is run only when <em>cross</em> is <em>true</em>:</p><div class=highlight><pre class=chroma><code class=language-yaml data-lang=yaml><span class=w> </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Install Linker</span><span class=w>
+</span><span class=w>   </span><span class=nt>if</span><span class=p>:</span><span class=w> </span><span class=l>matrix.cross</span><span class=w>
+</span><span class=w>   </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>     sudo apt update
+</span><span class=sd>     sudo apt install ${{ matrix.linker }}</span><span class=w>     
+</span></code></pre></div><p>And update the build step to use cross compilation.</p><div class=highlight><pre class=chroma><code class=language-yaml data-lang=yaml><span class=w> </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build</span><span class=w>
+</span><span class=w>   </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>cargo build --release --target ${{ matrix.target }}</span><span class=w>
+</span></code></pre></div><h3 id=uploading-the-binary>Uploading the binary</h3><p>The binary then can be packaged as a gzipped tarball. This is where I
+borrowed from <a href=https://github.com/softprops/action-gh-release>skim</a>&rsquo;s workflow.</p><div class=highlight><pre class=chroma><code class=language-yaml data-lang=yaml><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Package Artifacts</span><span class=w>
+</span><span class=w>    </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>      src=$(pwd)
+</span><span class=sd>      stage=
+</span><span class=sd>      case $RUNNER_OS in
+</span><span class=sd>          Linux)
+</span><span class=sd>              stage=$(mktemp -d)
+</span><span class=sd>              ;;
+</span><span class=sd>          macOS)
+</span><span class=sd>              stage=$(mktemp -d -t tmp)
+</span><span class=sd>              ;;
+</span><span class=sd>      esac
+</span><span class=sd>      cp target/${{ matrix.target }}/release/sysit $stage/
+</span><span class=sd>      cd $stage
+</span><span class=sd>      RELEASE_VERSION=${GITHUB_REF#refs/tags/}
+</span><span class=sd>      ASSET_NAME=&#34;sysit-$RELEASE_VERSION-${{ matrix.target }}.tar.gz&#34;
+</span><span class=sd>      ASSET_PATH=&#34;$src/$ASSET_NAME&#34;
+</span><span class=sd>      echo &#34;ASSET_PATH=$ASSET_PATH&#34; &gt;&gt; $GITHUB_ENV
+</span><span class=sd>      tar czf $ASSET_PATH *
+</span><span class=sd>      cd $src</span><span class=w>      
+</span></code></pre></div><p>In addition to the binaries, I also wanted checksum&rsquo;s so that the
+released tarballs are verifiable. This can be done by adding a few
+lines in the above script:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>        <span class=nv>CHECKSUM_PATH</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$ASSET_PATH</span><span class=s2>.sha256&#34;</span>
+        <span class=nb>echo</span> <span class=s2>&#34;CHECKSUM_PATH=</span><span class=nv>$CHECKSUM_PATH</span><span class=s2>&#34;</span> &gt;&gt; <span class=nv>$GITHUB_ENV</span>
+        <span class=k>case</span> <span class=nv>$RUNNER_OS</span> in
+            Linux<span class=o>)</span>
+                sha256sum <span class=nv>$ASSET_NAME</span> &gt; <span class=nv>$CHECKSUM_PATH</span>
+                <span class=p>;;</span>
+            macOS<span class=o>)</span>
+                shasum -a <span class=m>256</span> <span class=nv>$ASSET_NAME</span> &gt; <span class=nv>$CHECKSUM_PATH</span>
+                <span class=p>;;</span>
+        <span class=k>esac</span>
+</code></pre></div><p>With the release assets generated, the action: <a href=https://github.com/softprops/action-gh-release>softprops/action-gh-release</a>,
+makes it easy:</p><div class=highlight><pre class=chroma><code class=language-yaml data-lang=yaml><span class=w> </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Release</span><span class=w>
+</span><span class=w>   </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>softprops/action-gh-release@v1</span><span class=w>
+</span><span class=w>   </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>     </span><span class=nt>files</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>       ${{ env.ASSET_PATH }}
+</span><span class=sd>       ${{ env.CHECKSUM_PATH }}</span><span class=w>       
+</span><span class=w>   </span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span><span class=w>     </span><span class=nt>GITHUB_TOKEN</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.GITHUB_TOKEN }}</span><span class=w>
+</span></code></pre></div><p>And that&rsquo;s it! With all this in place, you can build binaries for all of your
+desired platforms and have them available for download as
+<a href=https://github.com/crodjer/sysit/releases/latest>a github release</a>.</p><br><p class=back-to-posts><a href=/blog>Back to posts</a></p></div><br><div class=disqus></div></div></div></section><noscript><img src=https://shie.herokuapp.com/ingress/31bd5293-545e-46e6-95d3-d195d0214b5a/pixel.gif></noscript><script defer src=https://shie.herokuapp.com/ingress/31bd5293-545e-46e6-95d3-d195d0214b5a/script.js></script></body></html>
