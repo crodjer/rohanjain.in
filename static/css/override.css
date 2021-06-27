@@ -1,3 +1,19 @@
-section.main .content a:visited {
-    color: #004786;
+section.main .content .markdown ul,
+section.main .content .markdown ol,
+section.main .content .markdown dl,
+section.main .content .markdown pre {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+section.main .content .markdown h1,
+section.main .content .markdown h2,
+section.main .content .markdown h3,
+section.main .content .markdown h4,
+section.main .content .markdown p {
+    margin-bottom: 0.5rem;
+}
+
+section.main .content .markdown h3 {
+    font-size: 1.1rem;
 }
