@@ -31,7 +31,7 @@ blogGroupBy  = "year"
 include_rss  = true
 
 gravatar     = "564e7aa79de47cdf3a094da1d4ac13cd"
-extraCssFiles = [ "/css/solarized.css" ]
+extraCssFiles = [ "/css/solarized.css", "/css/override.css" ]
 
 [[menu.main]]
 name                   = "Home"
