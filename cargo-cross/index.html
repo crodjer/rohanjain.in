@@ -71,7 +71,9 @@ additional build step, which is run only when <em>cross</em> is <em>true</em>:</
 </span><span class=sd>     sudo apt install ${{ matrix.linker }}</span><span class=w>     
 </span></code></pre></div><p>And update the build step to use cross compilation.</p><div class=highlight><pre class=chroma><code class=language-yaml data-lang=yaml><span class=w> </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build</span><span class=w>
 </span><span class=w>   </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>cargo build --release --target ${{ matrix.target }}</span><span class=w>
-</span></code></pre></div><h3 id=uploading-the-binary>Uploading the binary</h3><p>The binary then can be packaged as a gzipped tarball. This is where I
+</span></code></pre></div><blockquote><p>When <code>RUSTFLAGS</code> is set, the linker configured in <code>.cargo/config</code>.
+This may end up breaking the cross build. This issue is being
+tracked by <a href=https://github.com/rust-lang/cargo/issues/7984>cargo</a>.</p></blockquote><h3 id=uploading-the-binary>Uploading the binary</h3><p>The binary then can be packaged as a gzipped tarball. This is where I
 borrowed from <a href=https://github.com/softprops/action-gh-release>skim</a>&rsquo;s workflow.</p><div class=highlight><pre class=chroma><code class=language-yaml data-lang=yaml><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Package Artifacts</span><span class=w>
 </span><span class=w>    </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
 </span><span class=sd>      src=$(pwd)
