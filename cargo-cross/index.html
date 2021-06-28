@@ -9,7 +9,7 @@ the rest with <a href=https://syncthing.net/>syncthing</a>. That was true for
 my project, <a href=https://github.com/crodjer/sysit><strong>sysit</strong></a>, as well. I
 use sysit on all my systems to keep tabs on the resource usage.</p><p>Inspired from how <a href=https://github.com/lotabout/skim/blob/master/.github/workflows/publish-github.yml>skim</a>
 utilizes cross compilation to build binaries directly using Github
-workflows, I incorporated a similar flow in sysit.</p><h2 id=the-githu-workflow>The Githu Workflow</h2><p>The <a href=https://github.com/crodjer/sysit/blob/v0.4.0/.github/workflows/release.yml#L39>workflow</a>
+workflows, I incorporated a similar flow in sysit.</p><h2 id=the-github-workflow>The Github Workflow</h2><p>The <a href=https://github.com/crodjer/sysit/blob/v0.4.0/.github/workflows/release.yml#L39>workflow</a>
 to publish binaries does the following:</p><ol><li>Install the rust toolchain.</li><li>Build a release binary.</li><li>Add the binary as a release asset.</li></ol><h3 id=install-and-build-x86-64>Install and Build: x86-64</h3><p>Supporting <code>x86-64</code> is trivial. All you need to do is specify the OS
 in the matrix:</p><div class=highlight><pre class=chroma><code class=language-yaml data-lang=yaml><span class=nt>strategy</span><span class=p>:</span><span class=w>
 </span><span class=w>  </span><span class=nt>matrix</span><span class=p>:</span><span class=w>
