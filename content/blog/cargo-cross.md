@@ -15,7 +15,7 @@ Inspired from how [skim](https://github.com/lotabout/skim/blob/master/.github/wo
 utilizes cross compilation to build binaries directly using Github
 workflows, I incorporated a similar flow in sysit.
 
-## The Githu Workflow
+## The Github Workflow
 The [workflow](https://github.com/crodjer/sysit/blob/v0.4.0/.github/workflows/release.yml#L39)
 to publish binaries does the following:
 
