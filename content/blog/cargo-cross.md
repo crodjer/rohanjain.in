@@ -129,6 +129,10 @@ And update the build step to use cross compilation.
    run: cargo build --release --target ${{ matrix.target }}
 ```
 
+> When `RUSTFLAGS` is set, the linker configured in `.cargo/config`.
+> This may end up breaking the cross build. This issue is being
+> tracked by [cargo](https://github.com/rust-lang/cargo/issues/7984).
+
 ### Uploading the binary
 The binary then can be packaged as a gzipped tarball. This is where I
 borrowed from [skim](https://github.com/softprops/action-gh-release)'s workflow.
