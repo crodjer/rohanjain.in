@@ -5,6 +5,10 @@ date = "2015-05-10T00:00:00Z"
 publishdate = "2015-05-10T00:00:00Z"
 +++
 
+> Note: My [recent article](/jumper), talking about WireGuard is a
+> better and more ergonomic approach to achive this, compared to using
+> reverse SSH.
+
 About a year ago, I switched my parents computer (lets call it `P`) from the
 pre-installed OS (Windows) to Ubuntu. The primary reason for this switch was it
 hard for me to debug and fix issues. Things have been smooth after the switch
