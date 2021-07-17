@@ -191,3 +191,9 @@ makes it easy:
 And that's it! With all this in place, you can build binaries for all of your
 desired platforms and have them available for download as
 [a github release](https://github.com/crodjer/sysit/releases/latest).
+
+> Ads:
+>
+> Learn Rust: [Rust in Action](https://amzn.to/2Uk7Ydz),
+>[The Rust Programming Language](https://amzn.to/3etqiHQ)  
+> Get a [Raspberry Pi 4](https://amzn.to/3ijRwlA)
