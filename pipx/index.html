@@ -1,0 +1,30 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="Managing Python based applications is made easy with pipx. But I dislike installing pipx via a pip user install, as it results in two python utilities managing packages. So, instead I let pipx manage it&rsquo;s own updates.
+Here&rsquo;s how we can do it on a Debian system:
+  Install python3-pip, with:
+$ sudo apt install python3-pip   Install pipx:
+$ pip install --user pipx Didn&rsquo;t we want avoid that?"><meta property="og:title" content="Bootstrapping pipx for the obsessed"><meta property="og:description" content="Managing Python based applications is made easy with pipx. But I dislike installing pipx via a pip user install, as it results in two python utilities managing packages. So, instead I let pipx manage it&rsquo;s own updates.
+Here&rsquo;s how we can do it on a Debian system:
+  Install python3-pip, with:
+$ sudo apt install python3-pip   Install pipx:
+$ pip install --user pipx Didn&rsquo;t we want avoid that?"><meta property="og:type" content="article"><meta property="og:url" content="/pipx/"><meta property="article:published_time" content="2021-09-04T19:41:19+05:30"><meta property="article:modified_time" content="2021-09-04T19:41:19+05:30"><title>Bootstrapping pipx for the obsessed</title><link rel=canonical href=/pipx/><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500"><link rel=stylesheet href=/css/reset.css><link rel=stylesheet href=/css/pygments.css><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/css/solarized.css><link rel=stylesheet href=/css/override.css><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><section class=header><div class=container><div class=content><a href=/><img class=avatar src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" rcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
+<a href=/><div class=name>Rohan Jain</div></a><nav><ul><li class=nav-home><a href=/><span>Home</span></a></li><li class=nav-about><a href=/about/><span>About</span></a></li></ul></nav></div></div></section><section class=icons><div class=container><div class=content><a href=//github.com/crodjer target=_blank rel=noopener><img class=icon src=/img/github.svg alt=github></a>
+<a href=//twitter.com/__crodjer__ target=_blank rel=noopener><img class=icon src=/img/twitter.svg alt=twitter></a>
+<a href=//linkedin.com/in/crodjer target=_blank rel=noopener><img class=icon src=/img/linkedin.svg alt=linkedin></a></div></div></section><section class="main post non-narrow zero-top-spacing"><div class=container><div class=content><div class=front-matter><div class=title-container><div class=page-heading>Bootstrapping pipx for the obsessed</div><div class=initials><a href=/></a></div></div><div class=meta><div class=date title="Sat Sep 4 2021 19:41:19 +0530">Sep 4, 2021</div><div class=reading-time><div class=middot></div>2 minutes read</div></div></div><div class=markdown><p>Managing Python based applications is made easy with
+<a href=https://github.com/pypa/pipx>pipx</a>. But I dislike installing pipx
+via a pip user install, as it results in two python utilities
+managing packages. So, instead I let pipx manage it&rsquo;s own updates.</p><p>Here&rsquo;s how we can do it on a Debian system:</p><ol><li><p>Install <code>python3-pip</code>, with:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>$ sudo apt install python3-pip
+</code></pre></div></li><li><p>Install pipx:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>$ pip install --user pipx
+</code></pre></div><p>Didn&rsquo;t we want avoid that? Yes! We&rsquo;ll clean this up later.</p><p>Note the installation output for the packages that were installed.
+In my case, they were: <em>pyparsing, click, userpath, packaging,
+argcomplete and pipx</em>.</p></li><li><p>Ask pipx to install itself:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>$ pipx install pipx
+</code></pre></div></li><li><p>Now, we can clean up pip:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>$ pip uninstall -y pyparsing click userpath packaging argcomplete pipx
+$ sudo apt uninstall python3-pip --autoremove --purge
+</code></pre></div><p>If you are obsessed like me, you can also clean up the site
+packages directory. Only do this <em>after verifying</em> that it is
+empty.</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>$ rm -r ~/.local/lib/python3.9/site-packages
+</code></pre></div><p>In my case, it was safe to remove <code>~/.local/lib</code>.</p></li><li><p>As there already was a pipx in <code>~/.local/bin</code> from the pip
+install, pipx doesn&rsquo;t create a symlink in <code>~/.local/bin</code> when
+we did step 3. We need to manually do this:</p><pre><code>$ ln -sf ~/.local/pipx/venvs/pipx/bin/pipx ~/.local/bin/
+</code></pre></li></ol><p>That&rsquo;s it! Now we can manage packages with pipx, like:</p><pre><code>$ pipx install neovim-remote
+</code></pre><p>Upgrading all packages is trivial:</p><pre><code>$ pipx upgrade-all
+</code></pre><br><p class=back-to-posts><a href=/blog>Back to posts</a></p></div><br><div class=disqus></div></div></div></section><noscript><img src=https://t.rohanjain.in/ingress/31bd5293-545e-46e6-95d3-d195d0214b5a/pixel.gif></noscript><script defer src=https://t.rohanjain.in/ingress/31bd5293-545e-46e6-95d3-d195d0214b5a/script.js></script></body></html>
