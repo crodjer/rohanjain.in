@@ -1,11 +1,77 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="The Raspberry Pi 4 runs hot, specially when overclocked. As I use it as my programming machine for my personal projects, I wanted to get the most out of its CPU.
-The first case I ordered for my Pi came with a fan which worked on 3.3V and 5V (too noisy). I setup a circuit which would allow me to turn it on/off via a GPIO pin controlled by this python based service, which turns the fan on/off based on certain threshold temperatures."><meta property="og:title" content="Cooling the Raspberry Pi 4 with Argon Neo"><meta property="og:description" content="The Raspberry Pi 4 runs hot, specially when overclocked. As I use it as my programming machine for my personal projects, I wanted to get the most out of its CPU.
-The first case I ordered for my Pi came with a fan which worked on 3.3V and 5V (too noisy). I setup a circuit which would allow me to turn it on/off via a GPIO pin controlled by this python based service, which turns the fan on/off based on certain threshold temperatures."><meta property="og:type" content="article"><meta property="og:url" content="/pi-cooling/"><meta property="article:published_time" content="2021-01-08T10:21:02+05:30"><meta property="article:modified_time" content="2021-01-08T10:21:02+05:30"><title>Cooling the Raspberry Pi 4 with Argon Neo</title><link rel=canonical href=/pi-cooling/><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500"><link rel=stylesheet href=/css/reset.css><link rel=stylesheet href=/css/pygments.css><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/css/solarized.css><link rel=stylesheet href=/css/override.css><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><section class=header><div class=container><div class=content><a href=/><img class=avatar src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" rcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
-<a href=/><div class=name>Rohan Jain</div></a><nav><ul><li class=nav-home><a href=/><span>Home</span></a></li><li class=nav-about><a href=/about/><span>About</span></a></li></ul></nav></div></div></section><section class=icons><div class=container><div class=content><a href=//github.com/crodjer target=_blank rel=noopener><img class=icon src=/img/github.svg alt=github></a>
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="chrome=1">
+<meta name=HandheldFriendly content="True">
+<meta name=MobileOptimized content="320">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=referrer content="no-referrer">
+<meta name=author content="Rohan Jain">
+<meta name=description content="The Raspberry Pi 4 runs hot, specially when overclocked. As I use it as my programming machine for my personal projects, I wanted to get the most out of its CPU.
+The first case I ordered for my Pi came with a fan which worked on 3.3V and 5V (too noisy). I setup a circuit which would allow me to turn it on/off via a GPIO pin controlled by this python based service, which turns the fan on/off based on certain threshold temperatures.">
+<meta property="og:title" content="Cooling the Raspberry Pi 4 with Argon Neo">
+<meta property="og:description" content="The Raspberry Pi 4 runs hot, specially when overclocked. As I use it as my programming machine for my personal projects, I wanted to get the most out of its CPU.
+The first case I ordered for my Pi came with a fan which worked on 3.3V and 5V (too noisy). I setup a circuit which would allow me to turn it on/off via a GPIO pin controlled by this python based service, which turns the fan on/off based on certain threshold temperatures.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/pi-cooling/"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2021-01-08T10:21:02+05:30">
+<meta property="article:modified_time" content="2021-01-08T10:21:02+05:30">
+<title>
+Cooling the Raspberry Pi 4 with Argon Neo
+</title>
+<link rel=canonical href=/pi-cooling/>
+<link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+<link rel=stylesheet href=/css/reset.css>
+<link rel=stylesheet href=/css/pygments.css>
+<link rel=stylesheet href=/css/main.css>
+<link rel=stylesheet href=/css/solarized.css>
+<link rel=stylesheet href=/css/override.css>
+<link rel="shortcut icon" href=/img/favicon.ico>
+</head>
+<body lang=en>
+<section class=header>
+<div class=container>
+<div class=content>
+<a href=/><img class=avatar src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" rcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
+<a href=/><div class=name>Rohan Jain</div></a>
+<nav>
+<ul>
+<li class=nav-home><a href=/><span>Home</span></a></li>
+<li class=nav-about><a href=/about/><span>About</span></a></li>
+</ul>
+</nav>
+</div>
+</div>
+</section>
+<section class=icons>
+<div class=container>
+<div class=content>
+<a href=//github.com/crodjer target=_blank rel=noopener><img class=icon src=/img/github.svg alt=github></a>
 <a href=//twitter.com/__crodjer__ target=_blank rel=noopener><img class=icon src=/img/twitter.svg alt=twitter></a>
-<a href=//linkedin.com/in/crodjer target=_blank rel=noopener><img class=icon src=/img/linkedin.svg alt=linkedin></a></div></div></section><section class="main post non-narrow zero-top-spacing"><div class=container><div class=content><div class=front-matter><div class=title-container><div class=page-heading>Cooling the Raspberry Pi 4 with Argon Neo</div><div class=initials><a href=/></a></div></div><div class=meta><div class=date title="Fri Jan 8 2021 10:21:02 +0530">Jan 8, 2021</div><div class=reading-time><div class=middot></div>3 minutes read</div></div></div><div class=markdown><p>The Raspberry Pi 4 runs hot, specially when overclocked. As I use it
+<a href=//linkedin.com/in/crodjer target=_blank rel=noopener><img class=icon src=/img/linkedin.svg alt=linkedin></a>
+</div>
+</div>
+</section>
+<section class="main post non-narrow zero-top-spacing">
+<div class=container>
+<div class=content>
+<div class=front-matter>
+<div class=title-container>
+<div class=page-heading>
+Cooling the Raspberry Pi 4 with Argon Neo
+</div>
+<div class=initials><a href=/></a></div>
+</div>
+<div class=meta>
+<div class=date title="Fri Jan 8 2021 10:21:02 +0530">Jan 8, 2021</div>
+<div class=reading-time><div class=middot></div>3 minutes read</div>
+</div>
+</div>
+<div class=markdown>
+<p>The Raspberry Pi 4 runs hot, specially when overclocked. As I use it
 as my programming machine for my personal projects, I wanted to get
-the most out of its CPU.</p><p>The <a href=https://twitter.com/__crodjer__/status/1265526804808372224/photo/1>first case</a> I ordered for my Pi came with a fan which worked on
+the most out of its CPU.</p>
+<p>The <a href=https://twitter.com/__crodjer__/status/1265526804808372224/photo/1>first case</a> I ordered for my Pi came with a fan which worked on
 3.3V and 5V (too noisy). I setup a circuit which would allow me to
 turn it on/off via a GPIO pin controlled by
 <a href=https://github.com/crodjer/configs/blob/master/scripts/rpi-fan.py>this python based service</a>,
@@ -13,19 +79,147 @@ which turns the fan on/off based on certain threshold temperatures.
 This did work but the idling Pi would always go beyond the threshold
 temperature turning the fan on when. With the threshold at 65°C. I was
 getting 1:10 on:off ratio, which meant fan noise every 10 minutes of
-idle time.</p><p>I spent some time trying to figure out the best cooling setup for the
+idle time.</p>
+<p>I spent some time trying to figure out the best cooling setup for the
 Pi with a target of staying cool with a sustained load. To test the
 cooling setup, I wrote <a href=https://gist.github.com/crodjer/8a79078a058db4afe0d74527efd29e30>this script</a>.
-The key benchmarking command that the script run is:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>sysbench cpu --threads<span class=o>=</span><span class=m>4</span> --events<span class=o>=</span><span class=m>200000</span> --time<span class=o>=</span><span class=m>0</span> --cpu-max-prime<span class=o>=</span><span class=m>100000</span> run
+The key benchmarking command that the script run is:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sysbench cpu --threads<span class=o>=</span><span class=m>4</span> --events<span class=o>=</span><span class=m>200000</span> --time<span class=o>=</span><span class=m>0</span> --cpu-max-prime<span class=o>=</span><span class=m>100000</span> run
 </code></pre></div><p>I did not get satisfactory results with my plastic case + small heat
 sink + fan setup. Eventually, I found a way to purchase a fantastic
 passively cooled case: <a href=https://twitter.com/__crodjer__/status/1346864027473825793>Argon Neo</a>.
 It looks great and works as a heat sink itself. With the Neo, I now
 have a silent setup which would sustain long running CPU bound tasks
-with an even higher overclock of 2100 MHz without throttling.</p><p>A few of the results from the numerous benchmarks I did with
-<a href=https://gist.github.com/crodjer/8a79078a058db4afe0d74527efd29e30>the script</a>:</p><table><thead><tr><th>Events</th><th>Configuration</th><th>Overclock</th><th>Fan</th><th>Temp (°C)</th><th>Events/Sec</th></tr></thead><tbody><tr><td>50000</td><td>Plastic Case + Heat Sink</td><td>2000 MHz</td><td>No</td><td>83.7 (T)</td><td>310.89</td></tr><tr><td>50000</td><td>Plastic Case + Heat Sink</td><td>2000 MHz</td><td>3.3V</td><td>75.0</td><td>340.84</td></tr><tr><td>50000</td><td>Plastic Case + Heat Sink</td><td>2000 MHz</td><td>5V</td><td>63.3</td><td>339.36</td></tr><tr><td>50000</td><td>Plastic Case + Heat Sink</td><td>2147 MHz</td><td>5V</td><td>77.9</td><td>366.46</td></tr><tr><td>100000</td><td>Plastic Case + Heat Sink</td><td>2000 MHz</td><td>3.3V</td><td>79.8</td><td>337.47</td></tr><tr><td>100000</td><td>Neo + Thermal Paste</td><td>2000 MHz</td><td>No</td><td>81.3 (T)</td><td>342.85</td></tr><tr><td>100000</td><td>Neo without cover + Paste</td><td>2000 MHz</td><td>No</td><td>75.4</td><td>342.93</td></tr><tr><td>100000</td><td>Neo + Thermal Paste</td><td>2000 MHz</td><td>5V</td><td>76.4</td><td>340.66</td></tr><tr><td>100000</td><td>Neo + Thermal Paste</td><td>2000 MHz</td><td>5V</td><td>76.4</td><td>340.66</td></tr><tr><td>100000</td><td>Neo + Thermal Pad</td><td>2100 MHz</td><td>No</td><td>75.0</td><td>360.07</td></tr><tr><td>200000</td><td>Neo + Thermal Pad</td><td>2100 MHz</td><td>No</td><td>78.8</td><td>360.18</td></tr></tbody></table><p>A few observations I made with the Neo:</p><ul><li>Neo performs much better without the cover on because of
-insufficient thermal connectivity between the cover and the case.</li><li>Adding a fan made not much of a difference. Specially with the cover
-when there is no ventilation.</li><li>The case works better when the room fan is on which is likely when I
-am working on the Pi. I observe 3-4°C lower temperatures.</li><li>The included thermal pads performed much better than the thermal
-paste I had with me.</li><li>Although the case is Aluminium, I didn&rsquo;t observe much impact on the
-wireless signal. Likely because of the plastic base.</li></ul><br><p class=back-to-posts><a href=/blog>Back to posts</a></p></div><br><div class=disqus></div></div></div></section><noscript><img src=https://t.rohanjain.in/ingress/31bd5293-545e-46e6-95d3-d195d0214b5a/pixel.gif></noscript><script defer src=https://t.rohanjain.in/ingress/31bd5293-545e-46e6-95d3-d195d0214b5a/script.js></script></body></html>
+with an even higher overclock of 2100 MHz without throttling.</p>
+<p>A few of the results from the numerous benchmarks I did with
+<a href=https://gist.github.com/crodjer/8a79078a058db4afe0d74527efd29e30>the script</a>:</p>
+<table>
+<thead>
+<tr>
+<th>Events</th>
+<th>Configuration</th>
+<th>Overclock</th>
+<th>Fan</th>
+<th>Temp (°C)</th>
+<th>Events/Sec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>50000</td>
+<td>Plastic Case + Heat Sink</td>
+<td>2000 MHz</td>
+<td>No</td>
+<td>83.7 (T)</td>
+<td>310.89</td>
+</tr>
+<tr>
+<td>50000</td>
+<td>Plastic Case + Heat Sink</td>
+<td>2000 MHz</td>
+<td>3.3V</td>
+<td>75.0</td>
+<td>340.84</td>
+</tr>
+<tr>
+<td>50000</td>
+<td>Plastic Case + Heat Sink</td>
+<td>2000 MHz</td>
+<td>5V</td>
+<td>63.3</td>
+<td>339.36</td>
+</tr>
+<tr>
+<td>50000</td>
+<td>Plastic Case + Heat Sink</td>
+<td>2147 MHz</td>
+<td>5V</td>
+<td>77.9</td>
+<td>366.46</td>
+</tr>
+<tr>
+<td>100000</td>
+<td>Plastic Case + Heat Sink</td>
+<td>2000 MHz</td>
+<td>3.3V</td>
+<td>79.8</td>
+<td>337.47</td>
+</tr>
+<tr>
+<td>100000</td>
+<td>Neo + Thermal Paste</td>
+<td>2000 MHz</td>
+<td>No</td>
+<td>81.3 (T)</td>
+<td>342.85</td>
+</tr>
+<tr>
+<td>100000</td>
+<td>Neo without cover + Paste</td>
+<td>2000 MHz</td>
+<td>No</td>
+<td>75.4</td>
+<td>342.93</td>
+</tr>
+<tr>
+<td>100000</td>
+<td>Neo + Thermal Paste</td>
+<td>2000 MHz</td>
+<td>5V</td>
+<td>76.4</td>
+<td>340.66</td>
+</tr>
+<tr>
+<td>100000</td>
+<td>Neo + Thermal Paste</td>
+<td>2000 MHz</td>
+<td>5V</td>
+<td>76.4</td>
+<td>340.66</td>
+</tr>
+<tr>
+<td>100000</td>
+<td>Neo + Thermal Pad</td>
+<td>2100 MHz</td>
+<td>No</td>
+<td>75.0</td>
+<td>360.07</td>
+</tr>
+<tr>
+<td>200000</td>
+<td>Neo + Thermal Pad</td>
+<td>2100 MHz</td>
+<td>No</td>
+<td>78.8</td>
+<td>360.18</td>
+</tr>
+</tbody>
+</table>
+<p>A few observations I made with the Neo:</p>
+<ul>
+<li>Neo performs much better without the cover on because of
+insufficient thermal connectivity between the cover and the case.</li>
+<li>Adding a fan made not much of a difference. Specially with the cover
+when there is no ventilation.</li>
+<li>The case works better when the room fan is on which is likely when I
+am working on the Pi. I observe 3-4°C lower temperatures.</li>
+<li>The included thermal pads performed much better than the thermal
+paste I had with me.</li>
+<li>Although the case is Aluminium, I didn&rsquo;t observe much impact on the
+wireless signal. Likely because of the plastic base.</li>
+</ul>
+<br>
+<p class=back-to-posts><a href=/blog>Back to posts</a></p>
+</div>
+<br>
+<div class=disqus>
+</div>
+</div>
+</div>
+</section>
+<noscript>
+<img src=https://t.rohanjain.in/ingress/31bd5293-545e-46e6-95d3-d195d0214b5a/pixel.gif>
+</noscript>
+<script defer src=https://t.rohanjain.in/ingress/31bd5293-545e-46e6-95d3-d195d0214b5a/script.js></script>
+</body>
+</html>

@@ -1,12 +1,78 @@
-<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="Having been blessed with an unreliable internet, I always have had the need to change the default route when one goes down. ip provides you the required tooling to do that. I had been doing it so often, that I ended up writing a function to do this:
-route_to () { interface=$1 route=$(ip route | grep $interface | sed -r 's/\.0\/[[:digit:]]{2,3} /.1 /' | cut -d ' ' -f -4) if [ -n &#34;$route&#34; ]; then sudo ip route del default &> /dev/null sudo ip route replace default via $route else echo &#34;No routes match: $interface&#34; >&2 fi } With this in available in my shell, I can simply do route_to wlan0 and my system will start using wlan0 as the default interface."><meta property="og:title" content="Switch between networks based on availability"><meta property="og:description" content="Having been blessed with an unreliable internet, I always have had the need to change the default route when one goes down. ip provides you the required tooling to do that. I had been doing it so often, that I ended up writing a function to do this:
-route_to () { interface=$1 route=$(ip route | grep $interface | sed -r 's/\.0\/[[:digit:]]{2,3} /.1 /' | cut -d ' ' -f -4) if [ -n &#34;$route&#34; ]; then sudo ip route del default &> /dev/null sudo ip route replace default via $route else echo &#34;No routes match: $interface&#34; >&2 fi } With this in available in my shell, I can simply do route_to wlan0 and my system will start using wlan0 as the default interface."><meta property="og:type" content="article"><meta property="og:url" content="/route-to/"><meta property="article:published_time" content="2015-08-19T00:00:00+00:00"><meta property="article:modified_time" content="2015-08-19T00:00:00+00:00"><title>Switch between networks based on availability</title><link rel=canonical href=/route-to/><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500"><link rel=stylesheet href=/css/reset.css><link rel=stylesheet href=/css/pygments.css><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/css/solarized.css><link rel=stylesheet href=/css/override.css><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><section class=header><div class=container><div class=content><a href=/><img class=avatar src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" rcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
-<a href=/><div class=name>Rohan Jain</div></a><nav><ul><li class=nav-home><a href=/><span>Home</span></a></li><li class=nav-about><a href=/about/><span>About</span></a></li></ul></nav></div></div></section><section class=icons><div class=container><div class=content><a href=//github.com/crodjer target=_blank rel=noopener><img class=icon src=/img/github.svg alt=github></a>
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="chrome=1">
+<meta name=HandheldFriendly content="True">
+<meta name=MobileOptimized content="320">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=referrer content="no-referrer">
+<meta name=author content="Rohan Jain">
+<meta name=description content="Having been blessed with an unreliable internet, I always have had the need to change the default route when one goes down. ip provides you the required tooling to do that. I had been doing it so often, that I ended up writing a function to do this:
+route_to () { interface=$1 route=$(ip route | grep $interface | sed -r 's/\.0\/[[:digit:]]{2,3} /.1 /' | cut -d ' ' -f -4) if [ -n &#34;$route&#34; ]; then sudo ip route del default &> /dev/null sudo ip route replace default via $route else echo &#34;No routes match: $interface&#34; >&2 fi } With this in available in my shell, I can simply do route_to wlan0 and my system will start using wlan0 as the default interface.">
+<meta property="og:title" content="Switch between networks based on availability">
+<meta property="og:description" content="Having been blessed with an unreliable internet, I always have had the need to change the default route when one goes down. ip provides you the required tooling to do that. I had been doing it so often, that I ended up writing a function to do this:
+route_to () { interface=$1 route=$(ip route | grep $interface | sed -r 's/\.0\/[[:digit:]]{2,3} /.1 /' | cut -d ' ' -f -4) if [ -n &#34;$route&#34; ]; then sudo ip route del default &> /dev/null sudo ip route replace default via $route else echo &#34;No routes match: $interface&#34; >&2 fi } With this in available in my shell, I can simply do route_to wlan0 and my system will start using wlan0 as the default interface.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/route-to/"><meta property="article:section" content="blog">
+<meta property="article:published_time" content="2015-08-19T00:00:00+00:00">
+<meta property="article:modified_time" content="2015-08-19T00:00:00+00:00">
+<title>
+Switch between networks based on availability
+</title>
+<link rel=canonical href=/route-to/>
+<link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+<link rel=stylesheet href=/css/reset.css>
+<link rel=stylesheet href=/css/pygments.css>
+<link rel=stylesheet href=/css/main.css>
+<link rel=stylesheet href=/css/solarized.css>
+<link rel=stylesheet href=/css/override.css>
+<link rel="shortcut icon" href=/img/favicon.ico>
+</head>
+<body lang=en>
+<section class=header>
+<div class=container>
+<div class=content>
+<a href=/><img class=avatar src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" rcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
+<a href=/><div class=name>Rohan Jain</div></a>
+<nav>
+<ul>
+<li class=nav-home><a href=/><span>Home</span></a></li>
+<li class=nav-about><a href=/about/><span>About</span></a></li>
+</ul>
+</nav>
+</div>
+</div>
+</section>
+<section class=icons>
+<div class=container>
+<div class=content>
+<a href=//github.com/crodjer target=_blank rel=noopener><img class=icon src=/img/github.svg alt=github></a>
 <a href=//twitter.com/__crodjer__ target=_blank rel=noopener><img class=icon src=/img/twitter.svg alt=twitter></a>
-<a href=//linkedin.com/in/crodjer target=_blank rel=noopener><img class=icon src=/img/linkedin.svg alt=linkedin></a></div></div></section><section class="main post non-narrow zero-top-spacing"><div class=container><div class=content><div class=front-matter><div class=title-container><div class=page-heading>Switch between networks based on availability</div><div class=initials><a href=/></a></div></div><div class=meta><div class=date title="Wed Aug 19 2015 00:00:00 UTC">Aug 19, 2015</div><div class=reading-time><div class=middot></div>One minute read</div></div></div><div class=markdown><p>Having been blessed with an unreliable internet, I always have had the need to
+<a href=//linkedin.com/in/crodjer target=_blank rel=noopener><img class=icon src=/img/linkedin.svg alt=linkedin></a>
+</div>
+</div>
+</section>
+<section class="main post non-narrow zero-top-spacing">
+<div class=container>
+<div class=content>
+<div class=front-matter>
+<div class=title-container>
+<div class=page-heading>
+Switch between networks based on availability
+</div>
+<div class=initials><a href=/></a></div>
+</div>
+<div class=meta>
+<div class=date title="Wed Aug 19 2015 00:00:00 UTC">Aug 19, 2015</div>
+<div class=reading-time><div class=middot></div>One minute read</div>
+</div>
+</div>
+<div class=markdown>
+<p>Having been blessed with an unreliable internet, I always have had the need to
 change the default route when one goes down. <a href=http://linux.die.net/man/8/ip>ip</a> provides you the required
 tooling to do that. I had been doing it so often, that I ended up writing a
-function to do this:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>route_to <span class=o>()</span> <span class=o>{</span>
+function to do this:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>route_to <span class=o>()</span> <span class=o>{</span>
     <span class=nv>interface</span><span class=o>=</span><span class=nv>$1</span>
     <span class=nv>route</span><span class=o>=</span><span class=k>$(</span>ip route <span class=p>|</span> grep <span class=nv>$interface</span> <span class=p>|</span> sed -r <span class=s1>&#39;s/\.0\/[[:digit:]]{2,3} /.1 /&#39;</span> <span class=p>|</span> cut -d <span class=s1>&#39; &#39;</span> -f -4<span class=k>)</span>
     <span class=k>if</span> <span class=o>[</span> -n <span class=s2>&#34;</span><span class=nv>$route</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
@@ -17,4 +83,19 @@ function to do this:</p><div class=highlight><pre class=chroma><code class=langu
     <span class=k>fi</span>
 <span class=o>}</span>
 </code></pre></div><p>With this in available in my shell, I can simply do <code>route_to wlan0</code> and my
-system will start using <code>wlan0</code> as the default interface.</p><br><p class=back-to-posts><a href=/blog>Back to posts</a></p></div><br><div class=disqus></div></div></div></section><noscript><img src=https://t.rohanjain.in/ingress/31bd5293-545e-46e6-95d3-d195d0214b5a/pixel.gif></noscript><script defer src=https://t.rohanjain.in/ingress/31bd5293-545e-46e6-95d3-d195d0214b5a/script.js></script></body></html>
+system will start using <code>wlan0</code> as the default interface.</p>
+<br>
+<p class=back-to-posts><a href=/blog>Back to posts</a></p>
+</div>
+<br>
+<div class=disqus>
+</div>
+</div>
+</div>
+</section>
+<noscript>
+<img src=https://t.rohanjain.in/ingress/31bd5293-545e-46e6-95d3-d195d0214b5a/pixel.gif>
+</noscript>
+<script defer src=https://t.rohanjain.in/ingress/31bd5293-545e-46e6-95d3-d195d0214b5a/script.js></script>
+</body>
+</html>
