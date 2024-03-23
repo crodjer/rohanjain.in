@@ -1,133 +1,25 @@
-<!doctype html><html lang=en-us>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="chrome=1">
-<meta name=HandheldFriendly content="True">
-<meta name=MobileOptimized content="320">
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=referrer content="no-referrer">
-<meta name=author content="Rohan Jain">
-<meta name=description content="I was introduced to OSX for the first time in September, 2015. Coming from a XMonad/Linux based setup, I was accustomed to powerful and fast window management. Most available solutions for OSX did not have these qualities. I tried:
- Amethyst, a window manager with basic XMonad bindings. Just type the application name in Alfred. Initially this was slow, but quickly became habitual. Mjolinr, which is configured in Lua and can actually be quite powerful.">
-<meta property="og:title" content="The two windows workflow">
-<meta property="og:description" content="I was introduced to OSX for the first time in September, 2015. Coming from a XMonad/Linux based setup, I was accustomed to powerful and fast window management. Most available solutions for OSX did not have these qualities. I tried:
- Amethyst, a window manager with basic XMonad bindings. Just type the application name in Alfred. Initially this was slow, but quickly became habitual. Mjolinr, which is configured in Lua and can actually be quite powerful.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="/two-windows/"><meta property="article:section" content="blog">
-<meta property="article:published_time" content="2017-02-27T06:15:12+00:00">
-<meta property="article:modified_time" content="2017-02-27T06:15:12+00:00">
-<title>
-The two windows workflow
-</title>
-<link rel=canonical href=/two-windows/>
-<link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
-<link rel=stylesheet href=/css/reset.css>
-<link rel=stylesheet href=/css/pygments.css>
-<link rel=stylesheet href=/css/main.css>
-<link rel=stylesheet href=/css/solarized.css>
-<link rel=stylesheet href=/css/override.css>
-<link rel="shortcut icon" href=/img/favicon.ico>
-</head>
-<body lang=en>
-<section class=header>
-<div class=container>
-<div class=content>
-<a href=/><img class=avatar src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" rcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
-<a href=/><div class=name>Rohan Jain</div></a>
-<nav>
-<ul>
-<li class=nav-home><a href=/><span>Home</span></a></li>
-<li class=nav-about><a href=/about/><span>About</span></a></li>
-</ul>
-</nav>
-</div>
-</div>
-</section>
-<section class=icons>
-<div class=container>
-<div class=content>
-<a href=//github.com/crodjer target=_blank rel=noopener><img class=icon src=/img/github.svg alt=github></a>
+<!doctype html><html lang=en-US><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="chrome=1"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="I was introduced to OSX for the first time in September, 2015. Coming from a XMonad/Linux based setup, I was accustomed to powerful and fast window management. Most available solutions for OSX did not have these qualities. I tried:
+Amethyst, a window manager with basic XMonad bindings. Just type the application name in Alfred. Initially this was slow, but quickly became habitual. Mjolinr, which is configured in Lua and can actually be quite powerful."><meta property="og:title" content="The two windows workflow"><meta property="og:description" content="I was introduced to OSX for the first time in September, 2015. Coming from a XMonad/Linux based setup, I was accustomed to powerful and fast window management. Most available solutions for OSX did not have these qualities. I tried:
+Amethyst, a window manager with basic XMonad bindings. Just type the application name in Alfred. Initially this was slow, but quickly became habitual. Mjolinr, which is configured in Lua and can actually be quite powerful."><meta property="og:type" content="article"><meta property="og:url" content="/two-windows/"><meta property="article:section" content="blog"><meta property="article:published_time" content="2017-02-27T06:15:12+00:00"><meta property="article:modified_time" content="2017-02-27T06:15:12+00:00"><title>The two windows workflow
+</title><link rel=canonical href=/two-windows/><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500"><link rel=stylesheet href=/css/reset.css><link rel=stylesheet href=/css/pygments.css><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/css/solarized.css><link rel=stylesheet href=/css/override.css><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><section class=header><div class=container><div class=content><a href=/><img class=avatar src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" srcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
+<a href=/><div class=name>Rohan Jain</div></a><nav><ul><li class=nav-home><a href=/><span>Home</span></a></li><li class=nav-about><a href=/about/><span>About</span></a></li></ul></nav></div></div></section><section class=icons><div class=container><div class=content><a href=//github.com/crodjer target=_blank rel=noopener><img class=icon src=/img/github.svg alt=github></a>
 <a href=//twitter.com/__crodjer__ target=_blank rel=noopener><img class=icon src=/img/twitter.svg alt=twitter></a>
-<a href=//linkedin.com/in/crodjer target=_blank rel=noopener><img class=icon src=/img/linkedin.svg alt=linkedin></a>
-</div>
-</div>
-</section>
-<section class="main post non-narrow zero-top-spacing">
-<div class=container>
-<div class=content>
-<div class=front-matter>
-<div class=title-container>
-<div class=page-heading>
-The two windows workflow
-</div>
-<div class=initials><a href=/></a></div>
-</div>
-<div class=meta>
-<div class=date title="Mon Feb 27 2017 06:15:12 UTC">Feb 27, 2017</div>
-<div class=reading-time><div class=middot></div>2 minutes read</div>
-</div>
-</div>
-<div class=markdown>
-<p>I was introduced to OSX for the first time in September, 2015. Coming from a
+<a href=//linkedin.com/in/crodjer target=_blank rel=noopener><img class=icon src=/img/linkedin.svg alt=linkedin></a></div></div></section><section class="main post non-narrow zero-top-spacing"><div class=container><div class=content><div class=front-matter><div class=title-container><div class=page-heading>The two windows workflow</div><div class=initials><a href=/></a></div></div><div class=meta><div class=date title='Mon Feb 27 2017 06:15:12 UTC'>Feb 27, 2017</div><div class=reading-time><div class=middot></div>2 minutes read</div></div></div><div class=markdown><p>I was introduced to OSX for the first time in September, 2015. Coming from a
 XMonad/Linux based setup, I was accustomed to powerful and fast window
 management. Most available solutions for OSX did not have these qualities. I
-tried:</p>
-<ul>
-<li><em>Amethyst</em>, a window manager with basic XMonad bindings.</li>
-<li>Just type the application name in <em>Alfred</em>. Initially this was slow, but
-quickly became habitual.</li>
-<li><em>Mjolinr</em>, which is configured in Lua and can actually be quite powerful.</li>
-<li>Numerous other programs out there which try to solve the same problem in
-similar fashion.</li>
-</ul>
-<p>These programs sort of worked, but they are slow and unresponsive. Alfred based
+tried:</p><ul><li><em>Amethyst</em>, a window manager with basic XMonad bindings.</li><li>Just type the application name in <em>Alfred</em>. Initially this was slow, but
+quickly became habitual.</li><li><em>Mjolinr</em>, which is configured in Lua and can actually be quite powerful.</li><li>Numerous other programs out there which try to solve the same problem in
+similar fashion.</li></ul><p>These programs sort of worked, but they are slow and unresponsive. Alfred based
 switching works on application level and not window level. So, I needed some
-simpler alternatives.</p>
-<p>Eventually, I noticed that <code>Cmd-Tab</code> based window switching is fast. So, for
-last 6 months, I have been using a two window strategy. That is:</p>
-<p><strong>The primary workflow must be dependent on at max two windows.</strong></p>
-<p>This means that any application I want to have in my workflow must run in either
-of those windows.</p>
-<p>Those windows in my case are:</p>
-<ul>
-<li><em>iTerm2</em><br>
-This includes a <code>tmux</code> session, with multiple windows. The first window will
+simpler alternatives.</p><p>Eventually, I noticed that <code>Cmd-Tab</code> based window switching is fast. So, for
+last 6 months, I have been using a two window strategy. That is:</p><p><strong>The primary workflow must be dependent on at max two windows.</strong></p><p>This means that any application I want to have in my workflow must run in either
+of those windows.</p><p>Those windows in my case are:</p><ul><li><em>iTerm2</em><br>This includes a <code>tmux</code> session, with multiple windows. The first window will
 run a in-terminal emacs client and the rest all windows will various shell
 sessions and split configurations of their own. This way, I&rsquo;ll spend most of
-my time within a tmux session.</li>
-<li><em>Browser</em><br>
-Apart from functioning as a browser, it serves as an host for applications
-such as: Mail, Slack, Calender.</li>
-</ul>
-<p>There are multiple benefits of this setup:</p>
-<ul>
-<li>Quick window switching.</li>
-<li>Universal workflow. Use it on RaspberryPi, remote machines, Linux TTY.</li>
-<li>Keystrokes are deterministic. Just queue in the keystrokes and let the
+my time within a tmux session.</li><li><em>Browser</em><br>Apart from functioning as a browser, it serves as an host for applications
+such as: Mail, Slack, Calender.</li></ul><p>There are multiple benefits of this setup:</p><ul><li>Quick window switching.</li><li>Universal workflow. Use it on RaspberryPi, remote machines, Linux TTY.</li><li>Keystrokes are deterministic. Just queue in the keystrokes and let the
 computer execute things at its own pace. This also is my major complaint
-against touch phones (compared to say, an old Nokia QWERTY phone).</li>
-<li>I use Vim as a text editor for anything non Clojure. With tmux splits panes,
-all of the context stays in the same tmux window.</li>
-</ul>
-<p>There are drawbacks too:</p>
-<ul>
-<li>Not every application can run in the browser/terminal. Because of this, you
-end up negotiating for alternates.</li>
-<li>Although most of Emacs works well in terminal, some bindings at times won&rsquo;t
-work. This isn&rsquo;t a issue for me particularly.</li>
-</ul>
-<br>
-<p class=back-to-posts><a href=/blog>Back to posts</a></p>
-</div>
-<br>
-<div class=disqus>
-</div>
-</div>
-</div>
-</section>
-<script data-goatcounter=https://t.rohanjain.in/count async src=//t.rohanjain.in/count.js></script>
-<noscript>
-<img src=https://t.rohanjain.in/count>
-</noscript>
-</body>
-</html>
+against touch phones (compared to say, an old Nokia QWERTY phone).</li><li>I use Vim as a text editor for anything non Clojure. With tmux splits panes,
+all of the context stays in the same tmux window.</li></ul><p>There are drawbacks too:</p><ul><li>Not every application can run in the browser/terminal. Because of this, you
+end up negotiating for alternates.</li><li>Although most of Emacs works well in terminal, some bindings at times won&rsquo;t
+work. This isn&rsquo;t a issue for me particularly.</li></ul><br><p class=back-to-posts><a href=/blog>Back to posts</a></p></div><br><div class=disqus></div></div></div></section><script data-goatcounter=https://t.rohanjain.in/count async src=//t.rohanjain.in/count.js></script><noscript><img src=https://t.rohanjain.in/count></noscript></body></html>

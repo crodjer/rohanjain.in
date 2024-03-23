@@ -1,179 +1,100 @@
-<!doctype html><html lang=en-us>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="chrome=1">
-<meta name=HandheldFriendly content="True">
-<meta name=MobileOptimized content="320">
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=referrer content="no-referrer">
-<meta name=author content="Rohan Jain">
-<meta name=description content="Recently, I built an encrypted chat service, which was based on tornado and ember.js. The project itself had grave security issues, so I shut it down, but while working on it I learned a few new things and testing websockets with tornado is one of them.
-Most of the material out there for this suggests developing separate client based tests, which I didn&rsquo;t want to do. Eventually, I figured out that tornado already provides all the utilities to do unit/integration tests for websockets.">
-<meta property="og:title" content="Testing tornado websockets without third party clients">
-<meta property="og:description" content="Recently, I built an encrypted chat service, which was based on tornado and ember.js. The project itself had grave security issues, so I shut it down, but while working on it I learned a few new things and testing websockets with tornado is one of them.
-Most of the material out there for this suggests developing separate client based tests, which I didn&rsquo;t want to do. Eventually, I figured out that tornado already provides all the utilities to do unit/integration tests for websockets.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="/ws-test/"><meta property="article:section" content="old">
-<meta property="article:published_time" content="2015-08-22T00:00:00+00:00">
-<meta property="article:modified_time" content="2015-08-22T00:00:00+00:00">
-<title>
-Testing tornado websockets without third party clients
-</title>
-<link rel=canonical href=/ws-test/>
-<link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
-<link rel=stylesheet href=/css/reset.css>
-<link rel=stylesheet href=/css/pygments.css>
-<link rel=stylesheet href=/css/main.css>
-<link rel=stylesheet href=/css/solarized.css>
-<link rel=stylesheet href=/css/override.css>
-<link rel="shortcut icon" href=/img/favicon.ico>
-</head>
-<body lang=en>
-<section class=header>
-<div class=container>
-<div class=content>
-<a href=/><img class=avatar src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" rcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
-<a href=/><div class=name>Rohan Jain</div></a>
-<nav>
-<ul>
-<li class=nav-home><a href=/><span>Home</span></a></li>
-<li class=nav-about><a href=/about/><span>About</span></a></li>
-</ul>
-</nav>
-</div>
-</div>
-</section>
-<section class=icons>
-<div class=container>
-<div class=content>
-<a href=//github.com/crodjer target=_blank rel=noopener><img class=icon src=/img/github.svg alt=github></a>
+<!doctype html><html lang=en-US><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="chrome=1"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="Recently, I built an encrypted chat service, which was based on tornado and ember.js. The project itself had grave security issues, so I shut it down, but while working on it I learned a few new things and testing websockets with tornado is one of them.
+Most of the material out there for this suggests developing separate client based tests, which I didn&rsquo;t want to do. Eventually, I figured out that tornado already provides all the utilities to do unit/integration tests for websockets."><meta property="og:title" content="Testing tornado websockets without third party clients"><meta property="og:description" content="Recently, I built an encrypted chat service, which was based on tornado and ember.js. The project itself had grave security issues, so I shut it down, but while working on it I learned a few new things and testing websockets with tornado is one of them.
+Most of the material out there for this suggests developing separate client based tests, which I didn&rsquo;t want to do. Eventually, I figured out that tornado already provides all the utilities to do unit/integration tests for websockets."><meta property="og:type" content="article"><meta property="og:url" content="/ws-test/"><meta property="article:section" content="old"><meta property="article:published_time" content="2015-08-22T00:00:00+00:00"><meta property="article:modified_time" content="2015-08-22T00:00:00+00:00"><title>Testing tornado websockets without third party clients
+</title><link rel=canonical href=/ws-test/><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500"><link rel=stylesheet href=/css/reset.css><link rel=stylesheet href=/css/pygments.css><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/css/solarized.css><link rel=stylesheet href=/css/override.css><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><section class=header><div class=container><div class=content><a href=/><img class=avatar src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" srcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
+<a href=/><div class=name>Rohan Jain</div></a><nav><ul><li class=nav-home><a href=/><span>Home</span></a></li><li class=nav-about><a href=/about/><span>About</span></a></li></ul></nav></div></div></section><section class=icons><div class=container><div class=content><a href=//github.com/crodjer target=_blank rel=noopener><img class=icon src=/img/github.svg alt=github></a>
 <a href=//twitter.com/__crodjer__ target=_blank rel=noopener><img class=icon src=/img/twitter.svg alt=twitter></a>
-<a href=//linkedin.com/in/crodjer target=_blank rel=noopener><img class=icon src=/img/linkedin.svg alt=linkedin></a>
-</div>
-</div>
-</section>
-<section class=main>
-<div class=container>
-<div class=content>
-<div class=page-heading>
-Testing tornado websockets without third party clients
-</div>
-<div class=markdown>
-<p>Recently, I built an encrypted <a href=http://github.com/crodjer/qotr/>chat service</a>, which was based on
+<a href=//linkedin.com/in/crodjer target=_blank rel=noopener><img class=icon src=/img/linkedin.svg alt=linkedin></a></div></div></section><section class=main><div class=container><div class=content><div class=page-heading>Testing tornado websockets without third party clients</div><div class=markdown><p>Recently, I built an encrypted <a href=http://github.com/crodjer/qotr/>chat service</a>, which was based on
 <a href=http://www.tornadoweb.org/>tornado</a> and <a href=http://emberjs.com/>ember.js</a>. The project itself had grave security issues, so I
 shut it down, but while working on it I learned a few new things and testing
-websockets with tornado is one of them.</p>
-<p>Most of the material out there for this suggests developing separate client
+websockets with tornado is one of them.</p><p>Most of the material out there for this suggests developing separate client
 based tests, which I didn&rsquo;t want to do. Eventually, I figured out that tornado
-already provides all the utilities to do unit/integration tests for websockets.</p>
-<p>First, we will need a websockets based echo server to test, lets call it
-<code>ws.py</code>. The websocket handler would be:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>from</span> <span class=nn>tornado</span> <span class=kn>import</span> <span class=n>web</span><span class=p>,</span> <span class=n>websocket</span>
-
-<span class=k>class</span> <span class=nc>Echo</span><span class=p>(</span><span class=n>websocket</span><span class=o>.</span><span class=n>WebSocketHandler</span><span class=p>):</span>
-
-    <span class=c1># Open allows for any number arguments, unlike what pylint thinks.</span>
-    <span class=c1># pylint: disable=W0221</span>
-    <span class=k>def</span> <span class=nf>open</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-        <span class=bp>self</span><span class=o>.</span><span class=n>write_message</span><span class=p>(</span><span class=s1>&#39;hello&#39;</span><span class=p>)</span>
-
-    <span class=k>def</span> <span class=nf>on_message</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>message</span><span class=p>):</span>
-        <span class=bp>self</span><span class=o>.</span><span class=n>write_message</span><span class=p>(</span><span class=n>message</span><span class=p>)</span>
-
-    <span class=k>def</span> <span class=nf>on_close</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-        <span class=bp>self</span><span class=o>.</span><span class=n>write_message</span><span class=p>(</span><span class=s1>&#39;bye&#39;</span><span class=p>)</span>
-</code></pre></div><p>Lets define an application which uses the above handler:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>APP</span> <span class=o>=</span> <span class=n>web</span><span class=o>.</span><span class=n>Application</span><span class=p>([</span>
-    <span class=p>(</span><span class=sa>r</span><span class=s2>&#34;/&#34;</span><span class=p>,</span> <span class=n>Echo</span><span class=p>),</span>
-<span class=p>])</span>
-
-<span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
-    <span class=n>APP</span><span class=o>.</span><span class=n>listen</span><span class=p>(</span><span class=mi>5000</span><span class=p>)</span>
-</code></pre></div><p>Now, we will test the application out. Create a file, say <code>test_ws.py</code>:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>from</span> <span class=nn>tornado</span> <span class=kn>import</span> <span class=n>testing</span><span class=p>,</span> <span class=n>httpserver</span><span class=p>,</span> <span class=n>gen</span><span class=p>,</span> <span class=n>websocket</span>
-<span class=kn>from</span> <span class=nn>ws</span> <span class=kn>import</span> <span class=n>APP</span>
-
-<span class=k>class</span> <span class=nc>TestChatHandler</span><span class=p>(</span><span class=n>testing</span><span class=o>.</span><span class=n>AsyncTestCase</span><span class=p>):</span>
-    <span class=k>pass</span>
-</code></pre></div><p>We use tornado&rsquo;s testing wrapper for the integration it provides with the event
-loop. Lets tell unittest how to setup the tests:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=k>class</span> <span class=nc>TestChatHandler</span><span class=p>(</span><span class=n>testing</span><span class=o>.</span><span class=n>AsyncTestCase</span><span class=p>):</span>
-
-    <span class=k>def</span> <span class=nf>setUp</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-        <span class=nb>super</span><span class=p>(</span><span class=n>TestChatHandler</span><span class=p>,</span> <span class=bp>self</span><span class=p>)</span><span class=o>.</span><span class=n>setUp</span><span class=p>()</span>
-        <span class=n>server</span> <span class=o>=</span> <span class=n>httpserver</span><span class=o>.</span><span class=n>HTTPServer</span><span class=p>(</span><span class=n>APP</span><span class=p>)</span>
-        <span class=n>socket</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>port</span> <span class=o>=</span> <span class=n>testing</span><span class=o>.</span><span class=n>bind_unused_port</span><span class=p>()</span>
-        <span class=n>server</span><span class=o>.</span><span class=n>add_socket</span><span class=p>(</span><span class=n>socket</span><span class=p>)</span>
-</code></pre></div><p>We create a http server out of our application and get a socket bound to an
+already provides all the utilities to do unit/integration tests for websockets.</p><p>First, we will need a websockets based echo server to test, lets call it
+<code>ws.py</code>. The websocket handler would be:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>tornado</span> <span class=kn>import</span> <span class=n>web</span><span class=p>,</span> <span class=n>websocket</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Echo</span><span class=p>(</span><span class=n>websocket</span><span class=o>.</span><span class=n>WebSocketHandler</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># Open allows for any number arguments, unlike what pylint thinks.</span>
+</span></span><span class=line><span class=cl>    <span class=c1># pylint: disable=W0221</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>open</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>write_message</span><span class=p>(</span><span class=s1>&#39;hello&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>on_message</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>message</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>write_message</span><span class=p>(</span><span class=n>message</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>on_close</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>write_message</span><span class=p>(</span><span class=s1>&#39;bye&#39;</span><span class=p>)</span>
+</span></span></code></pre></div><p>Lets define an application which uses the above handler:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>APP</span> <span class=o>=</span> <span class=n>web</span><span class=o>.</span><span class=n>Application</span><span class=p>([</span>
+</span></span><span class=line><span class=cl>    <span class=p>(</span><span class=sa>r</span><span class=s2>&#34;/&#34;</span><span class=p>,</span> <span class=n>Echo</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>APP</span><span class=o>.</span><span class=n>listen</span><span class=p>(</span><span class=mi>5000</span><span class=p>)</span>
+</span></span></code></pre></div><p>Now, we will test the application out. Create a file, say <code>test_ws.py</code>:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>tornado</span> <span class=kn>import</span> <span class=n>testing</span><span class=p>,</span> <span class=n>httpserver</span><span class=p>,</span> <span class=n>gen</span><span class=p>,</span> <span class=n>websocket</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>ws</span> <span class=kn>import</span> <span class=n>APP</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>TestChatHandler</span><span class=p>(</span><span class=n>testing</span><span class=o>.</span><span class=n>AsyncTestCase</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>pass</span>
+</span></span></code></pre></div><p>We use tornado&rsquo;s testing wrapper for the integration it provides with the event
+loop. Lets tell unittest how to setup the tests:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>TestChatHandler</span><span class=p>(</span><span class=n>testing</span><span class=o>.</span><span class=n>AsyncTestCase</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>setUp</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>super</span><span class=p>(</span><span class=n>TestChatHandler</span><span class=p>,</span> <span class=bp>self</span><span class=p>)</span><span class=o>.</span><span class=n>setUp</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>server</span> <span class=o>=</span> <span class=n>httpserver</span><span class=o>.</span><span class=n>HTTPServer</span><span class=p>(</span><span class=n>APP</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>socket</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>port</span> <span class=o>=</span> <span class=n>testing</span><span class=o>.</span><span class=n>bind_unused_port</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>server</span><span class=o>.</span><span class=n>add_socket</span><span class=p>(</span><span class=n>socket</span><span class=p>)</span>
+</span></span></code></pre></div><p>We create a http server out of our application and get a socket bound to an
 unused port. We then ask the server to accept on the created socket. Don&rsquo;t
 forget the <code>super</code> call, it ensures that the ioloop gets created. <code>unittest</code>
 will now ensure that a server and an ioloop is up and running before running
-tests.</p>
-<p>Moving forward, we need to define a helper for creating a websocket connection
+tests.</p><p>Moving forward, we need to define a helper for creating a websocket connection
 to the server. Tornado websocket provides a handly websocket client. It can be
-created with <code>websocket.websocket_connect</code>.</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python>    <span class=k>def</span> <span class=nf>_mk_connection</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-        <span class=k>return</span> <span class=n>websocket</span><span class=o>.</span><span class=n>websocket_connect</span><span class=p>(</span>
-            <span class=s1>&#39;ws://localhost:</span><span class=si>{}</span><span class=s1>/&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>port</span><span class=p>)</span>
-        <span class=p>)</span>
-</code></pre></div><p>We can write a simple test for this:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python>    <span class=nd>@testing</span><span class=o>.</span><span class=n>gen_test</span>
-    <span class=k>def</span> <span class=nf>test_hello</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-        <span class=n>c</span> <span class=o>=</span> <span class=k>yield</span> <span class=bp>self</span><span class=o>.</span><span class=n>_mk_connection</span><span class=p>()</span>
-        <span class=c1># Get the initial hello from the server.</span>
-        <span class=n>response</span> <span class=o>=</span> <span class=k>yield</span> <span class=n>c</span><span class=o>.</span><span class=n>read_message</span><span class=p>()</span>
-        <span class=c1># Make sure that we got a &#39;hello&#39; not &#39;bye&#39;</span>
-        <span class=bp>self</span><span class=o>.</span><span class=n>assertEqual</span><span class=p>(</span><span class=s1>&#39;hello&#39;</span><span class=p>,</span> <span class=n>response</span><span class=p>)</span>
-</code></pre></div><p><code>testing.gen_test</code> is a wrapper over tornado&rsquo;s <code>gen.coroutine</code>. It runs the test
+created with <code>websocket.websocket_connect</code>.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>_mk_connection</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>websocket</span><span class=o>.</span><span class=n>websocket_connect</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>            <span class=s1>&#39;ws://localhost:</span><span class=si>{}</span><span class=s1>/&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>port</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>)</span>
+</span></span></code></pre></div><p>We can write a simple test for this:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl>    <span class=nd>@testing.gen_test</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_hello</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>c</span> <span class=o>=</span> <span class=k>yield</span> <span class=bp>self</span><span class=o>.</span><span class=n>_mk_connection</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=c1># Get the initial hello from the server.</span>
+</span></span><span class=line><span class=cl>        <span class=n>response</span> <span class=o>=</span> <span class=k>yield</span> <span class=n>c</span><span class=o>.</span><span class=n>read_message</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=c1># Make sure that we got a &#39;hello&#39; not &#39;bye&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>assertEqual</span><span class=p>(</span><span class=s1>&#39;hello&#39;</span><span class=p>,</span> <span class=n>response</span><span class=p>)</span>
+</span></span></code></pre></div><p><code>testing.gen_test</code> is a wrapper over tornado&rsquo;s <code>gen.coroutine</code>. It runs the test
 synchronously under the ioloop that <code>testing.AsyncTestCase</code> creates in
 <code>setUp</code>. The test checks for the &lsquo;hello&rsquo; message that we expect from the server
 on connection. <code>yield</code> makes sure that we for the response from the
 server. Note that if you write a <code>yield c.read_message()</code> when a message from
 server isn&rsquo;t expected, the coroutine will keep waiting, eventually raising
 <code>tornado.ioloop.TimeoutError</code> (5 seconds by default). Great, we can write lot of
-tests using just what we have now.</p>
-<p>The tests can be run via:</p>
-<pre tabindex=0><code>python -m tornado.testing discover
+tests using just what we have now.</p><p>The tests can be run via:</p><pre tabindex=0><code>python -m tornado.testing discover
 </code></pre><p>This could still be further improved. We need to yield and ignore the &lsquo;hello&rsquo;
 message in every test, for every client. And in your application, it may be a
 more complicated handshake - possibly a few initial messages. Once you write a
 test for that handshake, it needn&rsquo;t be re-written in every test. To avoid that,
-we will write an an abstraction over this:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python>    <span class=nd>@gen</span><span class=o>.</span><span class=n>coroutine</span>
-    <span class=k>def</span> <span class=nf>_mk_client</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-        <span class=n>c</span> <span class=o>=</span> <span class=k>yield</span> <span class=bp>self</span><span class=o>.</span><span class=n>_mk_connection</span><span class=p>()</span>
-
-        <span class=c1># Discard the hello</span>
-        <span class=c1># This could be any initial handshake, which needs to be generalized</span>
-        <span class=c1># for most of the tests.</span>
-        <span class=n>_</span> <span class=o>=</span> <span class=k>yield</span> <span class=n>c</span><span class=o>.</span><span class=n>read_message</span><span class=p>()</span>
-
-        <span class=k>raise</span> <span class=n>gen</span><span class=o>.</span><span class=n>Return</span><span class=p>(</span><span class=n>c</span><span class=p>)</span>
-</code></pre></div><p><code>_mk_client</code> here is a method in which you could place all the boilerplate. The
+we will write an an abstraction over this:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl>    <span class=nd>@gen.coroutine</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>_mk_client</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>c</span> <span class=o>=</span> <span class=k>yield</span> <span class=bp>self</span><span class=o>.</span><span class=n>_mk_connection</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1># Discard the hello</span>
+</span></span><span class=line><span class=cl>        <span class=c1># This could be any initial handshake, which needs to be generalized</span>
+</span></span><span class=line><span class=cl>        <span class=c1># for most of the tests.</span>
+</span></span><span class=line><span class=cl>        <span class=n>_</span> <span class=o>=</span> <span class=k>yield</span> <span class=n>c</span><span class=o>.</span><span class=n>read_message</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>raise</span> <span class=n>gen</span><span class=o>.</span><span class=n>Return</span><span class=p>(</span><span class=n>c</span><span class=p>)</span>
+</span></span></code></pre></div><p><code>_mk_client</code> here is a method in which you could place all the boilerplate. The
 key point here is the exception <code>gen.Return(c)</code> we raise in the end. <code>return</code>
 with a value is allowed only after Python <code>3.3</code>, so <code>tornado.gen</code> uses the value
-associated with this exception as the coroutine&rsquo;s result.</p>
-<p>With <code>_mk_client</code> available, we can write tests which only include the relevant
-code:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python>    <span class=nd>@testing</span><span class=o>.</span><span class=n>gen_test</span>
-    <span class=k>def</span> <span class=nf>test_echo</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
-        <span class=c1># A client with the hello taken care of.</span>
-        <span class=n>c</span> <span class=o>=</span> <span class=k>yield</span> <span class=bp>self</span><span class=o>.</span><span class=n>_mk_client</span><span class=p>()</span>
-
-        <span class=c1># Send a &#39;foo&#39; to the server.</span>
-        <span class=n>c</span><span class=o>.</span><span class=n>write_message</span><span class=p>(</span><span class=s2>&#34;foo&#34;</span><span class=p>)</span>
-        <span class=c1># Get the &#39;foo&#39; back.</span>
-        <span class=n>response</span> <span class=o>=</span> <span class=k>yield</span> <span class=n>c</span><span class=o>.</span><span class=n>read_message</span><span class=p>()</span>
-        <span class=c1># Make sure that we got a &#39;foo&#39; back and not &#39;bar&#39;.</span>
-        <span class=bp>self</span><span class=o>.</span><span class=n>assertEqual</span><span class=p>(</span><span class=s1>&#39;foo&#39;</span><span class=p>,</span> <span class=n>response</span><span class=p>)</span>
-</code></pre></div><p>The application built out of this post is available <a href=https://gist.github.com/crodjer/1e9989ab30fdc32db926>as a gist</a>.</p>
-</div>
-</div>
-</div>
-</section>
-<script data-goatcounter=https://t.rohanjain.in/count async src=//t.rohanjain.in/count.js></script>
-<noscript>
-<img src=https://t.rohanjain.in/count>
-</noscript>
-</body>
-</html>
+associated with this exception as the coroutine&rsquo;s result.</p><p>With <code>_mk_client</code> available, we can write tests which only include the relevant
+code:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl>    <span class=nd>@testing.gen_test</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_echo</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=c1># A client with the hello taken care of.</span>
+</span></span><span class=line><span class=cl>        <span class=n>c</span> <span class=o>=</span> <span class=k>yield</span> <span class=bp>self</span><span class=o>.</span><span class=n>_mk_client</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1># Send a &#39;foo&#39; to the server.</span>
+</span></span><span class=line><span class=cl>        <span class=n>c</span><span class=o>.</span><span class=n>write_message</span><span class=p>(</span><span class=s2>&#34;foo&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=c1># Get the &#39;foo&#39; back.</span>
+</span></span><span class=line><span class=cl>        <span class=n>response</span> <span class=o>=</span> <span class=k>yield</span> <span class=n>c</span><span class=o>.</span><span class=n>read_message</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=c1># Make sure that we got a &#39;foo&#39; back and not &#39;bar&#39;.</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>assertEqual</span><span class=p>(</span><span class=s1>&#39;foo&#39;</span><span class=p>,</span> <span class=n>response</span><span class=p>)</span>
+</span></span></code></pre></div><p>The application built out of this post is available <a href=https://gist.github.com/crodjer/1e9989ab30fdc32db926>as a gist</a>.</p></div></div></div></section><script data-goatcounter=https://t.rohanjain.in/count async src=//t.rohanjain.in/count.js></script><noscript><img src=https://t.rohanjain.in/count></noscript></body></html>

@@ -1,112 +1,27 @@
-<!doctype html><html lang=en-us>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="chrome=1">
-<meta name=HandheldFriendly content="True">
-<meta name=MobileOptimized content="320">
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=referrer content="no-referrer">
-<meta name=author content="Rohan Jain">
-<meta name=description content="I am a big fan of deterministic access to applications windows. That is, to be able to open them without needing any visual feedback from the screen. Tiling window managers do this well. On OSX, this can be tricky.
-For a long time, I used a two windows workflow i.e. all the applications I need should run in just two windows (applications): the browser (mail, slack etc.) or the terminal (emacs, tmux, bash).">
-<meta property="og:title" content="Window Management in OSX with Spark">
-<meta property="og:description" content="I am a big fan of deterministic access to applications windows. That is, to be able to open them without needing any visual feedback from the screen. Tiling window managers do this well. On OSX, this can be tricky.
-For a long time, I used a two windows workflow i.e. all the applications I need should run in just two windows (applications): the browser (mail, slack etc.) or the terminal (emacs, tmux, bash).">
-<meta property="og:type" content="article">
-<meta property="og:url" content="/spark/"><meta property="article:section" content="blog">
-<meta property="article:published_time" content="2017-12-06T12:44:55+00:00">
-<meta property="article:modified_time" content="2017-12-06T12:44:55+00:00">
-<title>
-Window Management in OSX with Spark
-</title>
-<link rel=canonical href=/spark/>
-<link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
-<link rel=stylesheet href=/css/reset.css>
-<link rel=stylesheet href=/css/pygments.css>
-<link rel=stylesheet href=/css/main.css>
-<link rel=stylesheet href=/css/solarized.css>
-<link rel=stylesheet href=/css/override.css>
-<link rel="shortcut icon" href=/img/favicon.ico>
-</head>
-<body lang=en>
-<section class=header>
-<div class=container>
-<div class=content>
-<a href=/><img class=avatar src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" rcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
-<a href=/><div class=name>Rohan Jain</div></a>
-<nav>
-<ul>
-<li class=nav-home><a href=/><span>Home</span></a></li>
-<li class=nav-about><a href=/about/><span>About</span></a></li>
-</ul>
-</nav>
-</div>
-</div>
-</section>
-<section class=icons>
-<div class=container>
-<div class=content>
-<a href=//github.com/crodjer target=_blank rel=noopener><img class=icon src=/img/github.svg alt=github></a>
+<!doctype html><html lang=en-US><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="chrome=1"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="I am a big fan of deterministic access to applications windows. That is, to be able to open them without needing any visual feedback from the screen. Tiling window managers do this well. On OSX, this can be tricky.
+For a long time, I used a two windows workflow i.e. all the applications I need should run in just two windows (applications): the browser (mail, slack etc.) or the terminal (emacs, tmux, bash)."><meta property="og:title" content="Window Management in OSX with Spark"><meta property="og:description" content="I am a big fan of deterministic access to applications windows. That is, to be able to open them without needing any visual feedback from the screen. Tiling window managers do this well. On OSX, this can be tricky.
+For a long time, I used a two windows workflow i.e. all the applications I need should run in just two windows (applications): the browser (mail, slack etc.) or the terminal (emacs, tmux, bash)."><meta property="og:type" content="article"><meta property="og:url" content="/spark/"><meta property="article:section" content="blog"><meta property="article:published_time" content="2017-12-06T12:44:55+00:00"><meta property="article:modified_time" content="2017-12-06T12:44:55+00:00"><title>Window Management in OSX with Spark
+</title><link rel=canonical href=/spark/><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500"><link rel=stylesheet href=/css/reset.css><link rel=stylesheet href=/css/pygments.css><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/css/solarized.css><link rel=stylesheet href=/css/override.css><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><section class=header><div class=container><div class=content><a href=/><img class=avatar src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" srcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
+<a href=/><div class=name>Rohan Jain</div></a><nav><ul><li class=nav-home><a href=/><span>Home</span></a></li><li class=nav-about><a href=/about/><span>About</span></a></li></ul></nav></div></div></section><section class=icons><div class=container><div class=content><a href=//github.com/crodjer target=_blank rel=noopener><img class=icon src=/img/github.svg alt=github></a>
 <a href=//twitter.com/__crodjer__ target=_blank rel=noopener><img class=icon src=/img/twitter.svg alt=twitter></a>
-<a href=//linkedin.com/in/crodjer target=_blank rel=noopener><img class=icon src=/img/linkedin.svg alt=linkedin></a>
-</div>
-</div>
-</section>
-<section class="main post non-narrow zero-top-spacing">
-<div class=container>
-<div class=content>
-<div class=front-matter>
-<div class=title-container>
-<div class=page-heading>
-Window Management in OSX with Spark
-</div>
-<div class=initials><a href=/></a></div>
-</div>
-<div class=meta>
-<div class=date title="Wed Dec 6 2017 12:44:55 UTC">Dec 6, 2017</div>
-<div class=reading-time><div class=middot></div>2 minutes read</div>
-</div>
-</div>
-<div class=markdown>
-<p>I am a big fan of deterministic access to applications windows. That is, to be
+<a href=//linkedin.com/in/crodjer target=_blank rel=noopener><img class=icon src=/img/linkedin.svg alt=linkedin></a></div></div></section><section class="main post non-narrow zero-top-spacing"><div class=container><div class=content><div class=front-matter><div class=title-container><div class=page-heading>Window Management in OSX with Spark</div><div class=initials><a href=/></a></div></div><div class=meta><div class=date title='Wed Dec 6 2017 12:44:55 UTC'>Dec 6, 2017</div><div class=reading-time><div class=middot></div>2 minutes read</div></div></div><div class=markdown><p>I am a big fan of deterministic access to applications windows. That is, to be
 able to open them without needing any visual feedback from the screen. Tiling
-window managers do this well. On OSX, this can be tricky.</p>
-<p>For a long time, I used a <a href=/two-windows/>two windows</a> workflow i.e. all the
+window managers do this well. On OSX, this can be tricky.</p><p>For a long time, I used a <a href=/two-windows/>two windows</a> workflow i.e. all the
 applications I need should run in just two windows (applications): the browser
 (mail, slack etc.) or the terminal (emacs, tmux, bash). This works, but is
-restrictive.</p>
-<p>I have switched to an alternative approach now. I have a global shortcut for
+restrictive.</p><p>I have switched to an alternative approach now. I have a global shortcut for
 each application I use frequently. For example: <code>Cmd-Ctrl-E</code> is <code>emacs</code>,
 <code>Cmd-Ctrl-C</code> is <code>chrome</code>. Now, wherever I may be, I can deterministically open
 Emacs. I do this with <a href=https://www.shadowlab.org/softwares/spark.php>Spark</a> and
-an <code>AppleScript</code> per application.</p>
-<p>I had to write <code>AppleScript</code>s instead of simply pointing to the application
+an <code>AppleScript</code> per application.</p><p>I had to write <code>AppleScript</code>s instead of simply pointing to the application
 because I need the window to be resized to the maximum as well. This is what
-the <code>AppleScript</code> to open (and resize) <code>Emacs</code> looks like:</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-applescript data-lang=applescript><span class=k>tell</span> <span class=nb>application</span> <span class=s2>&#34;Emacs&#34;</span>
-	<span class=c>-- Get bounds from the desktop.</span>
-	<span class=k>tell</span> <span class=nb>application</span> <span class=s2>&#34;Finder&#34;</span> <span class=k>to</span> <span class=na>bounds</span> <span class=k>of</span> <span class=na>window</span> <span class=k>of</span> <span class=nv>desktop</span>
-	<span class=c>-- Set the window bounds to the ones we just fetched.</span>
-	<span class=k>set</span> <span class=na>bounds</span> <span class=k>of</span> <span class=na>window</span> <span class=mi>1</span> <span class=k>to</span> <span class=no>result</span>
-	<span class=c>-- Focus the editor window.</span>
-	<span class=nb>activate</span>
-<span class=k>end</span> <span class=k>tell</span>
-</code></pre></div><blockquote>
-<p>This way of resizing cannot be used with multiple screens because the bounds
-provided by <code>Finder</code> will span all of them and so will the application window.</p>
-</blockquote>
-<br>
-<p class=back-to-posts><a href=/blog>Back to posts</a></p>
-</div>
-<br>
-<div class=disqus>
-</div>
-</div>
-</div>
-</section>
-<script data-goatcounter=https://t.rohanjain.in/count async src=//t.rohanjain.in/count.js></script>
-<noscript>
-<img src=https://t.rohanjain.in/count>
-</noscript>
-</body>
-</html>
+the <code>AppleScript</code> to open (and resize) <code>Emacs</code> looks like:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-applescript data-lang=applescript><span class=line><span class=cl><span class=k>tell</span> <span class=nb>application</span> <span class=s2>&#34;Emacs&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=c>-- Get bounds from the desktop.</span>
+</span></span><span class=line><span class=cl>	<span class=k>tell</span> <span class=nb>application</span> <span class=s2>&#34;Finder&#34;</span> <span class=k>to</span> <span class=na>bounds</span> <span class=k>of</span> <span class=na>window</span> <span class=k>of</span> <span class=nv>desktop</span>
+</span></span><span class=line><span class=cl>	<span class=c>-- Set the window bounds to the ones we just fetched.</span>
+</span></span><span class=line><span class=cl>	<span class=k>set</span> <span class=na>bounds</span> <span class=k>of</span> <span class=na>window</span> <span class=mi>1</span> <span class=k>to</span> <span class=no>result</span>
+</span></span><span class=line><span class=cl>	<span class=c>-- Focus the editor window.</span>
+</span></span><span class=line><span class=cl>	<span class=nb>activate</span>
+</span></span><span class=line><span class=cl><span class=k>end</span> <span class=k>tell</span>
+</span></span></code></pre></div><blockquote><p>This way of resizing cannot be used with multiple screens because the bounds
+provided by <code>Finder</code> will span all of them and so will the application window.</p></blockquote><br><p class=back-to-posts><a href=/blog>Back to posts</a></p></div><br><div class=disqus></div></div></div></section><script data-goatcounter=https://t.rohanjain.in/count async src=//t.rohanjain.in/count.js></script><noscript><img src=https://t.rohanjain.in/count></noscript></body></html>
