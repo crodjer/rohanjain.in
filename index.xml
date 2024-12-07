@@ -1,34 +1,265 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>The Perpetual Amature</title><link>/</link><description>Recent content on The Perpetual Amature</description><generator>Hugo -- gohugo.io</generator><language>en-US</language><lastBuildDate>Sat, 04 Sep 2021 19:41:19 +0530</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>Bootstrapping pipx for the obsessed</title><link>/pipx/</link><pubDate>Sat, 04 Sep 2021 19:41:19 +0530</pubDate><guid>/pipx/</guid><description>Managing Python based applications is made easy with pipx. But I dislike installing pipx via a pip user install, as it results in two python utilities managing packages. So, instead I let pipx manage it&amp;rsquo;s own updates.
-Here&amp;rsquo;s how we can do it on a Debian system:
-Install python3-pip, with:
-$ sudo apt install python3-pip Install pipx:
-$ pip install --user pipx Didn&amp;rsquo;t we want avoid that? Yes! We&amp;rsquo;ll clean this up later.</description></item><item><title>Cross Compiling Rust Binaries with Github Actions</title><link>/cargo-cross/</link><pubDate>Sun, 27 Jun 2021 16:50:00 +0530</pubDate><guid>/cargo-cross/</guid><description>Compiling rust is slow, specially on low power devices such as a Raspberry Pi. I build all my rust utilities with my RPi 4 and sync to the rest with syncthing. That was true for my project, sysit, as well. I use sysit on all my systems to keep tabs on the resource usage.
-Inspired from how skim utilizes cross compilation to build binaries directly using Github workflows, I incorporated a similar flow in sysit.</description></item><item><title>Encrypting 🔐 a Home 🏡 in Raspberry Pi</title><link>/fscrypt/</link><pubDate>Mon, 24 May 2021 11:22:27 +0530</pubDate><guid>/fscrypt/</guid><description>;tldr Use fscrypt to encrypt your home partition, with a few simple steps.
-Why encryption? I prefer to encrypt all my (and my family&amp;rsquo;s) storage at rest. Encryption is useful in scenarios where someone gains physical access to your device. This may save you from any losses other than the material cost of the device. Specially with a Raspberry Pi, it is more of a worry as how tiny the device is (the SD card is even smaller).</description></item><item><title>Hopping across the country with WireGuard</title><link>/jumper/</link><pubDate>Sun, 21 Feb 2021 19:11:38 +0530</pubDate><guid>/jumper/</guid><description>I need to be able to access all the computers over the internet as they are spread across the country:
-descartes: My dad&amp;rsquo;s Debian desktop (1800 km away). kant: RPi 3 running Arch (a NAS, printer, a wormhole). camus: RPi 4 running Manjaro (my personal work machine). nietzsche: My wife&amp;rsquo;s Manjaro notebook. Phones: newton, feyman, einstine and sagan. kepler: a tiny Debian on Google Cloud. webb: a tiny Ubuntu Server on Oracle Cloud.</description></item><item><title>Cooling the Raspberry Pi 4 with Argon Neo</title><link>/pi-cooling/</link><pubDate>Fri, 08 Jan 2021 10:21:02 +0530</pubDate><guid>/pi-cooling/</guid><description>The Raspberry Pi 4 runs hot, specially when overclocked. As I use it as my programming machine for my personal projects, I wanted to get the most out of its CPU.
-The first case I ordered for my Pi came with a fan which worked on 3.3V and 5V (too noisy). I setup a circuit which would allow me to turn it on/off via a GPIO pin controlled by this python based service, which turns the fan on/off based on certain threshold temperatures.</description></item><item><title>Some Light in the Background</title><link>/light/</link><pubDate>Wed, 15 Apr 2020 09:22:34 +0530</pubDate><guid>/light/</guid><description>tl;dr Dark backgrounds are the best. But when one accidentally land somewhere with a light background with eyes trained for dark, it can hurt. So, one may as well just make everything light for consistency.
-We love dark backgrounds. They are easier on the eyes, comfortable to work with in the night/dark rooms. So, we&amp;rsquo;d like everything that we see on the screen to be dark. And that&amp;rsquo;s the key, everything must be dark.</description></item><item><title>Window Management in OSX with Spark</title><link>/spark/</link><pubDate>Wed, 06 Dec 2017 12:44:55 +0000</pubDate><guid>/spark/</guid><description>I am a big fan of deterministic access to applications windows. That is, to be able to open them without needing any visual feedback from the screen. Tiling window managers do this well. On OSX, this can be tricky.
-For a long time, I used a two windows workflow i.e. all the applications I need should run in just two windows (applications): the browser (mail, slack etc.) or the terminal (emacs, tmux, bash).</description></item><item><title>The Purpose Of It All</title><link>/42/</link><pubDate>Wed, 10 May 2017 02:34:01 +0000</pubDate><guid>/42/</guid><description>If you have some time, I&amp;rsquo;d recommend reading The Myth of Sysiphus instead.
-The mind is free, with not much to worry about and starts to wander. It lands on the question: &amp;ldquo;What is the meaning of it all?&amp;rdquo;.
-Its not difficult to arrive at the answer: &amp;ldquo;There isn&amp;rsquo;t a meaning, really&amp;rdquo;, and sets in an existential crisis.
-But, I&amp;rsquo;d argue that there is a flaw in the question. Meaning isn&amp;rsquo;t something one should try to look for at all.</description></item><item><title>Dynamic DNS with Cloudflare</title><link>/cloudflare-ddns/</link><pubDate>Sat, 18 Mar 2017 05:28:10 +0000</pubDate><guid>/cloudflare-ddns/</guid><description>It is hard to maintain a regular internet uptime with home connections. 1/2 router re-connections per week can be fairly common. When that happens, the public IP changes with most ISPs. This can be annoying if you want access your computer remotely (possibly to SSH home). Dynamic DNS is a solution that exists to solve just that.
-I maintain DNS entries for my domain at Clouflare. The latest version of ddclient supports Cloudflare API, which works well with my ArchLinux box.</description></item><item><title>The two windows workflow</title><link>/two-windows/</link><pubDate>Mon, 27 Feb 2017 06:15:12 +0000</pubDate><guid>/two-windows/</guid><description>I was introduced to OSX for the first time in September, 2015. Coming from a XMonad/Linux based setup, I was accustomed to powerful and fast window management. Most available solutions for OSX did not have these qualities. I tried:
-Amethyst, a window manager with basic XMonad bindings. Just type the application name in Alfred. Initially this was slow, but quickly became habitual. Mjolinr, which is configured in Lua and can actually be quite powerful.</description></item><item><title>Decentralized Twitter</title><link>/decentralized-twitter/</link><pubDate>Sat, 11 Feb 2017 15:20:45 +0000</pubDate><guid>/decentralized-twitter/</guid><description>As a social network, twitter has a few fairly unique characteristics:
-It forces people to be more creative in trying to express the idea within 140 characters. Ability to control the content that you receive. Stricter filtering is possible based on one&amp;rsquo;s interests. On platforms such as Quora/Facebook, the feed is not deterministic. That&amp;rsquo;s not the case with twitter. You see tweets in order and as they happen. Twitter doesn&amp;rsquo;t try to decide what is important and what is not.</description></item><item><title>Find my code at Github</title><link>/code/</link><pubDate>Sat, 11 Feb 2017 09:48:44 +0000</pubDate><guid>/code/</guid><description>You can find most of the public code I have written at Github.</description></item><item><title>Navigating with the first telescope</title><link>/telescope/</link><pubDate>Thu, 12 May 2016 00:00:00 +0000</pubDate><guid>/telescope/</guid><description>In my previous post, I wrote about my initial experiences with stargazing - primarily to demonstrate that it can be fascinating without fancy equipment. After those initial sessions, I bought a telescope which magnified my experience significantly.
-Stars. Stars everywhere!
-The Telescope The primary purpose of an (astronomical) telescope, unlike popular belief, is not actually magnification. They act as light collectors (think burning a paper with a converging lens and sunlight).</description></item><item><title>Gazing in the night sky</title><link>/sky/</link><pubDate>Wed, 04 May 2016 00:00:00 +0000</pubDate><guid>/sky/</guid><description>About 6 months ago, I picked up a new hobby: Stargazing. Starting off with just naked eyes, I quickly realized that there is actually quite a lot to see without any optical equipment. Sky Map and Stellarium are incredibly useful applications for a dilettante like me.
-Dark adjustment Before any stargazing session, dark adjustment i.e. dilating the pupils completely to improve night vision, is essential. I turn off all kinds of lights in the house and listen to podcasts for a while (at least 30 minutes).</description></item><item><title>You have infinite email addresses</title><link>/infi-mail/</link><pubDate>Sat, 02 Apr 2016 00:00:00 +0000</pubDate><guid>/infi-mail/</guid><description>tl;dr
-You can add arbitrary tags to your email address. Any email sent to your-email+tag@your-provider.ext will land in the inbox for your-email@your-provider.ext.
-Emails are important. They are your identity on the web. Just like on phone, you&amp;rsquo;d want to control who can contact you via email. This warrants caution in signing up at places on the internet. It can be unsafe to register with the personal email address on new services for multiple reasons:</description></item><item><title>Categorizing archives by year with Hakyll</title><link>/hakyll-years/</link><pubDate>Mon, 31 Aug 2015 00:00:00 +0000</pubDate><guid>/hakyll-years/</guid><description>Recently, I decided to categorize my posts under directories named by the year they were created in. For example, this post is placed at: posts/2015/hakyll-years.mkd. I decided to utilize this structure to also group how archives are listed. Inspired from Hakyll&amp;rsquo;s tag functionality I wrote my own group by years functionality. This post tries to explain that. Also, I don&amp;rsquo;t see why a similar logic cannot be used to do simple pagination.</description></item><item><title>Clean URLs with Hakyll</title><link>/hakyll-clean-urls/</link><pubDate>Sun, 30 Aug 2015 00:00:00 +0000</pubDate><guid>/hakyll-clean-urls/</guid><description>The URLs generated by Hakyll, by default also include a .html extension. I have never been a fan of this. When things in reality are driven by the Content-Type header, it is absolutely redundant.
-Hakyll provides all the utilities with which we can get cleaner URLs, like this page&amp;rsquo;s. For this, I rely on the fact that most of the web servers automatically serve /foo/index.html for the URL /foo/. To generate clean paths, I define a custom route - cleanRoute:</description></item><item><title>Sitemap with Hakyll</title><link>/hakyll-sitemap/</link><pubDate>Sun, 30 Aug 2015 00:00:00 +0000</pubDate><guid>/hakyll-sitemap/</guid><description>Its fairly trivial to configure Hakyll to generate sitemaps. Sitemaps helps search engines websites. Similar to any typical html page, create a template - templates/sitemap.xml:
-&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt; &amp;lt;urlset xmlns=&amp;#34;http://www.sitemaps.org/schemas/sitemap/0.9&amp;#34;&amp;gt; $for(entries)$ &amp;lt;url&amp;gt; &amp;lt;loc&amp;gt;$host$$url$&amp;lt;/loc&amp;gt; &amp;lt;changefreq&amp;gt;weekly&amp;lt;/changefreq&amp;gt; $if(lastmod)$&amp;lt;lastmod&amp;gt;$lastmod$&amp;lt;/lastmod&amp;gt;$endif$ &amp;lt;priority&amp;gt;0.8&amp;lt;/priority&amp;gt; &amp;lt;/url&amp;gt; $endfor$ &amp;lt;/urlset&amp;gt; Then, using the templates, create a rule which uses all the pages from the site as entries. Here is what I do:
-create [&amp;#34;sitemap.xml&amp;#34;] $ do route idRoute compile $ do posts &amp;lt;- recentFirst =&amp;lt;&amp;lt; loadAll &amp;#34;posts/*/*&amp;#34; pages &amp;lt;- loadAll &amp;#34;pages/*&amp;#34; let allPosts = (return (pages ++ posts)) let sitemapCtx = mconcat [ listField &amp;#34;entries&amp;#34; pageCtx allPosts , constField &amp;#34;host&amp;#34; host , defaultContext ] makeItem &amp;#34;&amp;#34; &amp;gt;&amp;gt;= loadAndApplyTemplate &amp;#34;templates/sitemap.</description></item><item><title>Testing tornado websockets without third party clients</title><link>/ws-test/</link><pubDate>Sat, 22 Aug 2015 00:00:00 +0000</pubDate><guid>/ws-test/</guid><description>Recently, I built an encrypted chat service, which was based on tornado and ember.js. The project itself had grave security issues, so I shut it down, but while working on it I learned a few new things and testing websockets with tornado is one of them.
-Most of the material out there for this suggests developing separate client based tests, which I didn&amp;rsquo;t want to do. Eventually, I figured out that tornado already provides all the utilities to do unit/integration tests for websockets.</description></item><item><title>Using pulseaudio to play system beeps</title><link>/bell/</link><pubDate>Thu, 20 Aug 2015 00:00:00 +0000</pubDate><guid>/bell/</guid><description>Recently, I built a new desktop. After receiving everything, I realized that I was missing the onboard speaker (which creates the annoying beep sound). Ideally, the computer case should have had it, but they don&amp;rsquo;t come with a buzzer anymore. My various applications rely on the system beep, hence I needed to find a software alternative. Turns out it is fairly trivial to configure it to capture alerts with pulseaudio:</description></item><item><title>Switch between networks based on availability</title><link>/route-to/</link><pubDate>Wed, 19 Aug 2015 00:00:00 +0000</pubDate><guid>/route-to/</guid><description>Having been blessed with an unreliable internet, I always have had the need to change the default route when one goes down. ip provides you the required tooling to do that. I had been doing it so often, that I ended up writing a function to do this:
-route_to () { interface=$1 route=$(ip route | grep $interface | sed -r &amp;#39;s/\.0\/[[:digit:]]{2,3} /.1 /&amp;#39; | cut -d &amp;#39; &amp;#39; -f -4) if [ -n &amp;#34;$route&amp;#34; ]; then sudo ip route del default &amp;amp;&amp;gt; /dev/null sudo ip route replace default via $route else echo &amp;#34;No routes match: $interface&amp;#34; &amp;gt;&amp;amp;2 fi } With this in available in my shell, I can simply do route_to wlan0 and my system will start using wlan0 as the default interface.</description></item><item><title>VNC over reverse SSH</title><link>/vnc/</link><pubDate>Sun, 10 May 2015 00:00:00 +0000</pubDate><guid>/vnc/</guid><description>Note: My recent article, talking about WireGuard is a better and more ergonomic approach to achive this, compared to using reverse SSH.
-About a year ago, I switched my parents computer (lets call it P) from the pre-installed OS (Windows) to Ubuntu. The primary reason for this switch was it hard for me to debug and fix issues. Things have been smooth after the switch with no issues which I found hard to fix remotely.</description></item><item><title>The ubiquitous shell</title><link>/bash/</link><pubDate>Thu, 05 Mar 2015 00:00:00 +0000</pubDate><guid>/bash/</guid><description>Nothing makes a terminal feel more like home as one&amp;rsquo;s own shell configuration. My shell is bash, configured through a .bashrc and .profile. Bash is likely to be present in any Unix machine one uses.
-Bash is also my primary IDE. This allows for keeping a relatively simple set of utilities and tools to internalize. Coupled with a reliable window manager, workflows can be quickly scripted in the head. Shell scripts are an option as well for more complex flows.</description></item><item><title>Emacs: Flymake with virtualenvs in python-mode</title><link>/emacs-flymake-with-virtualenvs-in-python-mode/</link><pubDate>Tue, 28 Jan 2014 00:00:00 +0000</pubDate><guid>/emacs-flymake-with-virtualenvs-in-python-mode/</guid><description>Lately, I have been writing some python with emacs. So, I have been trying to get the popular checkers (pylint/pyflakes) to work with flymake and virtualenvs. The issues with existing solutions to get flymake working with the checkers is that most of them assume a global version of executable (which would be fine if it weren&amp;rsquo;t for the whole python 2 and 3 incompatibility).
-The python-mode in the latest emacs versions (mine is 24.</description></item><item><title>A productive workflow with vim sessions and servers</title><link>/yet-another-vim-productivity-post-server-client/</link><pubDate>Sun, 15 Apr 2012 00:00:00 +0000</pubDate><guid>/yet-another-vim-productivity-post-server-client/</guid><description>You can find lot of posts on the internet which try to tell you how to improve the ways in which Vim is used. Well, here is another one.
-#Vim Server, ZSH and Tiles
-A Vim instance behaves as a server in which files can be opened through remote applications. Read :help client-server of Vim to know more about this. I generally keep multiple Vim sessions running, described by task they are related to.</description></item><item><title>About</title><link>/about/</link><pubDate>Sun, 01 Apr 2012 12:21:25 +0000</pubDate><guid>/about/</guid><description>Hi, I am Rohan. I read and write code. I frequently read about physics, energy and climate change. After getting depressed enough of the latter, I read fiction or annoy my friends with my ideas or just code.
-I like to play table tennis, cricket and chess. I also bought a harmonica. Keep your hands on ears if you see me holding it. And yeah, I maintain a blog, which is so devoid of activity that it should have cobwebs on it.</description></item><item><title>Configure ssh to handle proxies and tunnels seamlessly</title><link>/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</link><pubDate>Sat, 27 Aug 2011 00:00:00 +0000</pubDate><guid>/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</guid><description>Recently I opened up on the port 443 over my EC2 instance (more or less like a VPS), so that I can access it through any firewalled proxy too. Apart from getting SSH running to a machine from outside world, I did some cool configuration to have ssh deal with with various remote hosts automatically. It uses the right proxy settings according the host being accessed.
-All the stuff which runs over ssh (like scp, git etc.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>The Perpetual Amature</title><link>/</link><description>Recent content on The Perpetual Amature</description><generator>Hugo</generator><language>en-US</language><lastBuildDate>Sat, 04 Sep 2021 19:41:19 +0530</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>Bootstrapping pipx for the obsessed</title><link>/pipx/</link><pubDate>Sat, 04 Sep 2021 19:41:19 +0530</pubDate><guid>/pipx/</guid><description>&lt;p>Managing Python based applications is made easy with
+&lt;a href="https://github.com/pypa/pipx">pipx&lt;/a>. But I dislike installing pipx
+via a pip user install, as it results in two python utilities
+managing packages. So, instead I let pipx manage it&amp;rsquo;s own updates.&lt;/p>
+&lt;p>Here&amp;rsquo;s how we can do it on a Debian system:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Install &lt;code>python3-pip&lt;/code>, with:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ sudo apt install python3-pip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Install pipx:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ pip install --user pipx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Didn&amp;rsquo;t we want avoid that? Yes! We&amp;rsquo;ll clean this up later.&lt;/p></description></item><item><title>Cross Compiling Rust Binaries with Github Actions</title><link>/cargo-cross/</link><pubDate>Sun, 27 Jun 2021 16:50:00 +0530</pubDate><guid>/cargo-cross/</guid><description>&lt;p>Compiling &lt;em>rust&lt;/em> is slow, specially on low power devices such as a
+&lt;em>Raspberry Pi&lt;/em>. I build all my rust utilities with my RPi 4 and sync to
+the rest with &lt;a href="https://syncthing.net/">syncthing&lt;/a>. That was true for
+my project, &lt;a href="https://github.com/crodjer/sysit">&lt;strong>sysit&lt;/strong>&lt;/a>, as well. I
+use sysit on all my systems to keep tabs on the resource usage.&lt;/p>
+&lt;p>Inspired from how &lt;a href="https://github.com/lotabout/skim/blob/master/.github/workflows/publish-github.yml">skim&lt;/a>
+utilizes cross compilation to build binaries directly using Github
+workflows, I incorporated a similar flow in sysit.&lt;/p></description></item><item><title>Encrypting 🔐 a Home 🏡 in Raspberry Pi</title><link>/fscrypt/</link><pubDate>Mon, 24 May 2021 11:22:27 +0530</pubDate><guid>/fscrypt/</guid><description>&lt;blockquote>
+&lt;p>;tldr
+Use &lt;a href="https://wiki.archlinux.org/title/Fscrypt#Encrypt_a_home_directory">fscrypt&lt;/a> to encrypt your
+home partition, with a few simple steps.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="why-encryption">Why encryption?&lt;/h2>
+&lt;p>I prefer to encrypt all my (and my family&amp;rsquo;s) storage at rest.
+Encryption is useful in scenarios where someone gains physical access
+to your device. This may save you from any losses other than the
+material cost of the device. Specially with a Raspberry Pi, it is more
+of a worry as how tiny the device is (the SD card is even smaller).
+It is much less likely that you &lt;em>lose&lt;/em> your desktop tower. Its
+worrying how many people carry around their portable computing devices
+(phones/laptops/tables) around without encryption at rest.&lt;/p></description></item><item><title>Hopping across the country with WireGuard</title><link>/jumper/</link><pubDate>Sun, 21 Feb 2021 19:11:38 +0530</pubDate><guid>/jumper/</guid><description>&lt;p>I need to be able to access all the computers over the
+internet as they are spread across the country:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>descartes&lt;/code>: My dad&amp;rsquo;s Debian desktop (1800 km away).&lt;/li>
+&lt;li>&lt;code>kant&lt;/code>: RPi 3 running Arch (a NAS, printer, a wormhole).&lt;/li>
+&lt;li>&lt;code>camus&lt;/code>: RPi 4 running Manjaro (my personal work machine).&lt;/li>
+&lt;li>&lt;code>nietzsche&lt;/code>: My wife&amp;rsquo;s Manjaro notebook.&lt;/li>
+&lt;li>Phones: &lt;code>newton&lt;/code>, &lt;code>feyman&lt;/code>, &lt;code>einstine&lt;/code> and &lt;code>sagan&lt;/code>.&lt;/li>
+&lt;li>&lt;code>kepler&lt;/code>: a tiny Debian on Google Cloud.&lt;/li>
+&lt;li>&lt;code>webb&lt;/code>: a tiny Ubuntu Server on Oracle Cloud.&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>All the computers actually have different astronomy inspired names.&lt;/p></description></item><item><title>Cooling the Raspberry Pi 4 with Argon Neo</title><link>/pi-cooling/</link><pubDate>Fri, 08 Jan 2021 10:21:02 +0530</pubDate><guid>/pi-cooling/</guid><description>&lt;p>The Raspberry Pi 4 runs hot, specially when overclocked. As I use it
+as my programming machine for my personal projects, I wanted to get
+the most out of its CPU.&lt;/p>
+&lt;p>The &lt;a href="https://twitter.com/__crodjer__/status/1265526804808372224/photo/1">first case&lt;/a> I ordered for my Pi came with a fan which worked on
+3.3V and 5V (too noisy). I setup a circuit which would allow me to
+turn it on/off via a GPIO pin controlled by
+&lt;a href="https://github.com/crodjer/configs/blob/master/scripts/rpi-fan.py">this python based service&lt;/a>,
+which turns the fan on/off based on certain threshold temperatures.
+This did work but the idling Pi would always go beyond the threshold
+temperature turning the fan on when. With the threshold at 65°C. I was
+getting 1:10 on:off ratio, which meant fan noise every 10 minutes of
+idle time.&lt;/p></description></item><item><title>Some Light in the Background</title><link>/light/</link><pubDate>Wed, 15 Apr 2020 09:22:34 +0530</pubDate><guid>/light/</guid><description>&lt;h4 id="tldr">tl;dr&lt;/h4>
+&lt;blockquote>
+&lt;p>Dark backgrounds are the best. But when one accidentally land
+somewhere with a light background with eyes trained for dark, it can
+hurt. So, one may as well just make everything light for
+consistency.&lt;/p>
+&lt;/blockquote>
+&lt;p>We love dark backgrounds. They are easier on the eyes, comfortable to
+work with in the night/dark rooms. So, we&amp;rsquo;d like everything that
+we see on the screen to be dark. And that&amp;rsquo;s the key, &lt;em>everything&lt;/em> must
+be dark.&lt;/p></description></item><item><title>Window Management in OSX with Spark</title><link>/spark/</link><pubDate>Wed, 06 Dec 2017 12:44:55 +0000</pubDate><guid>/spark/</guid><description>&lt;p>I am a big fan of deterministic access to applications windows. That is, to be
+able to open them without needing any visual feedback from the screen. Tiling
+window managers do this well. On OSX, this can be tricky.&lt;/p>
+&lt;p>For a long time, I used a &lt;a href="/two-windows/">two windows&lt;/a> workflow i.e. all the
+applications I need should run in just two windows (applications): the browser
+(mail, slack etc.) or the terminal (emacs, tmux, bash). This works, but is
+restrictive.&lt;/p></description></item><item><title>The Purpose Of It All</title><link>/42/</link><pubDate>Wed, 10 May 2017 02:34:01 +0000</pubDate><guid>/42/</guid><description>&lt;blockquote>
+&lt;p>If you have some time, I&amp;rsquo;d recommend reading &lt;a href="https://www.goodreads.com/book/show/11987.The_Myth_of_Sisyphus_and_Other_Essays?ac=1&amp;amp;from_search=true">The Myth of
+Sysiphus&lt;/a>
+instead.&lt;/p>
+&lt;/blockquote>
+&lt;p>The mind is free, with not much to worry about and starts to wander. It lands on
+the question: &amp;ldquo;What is the meaning of it all?&amp;rdquo;.&lt;/p>
+&lt;p>Its not difficult to arrive at the answer: &amp;ldquo;There isn&amp;rsquo;t a meaning, really&amp;rdquo;, and
+sets in an existential crisis.&lt;/p>
+&lt;p>But, I&amp;rsquo;d argue that there is a flaw in the question. Meaning isn&amp;rsquo;t something one
+should try to look for at all. Maybe, purpose is the right quest. And if you try
+to observe (or just use Camus&amp;rsquo; observations), the apparent purpose can be
+inferred.&lt;/p></description></item><item><title>Dynamic DNS with Cloudflare</title><link>/cloudflare-ddns/</link><pubDate>Sat, 18 Mar 2017 05:28:10 +0000</pubDate><guid>/cloudflare-ddns/</guid><description>&lt;p>It is hard to maintain a regular internet uptime with home connections. 1/2
+router re-connections per week can be fairly common. When that happens, the
+public IP changes with most ISPs. This can be annoying if you want access your
+computer remotely (possibly to SSH home). Dynamic DNS is a solution that exists
+to solve just that.&lt;/p>
+&lt;p>I maintain DNS entries for my domain at
+&lt;a href="https://www.cloudflare.com/">Clouflare&lt;/a>. The latest version of
+&lt;a href="https://sourceforge.net/p/ddclient/wiki/Home/">&lt;code>ddclient&lt;/code>&lt;/a> supports Cloudflare
+API, which works well with my ArchLinux box. But ddclient bundled with Raspbian,
+is yet to get that update. Cloudflare&amp;rsquo;s API is fairly straight forward, so I
+decided to use a curl/systemd based solution on my RaspberryPi.&lt;/p></description></item><item><title>The two windows workflow</title><link>/two-windows/</link><pubDate>Mon, 27 Feb 2017 06:15:12 +0000</pubDate><guid>/two-windows/</guid><description>&lt;p>I was introduced to OSX for the first time in September, 2015. Coming from a
+XMonad/Linux based setup, I was accustomed to powerful and fast window
+management. Most available solutions for OSX did not have these qualities. I
+tried:&lt;/p>
+&lt;ul>
+&lt;li>&lt;em>Amethyst&lt;/em>, a window manager with basic XMonad bindings.&lt;/li>
+&lt;li>Just type the application name in &lt;em>Alfred&lt;/em>. Initially this was slow, but
+quickly became habitual.&lt;/li>
+&lt;li>&lt;em>Mjolinr&lt;/em>, which is configured in Lua and can actually be quite powerful.&lt;/li>
+&lt;li>Numerous other programs out there which try to solve the same problem in
+similar fashion.&lt;/li>
+&lt;/ul>
+&lt;p>These programs sort of worked, but they are slow and unresponsive. Alfred based
+switching works on application level and not window level. So, I needed some
+simpler alternatives.&lt;/p></description></item><item><title>Decentralized Twitter</title><link>/decentralized-twitter/</link><pubDate>Sat, 11 Feb 2017 15:20:45 +0000</pubDate><guid>/decentralized-twitter/</guid><description>&lt;p>As a social network, twitter has a few fairly unique characteristics:&lt;/p>
+&lt;ul>
+&lt;li>It forces people to be more creative in trying to express the idea within 140
+characters.&lt;/li>
+&lt;li>Ability to control the content that you receive. Stricter filtering is
+possible based on one&amp;rsquo;s interests.&lt;/li>
+&lt;li>On platforms such as Quora/Facebook, the feed is not deterministic. That&amp;rsquo;s
+not the case with twitter. You see tweets in order and as they happen.
+Twitter doesn&amp;rsquo;t try to decide what is important and what is not.&lt;/li>
+&lt;/ul>
+&lt;p>But Twitter has been bleeding money since I have known about it. It has
+seemingly created a lot of value in sharing of ideas and news. If it were to go
+away, it&amp;rsquo;ll have an (at least temporary) impact on its users.&lt;/p></description></item><item><title>Find my code at Github</title><link>/code/</link><pubDate>Sat, 11 Feb 2017 09:48:44 +0000</pubDate><guid>/code/</guid><description>&lt;p>You can find most of the public code I have written at
+&lt;a href="https://github.com/crodjer">Github&lt;/a>.&lt;/p></description></item><item><title>Navigating with the first telescope</title><link>/telescope/</link><pubDate>Thu, 12 May 2016 00:00:00 +0000</pubDate><guid>/telescope/</guid><description>&lt;p>In my &lt;a href="/sky/">previous post&lt;/a>, I wrote about my initial experiences with stargazing -
+primarily to demonstrate that it can be fascinating without fancy
+equipment. After those initial sessions, I bought a telescope which magnified my
+experience significantly.&lt;/p>
+&lt;blockquote>
+&lt;p>Stars. Stars everywhere!&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="the-telescope">The Telescope&lt;/h2>
+&lt;p>The primary purpose of an (astronomical) telescope, unlike popular belief, is
+not actually magnification. They act as light collectors (think burning a paper
+with a converging lens and sunlight).&lt;/p></description></item><item><title>Gazing in the night sky</title><link>/sky/</link><pubDate>Wed, 04 May 2016 00:00:00 +0000</pubDate><guid>/sky/</guid><description>&lt;p>About 6 months ago, I picked up a new hobby: Stargazing. Starting off with just
+naked eyes, I quickly realized that there is actually quite a lot to see without
+any optical equipment. &lt;a href="https://play.google.com/store/apps/details?id=com.google.android.stardroid&amp;amp;hl=en">Sky Map&lt;/a> and &lt;a href="http://stellarium.org/">Stellarium&lt;/a> are incredibly useful
+applications for a dilettante like me.&lt;/p>
+&lt;h2 id="dark-adjustment">Dark adjustment&lt;/h2>
+&lt;p>Before any stargazing session, dark adjustment i.e. dilating the pupils
+completely to improve night vision, is essential. I turn off all kinds of lights
+in the house and listen to podcasts for a while (at least 30 minutes). I go out
+to stargaze when the outside looks brighter than inside.&lt;/p></description></item><item><title>You have infinite email addresses</title><link>/infi-mail/</link><pubDate>Sat, 02 Apr 2016 00:00:00 +0000</pubDate><guid>/infi-mail/</guid><description>&lt;blockquote>
+&lt;p>&lt;strong>tl;dr&lt;/strong>&lt;br>
+You can add arbitrary tags to your email address. Any email sent to
+&lt;code>your-email+tag@your-provider.ext&lt;/code> will land in the inbox for
+&lt;code>your-email@your-provider.ext&lt;/code>.&lt;/p>
+&lt;/blockquote>
+&lt;p>Emails are important. They are your identity on the web. Just like on phone,
+you&amp;rsquo;d want to control who can contact you via email. This warrants caution in
+signing up at places on the internet. It can be unsafe to register with the
+personal email address on new services for multiple reasons:&lt;/p></description></item><item><title>Categorizing archives by year with Hakyll</title><link>/hakyll-years/</link><pubDate>Mon, 31 Aug 2015 00:00:00 +0000</pubDate><guid>/hakyll-years/</guid><description>&lt;p>Recently, I decided to categorize my posts under directories named by
+the year they were created in. For example, this post is placed at:
+&lt;code>posts/2015/hakyll-years.mkd&lt;/code>. I decided to utilize this structure to
+also group how archives are listed. Inspired from
+&lt;a href="http://jaspervdj.be/hakyll/reference/src/Hakyll-Web-Tags.html">Hakyll&amp;rsquo;s tag functionality&lt;/a>
+I wrote my own group by years functionality. This post tries to
+explain that. Also, I don&amp;rsquo;t see why a similar logic cannot be used to
+do simple pagination.&lt;/p></description></item><item><title>Clean URLs with Hakyll</title><link>/hakyll-clean-urls/</link><pubDate>Sun, 30 Aug 2015 00:00:00 +0000</pubDate><guid>/hakyll-clean-urls/</guid><description>&lt;p>The URLs generated by &lt;a href="http://jaspervdj.be/hakyll/">Hakyll&lt;/a>, by default also include a
+&lt;code>.html&lt;/code> extension. I have never been a fan of this. When things in
+reality are driven by the &lt;code>Content-Type&lt;/code> header, it is absolutely
+redundant.&lt;/p>
+&lt;p>Hakyll provides all the utilities with which we can get cleaner URLs,
+like &lt;a href=".">this page&amp;rsquo;s&lt;/a>. For this, I rely on the fact that most of the
+web servers automatically serve &lt;code>/foo/index.html&lt;/code> for the URL
+&lt;code>/foo/&lt;/code>. To generate &lt;em>clean&lt;/em> paths, I define a custom route -
+&lt;code>cleanRoute&lt;/code>:&lt;/p></description></item><item><title>Sitemap with Hakyll</title><link>/hakyll-sitemap/</link><pubDate>Sun, 30 Aug 2015 00:00:00 +0000</pubDate><guid>/hakyll-sitemap/</guid><description>&lt;p>Its fairly trivial to configure &lt;a href="http://jaspervdj.be/hakyll/">Hakyll&lt;/a> to generate
+sitemaps. Sitemaps helps search engines websites. Similar to any
+typical html page, create a template - &lt;code>templates/sitemap.xml&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;urlset&lt;/span> &lt;span class="na">xmlns=&lt;/span>&lt;span class="s">&amp;#34;http://www.sitemaps.org/schemas/sitemap/0.9&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$for(entries)$
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;url&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;loc&amp;gt;&lt;/span>$host$$url$&lt;span class="nt">&amp;lt;/loc&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;changefreq&amp;gt;&lt;/span>weekly&lt;span class="nt">&amp;lt;/changefreq&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> $if(lastmod)$&lt;span class="nt">&amp;lt;lastmod&amp;gt;&lt;/span>$lastmod$&lt;span class="nt">&amp;lt;/lastmod&amp;gt;&lt;/span>$endif$
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;priority&amp;gt;&lt;/span>0.8&lt;span class="nt">&amp;lt;/priority&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/url&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$endfor$
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;/urlset&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then, using the templates, create a rule which uses all the pages from
+the site as entries. Here is what I do:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-haskell" data-lang="haskell">&lt;span class="line">&lt;span class="cl"> &lt;span class="n">create&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s">&amp;#34;sitemap.xml&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">$&lt;/span> &lt;span class="kr">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">route&lt;/span> &lt;span class="n">idRoute&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">compile&lt;/span> &lt;span class="o">$&lt;/span> &lt;span class="kr">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">posts&lt;/span> &lt;span class="ow">&amp;lt;-&lt;/span> &lt;span class="n">recentFirst&lt;/span> &lt;span class="o">=&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">loadAll&lt;/span> &lt;span class="s">&amp;#34;posts/*/*&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pages&lt;/span> &lt;span class="ow">&amp;lt;-&lt;/span> &lt;span class="n">loadAll&lt;/span> &lt;span class="s">&amp;#34;pages/*&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">let&lt;/span> &lt;span class="n">allPosts&lt;/span> &lt;span class="ow">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">return&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">pages&lt;/span> &lt;span class="o">++&lt;/span> &lt;span class="n">posts&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">let&lt;/span> &lt;span class="n">sitemapCtx&lt;/span> &lt;span class="ow">=&lt;/span> &lt;span class="n">mconcat&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">[&lt;/span> &lt;span class="n">listField&lt;/span> &lt;span class="s">&amp;#34;entries&amp;#34;&lt;/span> &lt;span class="n">pageCtx&lt;/span> &lt;span class="n">allPosts&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span> &lt;span class="n">constField&lt;/span> &lt;span class="s">&amp;#34;host&amp;#34;&lt;/span> &lt;span class="n">host&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">,&lt;/span> &lt;span class="n">defaultContext&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">makeItem&lt;/span> &lt;span class="s">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;gt;&amp;gt;=&lt;/span> &lt;span class="n">loadAndApplyTemplate&lt;/span> &lt;span class="s">&amp;#34;templates/sitemap.xml&amp;#34;&lt;/span> &lt;span class="n">sitemapCtx&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;gt;&amp;gt;=&lt;/span> &lt;span class="n">cleanIndexHtmls&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This generates &lt;a href="/sitemap.xml">/sitemap.xml&lt;/a> which can be submitted to
+search engines for indexing.&lt;/p></description></item><item><title>Testing tornado websockets without third party clients</title><link>/ws-test/</link><pubDate>Sat, 22 Aug 2015 00:00:00 +0000</pubDate><guid>/ws-test/</guid><description>&lt;p>Recently, I built an encrypted &lt;a href="http://github.com/crodjer/qotr/">chat service&lt;/a>, which was based on
+&lt;a href="http://www.tornadoweb.org/">tornado&lt;/a> and &lt;a href="http://emberjs.com/">ember.js&lt;/a>. The project itself had grave security issues, so I
+shut it down, but while working on it I learned a few new things and testing
+websockets with tornado is one of them.&lt;/p>
+&lt;p>Most of the material out there for this suggests developing separate client
+based tests, which I didn&amp;rsquo;t want to do. Eventually, I figured out that tornado
+already provides all the utilities to do unit/integration tests for websockets.&lt;/p></description></item><item><title>Using pulseaudio to play system beeps</title><link>/bell/</link><pubDate>Thu, 20 Aug 2015 00:00:00 +0000</pubDate><guid>/bell/</guid><description>&lt;p>Recently, I built a new desktop. After receiving everything, I realized that I
+was missing the onboard speaker (which creates the annoying beep sound).
+Ideally, the computer case should have had it, but they don&amp;rsquo;t come with a buzzer
+anymore. My various applications rely on the system beep, hence I needed to find
+a software alternative. Turns out it is fairly trivial to configure it to
+capture alerts with pulseaudio:&lt;/p></description></item><item><title>Switch between networks based on availability</title><link>/route-to/</link><pubDate>Wed, 19 Aug 2015 00:00:00 +0000</pubDate><guid>/route-to/</guid><description>&lt;p>Having been blessed with an unreliable internet, I always have had the need to
+change the default route when one goes down. &lt;a href="http://linux.die.net/man/8/ip">ip&lt;/a> provides you the required
+tooling to do that. I had been doing it so often, that I ended up writing a
+function to do this:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">route_to &lt;span class="o">()&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">interface&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">route&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$(&lt;/span>ip route &lt;span class="p">|&lt;/span> grep &lt;span class="nv">$interface&lt;/span> &lt;span class="p">|&lt;/span> sed -r &lt;span class="s1">&amp;#39;s/\.0\/[[:digit:]]{2,3} /.1 /&amp;#39;&lt;/span> &lt;span class="p">|&lt;/span> cut -d &lt;span class="s1">&amp;#39; &amp;#39;&lt;/span> -f -4&lt;span class="k">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -n &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$route&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sudo ip route del default &lt;span class="p">&amp;amp;&lt;/span>&amp;gt; /dev/null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sudo ip route replace default via &lt;span class="nv">$route&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;No routes match: &lt;/span>&lt;span class="nv">$interface&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &amp;gt;&lt;span class="p">&amp;amp;&lt;/span>&lt;span class="m">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>With this in available in my shell, I can simply do &lt;code>route_to wlan0&lt;/code> and my
+system will start using &lt;code>wlan0&lt;/code> as the default interface.&lt;/p></description></item><item><title>VNC over reverse SSH</title><link>/vnc/</link><pubDate>Sun, 10 May 2015 00:00:00 +0000</pubDate><guid>/vnc/</guid><description>&lt;blockquote>
+&lt;p>Note: My &lt;a href="/jumper">recent article&lt;/a>, talking about WireGuard is a
+better and more ergonomic approach to achive this, compared to using
+reverse SSH.&lt;/p>
+&lt;/blockquote>
+&lt;p>About a year ago, I switched my parents computer (lets call it &lt;code>P&lt;/code>) from the
+pre-installed OS (Windows) to Ubuntu. The primary reason for this switch was it
+hard for me to debug and fix issues. Things have been smooth after the switch
+with no issues which I found hard to fix remotely. What specially has worked is
+my ability to log in to the computer when its on through my VPS and service it.&lt;/p></description></item><item><title>The ubiquitous shell</title><link>/bash/</link><pubDate>Thu, 05 Mar 2015 00:00:00 +0000</pubDate><guid>/bash/</guid><description>&lt;p>Nothing makes a terminal feel more like home as one&amp;rsquo;s own shell
+configuration. My shell is bash, configured through a &lt;a href="https://github.com/crodjer/configs/blob/master/.bashrc">.bashrc&lt;/a> and
+&lt;a href="https://github.com/crodjer/configs/blob/master/.profile">.profile&lt;/a>. Bash is likely to be present in any Unix machine one
+uses.&lt;/p>
+&lt;p>Bash is also my primary IDE. This allows for keeping a relatively simple set of
+utilities and tools to internalize. Coupled with a reliable window manager,
+workflows can be quickly scripted in the head. Shell scripts are an option as
+well for more complex flows. This can be done at multiple levels: using uniquely
+identifiable comments in commands , bash functions, complete bash script.&lt;/p></description></item><item><title>Emacs: Flymake with virtualenvs in python-mode</title><link>/emacs-flymake-with-virtualenvs-in-python-mode/</link><pubDate>Tue, 28 Jan 2014 00:00:00 +0000</pubDate><guid>/emacs-flymake-with-virtualenvs-in-python-mode/</guid><description>&lt;p>Lately, I have been writing some python with emacs. So, I have been trying to
+get the popular checkers (&lt;code>pylint&lt;/code>/&lt;code>pyflakes&lt;/code>) to work with flymake and
+virtualenvs. The issues with existing solutions to get flymake working with the
+checkers is that most of them assume a global version of executable (which would
+be fine if it weren&amp;rsquo;t for the whole python 2 and 3 incompatibility).&lt;/p>
+&lt;p>The &lt;code>python-mode&lt;/code> in the latest emacs versions (mine is &lt;code>24.3.1&lt;/code>) includes a
+basic support for &lt;code>virtualenvs&lt;/code>. I run &lt;code>pylint/pyflakes&lt;/code> through the command
+&lt;code>env&lt;/code> with the environment variables calculated from the functions provided by
+&lt;code>python-mode&lt;/code>. Here is the code extracted from my
+&lt;a href="https://github.com/crodjer/configs/blob/master/.emacs">emacs configuration&lt;/a>:&lt;/p></description></item><item><title>A productive workflow with vim sessions and servers</title><link>/yet-another-vim-productivity-post-server-client/</link><pubDate>Sun, 15 Apr 2012 00:00:00 +0000</pubDate><guid>/yet-another-vim-productivity-post-server-client/</guid><description>&lt;p>You can find lot of posts on the internet which try to tell you how to improve
+the ways in which Vim is used. Well, here is another one.&lt;/p>
+&lt;p>#Vim Server, ZSH and Tiles&lt;/p>
+&lt;p>A Vim instance behaves as a server in which files can be opened through remote
+applications. Read &lt;code>:help client-server&lt;/code> of Vim to know more about this. I
+generally keep multiple Vim sessions running, described by task they are related
+to.&lt;/p></description></item><item><title>About</title><link>/about/</link><pubDate>Fri, 19 Feb 2016 02:34:01 +0000</pubDate><guid>/about/</guid><description>&lt;p>Hi, I am Rohan. I read and write code. I frequently read about physics, energy
+and climate change. After getting depressed enough of the latter, I read fiction
+or annoy my friends with my ideas or just code.&lt;/p>
+&lt;p>I like to play table tennis, cricket and chess. I also bought a harmonica. Keep
+your hands on ears if you see me holding it. And yeah, I maintain a blog, which
+is so devoid of activity that it should have cobwebs on
+it.&lt;/p></description></item><item><title>Configure ssh to handle proxies and tunnels seamlessly</title><link>/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</link><pubDate>Sat, 27 Aug 2011 00:00:00 +0000</pubDate><guid>/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/</guid><description>&lt;p>Recently I opened up on the port &lt;em>443&lt;/em> over my EC2 instance (more or less like
+a VPS), so that I can access it through any firewalled proxy too. Apart from
+getting SSH running to a machine from outside world, I did some cool
+configuration to have ssh deal with with various remote hosts automatically. It
+uses &lt;em>the right&lt;/em> proxy settings according the host being accessed.&lt;/p>
+&lt;p>All the stuff which runs over ssh (like &lt;em>scp&lt;/em>, &lt;em>git&lt;/em> etc.) also work the way
+they are supposed to, following the ssh configuration.&lt;/p></description></item></channel></rss>
