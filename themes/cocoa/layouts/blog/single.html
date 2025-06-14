@@ -1,0 +1,59 @@
+{{ partial "header.html" . }}
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    {{ partial "page-heading" . }}
+                    <div class="initials"><a href="{{ .Site.BaseURL }}">{{ .Site.Params.Initials }}</a></div>
+                </div>
+                <div class="meta">
+                    {{ if and .Site.Params.dateformfull .Site.Params.dateform }}
+                    <div class="date" title='{{ .Date.Format .Site.Params.dateformfull }}'>{{ .Date.Format .Site.Params.dateform }}</div>
+                    {{ else }}
+                    <div class="date" title='{{ .Date.Format "Mon Jan 2 2006 15:04:05 MST" }}'>{{ .Date.Format "Jan 2, 2006" }}</div>
+                    {{ end }}
+                    {{ if not .Site.Params.noshowreadtime }}
+		    <div class="reading-time"><div class="middot"></div>{{ i18n "readingTime" .ReadingTime }}</div>
+                    {{ end }}
+                </div>
+            </div>
+            <div class="markdown">
+                {{ .Content }}
+                <br>
+                {{ if .Params.tags }}
+                  <div class="tags">
+                    <strong>Tags:</strong>
+                  {{range .Params.tags}}
+                    <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+                  {{end}}
+                  </div>
+                  <br />
+                {{end}}
+                <p class="back-to-posts"><a {{ printf "href=%q" ("/blog" | relLangURL) | safeHTMLAttr }}>{{ i18n "backToPosts" }}</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                {{ template "_internal/disqus.html" . }}
+            </div>
+            {{ if .Site.Params.gitalk }}
+            <div id="gitalk-container"></div>
+            <script type="text/javascript">
+                const gitalk = new Gitalk({
+                  clientID: "{{ .Site.Params.gitalk_clientID }}",
+                  clientSecret: "{{ .Site.Params.gitalk_clientSecret }}",
+                  repo: "{{ .Site.Params.gitalk_repo }}",
+                  owner: "{{ .Site.Params.gitalk_owner }}",
+                  admin: {{ .Site.Params.gitalk_admin }},
+                  // facebook-like distraction free mode
+                  distractionFreeMode: true
+                })
+                gitalk.render('gitalk-container')
+            </script>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+{{ partial "footer.html" . }}

@@ -1,0 +1,71 @@
+<!-- HTTPS -->
+
+{{ if .Site.Params.forcehttps }}
+<script type="text/javascript">
+    var baseURL = '{{ .Site.BaseURL }}';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+{{ end }}
+
+<!-- CSS -->
+
+{{ if .Site.Params.highlightjs }}
+  {{ if .Site.Params.highlightjs_css_url }}
+    <link rel="stylesheet" href="{{ .Site.Params.highlightjs_css_url }}">
+  {{ else }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/{{ .Site.Params.highlightjsStyle | default "default" }}.min.css">
+  {{ end }}
+{{ end }}
+
+<!-- Fonts and icon CSS -->
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+{{ if .Site.Params.cachebuster }}
+
+    {{ $t := now }}
+    <link rel="stylesheet" href="/css/reset.css?t={{$t}}">
+    <link rel="stylesheet" href="/css/pygments.css?t={{$t}}">
+    <link rel="stylesheet" href="/css/main.css?t={{$t}}">
+    {{range .Site.Params.extracssfiles}}
+        <link rel="stylesheet" href="{{.}}?t={{$t}}">
+    {{ end }}
+
+{{ else }}
+
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/pygments.css">
+    <link rel="stylesheet" href="/css/main.css">
+    {{range .Site.Params.extracssfiles}}
+        <link rel="stylesheet" href="{{.}}">
+    {{end}}
+
+{{ end }}
+
+<!-- Icon -->
+<link rel="shortcut icon"
+{{ if .Site.Params.faviconfile }}
+    href="/{{ .Site.Params.faviconfile }}"
+{{ else }}
+    href="/img/favicon.ico"
+{{ end }}
+>
+
+<!-- RSS -->
+{{ $RSSLink := "" }}
+{{ with .OutputFormats.Get "RSS" }}
+{{ $RSSLink = .RelPermalink }}
+{{ end }}
+{{ if and .Site.Params.include_rss $RSSLink }}
+  <link href="{{ $RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+{{ end }}
+
+<!-- gitalk -->
+{{ if .Site.Params.gitalk }}
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+{{ end }}
+<!-- End gitalk Code -->

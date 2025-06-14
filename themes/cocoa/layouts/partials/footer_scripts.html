@@ -1,0 +1,34 @@
+<!-- Google Analytics -->
+{{ template "_internal/google_analytics_async.html" . }}
+
+{{ if .Site.Params.highlightjs }}
+  {{ if .Site.Params.highlightjs_url }}
+    <script src="{{ .Site.Params.highlightjs_url }}"></script>
+  {{ else }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+    {{ range .Site.Params.highlightjslanguages }}
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/languages/{{.}}.min.js"></script>
+    {{ end }}
+  {{ end }}
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+{{ end }}
+
+{{ if .Site.Params.piwik }}
+<!-- Piwik -->
+<script type="text/javascript">
+    var _paq = _paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="{{ .Site.Params.piwik_url }}";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '{{ .Site.Params.piwik_id }}']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+</script>
+<!-- End Piwik Code -->
+{{ end }}
