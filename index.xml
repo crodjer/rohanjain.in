@@ -21,8 +21,7 @@ utilizes cross compilation to build binaries directly using Github
 workflows, I incorporated a similar flow in sysit.&lt;/p></description></item><item><title>Encrypting 🔐 a Home 🏡 in Raspberry Pi</title><link>/fscrypt/</link><pubDate>Mon, 24 May 2021 11:22:27 +0530</pubDate><guid>/fscrypt/</guid><description>&lt;blockquote>
 &lt;p>;tldr
 Use &lt;a href="https://wiki.archlinux.org/title/Fscrypt#Encrypt_a_home_directory">fscrypt&lt;/a> to encrypt your
-home partition, with a few simple steps.&lt;/p>
-&lt;/blockquote>
+home partition, with a few simple steps.&lt;/p>&lt;/blockquote>
 &lt;h2 id="why-encryption">Why encryption?&lt;/h2>
 &lt;p>I prefer to encrypt all my (and my family&amp;rsquo;s) storage at rest.
 Encryption is useful in scenarios where someone gains physical access
@@ -59,8 +58,7 @@ idle time.&lt;/p></description></item><item><title>Some Light in the Background<
 &lt;p>Dark backgrounds are the best. But when one accidentally land
 somewhere with a light background with eyes trained for dark, it can
 hurt. So, one may as well just make everything light for
-consistency.&lt;/p>
-&lt;/blockquote>
+consistency.&lt;/p>&lt;/blockquote>
 &lt;p>We love dark backgrounds. They are easier on the eyes, comfortable to
 work with in the night/dark rooms. So, we&amp;rsquo;d like everything that
 we see on the screen to be dark. And that&amp;rsquo;s the key, &lt;em>everything&lt;/em> must
@@ -73,8 +71,7 @@ applications I need should run in just two windows (applications): the browser
 restrictive.&lt;/p></description></item><item><title>The Purpose Of It All</title><link>/42/</link><pubDate>Wed, 10 May 2017 02:34:01 +0000</pubDate><guid>/42/</guid><description>&lt;blockquote>
 &lt;p>If you have some time, I&amp;rsquo;d recommend reading &lt;a href="https://www.goodreads.com/book/show/11987.The_Myth_of_Sisyphus_and_Other_Essays?ac=1&amp;amp;from_search=true">The Myth of
 Sysiphus&lt;/a>
-instead.&lt;/p>
-&lt;/blockquote>
+instead.&lt;/p>&lt;/blockquote>
 &lt;p>The mind is free, with not much to worry about and starts to wander. It lands on
 the question: &amp;ldquo;What is the meaning of it all?&amp;rdquo;.&lt;/p>
 &lt;p>Its not difficult to arrive at the answer: &amp;ldquo;There isn&amp;rsquo;t a meaning, really&amp;rdquo;, and
@@ -124,8 +121,7 @@ primarily to demonstrate that it can be fascinating without fancy
 equipment. After those initial sessions, I bought a telescope which magnified my
 experience significantly.&lt;/p>
 &lt;blockquote>
-&lt;p>Stars. Stars everywhere!&lt;/p>
-&lt;/blockquote>
+&lt;p>Stars. Stars everywhere!&lt;/p>&lt;/blockquote>
 &lt;h2 id="the-telescope">The Telescope&lt;/h2>
 &lt;p>The primary purpose of an (astronomical) telescope, unlike popular belief, is
 not actually magnification. They act as light collectors (think burning a paper
@@ -141,8 +137,7 @@ to stargaze when the outside looks brighter than inside.&lt;/p></description></i
 &lt;p>&lt;strong>tl;dr&lt;/strong>&lt;br>
 You can add arbitrary tags to your email address. Any email sent to
 &lt;code>your-email+tag@your-provider.ext&lt;/code> will land in the inbox for
-&lt;code>your-email@your-provider.ext&lt;/code>.&lt;/p>
-&lt;/blockquote>
+&lt;code>your-email@your-provider.ext&lt;/code>.&lt;/p>&lt;/blockquote>
 &lt;p>Emails are important. They are your identity on the web. Just like on phone,
 you&amp;rsquo;d want to control who can contact you via email. This warrants caution in
 signing up at places on the internet. It can be unsafe to register with the
@@ -221,8 +216,7 @@ function to do this:&lt;/p>
 system will start using &lt;code>wlan0&lt;/code> as the default interface.&lt;/p></description></item><item><title>VNC over reverse SSH</title><link>/vnc/</link><pubDate>Sun, 10 May 2015 00:00:00 +0000</pubDate><guid>/vnc/</guid><description>&lt;blockquote>
 &lt;p>Note: My &lt;a href="/jumper">recent article&lt;/a>, talking about WireGuard is a
 better and more ergonomic approach to achive this, compared to using
-reverse SSH.&lt;/p>
-&lt;/blockquote>
+reverse SSH.&lt;/p>&lt;/blockquote>
 &lt;p>About a year ago, I switched my parents computer (lets call it &lt;code>P&lt;/code>) from the
 pre-installed OS (Windows) to Ubuntu. The primary reason for this switch was it
 hard for me to debug and fix issues. Things have been smooth after the switch
