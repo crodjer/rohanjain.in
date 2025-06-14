@@ -26,7 +26,7 @@ configuration information first:
 - `DNS Zone`  
   You can get it by visiting the overview page of Cloudflare dashboard (called
   Zone ID):
-  https://www.cloudflare.com/a/overview/<your-domain>
+  `https://www.cloudflare.com/a/overview/<your-domain>`
 - `Auth Email`: This is your cloudflare account email.
 - `Auth Key`: This is your *Global API Key* under Cloudflare account settings:
   <https://www.cloudflare.com/a/account/my-account>
