@@ -1,0 +1,76 @@
+<!doctype html><html lang=en-US><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="chrome=1"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="What are Quadlets?
+I self-host most of my services important to me personally. Lately, I have been
+using Quadlets for this. I came
+across the concept of Quadlets from Immich.
+For git repositories, I have been just using git init --bare in a server and
+plain SSH to work them: git clone git@<user>:sources/<repo>.
+Having used Quadlets with Immich, I thought of trying using them with Gitlab.
+And this post talks about how to do that."><meta property="og:url" content="/gitlab/"><meta property="og:site_name" content="The Perpetual Amature"><meta property="og:title" content="Self Hosting Gitlab using Quadlets"><meta property="og:description" content="What are Quadlets? I self-host most of my services important to me personally. Lately, I have been using Quadlets for this. I came across the concept of Quadlets from Immich.
+For git repositories, I have been just using git init --bare in a server and plain SSH to work them: git clone git@<user>:sources/<repo>.
+Having used Quadlets with Immich, I thought of trying using them with Gitlab. And this post talks about how to do that."><meta property="og:locale" content="en_US"><meta property="og:type" content="article"><meta property="article:section" content="blog"><meta property="article:published_time" content="2025-10-26T09:27:21+05:30"><meta property="article:modified_time" content="2025-10-26T09:27:21+05:30"><title>Self Hosting Gitlab using Quadlets</title><link rel=canonical href=/gitlab/><script type=module src=https://cdn.jsdelivr.net/npm/@hotwired/turbo@latest/dist/turbo.es2017-esm.min.js></script><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500"><link rel=stylesheet href=/css/reset.css><link rel=stylesheet href=/css/pygments.css><link rel=stylesheet href=/css/main.css><link rel=stylesheet href=/css/solarized.css><link rel=stylesheet href=/css/override.css><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><section class=header><div class=container><div class=content><a href=/><img class=avatar src="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=50" srcset="https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=100 2x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=150 3x, https://gravatar.com/avatar/564e7aa79de47cdf3a094da1d4ac13cd?s=200 4x"></a>
+<a href=/><div class=name>Rohan Jain</div></a><nav><ul><li class=nav-home><a href=/><span>Home</span></a></li><li class=nav-about><a href=/about/><span>About</span></a></li></ul></nav></div></div></section><section class=icons><div class=container><div class=content><a href=//github.com/crodjer target=_blank rel=noopener><img class=icon src=/img/github.svg alt=github></a>
+<a href=//twitter.com/__crodjer__ target=_blank rel=noopener><img class=icon src=/img/twitter.svg alt=twitter></a>
+<a href=//linkedin.com/in/crodjer target=_blank rel=noopener><img class=icon src=/img/linkedin.svg alt=linkedin></a></div></div></section><section class="main post non-narrow zero-top-spacing"><div class=container><div class=content><div class=front-matter><div class=title-container><div class=page-heading>Self Hosting Gitlab using Quadlets</div><div class=initials><a href=/></a></div></div><div class=meta><div class=date title='Sun Oct 26 2025 09:27:21 +0530'>Oct 26, 2025</div><div class=reading-time><div class=middot></div>3 minutes read</div></div></div><div class=markdown><h3 id=what-are-quadlets>What are Quadlets?</h3><p>I self-host most of my services important to me personally. Lately, I have been
+using <a href=https://www.redhat.com/en/blog/quadlet-podman>Quadlets</a> for this. I came
+across the concept of Quadlets from Immich.</p><p>For git repositories, I have been just using <code>git init --bare</code> in a server and
+plain SSH to work them: <code>git clone git@&lt;user>:sources/&lt;repo></code>.</p><p>Having used Quadlets with Immich, I thought of trying using them with Gitlab.
+And this post talks about how to do that.</p><h2 id=podman-setup>Podman Setup</h2><p>Before setting up the quadlet, there are some packages required for <code>podman</code> to
+function fine with networking. I installed: <code>aardvark-dns, dbus-user-session, passt, podman, uidmap</code>. But some packages from this list may not be needed for
+<code>gitlab</code> as it’s just a single container.</p><h2 id=gitlab-setup>Gitlab Setup</h2><p>Basically, all that we need to do is define:
+<code>.config/containers/systemd/gitlab.container</code></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-systemd data-lang=systemd><span class=line><span class=cl><span class=k>[Unit]</span>
+</span></span><span class=line><span class=cl><span class=na>Description</span><span class=o>=</span><span class=s>GitLab Container</span>
+</span></span><span class=line><span class=cl><span class=na>After</span><span class=o>=</span><span class=s>network-online.target</span>
+</span></span><span class=line><span class=cl><span class=na>Wants</span><span class=o>=</span><span class=s>network-online.target</span>
+</span></span><span class=line><span class=cl><span class=c># This ensures that the container won&#39;t start unless the directories are</span>
+</span></span><span class=line><span class=cl><span class=c># available.</span>
+</span></span><span class=line><span class=cl><span class=c># I need this since my file system is double encrypted - FDE with LUKS for</span>
+</span></span><span class=line><span class=cl><span class=c># system) and file-level encryption, managed by `ansible`. You might not need</span>
+</span></span><span class=line><span class=cl><span class=c># this if this path is guaranteed to be available.</span>
+</span></span><span class=line><span class=cl><span class=na>ConditionPathExists</span><span class=o>=</span><span class=s>&lt;path-to-data-directory&gt;/repositories</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>[Container]</span>
+</span></span><span class=line><span class=cl><span class=na>Image</span><span class=o>=</span><span class=s>docker.io/gitlab/gitlab-ce:latest</span>
+</span></span><span class=line><span class=cl><span class=na>ContainerName</span><span class=o>=</span><span class=s>gitlab</span>
+</span></span><span class=line><span class=cl><span class=na>ShmSize</span><span class=o>=</span><span class=s>256m</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=na>PublishPort</span><span class=o>=</span><span class=s>3939:80</span>
+</span></span><span class=line><span class=cl><span class=na>PublishPort</span><span class=o>=</span><span class=s>2222:22</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=na>Volume</span><span class=o>=</span><span class=s>&lt;path-to-data-directory&gt;/repositories/config:/etc/gitlab:Z</span>
+</span></span><span class=line><span class=cl><span class=na>Volume</span><span class=o>=</span><span class=s>&lt;path-to-data-directory&gt;/repositories/logs:/var/log/gitlab:Z</span>
+</span></span><span class=line><span class=cl><span class=na>Volume</span><span class=o>=</span><span class=s>&lt;path-to-data-directory&gt;/repositories/data:/var/opt/gitlab:Z</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># Explaining, GITLAB_OMNIBUS_CONFIG</span>
+</span></span><span class=line><span class=cl><span class=c># `external_url`: I have an external reverse proxy managed by my Ansible roles.</span>
+</span></span><span class=line><span class=cl><span class=c># `nginx[&#39;listen_port&#39;]: Just listen on `80`, so that I can manage the actual</span>
+</span></span><span class=line><span class=cl><span class=c># SSL from my reverse proxy outside.</span>
+</span></span><span class=line><span class=cl><span class=c># `nginx[&#39;listen_https&#39;]: Ask `nginx` to not do SSL inside the container.</span>
+</span></span><span class=line><span class=cl><span class=c># `gitlab_rails[&#39;gitlab_shell_ssh_port&#39;]: The port I use for listening for SSH.</span>
+</span></span><span class=line><span class=cl><span class=na>Environment</span><span class=o>=</span><span class=s>GITLAB_OMNIBUS_CONFIG=&#34;external_url &#39;https://git.sirius.nufy.in&#39;; nginx[&#39;listen_port&#39;] = 80; nginx[&#39;listen_https&#39;] = false; gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 2222; &#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>[Service]</span>
+</span></span><span class=line><span class=cl><span class=na>Restart</span><span class=o>=</span><span class=s>always</span>
+</span></span><span class=line><span class=cl><span class=na>TimeoutStartSec</span><span class=o>=</span><span class=s>900</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>[Install]</span>
+</span></span><span class=line><span class=cl><span class=na>WantedBy</span><span class=o>=</span><span class=s>default.target</span>
+</span></span></code></pre></div><h3 id=gitlab-omnibus-config>Gitlab Omnibus Config</h3><p>There&rsquo;s quite a bit going on in the <code>GITLAB_OMNIBUS_CONFIG</code>. My Ansible setup
+takes care of setting up SSL and exposing it over <code>443</code>, so I don&rsquo;t forward that
+to <code>gitlab</code>. That&rsquo;s what I configure <code>external_url</code> to. The <code>nginx</code> specific
+configuration asks nginx to not do SSL and listen on <code>80</code> which I forward to
+3939 outside. For SSH, the port I forward is <code>2222</code> as my node itself does its
+ssh on <code>22</code>.</p><h3 id=starting-the-service>Starting the Service</h3><p>Once this unit file is set up, you should be able to start it with:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ systemctl --user daemon-reload
+</span></span><span class=line><span class=cl>$ systemctl --user <span class=nb>enable</span> --now gitlab.service
+</span></span></code></pre></div><p>For the first launch, getting the image will take some time. You can look at the
+status using:
+<code>systemctl status --user gitlab</code>.</p><p>Once it is up and running, use <code>journalctl --user -fu gitlab</code> to look at the
+service logs.</p><p>Now, ideally if you set up your reverse proxy right, you should be able to access
+<code>gitlab</code> over your hostname.</p><h3 id=gitlab-configuration>Gitlab Configuration</h3><p>We do need to take care of one more thing, that is the root password. You can
+find it under your config directory in the file <code>initial_root_password</code>. Use this
+password with the username <code>root</code> for further configuration as per
+<a href=https://docs.gitlab.com/install/next_steps/>next steps documentation</a>.</p><h2 id=why-quadlets>Why Quadlets?</h2><p>Podman and Quadlets can manage a significantly more complex configuration (for
+instance, Immich via
+<a href=https://github.com/linux-universe/immich-podman-quadlets/blob/main/README.md>this handbook</a>).
+I find this much easier to manage than <code>docker-compose.yaml</code>, which isn&rsquo;t
+ergonomic with Ansible. Additionally, <code>podman</code> doesn&rsquo;t need any daemon running
+like Docker for it to be useful.</p><br><p class=back-to-posts><a href=/blog>Back to posts</a></p></div><br><div class=disqus></div></div></div></section></body></html>
