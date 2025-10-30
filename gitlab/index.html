@@ -46,7 +46,7 @@ function fine with networking. I installed: <code>aardvark-dns, dbus-user-sessio
 </span></span><span class=line><span class=cl><span class=c># SSL from my reverse proxy outside.</span>
 </span></span><span class=line><span class=cl><span class=c># `nginx[&#39;listen_https&#39;]: Ask `nginx` to not do SSL inside the container.</span>
 </span></span><span class=line><span class=cl><span class=c># `gitlab_rails[&#39;gitlab_shell_ssh_port&#39;]: The port I use for listening for SSH.</span>
-</span></span><span class=line><span class=cl><span class=na>Environment</span><span class=o>=</span><span class=s>GITLAB_OMNIBUS_CONFIG=&#34;external_url &#39;https://git.sirius.nufy.in&#39;; nginx[&#39;listen_port&#39;] = 80; nginx[&#39;listen_https&#39;] = false; gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 2222; &#34;</span>
+</span></span><span class=line><span class=cl><span class=na>Environment</span><span class=o>=</span><span class=s>GITLAB_OMNIBUS_CONFIG=&#34;external_url &#39;https://&lt;my-hostname&gt;&#39;; nginx[&#39;listen_port&#39;] = 80; nginx[&#39;listen_https&#39;] = false; gitlab_rails[&#39;gitlab_shell_ssh_port&#39;] = 2222; &#34;</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=k>[Service]</span>
 </span></span><span class=line><span class=cl><span class=na>Restart</span><span class=o>=</span><span class=s>always</span>
