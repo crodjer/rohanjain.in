@@ -1,5 +1,5 @@
 ---
-title: "Encrypting 🔐 a Home 🏡 in Raspberry Pi"
+title: "Encrypting a home in a Raspberry Pi"
 slug: fscrypt
 date: 2021-05-24T11:22:27+05:30
 draft: false
