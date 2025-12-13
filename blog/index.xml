@@ -25,7 +25,7 @@ my project, &lt;a href="https://github.com/crodjer/sysit"&gt;&lt;strong&gt;sysit
 use sysit on all my systems to keep tabs on the resource usage.&lt;/p&gt;
 &lt;p&gt;Inspired from how &lt;a href="https://github.com/lotabout/skim/blob/master/.github/workflows/publish-github.yml"&gt;skim&lt;/a&gt;
 utilizes cross compilation to build binaries directly using Github
-workflows, I incorporated a similar flow in sysit.&lt;/p&gt;</description></item><item><title>Encrypting 🔐 a Home 🏡 in Raspberry Pi</title><link>/fscrypt/</link><pubDate>Mon, 24 May 2021 11:22:27 +0530</pubDate><guid>/fscrypt/</guid><description>&lt;blockquote&gt;
+workflows, I incorporated a similar flow in sysit.&lt;/p&gt;</description></item><item><title>Encrypting a home in a Raspberry Pi</title><link>/fscrypt/</link><pubDate>Mon, 24 May 2021 11:22:27 +0530</pubDate><guid>/fscrypt/</guid><description>&lt;blockquote&gt;
 &lt;p&gt;;tldr
 Use &lt;a href="https://wiki.archlinux.org/title/Fscrypt#Encrypt_a_home_directory"&gt;fscrypt&lt;/a&gt; to encrypt your
 home partition, with a few simple steps.&lt;/p&gt;
