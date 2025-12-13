@@ -19,11 +19,11 @@ old = ":slug/"
 
 [params]
 author       = "Rohan Jain"
-avatar       = "img/avatar.png"
+avatar       = "img/avatar-small.jpg"
 dateForm     = "Jan 2, 2006"
 dateFormFull = "Mon Jan 2 2006 15:04:05 MST"
 description  = "Rohan's Personal Web Blog."
-faviconFile  = "img/avatar.png"
+faviconFile  = "img/favicon.ico"
 github       = "//github.com/crodjer"
 linkedin     = "//linkedin.com/in/crodjer"
 twitter      = "//twitter.com/__crodjer__"
