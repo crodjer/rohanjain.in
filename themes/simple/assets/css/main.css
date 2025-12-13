@@ -63,7 +63,7 @@ section {
 
 /* Header */
 section.header {
-  padding: 32px 24px 24px;
+  padding: 32px;
 }
 section.header .content {
   display: flex;
@@ -156,7 +156,7 @@ section.icons .content a:hover {
 
 /* Main Content */
 section.main {
-  padding: 32px 24px;
+  padding: 32px 32px;
   flex-grow: 1;
 }
 section.main .content {
@@ -167,7 +167,7 @@ section.main .content {
 /* Post Items (Lists) */
 section.main .content .post-item {
   display: list-item;
-  list-style: disc inside;
+  list-style: circle;
 }
 section.main .content .post-item .meta {
   color: #666;
