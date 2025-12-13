@@ -190,6 +190,10 @@ section.main .content .no-bullet .date {
   font-style: normal;
 }
 
+section.zero-top-spacing {
+  align-items: start;
+}
+
 @media (min-width: 600px) {
   section.main {
     padding: 0 16px;
@@ -219,12 +223,12 @@ section.main .content .markdown h6 {
   margin-bottom: 0.5rem;
   margin-top: 1.75rem;
 }
-section.main .content .markdown h1 { font-size: 1.75rem; margin-bottom: 2rem; }
-section.main .content .markdown h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
-section.main .content .markdown h3 { font-size: 1.1rem; margin-bottom: 1rem; }
+section.main .content .markdown h1 { font-size: 1.2rem; margin-top: 1.5rem; }
+section.main .content .markdown h2 { font-size: 1.1rem; margin-top: 1.2rem; }
+section.main .content .markdown h3 { font-size: 1.05rem; margin-top: 1.2rem; }
 section.main .content .markdown h4,
 section.main .content .markdown h5,
-section.main .content .markdown h6 { font-size: 1rem; margin-bottom: 1rem; }
+section.main .content .markdown h6 { font-size: 1rem; margin-top: 1rem; }
 
 section.main .content .markdown code,
 section.main .content .markdown pre,
@@ -235,7 +239,7 @@ section.main .content p .literal {
   border-radius: 5px;
 }
 
-section.main .content .markdown code,
+section.main .content .markdown p code,
 section.main .content p .literal {
   padding: .15em .5em;
 }
@@ -305,6 +309,8 @@ section.main .content .front-matter .meta {
   color: #666;
   display: flex;
   margin-bottom: 32px;
+  font-size: 0.9rem;
+  flex-direction: column;
 }
 @media (min-width: 600px) {
   section.main .content .title-container .initials { display: none; }
