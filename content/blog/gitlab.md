@@ -56,7 +56,7 @@ Volume=<path-to-data-directory>/repositories/data:/var/opt/gitlab:Z
 # SSL from my reverse proxy outside.
 # `nginx['listen_https']: Ask `nginx` to not do SSL inside the container.
 # `gitlab_rails['gitlab_shell_ssh_port']: The port I use for listening for SSH.
-Environment=GITLAB_OMNIBUS_CONFIG="external_url 'https://<my-hostname>'; nginx['listen_port'] = 80; nginx['listen_https'] = false; gitlab_rails['gitlab_shell_ssh_port'] = 2222; "
+Environment=GITLAB_OMNIBUS_CONFIG="external_url 'https://<my-hostname>'; nginx['listen_port'] = 80; nginx['listen_https'] = false; gitlab_rails['gitlab_shell_ssh_port'] = 2222;"
 
 [Service]
 Restart=always
