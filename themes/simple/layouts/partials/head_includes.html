@@ -9,9 +9,6 @@
 </script>
 {{ end }}
 
-<!-- Turbo -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@latest/dist/turbo.es2017-esm.min.js"></script>
-
 <!-- CSS -->
 
 {{ if .Site.Params.highlightjs }}
@@ -23,29 +20,13 @@
 {{ end }}
 
 <!-- Fonts and icon CSS -->
-
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
 
-{{ if .Site.Params.cachebuster }}
+{{ $pygments := resources.Get "css/pygments.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $pygments.RelPermalink }}" integrity="{{ $pygments.Data.Integrity }}">
 
-    {{ $t := now }}
-    <link rel="stylesheet" href="/css/reset.css?t={{$t}}">
-    <link rel="stylesheet" href="/css/pygments.css?t={{$t}}">
-    <link rel="stylesheet" href="/css/main.css?t={{$t}}">
-    {{range .Site.Params.extracssfiles}}
-        <link rel="stylesheet" href="{{.}}?t={{$t}}">
-    {{ end }}
-
-{{ else }}
-
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/pygments.css">
-    <link rel="stylesheet" href="/css/main.css">
-    {{range .Site.Params.extracssfiles}}
-        <link rel="stylesheet" href="{{.}}">
-    {{end}}
-
-{{ end }}
+{{ $main := resources.Get "css/main.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $main.RelPermalink }}" integrity="{{ $main.Data.Integrity }}">
 
 <!-- Icon -->
 <link rel="shortcut icon"

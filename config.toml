@@ -10,7 +10,7 @@ title               = "The Perpetual Amature"
 pygmentsUseClasses  = true
 pygmentsCodeFences  = true
 pluralizeListTitles = false
-theme               = "cocoa"
+theme               = "simple"
 
 [permalinks]
 blog  = ":slug/"
@@ -19,19 +19,17 @@ old = ":slug/"
 
 [params]
 author       = "Rohan Jain"
+avatar       = "img/avatar.png"
 dateForm     = "Jan 2, 2006"
 dateFormFull = "Mon Jan 2 2006 15:04:05 MST"
 description  = "Rohan's Personal Web Blog."
-faviconFile  = "img/favicon.ico"
+faviconFile  = "img/avatar.png"
 github       = "//github.com/crodjer"
-lang         = "en"
 linkedin     = "//linkedin.com/in/crodjer"
 twitter      = "//twitter.com/__crodjer__"
+lang         = "en"
 blogGroupBy  = "year"
 include_rss  = true
-
-gravatar     = "564e7aa79de47cdf3a094da1d4ac13cd"
-extraCssFiles = [ "/css/solarized.css", "/css/override.css" ]
 
 [[menu.main]]
 name                   = "Home"
@@ -43,3 +41,13 @@ name                   = "About"
 weight                 = -8
 identifier             = "about"
 url                    = "/about/"
+
+[minify]
+minifyOutput = true
+
+[minify.tdewolff]
+  html = { keepQuotes = false }
+  css = { keepCSS2 = true }
+  js = { keepVarNames = true }
+  json = { keepNumbers = true }
+  xml = { keepWhitespace = false }
