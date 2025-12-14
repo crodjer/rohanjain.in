@@ -1,11 +1,6 @@
 {{ partial "header.html" . }}
-<section class="main">
-    <div class="container f04">
-        <div class="content">
-            <div class="num">404</div>
-	    <div class="detail">{{ i18n "pageNotFound" }}</div>
-	    <div class="suggestion"><a href="/">{{ i18n "visitHomePage" }}</a></div>
-        </div>
-    </div>
-</section>
+<main>
+  <h1>404</h1>
+  <p>{{ i18n "pageNotFound" }}</p>
+</main>
 {{ partial "footer.html" . }}

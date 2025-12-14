@@ -28,7 +28,6 @@ issue as well.
 > measure of its brightness as seen by an observer on Earth. The smaller the
 > number, the
 > brighter a star appears.  
-> - Wikipedia
 
 At the time I started, the most identifiable constellation was
 [Orion][]. [Betelgeuse][], reddish orange star in Orion, very quickly became my

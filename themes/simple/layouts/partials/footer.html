@@ -1,30 +1,22 @@
-<section class="icons">
-    <div class="container">
-        <div class="content">
-        {{ if .Site.Params.github }}
-            <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">Github</a>
-        {{ end }}
-
-        {{ if .Site.Params.linkedin }}
-            <a href="{{ .Site.Params.linkedin }}" target="_blank" rel="noopener">Linkedin</a>
-        {{ end }}
-
-        {{ if .Site.Params.twitter }}
-            <a href="{{ .Site.Params.twitter }}" target="_blank" rel="noopener">Twitter</a>
-        {{ end }}
-
-        {{ $RSSLink := "" }}
-        {{ with .OutputFormats.Get "RSS" }}
-        {{ $RSSLink = .RelPermalink }}
-        {{ end }}
-        {{ if and .Site.Params.include_rss $RSSLink }}
-            <a href="{{ $RSSLink }}">RSS</a>
-        {{ end }}
-        </div>
-    </div>
-</section>
-
-{{ partial "footer_scripts" . }}
-
+  <footer>
+    <a {{ printf "href=%q" ("/blog" | relLangURL) | safeHTMLAttr }}>{{ i18n "backToPosts" }}</a>
+    {{ if .Site.Params.github }}
+    <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">Github</a>
+    {{ end }}
+    {{ if .Site.Params.linkedin }}
+    <a href="{{ .Site.Params.linkedin }}" target="_blank" rel="noopener">Linkedin</a>
+    {{ end }}
+    {{ if .Site.Params.twitter }}
+    <a href="{{ .Site.Params.twitter }}" target="_blank" rel="noopener">Twitter</a>
+    {{ end }}
+    {{ $RSSLink := "" }}
+    {{ with .OutputFormats.Get "RSS" }}
+    {{ $RSSLink = .RelPermalink }}
+    {{ end }}
+    {{ if and .Site.Params.include_rss $RSSLink }}
+    <a href="{{ $RSSLink }}">RSS</a>
+    {{ end }}
+  </footer>
+  {{ partial "footer_scripts" . }}
 </body>
 </html>

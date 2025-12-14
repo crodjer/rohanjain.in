@@ -1,40 +1,34 @@
 {{ partial "header.html" . }}
 
-<section class="main post non-narrow zero-top-spacing">
-    <div class="container">
-        <div class="content">
-            <div class="front-matter">
-                <div class="title-container">
-                    {{ partial "page-heading" . }}
-                    <div class="initials"><a href="{{ .Site.BaseURL }}">{{ .Site.Params.Initials }}</a></div>
-                </div>
-                <div class="meta">
-                    {{ if and .Site.Params.dateformfull .Site.Params.dateform }}
-                    <div class="date" title='{{ .Date.Format .Site.Params.dateformfull }}'>{{ .Date.Format .Site.Params.dateform }}</div>
-                    {{ else }}
-                    <div class="date" title='{{ .Date.Format "Mon Jan 2 2006 15:04:05 MST" }}'>{{ .Date.Format "Jan 2, 2006" }}</div>
-                    {{ end }}
-                    {{ if not .Site.Params.noshowreadtime }}
-		    <div class="reading-time"><div class="middot"></div>{{ i18n "readingTime" .ReadingTime }}</div>
-                    {{ end }}
-                </div>
-            </div>
-            <div class="markdown">
-                {{ .Content }}
-                <br>
-                {{ if .Params.tags }}
-                  <div class="tags">
-                    <strong>Tags:</strong>
-                  {{range .Params.tags}}
-                    <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
-                  {{end}}
-                  </div>
-                  <br />
-                {{end}}
-                <p class="back-to-posts"><a {{ printf "href=%q" ("/blog" | relLangURL) | safeHTMLAttr }}>{{ i18n "backToPosts" }}</a></p>
-            </div>
-        </div>
-    </div>
-</section>
+<main>
+  <article>
+    <header>
+      {{ partial "page-heading.html" . }}
+
+      {{ if and .Site.Params.dateformfull .Site.Params.dateform }}
+      <small>
+        <time datetime='{{ .Date.Format "2006-01-02" }}' title='{{ .Date.Format .Site.Params.dateformfull }}'>{{ .Date.Format .Site.Params.dateform }}</time>
+        {{ if not .Site.Params.noshowreadtime }} | {{ i18n "readingTime" .ReadingTime }}{{ end }}
+      </small>
+      {{ else }}
+      <small>
+        <time datetime='{{ .Date.Format "2006-01-02" }}' title='{{ .Date.Format "Mon Jan 2 2006 15:04:05 MST" }}'>{{ .Date.Format "Jan 2, 2006" }}</time>
+        {{ if not .Site.Params.noshowreadtime }} | {{ i18n "readingTime" .ReadingTime }}{{ end }}
+      </small>
+      {{ end }}
+    </header>
+
+    {{ .Content }}
+
+    {{ if .Params.tags }}
+    <p>
+    <strong>Tags:</strong>
+    {{ range .Params.tags }}
+    <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+    {{ end }}
+    </p>
+    {{ end }}
+  </article>
+</main>
 
 {{ partial "footer.html" . }}

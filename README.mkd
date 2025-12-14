@@ -1,7 +1,2 @@
-My tussles with programming.
-
-A personal blog built with,
-
-- [Hugo](https://gohugo.io/)
-- [Cocoa Theme](https://github.com/nishanths/cocoa-hugo-theme) for
-  Hugo.
+My personal blog built with [Hugo](https://gohugo.io/).
+Hosted at: [rohanjain.in](https://www.rohanjain.in/)

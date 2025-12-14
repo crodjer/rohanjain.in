@@ -7,8 +7,6 @@ layoutdir           = "layouts"
 publishdir          = "public"
 author              = "Rohan Jain"
 title               = "The Perpetual Amature"
-pygmentsUseClasses  = true
-pygmentsCodeFences  = true
 pluralizeListTitles = false
 theme               = "simple"
 
@@ -19,7 +17,6 @@ old = ":slug/"
 
 [params]
 author       = "Rohan Jain"
-avatar       = "img/avatar-small.jpg"
 dateForm     = "Jan 2, 2006"
 dateFormFull = "Mon Jan 2 2006 15:04:05 MST"
 description  = "Rohan's Personal Web Blog."
@@ -52,3 +49,6 @@ minifyOutput = true
   js = { keepVarNames = true }
   json = { keepNumbers = true }
   xml = { keepWhitespace = false }
+
+[markup.highlight]
+codeFences = false

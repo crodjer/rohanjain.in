@@ -182,9 +182,3 @@ ssh penguin@pi -t -- 'fscrypt unlock /home/penguin; tmux -u new -As pi'
 3. This doesn't protect you from an attack in a running machine, so
    use a firewall. I'd recommend
    [ufw](https://wiki.archlinux.org/title/Uncomplicated_Firewall).
-
-> Ads:
->
-> Learn: [How Linux Works](https://amzn.to/3kxb1d0), [The Linux
-Command Line](https://amzn.to/3ijmWZ9)  
-> Get a [Raspberry Pi 4](https://amzn.to/3ijRwlA), A fast [SD Card](https://amzn.to/3z9Cjdu)

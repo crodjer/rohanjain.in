@@ -156,7 +156,6 @@ should improve in the future sightings.
 
 > In astronomy, [limiting magnitude][] is the faintest apparent magnitude of a
 > celestial body that is detectable or detected by a given instrument.  
-> - Wikipedia
 
 I find figuring out the limiting magnitude for my telescope interesting.
 Theoretically, I should be able to see stars up to an apparent magnitude of

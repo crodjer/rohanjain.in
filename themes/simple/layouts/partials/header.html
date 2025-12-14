@@ -1,26 +1,16 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
-
-{{ partial "head.html" . }}
-
-<body lang="{{ .Site.Params.lang }}">
-
-<section class="header">
-    <div class="container">
-        <div class="content">
-            <a {{ printf "href=%q" ("/" | relLangURL) | safeHTMLAttr }}><img class="avatar" src="{{ .Site.Params.avatar | absURL }}" alt="avatar"></a>
-            <a {{ printf "href=%q" ("/" | relLangURL) | safeHTMLAttr }}><div class="name">{{ .Site.Params.author }}</div></a>
-            {{ if .Site.Params.selfintro }}
-              <h3 class="self-intro">{{ .Site.Params.selfintro }}</h3>
-            {{ end }}
-            <nav>
-                <ul>
-                    {{ range .Site.Menus.main }}
-                        {{/* TODO: use relLangURL instead of absLangURL? */}}
-                        <li class="nav-{{ .Identifier }}"><a href="{{ .URL | absLangURL }}">{{ .Pre }}<span>{{ .Name }}</span></a></li>
-                    {{ end }}
-                </ul>
-            </nav>
-        </div>
-    </div>
-</section>
+  {{ partial "head.html" . }}
+  <body lang="{{ .Site.Params.lang }}">
+    <header>
+      <a {{ printf "href=%q" ("/" | relLangURL) | safeHTMLAttr }}>{{ .Site.Title }}</a>
+      {{ with .Site.Params.selfintro }}<p>{{ . }}</p>{{ end }}
+      <nav>
+        <ul>
+          {{ range .Site.Menus.main }}
+          {{/* TODO: use relLangURL instead of absLangURL? */}}
+          <li><a href="{{ .URL | absLangURL }}">{{ .Pre }}{{ .Name }}</a></li>
+          {{ end }}
+        </ul>
+      </nav>
+    </header>

@@ -1,36 +1,34 @@
 {{ partial "header.html" . }}
-<section class="main">
-    <div class="container">
-        <div class="content">
-            {{ if .Content }}
-                <div class="markdown">
-                    {{ .Content }}
-                </div>
-            {{ end }}
-            <div class="page-heading">{{ i18n "blogHeading" }}</div>
-            <ul>
-                {{ if eq .Site.Params.bloggroupby "month" }}
-                    {{ $.Scratch.Set "datespec" "Jan, 2006" }}
-                {{ else if eq .Site.Params.bloggroupby "year" }}
-                    {{ $.Scratch.Set "datespec" "2006" }}
-                {{ end }}
-                {{ if not ($.Scratch.Get "datespec") }}
-                    {{ range .Data.Pages.ByPublishDate.Reverse }}
-                    {{ partial "li.html" . }}
-                    {{ end }}
-                {{ else }}
-                    {{ range .Data.Pages.ByPublishDate.GroupByDate ($.Scratch.Get "datespec") "desc" }}
-                        <li class="post-item no-bullet">
-                            <span class="date">{{ .Key }}</span>
-                        </li>
-                        {{ range .Pages.ByPublishDate.Reverse }}
-                            {{ partial "li.html" . }}
-                        {{ end }}
-                    {{ end }}
-                {{ end }}
-            </ul>
-        </div>
-    </div>
-</section>
-{{ partial "footer.html" . }}
+<main>
+  <h1>{{ i18n "blogHeading" }}</h1>
 
+  {{ if .Content }}
+  <article>
+    {{ .Content }}
+  </article>
+  {{ end }}
+
+  {{ if eq .Site.Params.bloggroupby "month" }}
+  {{ $.Scratch.Set "datespec" "Jan, 2006" }}
+  {{ else if eq .Site.Params.bloggroupby "year" }}
+  {{ $.Scratch.Set "datespec" "2006" }}
+  {{ end }}
+
+  {{ if not ($.Scratch.Get "datespec") }}
+  <ul>
+    {{ range .Data.Pages.ByPublishDate.Reverse }}
+    {{ partial "li.html" . }}
+    {{ end }}
+  </ul>
+  {{ else }}
+  {{ range .Data.Pages.ByPublishDate.GroupByDate ($.Scratch.Get "datespec") "desc" }}
+  <h2>{{ .Key }}</h2>
+  <ul>
+    {{ range .Pages.ByPublishDate.Reverse }}
+    {{ partial "li.html" . }}
+    {{ end }}
+  </ul>
+  {{ end }}
+  {{ end }}
+</main>
+{{ partial "footer.html" . }}

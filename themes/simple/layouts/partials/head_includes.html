@@ -19,11 +19,8 @@
   {{ end }}
 {{ end }}
 
-{{ $pygments := resources.Get "css/pygments.css" | minify | fingerprint }}
-<link rel="stylesheet" href="{{ $pygments.RelPermalink }}" integrity="{{ $pygments.Data.Integrity }}">
-
 {{ $main := resources.Get "css/main.css" | minify | fingerprint }}
-<link rel="stylesheet" href="{{ $main.RelPermalink }}" integrity="{{ $main.Data.Integrity }}">
+<link rel="stylesheet" href="{{ $main.RelPermalink }}">
 
 <!-- Icon -->
 <link rel="shortcut icon"
