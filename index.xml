@@ -1,4 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>The Perpetual Amature</title><link>/</link><description>Recent content on The Perpetual Amature</description><generator>Hugo</generator><language>en-US</language><lastBuildDate>Sun, 26 Oct 2025 09:27:21 +0530</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>Self Hosting Gitlab using Quadlets</title><link>/gitlab/</link><pubDate>Sun, 26 Oct 2025 09:27:21 +0530</pubDate><guid>/gitlab/</guid><description>&lt;h3 id="what-are-quadlets"&gt;What are Quadlets?&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>The Perpetual Amature</title><link>/</link><description>Recent content on The Perpetual Amature</description><generator>Hugo</generator><language>en-US</language><lastBuildDate>Sat, 13 Dec 2025 14:49:04 +0530</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>Run Gemini CLI Safely with Firejail</title><link>/gemini-cli/</link><pubDate>Sat, 13 Dec 2025 14:49:04 +0530</pubDate><guid>/gemini-cli/</guid><description>&lt;p&gt;I have always had a strict policy against running JS applications. But
+&lt;code&gt;gemini-cli&lt;/code&gt; looked promising, and I wanted to use it outside of a throwaway VM.&lt;/p&gt;
+&lt;p&gt;A friend introduced me to &lt;a href="https://github.com/netblue30/firejail"&gt;firejail&lt;/a&gt;,
+which runs programs in a (configurable) restricted environment. This meant I
+could safely use tools like &lt;code&gt;gemini-cli&lt;/code&gt; and reduce my exposure to the
+ever-present supply chain attacks in the JavaScript world.&lt;/p&gt;
+&lt;h1 id="running-gemini-cli"&gt;Running Gemini CLI&lt;/h1&gt;
+&lt;p&gt;We don&amp;rsquo;t even have to build the &lt;code&gt;gemini-cli&lt;/code&gt; client. We can directly download
+&lt;code&gt;gemini.js&lt;/code&gt; from the &lt;code&gt;gemini-cli&lt;/code&gt;
+&lt;a href="https://github.com/google-gemini/gemini-cli/releases/latest"&gt;release page&lt;/a&gt;:&lt;/p&gt;</description></item><item><title>Self Hosting Gitlab using Quadlets</title><link>/gitlab/</link><pubDate>Sun, 26 Oct 2025 09:27:21 +0530</pubDate><guid>/gitlab/</guid><description>&lt;h3 id="what-are-quadlets"&gt;What are Quadlets?&lt;/h3&gt;
 &lt;p&gt;I self-host most of my services important to me personally. Lately, I have been
 using &lt;a href="https://www.redhat.com/en/blog/quadlet-podman"&gt;Quadlets&lt;/a&gt; for this. I came
 across the concept of Quadlets from Immich.&lt;/p&gt;
