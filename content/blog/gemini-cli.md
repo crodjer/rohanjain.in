@@ -15,7 +15,7 @@ which runs programs in a (configurable) restricted environment. This meant I
 could safely use tools like `gemini-cli` and reduce my exposure to the
 ever-present supply chain attacks in the JavaScript world.
 
-# Running Gemini CLI
+## Running Gemini CLI
 We don't even have to build the `gemini-cli` client. We can directly download
 `gemini.js` from the `gemini-cli`
 [release page](https://github.com/google-gemini/gemini-cli/releases/latest):
@@ -36,7 +36,7 @@ DENO_COMPAT=1 firejail --whitelist=~/.gemini --whitelist=$PWD \
 This runs `deno` in the node compatible mode under `firejail` while allowing
 access to `~/.gemini` and the current directories.
 
-# My Setup
+## My Setup
 I have a more complex script which takes care of keeping `gemini.js` up to date
 and runs it with stricter permissions.
 I'd recommend [checking it out here](https://github.com/crodjer/configs/blob/master/neovim/.local/bin/gemini.sh).

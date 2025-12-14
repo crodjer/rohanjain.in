@@ -8,7 +8,7 @@
 
 html {
   height: 100%;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 body {
@@ -76,20 +76,20 @@ section.header .avatar {
   max-width: 60px;
 }
 section.header .name {
-  font-size: 18px;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #555;
   text-transform: uppercase;
   margin-top: 0.5rem;
 }
 section.header h3.self-intro {
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 400;
   color: #555;
   margin-bottom: 1rem;
 }
 section.header nav {
-  font-size: 14px;
+  font-size: 0.9rem;
   margin-bottom: 16px;
   text-transform: uppercase;
 }
@@ -98,7 +98,7 @@ section.header nav ul {
   display: inline-flex;
 }
 section.header nav ul li {
-  margin: 0 6px;
+  margin-right: 6px;
 }
 section.header nav ul a {
   color: #555;
@@ -129,7 +129,7 @@ section.header nav ul a:hover {
 
 /* Icons (Footer) */
 section.icons {
-  padding-bottom: 32px;
+  padding: 16px;
   font-size: 0.8rem;
 }
 section.icons .container {
@@ -158,7 +158,7 @@ section.main {
 }
 section.main .content {
   color: #111;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 /* Post Items (Lists) */
@@ -180,7 +180,7 @@ section.main .content .no-bullet {
   margin-bottom: 1rem;
 }
 section.main .content .no-bullet .date {
-  font-size: 18px;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #666 !important;
   font-style: normal;
@@ -290,7 +290,7 @@ section.main .content .markdown tbody tr:nth-child(2n+1) th {
 
 /* Page Heading in Main */
 section.main .content .page-heading {
-  font-size: 18px;
+  font-size: 1.1rem;
   font-weight: 700;
   color: #555;
   text-transform: uppercase;
@@ -318,12 +318,11 @@ section.main .container.f04 .content {
   align-items: center;
 }
 section.main .container.f04 .content .num {
-  margin: 30px 0;
-  font-size: 50px;
+  font-size: 3rem;
   font-weight: 200;
 }
 section.main .container.f04 .content .detail {
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
 @media (min-width: 600px) {
   section.main .container.f04 {
@@ -333,11 +332,7 @@ section.main .container.f04 .content .detail {
     align-items: flex-start;
   }
   section.main .container.f04 .content .num {
-    margin: 0 0 10px 0;
-    font-size: 32px;
-  }
-  section.main .container.f04 .content .detail {
-    margin-bottom: 30px;
+    font-size: 4rem;
   }
 }
 
