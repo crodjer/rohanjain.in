@@ -150,8 +150,19 @@ h2, h3, h4, h5 {
   color: #555;
   margin-bottom: 0.75rem;
   margin-top: 1.5rem;
+  position: relative;
 }
 
+.heading-anchor, .heading-anchor:visited {
+  color: inherit;
+  font-size: 0.8rem;
+  font-weight: 100;
+  left: -0.75rem;
+  opacity: 0.6;
+  position: absolute;
+  text-decoration: none;
+  top: 0.25rem;
+}
 
 article header {
   flex-direction: column;
@@ -255,5 +266,9 @@ th, td {
 
   main blockquote {
     border-left-color: #053440;
+  }
+
+  main .heading-anchor {
+    color: #93a1a1;
   }
 }

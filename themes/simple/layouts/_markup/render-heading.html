@@ -1,0 +1,6 @@
+<h{{ .Level }} id="{{ .Anchor }}">
+  {{ if ge .Level 2 }}
+    <a class="heading-anchor" href="#{{ .Anchor }}" aria-label="Permalink to {{ .Text | plainify }}">§</a>
+  {{ end }}
+  {{ .Text | safeHTML }}
+</h{{ .Level }}>

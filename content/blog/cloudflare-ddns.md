@@ -18,19 +18,19 @@ API, which works well with my ArchLinux box. But ddclient bundled with Raspbian,
 is yet to get that update. Cloudflare's API is fairly straight forward, so I
 decided to use a curl/systemd based solution on my RaspberryPi.
 
-# Configuration information
+## Configuration information
 If you too want to set Dynamic DNS with Cloudflare, you need to acquire some
 configuration information first:
 
-## Cloudflare configuration details
-- `DNS Zone`  
+### Cloudflare configuration details
+- `DNS Zone`
   You can get it by visiting the overview page of Cloudflare dashboard (called
   Zone ID):
   `https://www.cloudflare.com/a/overview/<your-domain>`
 - `Auth Email`: This is your cloudflare account email.
 - `Auth Key`: This is your *Global API Key* under Cloudflare account settings:
   <https://www.cloudflare.com/a/account/my-account>
-- `IDENTIFIER`  
+- `IDENTIFIER`
   To get the identifier, you need to first set an A record for the subdomain you
   want to manage with Dynamic DNS. Then, plug in the subdomain in this curl
   query to obtain the identifier:
@@ -40,17 +40,17 @@ configuration information first:
        --silent -X GET \
        -H "X-Auth-Email: <cloudflare-auth-email>" \
        -H "X-Auth-Key: <cloudflare-auth-key>" \
-       -H "Content-Type: application/json" 
+       -H "Content-Type: application/json"
   ```
 
-## IP Address
+### IP Address
 I use `dig` with OpenDNS to get the current public IP and
 <https://www.ipify.org/> as a fallback if `dig` isn't installed. Using `dig` is
 faster though and you can install it via `dnsutils` (available as an official
 package on most systems).
 
 
-# The script
+## The script
 All the above information can now be plugged in this bash script to update the
 DNS entry on Cloudflare. I placed it at `/usr/local/bin/cloudflare-ddns.sh`
 ```bash
@@ -111,10 +111,10 @@ Try running `cloudflare-ddns.sh` to see if DNS records get updated on
 Cloudflare. For debugging purposes, I store the Cloudflare response at
 `/tmp/cloudflare-ddns-update.json`.
 
-# Systemd
+## Systemd
 We'll automate this execution by writing a systemd service and a timer.
 
-## Configuring the service
+### Configuring the service
 My systemd service unit looks like this:
 `/etc/systemd/system/cloudflare-ddns.service`
 ```
@@ -133,7 +133,7 @@ sudo systemctl start cloudflare-ddns.service
 sudo journalctl -u cloudflare-ddns
 ```
 
-## Setting up a timer
+### Setting up a timer
 Set up a timer, so that DNS update is attempted every 2 minutes:
 `/etc/systemd/system/cloudflare-ddns.timer`
 ```

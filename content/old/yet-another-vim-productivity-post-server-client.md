@@ -8,7 +8,7 @@ publishdate = "2012-04-15T00:00:00Z"
 You can find lot of posts on the internet which try to tell you how to improve
 the ways in which Vim is used. Well, here is another one.
 
-#Vim Server, ZSH and Tiles
+## Vim Server, ZSH and Tiles
 
 A Vim instance behaves as a server in which files can be opened through remote
 applications. Read `:help client-server` of Vim to know more about this. I
@@ -70,7 +70,7 @@ compdef _vim es
 
 ```
 
-#Vim Sessions
+## Vim Sessions
 
 Having multiple instances is great, but I don't want to set each up every time I
 need resume working. For this I use *Vim Sessions*, which allow the current Vim
