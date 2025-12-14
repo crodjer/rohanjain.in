@@ -29,3 +29,12 @@
 </script>
 <!-- End Piwik Code -->
 {{ end }}
+
+{{ if .Site.Params.goatCounter }}
+{{ $gc := resources.Get "js/count.js"  | minify | fingerprint }}
+<script data-goatcounter="{{ .Site.Params.goatCounter }}/count"
+        async src="{{ $gc.RelPermalink }}"></script>
+<noscript>
+    <img src="{{ .Site.Params.goatCounter }}/count?p={{ .RelPermalink }}&t={{ .Title }}">
+</noscript>
+{{ end }}
