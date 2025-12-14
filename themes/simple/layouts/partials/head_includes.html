@@ -19,9 +19,6 @@
   {{ end }}
 {{ end }}
 
-<!-- Fonts and icon CSS -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
-
 {{ $pygments := resources.Get "css/pygments.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $pygments.RelPermalink }}" integrity="{{ $pygments.Data.Integrity }}">
 
