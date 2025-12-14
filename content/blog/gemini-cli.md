@@ -2,6 +2,7 @@
 title = "Run Gemini CLI Safely with Firejail"
 slug = "gemini-cli"
 date = "2025-12-13T14:49:04+05:30"
+lastmod = "2025-12-14T15:32:04+05:30"
 description = "Firejail can be used to safely run JavaScript applications like gemini-cli by restricting their environment."
 draft = false
 +++
