@@ -4,7 +4,7 @@
 which runs programs in a (configurable) restricted environment. This meant I
 could safely use tools like &lt;code&gt;gemini-cli&lt;/code&gt; and reduce my exposure to the
 ever-present supply chain attacks in the JavaScript world.&lt;/p&gt;
-&lt;h1 id="running-gemini-cli"&gt;Running Gemini CLI&lt;/h1&gt;
+&lt;h2 id="running-gemini-cli"&gt;Running Gemini CLI&lt;/h2&gt;
 &lt;p&gt;We don&amp;rsquo;t even have to build the &lt;code&gt;gemini-cli&lt;/code&gt; client. We can directly download
 &lt;code&gt;gemini.js&lt;/code&gt; from the &lt;code&gt;gemini-cli&lt;/code&gt;
 &lt;a href="https://github.com/google-gemini/gemini-cli/releases/latest"&gt;release page&lt;/a&gt;:&lt;/p&gt;</description></item><item><title>Self Hosting Gitlab using Quadlets</title><link>/gitlab/</link><pubDate>Sun, 26 Oct 2025 09:27:21 +0530</pubDate><guid>/gitlab/</guid><description>&lt;h3 id="what-are-quadlets"&gt;What are Quadlets?&lt;/h3&gt;
