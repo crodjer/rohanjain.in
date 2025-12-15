@@ -1,33 +1,33 @@
-<!doctype html><html lang=en-US><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="chrome=1"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="Sitemap with Hakyll | Rohan's Personal Web Blog."><meta property="og:title" content="Sitemap with Hakyll"><meta property="og:description" content="Sitemap with Hakyll | Rohan's Personal Web Blog."><meta property="og:type" content="article"><meta property="og:url" content="/hakyll-sitemap/"><meta property="article:section" content="old"><meta property="article:published_time" content="2015-08-30T00:00:00+00:00"><meta property="article:modified_time" content="2015-08-30T00:00:00+00:00"><title>Sitemap with Hakyll</title><link rel=canonical href=/hakyll-sitemap/><link rel=stylesheet href=/css/pygments.min.42fe0099f9515ec8cb510d96b2ec79b3525dab83b63dc7ca290b29679ae42e97.css integrity="sha256-Qv4AmflRXsjLUQ2Wsux5s1Jdq4O2PcfKKQspZ5rkLpc="><link rel=stylesheet href=/css/main.min.4814e7df4d62d4897e8b69594fb83674fa177090ddec01503f8332c3ba5cb444.css integrity="sha256-SBTn301i1Il+i2lZT7g2dPoXcJDd7AFQP4Myw7pctEQ="><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><section class=header><div class=container><div class=content><a href=/><img class=avatar src=/img/avatar-small.jpg alt=avatar></a>
-<a href=/><div class=name>Rohan Jain</div></a><nav><ul><li class=nav-home><a href=/><span>Home</span></a></li><li class=nav-about><a href=/about/><span>About</span></a></li></ul></nav></div></div></section><section class=main><div class=container><div class=content><div class=page-heading>Sitemap with Hakyll</div><div class=markdown><p>Its fairly trivial to configure <a href=http://jaspervdj.be/hakyll/>Hakyll</a> to generate
+<!doctype html><html lang=en-US><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="Sitemap with Hakyll | Rohan's Personal Web Blog."><meta property="og:title" content="Sitemap with Hakyll"><meta property="og:type" content="article"><meta property="article:published_time" content="2015-08-30T00:00:00+00:00"><meta property="article:modified_time" content="2015-08-30T00:00:00+00:00"><title>Sitemap with Hakyll</title><link rel=canonical href=/hakyll-sitemap/><link rel=stylesheet href=/css/main.min.97ffe0e39b9819392033e2635f05ec47c705d94936b7483bb66889dbf15d7a90.css><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><header><a href=/>The Perpetual Amature</a><nav><ul><li><a href=/>Home</a></li><li><a href=/about/>About</a></li></ul></nav></header><main><h1>Sitemap with Hakyll</h1><p>Its fairly trivial to configure <a href=http://jaspervdj.be/hakyll/>Hakyll</a> to generate
 sitemaps. Sitemaps helps search engines websites. Similar to any
-typical html page, create a template - <code>templates/sitemap.xml</code>:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-xml data-lang=xml><span class=line><span class=cl><span class=cp>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
-</span></span><span class=line><span class=cl><span class=nt>&lt;urlset</span> <span class=na>xmlns=</span><span class=s>&#34;http://www.sitemaps.org/schemas/sitemap/0.9&#34;</span><span class=nt>&gt;</span>
-</span></span><span class=line><span class=cl>$for(entries)$
-</span></span><span class=line><span class=cl>    <span class=nt>&lt;url&gt;</span>
-</span></span><span class=line><span class=cl>        <span class=nt>&lt;loc&gt;</span>$host$$url$<span class=nt>&lt;/loc&gt;</span>
-</span></span><span class=line><span class=cl>        <span class=nt>&lt;changefreq&gt;</span>weekly<span class=nt>&lt;/changefreq&gt;</span>
-</span></span><span class=line><span class=cl>        $if(lastmod)$<span class=nt>&lt;lastmod&gt;</span>$lastmod$<span class=nt>&lt;/lastmod&gt;</span>$endif$
-</span></span><span class=line><span class=cl>        <span class=nt>&lt;priority&gt;</span>0.8<span class=nt>&lt;/priority&gt;</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&lt;/url&gt;</span>
-</span></span><span class=line><span class=cl>$endfor$
-</span></span><span class=line><span class=cl><span class=nt>&lt;/urlset&gt;</span>
-</span></span></code></pre></div><p>Then, using the templates, create a rule which uses all the pages from
-the site as entries. Here is what I do:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-haskell data-lang=haskell><span class=line><span class=cl>  <span class=n>create</span> <span class=p>[</span><span class=s>&#34;sitemap.xml&#34;</span><span class=p>]</span> <span class=o>$</span> <span class=kr>do</span>
-</span></span><span class=line><span class=cl>         <span class=n>route</span>   <span class=n>idRoute</span>
-</span></span><span class=line><span class=cl>         <span class=n>compile</span> <span class=o>$</span> <span class=kr>do</span>
-</span></span><span class=line><span class=cl>           <span class=n>posts</span> <span class=ow>&lt;-</span> <span class=n>recentFirst</span> <span class=o>=&lt;&lt;</span> <span class=n>loadAll</span> <span class=s>&#34;posts/*/*&#34;</span>
-</span></span><span class=line><span class=cl>           <span class=n>pages</span> <span class=ow>&lt;-</span> <span class=n>loadAll</span> <span class=s>&#34;pages/*&#34;</span>
-</span></span><span class=line><span class=cl>           <span class=kr>let</span> <span class=n>allPosts</span> <span class=ow>=</span> <span class=p>(</span><span class=n>return</span> <span class=p>(</span><span class=n>pages</span> <span class=o>++</span> <span class=n>posts</span><span class=p>))</span>
-</span></span><span class=line><span class=cl>           <span class=kr>let</span> <span class=n>sitemapCtx</span> <span class=ow>=</span> <span class=n>mconcat</span>
-</span></span><span class=line><span class=cl>                            <span class=p>[</span> <span class=n>listField</span> <span class=s>&#34;entries&#34;</span> <span class=n>pageCtx</span> <span class=n>allPosts</span>
-</span></span><span class=line><span class=cl>                            <span class=p>,</span> <span class=n>constField</span> <span class=s>&#34;host&#34;</span> <span class=n>host</span>
-</span></span><span class=line><span class=cl>                            <span class=p>,</span> <span class=n>defaultContext</span>
-</span></span><span class=line><span class=cl>                            <span class=p>]</span>
-</span></span><span class=line><span class=cl>           <span class=n>makeItem</span> <span class=s>&#34;&#34;</span>
-</span></span><span class=line><span class=cl>            <span class=o>&gt;&gt;=</span> <span class=n>loadAndApplyTemplate</span> <span class=s>&#34;templates/sitemap.xml&#34;</span> <span class=n>sitemapCtx</span>
-</span></span><span class=line><span class=cl>            <span class=o>&gt;&gt;=</span> <span class=n>cleanIndexHtmls</span>
-</span></span></code></pre></div><p>This generates <a href=/sitemap.xml>/sitemap.xml</a> which can be submitted to
-search engines for indexing.</p></div></div></div></section><section class=icons><div class=container><div class=content><a href=//github.com/crodjer target=_blank rel=noopener>Github</a>
+typical html page, create a template - <code>templates/sitemap.xml</code>:</p><pre><code class=language-xml>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;urlset xmlns=&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;&gt;
+$for(entries)$
+    &lt;url&gt;
+        &lt;loc&gt;$host$$url$&lt;/loc&gt;
+        &lt;changefreq&gt;weekly&lt;/changefreq&gt;
+        $if(lastmod)$&lt;lastmod&gt;$lastmod$&lt;/lastmod&gt;$endif$
+        &lt;priority&gt;0.8&lt;/priority&gt;
+    &lt;/url&gt;
+$endfor$
+&lt;/urlset&gt;
+</code></pre><p>Then, using the templates, create a rule which uses all the pages from
+the site as entries. Here is what I do:</p><pre><code class=language-haskell>  create [&quot;sitemap.xml&quot;] $ do
+         route   idRoute
+         compile $ do
+           posts &lt;- recentFirst =&lt;&lt; loadAll &quot;posts/*/*&quot;
+           pages &lt;- loadAll &quot;pages/*&quot;
+           let allPosts = (return (pages ++ posts))
+           let sitemapCtx = mconcat
+                            [ listField &quot;entries&quot; pageCtx allPosts
+                            , constField &quot;host&quot; host
+                            , defaultContext
+                            ]
+           makeItem &quot;&quot;
+            &gt;&gt;= loadAndApplyTemplate &quot;templates/sitemap.xml&quot; sitemapCtx
+            &gt;&gt;= cleanIndexHtmls
+</code></pre><p>This generates <a href=/sitemap.xml>/sitemap.xml</a> which can be submitted to
+search engines for indexing.</p></main><footer><a href=/blog>All Posts</a>
+<a href=//github.com/crodjer target=_blank rel=noopener>Github</a>
 <a href=//linkedin.com/in/crodjer target=_blank rel=noopener>Linkedin</a>
-<a href=//twitter.com/__crodjer__ target=_blank rel=noopener>Twitter</a></div></div></section></body></html>
+<a href=//twitter.com/__crodjer__ target=_blank rel=noopener>Twitter</a></footer><script data-goatcounter=https://t.rohanjain.in/count async src=/js/count.min.4e3257a9873dba863f309fe89287c9f6e962d7be1758704f13b2608e58008e5f.js></script><noscript><img src="https://t.rohanjain.in/count?p=%2fhakyll-sitemap%2f&t=Sitemap%20with%20Hakyll"></noscript></body></html>

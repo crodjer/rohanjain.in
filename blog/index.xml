@@ -4,10 +4,20 @@
 which runs programs in a (configurable) restricted environment. This meant I
 could safely use tools like &lt;code&gt;gemini-cli&lt;/code&gt; and reduce my exposure to the
 ever-present supply chain attacks in the JavaScript world.&lt;/p&gt;
-&lt;h2 id="running-gemini-cli"&gt;Running Gemini CLI&lt;/h2&gt;
+&lt;h2 id="running-gemini-cli"&gt;
+ 
+ &lt;a class="heading-anchor" href="#running-gemini-cli" aria-label="Permalink to Running Gemini CLI"&gt;§&lt;/a&gt;
+ 
+ Running Gemini CLI
+&lt;/h2&gt;
 &lt;p&gt;We don&amp;rsquo;t even have to build the &lt;code&gt;gemini-cli&lt;/code&gt; client. We can directly download
 &lt;code&gt;gemini.js&lt;/code&gt; from the &lt;code&gt;gemini-cli&lt;/code&gt;
-&lt;a href="https://github.com/google-gemini/gemini-cli/releases/latest"&gt;release page&lt;/a&gt;:&lt;/p&gt;</description></item><item><title>Self Hosting Gitlab using Quadlets</title><link>/gitlab/</link><pubDate>Sun, 26 Oct 2025 09:27:21 +0530</pubDate><guid>/gitlab/</guid><description>&lt;h3 id="what-are-quadlets"&gt;What are Quadlets?&lt;/h3&gt;
+&lt;a href="https://github.com/google-gemini/gemini-cli/releases/latest"&gt;release page&lt;/a&gt;:&lt;/p&gt;</description></item><item><title>Self Hosting Gitlab using Quadlets</title><link>/gitlab/</link><pubDate>Sun, 26 Oct 2025 09:27:21 +0530</pubDate><guid>/gitlab/</guid><description>&lt;h3 id="what-are-quadlets"&gt;
+ 
+ &lt;a class="heading-anchor" href="#what-are-quadlets" aria-label="Permalink to What are Quadlets?"&gt;§&lt;/a&gt;
+ 
+ What are Quadlets?
+&lt;/h3&gt;
 &lt;p&gt;I self-host most of my services important to me personally. Lately, I have been
 using &lt;a href="https://www.redhat.com/en/blog/quadlet-podman"&gt;Quadlets&lt;/a&gt; for this. I came
 across the concept of Quadlets from Immich.&lt;/p&gt;
@@ -22,12 +32,14 @@ managing packages. So, instead I let pipx manage it&amp;rsquo;s own updates.&lt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Install &lt;code&gt;python3-pip&lt;/code&gt;, with:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ sudo apt install python3-pip
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;$ sudo apt install python3-pip
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Install pipx:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ pip install --user pipx
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Didn&amp;rsquo;t we want avoid that? Yes! We&amp;rsquo;ll clean this up later.&lt;/p&gt;</description></item><item><title>Cross Compiling Rust Binaries with Github Actions</title><link>/cargo-cross/</link><pubDate>Sun, 27 Jun 2021 16:50:00 +0530</pubDate><guid>/cargo-cross/</guid><description>&lt;p&gt;Compiling &lt;em&gt;rust&lt;/em&gt; is slow, specially on low power devices such as a
+&lt;pre&gt;&lt;code class="language-bash"&gt;$ pip install --user pipx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Didn&amp;rsquo;t we want avoid that? Yes! We&amp;rsquo;ll clean this up later.&lt;/p&gt;</description></item><item><title>Cross Compiling Rust Binaries with Github Actions</title><link>/cargo-cross/</link><pubDate>Sun, 27 Jun 2021 16:50:00 +0530</pubDate><guid>/cargo-cross/</guid><description>&lt;p&gt;Compiling &lt;em&gt;rust&lt;/em&gt; is slow, specially on low power devices such as a
 &lt;em&gt;Raspberry Pi&lt;/em&gt;. I build all my rust utilities with my RPi 4 and sync to
 the rest with &lt;a href="https://syncthing.net/"&gt;syncthing&lt;/a&gt;. That was true for
 my project, &lt;a href="https://github.com/crodjer/sysit"&gt;&lt;strong&gt;sysit&lt;/strong&gt;&lt;/a&gt;, as well. I
@@ -39,7 +51,12 @@ workflows, I incorporated a similar flow in sysit.&lt;/p&gt;</description></item
 Use &lt;a href="https://wiki.archlinux.org/title/Fscrypt#Encrypt_a_home_directory"&gt;fscrypt&lt;/a&gt; to encrypt your
 home partition, with a few simple steps.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id="why-encryption"&gt;Why encryption?&lt;/h2&gt;
+&lt;h2 id="why-encryption"&gt;
+ 
+ &lt;a class="heading-anchor" href="#why-encryption" aria-label="Permalink to Why encryption?"&gt;§&lt;/a&gt;
+ 
+ Why encryption?
+&lt;/h2&gt;
 &lt;p&gt;I prefer to encrypt all my (and my family&amp;rsquo;s) storage at rest.
 Encryption is useful in scenarios where someone gains physical access
 to your device. This may save you from any losses other than the
@@ -70,7 +87,12 @@ which turns the fan on/off based on certain threshold temperatures.
 This did work but the idling Pi would always go beyond the threshold
 temperature turning the fan on when. With the threshold at 65°C. I was
 getting 1:10 on:off ratio, which meant fan noise every 10 minutes of
-idle time.&lt;/p&gt;</description></item><item><title>Some Light in the Background</title><link>/light/</link><pubDate>Wed, 15 Apr 2020 09:22:34 +0530</pubDate><guid>/light/</guid><description>&lt;h4 id="tldr"&gt;tl;dr&lt;/h4&gt;
+idle time.&lt;/p&gt;</description></item><item><title>Some Light in the Background</title><link>/light/</link><pubDate>Wed, 15 Apr 2020 09:22:34 +0530</pubDate><guid>/light/</guid><description>&lt;h4 id="tldr"&gt;
+ 
+ &lt;a class="heading-anchor" href="#tldr" aria-label="Permalink to tl;dr"&gt;§&lt;/a&gt;
+ 
+ tl;dr
+&lt;/h4&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Dark backgrounds are the best. But when one accidentally land
 somewhere with a light background with eyes trained for dark, it can
@@ -141,14 +163,24 @@ experience significantly.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Stars. Stars everywhere!&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id="the-telescope"&gt;The Telescope&lt;/h2&gt;
+&lt;h2 id="the-telescope"&gt;
+ 
+ &lt;a class="heading-anchor" href="#the-telescope" aria-label="Permalink to The Telescope"&gt;§&lt;/a&gt;
+ 
+ The Telescope
+&lt;/h2&gt;
 &lt;p&gt;The primary purpose of an (astronomical) telescope, unlike popular belief, is
 not actually magnification. They act as light collectors (think burning a paper
 with a converging lens and sunlight).&lt;/p&gt;</description></item><item><title>Gazing in the night sky</title><link>/sky/</link><pubDate>Wed, 04 May 2016 00:00:00 +0000</pubDate><guid>/sky/</guid><description>&lt;p&gt;About 6 months ago, I picked up a new hobby: Stargazing. Starting off with just
 naked eyes, I quickly realized that there is actually quite a lot to see without
 any optical equipment. &lt;a href="https://play.google.com/store/apps/details?id=com.google.android.stardroid&amp;amp;hl=en"&gt;Sky Map&lt;/a&gt; and &lt;a href="http://stellarium.org/"&gt;Stellarium&lt;/a&gt; are incredibly useful
 applications for a dilettante like me.&lt;/p&gt;
-&lt;h2 id="dark-adjustment"&gt;Dark adjustment&lt;/h2&gt;
+&lt;h2 id="dark-adjustment"&gt;
+ 
+ &lt;a class="heading-anchor" href="#dark-adjustment" aria-label="Permalink to Dark adjustment"&gt;§&lt;/a&gt;
+ 
+ Dark adjustment
+&lt;/h2&gt;
 &lt;p&gt;Before any stargazing session, dark adjustment i.e. dilating the pupils
 completely to improve night vision, is essential. I turn off all kinds of lights
 in the house and listen to podcasts for a while (at least 30 minutes). I go out
@@ -165,17 +197,18 @@ personal email address on new services for multiple reasons:&lt;/p&gt;</descript
 change the default route when one goes down. &lt;a href="http://linux.die.net/man/8/ip"&gt;ip&lt;/a&gt; provides you the required
 tooling to do that. I had been doing it so often, that I ended up writing a
 function to do this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;route_to &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nv"&gt;interface&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nv"&gt;route&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;ip route &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="nv"&gt;$interface&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; sed -r &lt;span class="s1"&gt;&amp;#39;s/\.0\/[[:digit:]]{2,3} /.1 /&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; cut -d &lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt; -f -4&lt;span class="k"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -n &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$route&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; sudo ip route del default &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&amp;gt; /dev/null
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; sudo ip route replace default via &lt;span class="nv"&gt;$route&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;else&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;No routes match: &lt;/span&gt;&lt;span class="nv"&gt;$interface&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;fi&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;With this in available in my shell, I can simply do &lt;code&gt;route_to wlan0&lt;/code&gt; and my
+&lt;pre&gt;&lt;code class="language-bash"&gt;route_to () {
+ interface=$1
+ route=$(ip route | grep $interface | sed -r 's/\.0\/[[:digit:]]{2,3} /.1 /' | cut -d ' ' -f -4)
+ if [ -n &amp;quot;$route&amp;quot; ]; then
+ sudo ip route del default &amp;amp;&amp;gt; /dev/null
+ sudo ip route replace default via $route
+ else
+ echo &amp;quot;No routes match: $interface&amp;quot; &amp;gt;&amp;amp;2
+ fi
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With this in available in my shell, I can simply do &lt;code&gt;route_to wlan0&lt;/code&gt; and my
 system will start using &lt;code&gt;wlan0&lt;/code&gt; as the default interface.&lt;/p&gt;</description></item><item><title>VNC over reverse SSH</title><link>/vnc/</link><pubDate>Sun, 10 May 2015 00:00:00 +0000</pubDate><guid>/vnc/</guid><description>&lt;blockquote&gt;
 &lt;p&gt;Note: My &lt;a href="/jumper"&gt;recent article&lt;/a&gt;, talking about WireGuard is a
 better and more ergonomic approach to achive this, compared to using

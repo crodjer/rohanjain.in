@@ -1,33 +1,33 @@
-<!doctype html><html lang=en-US><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="chrome=1"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="Configure ssh to handle proxies and tunnels seamlessly | Rohan's Personal Web Blog."><meta property="og:title" content="Configure ssh to handle proxies and tunnels seamlessly"><meta property="og:description" content="Configure ssh to handle proxies and tunnels seamlessly | Rohan's Personal Web Blog."><meta property="og:type" content="article"><meta property="og:url" content="/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/"><meta property="article:section" content="old"><meta property="article:published_time" content="2011-08-27T00:00:00+00:00"><meta property="article:modified_time" content="2011-08-27T00:00:00+00:00"><title>Configure ssh to handle proxies and tunnels seamlessly</title><link rel=canonical href=/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/><link rel=stylesheet href=/css/pygments.min.42fe0099f9515ec8cb510d96b2ec79b3525dab83b63dc7ca290b29679ae42e97.css integrity="sha256-Qv4AmflRXsjLUQ2Wsux5s1Jdq4O2PcfKKQspZ5rkLpc="><link rel=stylesheet href=/css/main.min.4814e7df4d62d4897e8b69594fb83674fa177090ddec01503f8332c3ba5cb444.css integrity="sha256-SBTn301i1Il+i2lZT7g2dPoXcJDd7AFQP4Myw7pctEQ="><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><section class=header><div class=container><div class=content><a href=/><img class=avatar src=/img/avatar-small.jpg alt=avatar></a>
-<a href=/><div class=name>Rohan Jain</div></a><nav><ul><li class=nav-home><a href=/><span>Home</span></a></li><li class=nav-about><a href=/about/><span>About</span></a></li></ul></nav></div></div></section><section class=main><div class=container><div class=content><div class=page-heading>Configure ssh to handle proxies and tunnels seamlessly</div><div class=markdown><p>Recently I opened up on the port <em>443</em> over my EC2 instance (more or less like
+<!doctype html><html lang=en-US><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="Configure ssh to handle proxies and tunnels seamlessly | Rohan's Personal Web Blog."><meta property="og:title" content="Configure ssh to handle proxies and tunnels seamlessly"><meta property="og:type" content="article"><meta property="article:published_time" content="2011-08-27T00:00:00+00:00"><meta property="article:modified_time" content="2011-08-27T00:00:00+00:00"><title>Configure ssh to handle proxies and tunnels seamlessly</title><link rel=canonical href=/configure-ssh-to-handle-proxies-and-tunnels-seamlessly/><link rel=stylesheet href=/css/main.min.97ffe0e39b9819392033e2635f05ec47c705d94936b7483bb66889dbf15d7a90.css><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><header><a href=/>The Perpetual Amature</a><nav><ul><li><a href=/>Home</a></li><li><a href=/about/>About</a></li></ul></nav></header><main><h1>Configure ssh to handle proxies and tunnels seamlessly</h1><p>Recently I opened up on the port <em>443</em> over my EC2 instance (more or less like
 a VPS), so that I can access it through any firewalled proxy too. Apart from
 getting SSH running to a machine from outside world, I did some cool
 configuration to have ssh deal with with various remote hosts automatically. It
 uses <em>the right</em> proxy settings according the host being accessed.</p><p>All the stuff which runs over ssh (like <em>scp</em>, <em>git</em> etc.) also work the way
 they are supposed to, following the ssh configuration.</p><p>To get this to work you need to have <em>corkscrew</em> and <em>netcat</em> (the swiss army
-knife) already installed.</p><p>Here is how it goes:<br><code>File ~/.ssh/config:</code></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-apache data-lang=apache><span class=line><span class=cl><span class=c># Let me access local remotes directly.</span>
-</span></span><span class=line><span class=cl><span class=nb>Host</span> <span class=m>127.0.0.1</span>, <span class=m>10</span>.*
-</span></span><span class=line><span class=cl>    <span class=nb>ProxyCommand</span> <span class=k>none</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c># Github lets you ssh over port 443 too, utilize that instead of tunneling</span>
-</span></span><span class=line><span class=cl><span class=c># through remote computer</span>
-</span></span><span class=line><span class=cl><span class=nb>Host</span> github.com
-</span></span><span class=line><span class=cl>    <span class=nb>Hostname</span> ssh.github.com
-</span></span><span class=line><span class=cl>    <span class=nb>User</span> git
-</span></span><span class=line><span class=cl>    <span class=nb>ProxyCommand</span> corkscrew <span class=m>10.3.100.211</span> <span class=m>8080</span> %h %p
-</span></span><span class=line><span class=cl>    <span class=nb>Port</span> <span class=m>443</span>
-</span></span><span class=line><span class=cl>    <span class=nb>Hostname</span> ssh.github.com
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c># Let me ssh onto my ec2 instance, which has full network access, through a</span>
-</span></span><span class=line><span class=cl><span class=c># http proxy.</span>
-</span></span><span class=line><span class=cl><span class=nb>Host</span> ecc.rohanjain.in
-</span></span><span class=line><span class=cl>    <span class=nb>ProxyCommand</span> corkscrew <span class=m>10.3.100.211</span> <span class=m>8080</span> %h %p
-</span></span><span class=line><span class=cl>    <span class=nb>Port</span> <span class=m>443</span>
-</span></span><span class=line><span class=cl>    <span class=nb>ServerAliveInterval</span> <span class=m>600</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c># All the rest should connect through an ssh connection over the ec2 instance.</span>
-</span></span><span class=line><span class=cl><span class=nb>Host</span> *
-</span></span><span class=line><span class=cl>    <span class=nb>ProxyCommand</span> ssh -q -a -x -p <span class=m>443</span> ecc.rohanjain.in nc %h %p
-</span></span></code></pre></div></div></div></div></section><section class=icons><div class=container><div class=content><a href=//github.com/crodjer target=_blank rel=noopener>Github</a>
+knife) already installed.</p><p>Here is how it goes:<br><code>File ~/.ssh/config:</code></p><pre><code class=language-apache># Let me access local remotes directly.
+Host 127.0.0.1, 10.*
+    ProxyCommand none
+
+# Github lets you ssh over port 443 too, utilize that instead of tunneling
+# through remote computer
+Host github.com
+    Hostname ssh.github.com
+    User git
+    ProxyCommand corkscrew 10.3.100.211 8080 %h %p
+    Port 443
+    Hostname ssh.github.com
+
+# Let me ssh onto my ec2 instance, which has full network access, through a
+# http proxy.
+Host ecc.rohanjain.in
+    ProxyCommand corkscrew 10.3.100.211 8080 %h %p
+    Port 443
+    ServerAliveInterval 600
+
+# All the rest should connect through an ssh connection over the ec2 instance.
+Host *
+    ProxyCommand ssh -q -a -x -p 443 ecc.rohanjain.in nc %h %p
+</code></pre></main><footer><a href=/blog>All Posts</a>
+<a href=//github.com/crodjer target=_blank rel=noopener>Github</a>
 <a href=//linkedin.com/in/crodjer target=_blank rel=noopener>Linkedin</a>
-<a href=//twitter.com/__crodjer__ target=_blank rel=noopener>Twitter</a></div></div></section></body></html>
+<a href=//twitter.com/__crodjer__ target=_blank rel=noopener>Twitter</a></footer><script data-goatcounter=https://t.rohanjain.in/count async src=/js/count.min.4e3257a9873dba863f309fe89287c9f6e962d7be1758704f13b2608e58008e5f.js></script><noscript><img src="https://t.rohanjain.in/count?p=%2fconfigure-ssh-to-handle-proxies-and-tunnels-seamlessly%2f&t=Configure%20ssh%20to%20handle%20proxies%20and%20tunnels%20seamlessly"></noscript></body></html>

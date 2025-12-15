@@ -1,5 +1,5 @@
-<!doctype html><html lang=en-US><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="chrome=1"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="Dynamic DNS with Cloudflare | Rohan's Personal Web Blog."><meta property="og:title" content="Dynamic DNS with Cloudflare"><meta property="og:description" content="Dynamic DNS with Cloudflare | Rohan's Personal Web Blog."><meta property="og:type" content="article"><meta property="og:url" content="/cloudflare-ddns/"><meta property="article:section" content="blog"><meta property="article:published_time" content="2017-03-18T05:28:10+00:00"><meta property="article:modified_time" content="2017-03-18T05:28:10+00:00"><title>Dynamic DNS with Cloudflare</title><link rel=canonical href=/cloudflare-ddns/><link rel=stylesheet href=/css/pygments.min.42fe0099f9515ec8cb510d96b2ec79b3525dab83b63dc7ca290b29679ae42e97.css integrity="sha256-Qv4AmflRXsjLUQ2Wsux5s1Jdq4O2PcfKKQspZ5rkLpc="><link rel=stylesheet href=/css/main.min.4814e7df4d62d4897e8b69594fb83674fa177090ddec01503f8332c3ba5cb444.css integrity="sha256-SBTn301i1Il+i2lZT7g2dPoXcJDd7AFQP4Myw7pctEQ="><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><section class=header><div class=container><div class=content><a href=/><img class=avatar src=/img/avatar-small.jpg alt=avatar></a>
-<a href=/><div class=name>Rohan Jain</div></a><nav><ul><li class=nav-home><a href=/><span>Home</span></a></li><li class=nav-about><a href=/about/><span>About</span></a></li></ul></nav></div></div></section><section class="main post non-narrow zero-top-spacing"><div class=container><div class=content><div class=front-matter><div class=title-container><div class=page-heading>Dynamic DNS with Cloudflare</div><div class=initials><a href=/></a></div></div><div class=meta><div class=date title='Sat Mar 18 2017 05:28:10 UTC'>Mar 18, 2017</div><div class=reading-time><div class=middot></div>3 minutes read</div></div></div><div class=markdown><p>It is hard to maintain a regular internet uptime with home connections. 1/2
+<!doctype html><html lang=en-US><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="Dynamic DNS with Cloudflare | Rohan's Personal Web Blog."><meta property="og:title" content="Dynamic DNS with Cloudflare"><meta property="og:type" content="article"><meta property="article:published_time" content="2017-03-18T05:28:10+00:00"><meta property="article:modified_time" content="2017-03-18T05:28:10+00:00"><title>Dynamic DNS with Cloudflare</title><link rel=canonical href=/cloudflare-ddns/><link rel=stylesheet href=/css/main.min.97ffe0e39b9819392033e2635f05ec47c705d94936b7483bb66889dbf15d7a90.css><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><header><a href=/>The Perpetual Amature</a><nav><ul><li><a href=/>Home</a></li><li><a href=/about/>About</a></li></ul></nav></header><main><article><header><h1>Dynamic DNS with Cloudflare</h1><small><time datetime=2017-03-18 title='Sat Mar 18 2017 05:28:10 UTC'>Mar 18, 2017</time>
+| 3 minutes read</small></header><p>It is hard to maintain a regular internet uptime with home connections. 1/2
 router re-connections per week can be fairly common. When that happens, the
 public IP changes with most ISPs. This can be annoying if you want access your
 computer remotely (possibly to SSH home). Dynamic DNS is a solution that exists
@@ -8,86 +8,95 @@ to solve just that.</p><p>I maintain DNS entries for my domain at
 <a href=https://sourceforge.net/p/ddclient/wiki/Home/><code>ddclient</code></a> supports Cloudflare
 API, which works well with my ArchLinux box. But ddclient bundled with Raspbian,
 is yet to get that update. Cloudflare&rsquo;s API is fairly straight forward, so I
-decided to use a curl/systemd based solution on my RaspberryPi.</p><h1 id=configuration-information>Configuration information</h1><p>If you too want to set Dynamic DNS with Cloudflare, you need to acquire some
-configuration information first:</p><h2 id=cloudflare-configuration-details>Cloudflare configuration details</h2><ul><li><p><code>DNS Zone</code><br>You can get it by visiting the overview page of Cloudflare dashboard (called
+decided to use a curl/systemd based solution on my RaspberryPi.</p><h2 id=configuration-information><a class=heading-anchor href=#configuration-information aria-label="Permalink to Configuration information">§</a>
+Configuration information</h2><p>If you too want to set Dynamic DNS with Cloudflare, you need to acquire some
+configuration information first:</p><h3 id=cloudflare-configuration-details><a class=heading-anchor href=#cloudflare-configuration-details aria-label="Permalink to Cloudflare configuration details">§</a>
+Cloudflare configuration details</h3><ul><li><p><code>DNS Zone</code>
+You can get it by visiting the overview page of Cloudflare dashboard (called
 Zone ID):
 <code>https://www.cloudflare.com/a/overview/&lt;your-domain></code></p></li><li><p><code>Auth Email</code>: This is your cloudflare account email.</p></li><li><p><code>Auth Key</code>: This is your <em>Global API Key</em> under Cloudflare account settings:
-<a href=https://www.cloudflare.com/a/account/my-account>https://www.cloudflare.com/a/account/my-account</a></p></li><li><p><code>IDENTIFIER</code><br>To get the identifier, you need to first set an A record for the subdomain you
+<a href=https://www.cloudflare.com/a/account/my-account>https://www.cloudflare.com/a/account/my-account</a></p></li><li><p><code>IDENTIFIER</code>
+To get the identifier, you need to first set an A record for the subdomain you
 want to manage with Dynamic DNS. Then, plug in the subdomain in this curl
-query to obtain the identifier:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>curl <span class=s2>&#34;https://api.cloudflare.com/client/v4/zones/&lt;your-dns-zone&gt;/dns_records?name=&lt;subdomain&gt;.&lt;your-domain&gt;&#34;</span> <span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span>     --silent -X GET <span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span>     -H <span class=s2>&#34;X-Auth-Email: &lt;cloudflare-auth-email&gt;&#34;</span> <span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span>     -H <span class=s2>&#34;X-Auth-Key: &lt;cloudflare-auth-key&gt;&#34;</span> <span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span>     -H <span class=s2>&#34;Content-Type: application/json&#34;</span> 
-</span></span></code></pre></div></li></ul><h2 id=ip-address>IP Address</h2><p>I use <code>dig</code> with OpenDNS to get the current public IP and
+query to obtain the identifier:</p><pre><code class=language-bash>curl &quot;https://api.cloudflare.com/client/v4/zones/&lt;your-dns-zone&gt;/dns_records?name=&lt;subdomain&gt;.&lt;your-domain&gt;&quot; \
+     --silent -X GET \
+     -H &quot;X-Auth-Email: &lt;cloudflare-auth-email&gt;&quot; \
+     -H &quot;X-Auth-Key: &lt;cloudflare-auth-key&gt;&quot; \
+     -H &quot;Content-Type: application/json&quot;
+</code></pre></li></ul><h3 id=ip-address><a class=heading-anchor href=#ip-address aria-label="Permalink to IP Address">§</a>
+IP Address</h3><p>I use <code>dig</code> with OpenDNS to get the current public IP and
 <a href=https://www.ipify.org/>https://www.ipify.org/</a> as a fallback if <code>dig</code> isn&rsquo;t installed. Using <code>dig</code> is
 faster though and you can install it via <code>dnsutils</code> (available as an official
-package on most systems).</p><h1 id=the-script>The script</h1><p>All the above information can now be plugged in this bash script to update the
-DNS entry on Cloudflare. I placed it at <code>/usr/local/bin/cloudflare-ddns.sh</code></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1>#/usr/bin/env sh</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># Get the Zone ID from: https://www.cloudflare.com/a/overview/&lt;your-domain&gt;</span>
-</span></span><span class=line><span class=cl><span class=nv>DNS_ZONE</span><span class=o>=</span>&lt;your-dns-zone&gt;
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># Get the existing identifier for DNS entry:</span>
-</span></span><span class=line><span class=cl><span class=c1># https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records</span>
-</span></span><span class=line><span class=cl><span class=nv>IDENTIFIER</span><span class=o>=</span>&lt;your-domain-dns-entry-identifier&gt;
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># Get these from: https://www.cloudflare.com/a/account/my-account</span>
-</span></span><span class=line><span class=cl><span class=nv>AUTH_EMAIL</span><span class=o>=</span>&lt;cloudflare-auth-email&gt;
-</span></span><span class=line><span class=cl><span class=nv>AUTH_KEY</span><span class=o>=</span>&lt;cloudflare-auth-key&gt;
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># Desired domain name</span>
-</span></span><span class=line><span class=cl><span class=nv>DOMAIN_NAME</span><span class=o>=</span><span class=s2>&#34;&lt;subdomain&gt;.&lt;your-domain&gt;&#34;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># Get previous IP address</span>
-</span></span><span class=line><span class=cl><span class=nv>_PREV_IP_FILE</span><span class=o>=</span><span class=s2>&#34;/tmp/public-ip.txt&#34;</span>
-</span></span><span class=line><span class=cl><span class=nv>_PREV_IP</span><span class=o>=</span><span class=k>$(</span>cat <span class=nv>$_PREV_IP_FILE</span> <span class=p>&amp;</span>&gt; /dev/null<span class=k>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># Install `dig` via `dnsutils` for faster IP lookup.</span>
-</span></span><span class=line><span class=cl><span class=nb>command</span> -v dig <span class=p>&amp;</span>&gt; /dev/null <span class=o>&amp;&amp;</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>    <span class=nv>_IP</span><span class=o>=</span><span class=k>$(</span>dig +short myip.opendns.com @resolver1.opendns.com<span class=k>)</span>
-</span></span><span class=line><span class=cl><span class=o>}</span> <span class=o>||</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>    <span class=nv>_IP</span><span class=o>=</span><span class=k>$(</span>curl --silent https://api.ipify.org<span class=k>)</span>
-</span></span><span class=line><span class=cl><span class=o>}</span> <span class=o>||</span> <span class=o>{</span>
-</span></span><span class=line><span class=cl>    <span class=nb>exit</span> <span class=m>1</span>
-</span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># If new/previous IPs match, no need for an update.</span>
-</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[</span> <span class=s2>&#34;</span><span class=nv>$_IP</span><span class=s2>&#34;</span> <span class=o>=</span> <span class=s2>&#34;</span><span class=nv>$_PREV_IP</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
-</span></span><span class=line><span class=cl>    <span class=nb>exit</span> <span class=m>0</span>
-</span></span><span class=line><span class=cl><span class=k>fi</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=nv>_UPDATE</span><span class=o>=</span><span class=k>$(</span>cat <span class=s>&lt;&lt;EOF
-</span></span></span><span class=line><span class=cl><span class=s>{ &#34;type&#34;: &#34;A&#34;,
-</span></span></span><span class=line><span class=cl><span class=s>  &#34;name&#34;: &#34;$DOMAIN_NAME&#34;,
-</span></span></span><span class=line><span class=cl><span class=s>  &#34;content&#34;: &#34;$_IP&#34;,
-</span></span></span><span class=line><span class=cl><span class=s>  &#34;ttl&#34;: 120,
-</span></span></span><span class=line><span class=cl><span class=s>  &#34;proxied&#34;: false }
-</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
-</span></span><span class=line><span class=cl><span class=k>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>curl <span class=s2>&#34;https://api.cloudflare.com/client/v4/zones/</span><span class=nv>$DNS_ZONE</span><span class=s2>/dns_records/</span><span class=nv>$IDENTIFIER</span><span class=s2>&#34;</span> <span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span>     --silent <span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span>     -X PUT <span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span>     -H <span class=s2>&#34;Content-Type: application/json&#34;</span> <span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span>     -H <span class=s2>&#34;X-Auth-Email: </span><span class=nv>$AUTH_EMAIL</span><span class=s2>&#34;</span> <span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span>     -H <span class=s2>&#34;X-Auth-Key: </span><span class=nv>$AUTH_KEY</span><span class=s2>&#34;</span> <span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span>     -d <span class=s2>&#34;</span><span class=nv>$_UPDATE</span><span class=s2>&#34;</span> &gt; /tmp/cloudflare-ddns-update.json <span class=o>&amp;&amp;</span> <span class=se>\
-</span></span></span><span class=line><span class=cl><span class=se></span>     <span class=nb>echo</span> <span class=nv>$_IP</span> &gt; <span class=nv>$_PREV_IP_FILE</span>
-</span></span></code></pre></div><p>Try running <code>cloudflare-ddns.sh</code> to see if DNS records get updated on
+package on most systems).</p><h2 id=the-script><a class=heading-anchor href=#the-script aria-label="Permalink to The script">§</a>
+The script</h2><p>All the above information can now be plugged in this bash script to update the
+DNS entry on Cloudflare. I placed it at <code>/usr/local/bin/cloudflare-ddns.sh</code></p><pre><code class=language-bash>#/usr/bin/env sh
+
+# Get the Zone ID from: https://www.cloudflare.com/a/overview/&lt;your-domain&gt;
+DNS_ZONE=&lt;your-dns-zone&gt;
+
+# Get the existing identifier for DNS entry:
+# https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records
+IDENTIFIER=&lt;your-domain-dns-entry-identifier&gt;
+
+# Get these from: https://www.cloudflare.com/a/account/my-account
+AUTH_EMAIL=&lt;cloudflare-auth-email&gt;
+AUTH_KEY=&lt;cloudflare-auth-key&gt;
+
+# Desired domain name
+DOMAIN_NAME=&quot;&lt;subdomain&gt;.&lt;your-domain&gt;&quot;
+
+# Get previous IP address
+_PREV_IP_FILE=&quot;/tmp/public-ip.txt&quot;
+_PREV_IP=$(cat $_PREV_IP_FILE &amp;&gt; /dev/null)
+
+# Install `dig` via `dnsutils` for faster IP lookup.
+command -v dig &amp;&gt; /dev/null &amp;&amp; {
+    _IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
+} || {
+    _IP=$(curl --silent https://api.ipify.org)
+} || {
+    exit 1
+}
+
+# If new/previous IPs match, no need for an update.
+if [ &quot;$_IP&quot; = &quot;$_PREV_IP&quot; ]; then
+    exit 0
+fi
+
+_UPDATE=$(cat &lt;&lt;EOF
+{ &quot;type&quot;: &quot;A&quot;,
+  &quot;name&quot;: &quot;$DOMAIN_NAME&quot;,
+  &quot;content&quot;: &quot;$_IP&quot;,
+  &quot;ttl&quot;: 120,
+  &quot;proxied&quot;: false }
+EOF
+)
+
+curl &quot;https://api.cloudflare.com/client/v4/zones/$DNS_ZONE/dns_records/$IDENTIFIER&quot; \
+     --silent \
+     -X PUT \
+     -H &quot;Content-Type: application/json&quot; \
+     -H &quot;X-Auth-Email: $AUTH_EMAIL&quot; \
+     -H &quot;X-Auth-Key: $AUTH_KEY&quot; \
+     -d &quot;$_UPDATE&quot; &gt; /tmp/cloudflare-ddns-update.json &amp;&amp; \
+     echo $_IP &gt; $_PREV_IP_FILE
+</code></pre><p>Try running <code>cloudflare-ddns.sh</code> to see if DNS records get updated on
 Cloudflare. For debugging purposes, I store the Cloudflare response at
-<code>/tmp/cloudflare-ddns-update.json</code>.</p><h1 id=systemd>Systemd</h1><p>We&rsquo;ll automate this execution by writing a systemd service and a timer.</p><h2 id=configuring-the-service>Configuring the service</h2><p>My systemd service unit looks like this:
-<code>/etc/systemd/system/cloudflare-ddns.service</code></p><pre tabindex=0><code>[Unit]
+<code>/tmp/cloudflare-ddns-update.json</code>.</p><h2 id=systemd><a class=heading-anchor href=#systemd aria-label="Permalink to Systemd">§</a>
+Systemd</h2><p>We&rsquo;ll automate this execution by writing a systemd service and a timer.</p><h3 id=configuring-the-service><a class=heading-anchor href=#configuring-the-service aria-label="Permalink to Configuring the service">§</a>
+Configuring the service</h3><p>My systemd service unit looks like this:
+<code>/etc/systemd/system/cloudflare-ddns.service</code></p><pre><code>[Unit]
 Description=Update DNS entry for this host to current IP
 
 [Service]
 Type=oneshot
 ExecStart=/bin/sh /usr/local/bin/cloudflare-ddns.sh
-</code></pre><p>Test the service by running:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl start cloudflare-ddns.service
-</span></span><span class=line><span class=cl><span class=c1># Check the results:</span>
-</span></span><span class=line><span class=cl>sudo journalctl -u cloudflare-ddns
-</span></span></code></pre></div><h2 id=setting-up-a-timer>Setting up a timer</h2><p>Set up a timer, so that DNS update is attempted every 2 minutes:
-<code>/etc/systemd/system/cloudflare-ddns.timer</code></p><pre tabindex=0><code>[Unit]
+</code></pre><p>Test the service by running:</p><pre><code class=language-bash>sudo systemctl start cloudflare-ddns.service
+# Check the results:
+sudo journalctl -u cloudflare-ddns
+</code></pre><h3 id=setting-up-a-timer><a class=heading-anchor href=#setting-up-a-timer aria-label="Permalink to Setting up a timer">§</a>
+Setting up a timer</h3><p>Set up a timer, so that DNS update is attempted every 2 minutes:
+<code>/etc/systemd/system/cloudflare-ddns.timer</code></p><pre><code>[Unit]
 Description=Update DNS entry in cloudflare every 2 minutes
 
 [Timer]
@@ -97,8 +106,9 @@ Unit=cloudflare-ddns.service
 
 [Install]
 WantedBy=basic.target
-</code></pre><p>To enable the timer, run:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> cloudflare-ddns.timer
-</span></span></code></pre></div><p>And that&rsquo;s it, now the system&rsquo;s IP will be kept up to date (within 2 minutes)
-for remote access.</p><br><p class=back-to-posts><a href=/blog>All Posts</a></p></div></div></div></section><section class=icons><div class=container><div class=content><a href=//github.com/crodjer target=_blank rel=noopener>Github</a>
+</code></pre><p>To enable the timer, run:</p><pre><code class=language-bash>sudo systemctl enable cloudflare-ddns.timer
+</code></pre><p>And that&rsquo;s it, now the system&rsquo;s IP will be kept up to date (within 2 minutes)
+for remote access.</p></article></main><footer><a href=/blog>All Posts</a>
+<a href=//github.com/crodjer target=_blank rel=noopener>Github</a>
 <a href=//linkedin.com/in/crodjer target=_blank rel=noopener>Linkedin</a>
-<a href=//twitter.com/__crodjer__ target=_blank rel=noopener>Twitter</a></div></div></section></body></html>
+<a href=//twitter.com/__crodjer__ target=_blank rel=noopener>Twitter</a></footer><script data-goatcounter=https://t.rohanjain.in/count async src=/js/count.min.4e3257a9873dba863f309fe89287c9f6e962d7be1758704f13b2608e58008e5f.js></script><noscript><img src="https://t.rohanjain.in/count?p=%2fcloudflare-ddns%2f&t=Dynamic%20DNS%20with%20Cloudflare"></noscript></body></html>

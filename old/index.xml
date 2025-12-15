@@ -16,34 +16,36 @@ web servers automatically serve &lt;code&gt;/foo/index.html&lt;/code&gt; for the
 &lt;code&gt;cleanRoute&lt;/code&gt;:&lt;/p&gt;</description></item><item><title>Sitemap with Hakyll</title><link>/hakyll-sitemap/</link><pubDate>Sun, 30 Aug 2015 00:00:00 +0000</pubDate><guid>/hakyll-sitemap/</guid><description>&lt;p&gt;Its fairly trivial to configure &lt;a href="http://jaspervdj.be/hakyll/"&gt;Hakyll&lt;/a&gt; to generate
 sitemaps. Sitemaps helps search engines websites. Similar to any
 typical html page, create a template - &lt;code&gt;templates/sitemap.xml&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-xml" data-lang="xml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;&amp;lt;urlset&lt;/span&gt; &lt;span class="na"&gt;xmlns=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;http://www.sitemaps.org/schemas/sitemap/0.9&amp;#34;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$for(entries)$
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;url&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;loc&amp;gt;&lt;/span&gt;$host$$url$&lt;span class="nt"&gt;&amp;lt;/loc&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;changefreq&amp;gt;&lt;/span&gt;weekly&lt;span class="nt"&gt;&amp;lt;/changefreq&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; $if(lastmod)$&lt;span class="nt"&gt;&amp;lt;lastmod&amp;gt;&lt;/span&gt;$lastmod$&lt;span class="nt"&gt;&amp;lt;/lastmod&amp;gt;&lt;/span&gt;$endif$
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;priority&amp;gt;&lt;/span&gt;0.8&lt;span class="nt"&gt;&amp;lt;/priority&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$endfor$
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;&amp;lt;/urlset&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then, using the templates, create a rule which uses all the pages from
+&lt;pre&gt;&lt;code class="language-xml"&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;urlset xmlns=&amp;quot;http://www.sitemaps.org/schemas/sitemap/0.9&amp;quot;&amp;gt;
+$for(entries)$
+ &amp;lt;url&amp;gt;
+ &amp;lt;loc&amp;gt;$host$$url$&amp;lt;/loc&amp;gt;
+ &amp;lt;changefreq&amp;gt;weekly&amp;lt;/changefreq&amp;gt;
+ $if(lastmod)$&amp;lt;lastmod&amp;gt;$lastmod$&amp;lt;/lastmod&amp;gt;$endif$
+ &amp;lt;priority&amp;gt;0.8&amp;lt;/priority&amp;gt;
+ &amp;lt;/url&amp;gt;
+$endfor$
+&amp;lt;/urlset&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then, using the templates, create a rule which uses all the pages from
 the site as entries. Here is what I do:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-haskell" data-lang="haskell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;sitemap.xml&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;$&lt;/span&gt; &lt;span class="kr"&gt;do&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;route&lt;/span&gt; &lt;span class="n"&gt;idRoute&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;compile&lt;/span&gt; &lt;span class="o"&gt;$&lt;/span&gt; &lt;span class="kr"&gt;do&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;posts&lt;/span&gt; &lt;span class="ow"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;recentFirst&lt;/span&gt; &lt;span class="o"&gt;=&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;loadAll&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;posts/*/*&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;pages&lt;/span&gt; &lt;span class="ow"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;loadAll&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;pages/*&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;let&lt;/span&gt; &lt;span class="n"&gt;allPosts&lt;/span&gt; &lt;span class="ow"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;return&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pages&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt; &lt;span class="n"&gt;posts&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;let&lt;/span&gt; &lt;span class="n"&gt;sitemapCtx&lt;/span&gt; &lt;span class="ow"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mconcat&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="n"&gt;listField&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;entries&amp;#34;&lt;/span&gt; &lt;span class="n"&gt;pageCtx&lt;/span&gt; &lt;span class="n"&gt;allPosts&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;constField&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;host&amp;#34;&lt;/span&gt; &lt;span class="n"&gt;host&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;defaultContext&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;makeItem&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;=&lt;/span&gt; &lt;span class="n"&gt;loadAndApplyTemplate&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;templates/sitemap.xml&amp;#34;&lt;/span&gt; &lt;span class="n"&gt;sitemapCtx&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;=&lt;/span&gt; &lt;span class="n"&gt;cleanIndexHtmls&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This generates &lt;a href="/sitemap.xml"&gt;/sitemap.xml&lt;/a&gt; which can be submitted to
+&lt;pre&gt;&lt;code class="language-haskell"&gt; create [&amp;quot;sitemap.xml&amp;quot;] $ do
+ route idRoute
+ compile $ do
+ posts &amp;lt;- recentFirst =&amp;lt;&amp;lt; loadAll &amp;quot;posts/*/*&amp;quot;
+ pages &amp;lt;- loadAll &amp;quot;pages/*&amp;quot;
+ let allPosts = (return (pages ++ posts))
+ let sitemapCtx = mconcat
+ [ listField &amp;quot;entries&amp;quot; pageCtx allPosts
+ , constField &amp;quot;host&amp;quot; host
+ , defaultContext
+ ]
+ makeItem &amp;quot;&amp;quot;
+ &amp;gt;&amp;gt;= loadAndApplyTemplate &amp;quot;templates/sitemap.xml&amp;quot; sitemapCtx
+ &amp;gt;&amp;gt;= cleanIndexHtmls
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This generates &lt;a href="/sitemap.xml"&gt;/sitemap.xml&lt;/a&gt; which can be submitted to
 search engines for indexing.&lt;/p&gt;</description></item><item><title>Testing tornado websockets without third party clients</title><link>/ws-test/</link><pubDate>Sat, 22 Aug 2015 00:00:00 +0000</pubDate><guid>/ws-test/</guid><description>&lt;p&gt;Recently, I built an encrypted &lt;a href="http://github.com/crodjer/qotr/"&gt;chat service&lt;/a&gt;, which was based on
 &lt;a href="http://www.tornadoweb.org/"&gt;tornado&lt;/a&gt; and &lt;a href="http://emberjs.com/"&gt;ember.js&lt;/a&gt;. The project itself had grave security issues, so I
 shut it down, but while working on it I learned a few new things and testing
@@ -74,7 +76,12 @@ basic support for &lt;code&gt;virtualenvs&lt;/code&gt;. I run &lt;code&gt;pylint
 &lt;code&gt;python-mode&lt;/code&gt;. Here is the code extracted from my
 &lt;a href="https://github.com/crodjer/configs/blob/master/.emacs"&gt;emacs configuration&lt;/a&gt;:&lt;/p&gt;</description></item><item><title>A productive workflow with vim sessions and servers</title><link>/yet-another-vim-productivity-post-server-client/</link><pubDate>Sun, 15 Apr 2012 00:00:00 +0000</pubDate><guid>/yet-another-vim-productivity-post-server-client/</guid><description>&lt;p&gt;You can find lot of posts on the internet which try to tell you how to improve
 the ways in which Vim is used. Well, here is another one.&lt;/p&gt;
-&lt;p&gt;#Vim Server, ZSH and Tiles&lt;/p&gt;
+&lt;h2 id="vim-server-zsh-and-tiles"&gt;
+ 
+ &lt;a class="heading-anchor" href="#vim-server-zsh-and-tiles" aria-label="Permalink to Vim Server, ZSH and Tiles"&gt;§&lt;/a&gt;
+ 
+ Vim Server, ZSH and Tiles
+&lt;/h2&gt;
 &lt;p&gt;A Vim instance behaves as a server in which files can be opened through remote
 applications. Read &lt;code&gt;:help client-server&lt;/code&gt; of Vim to know more about this. I
 generally keep multiple Vim sessions running, described by task they are related

@@ -4,10 +4,20 @@
 which runs programs in a (configurable) restricted environment. This meant I
 could safely use tools like &lt;code&gt;gemini-cli&lt;/code&gt; and reduce my exposure to the
 ever-present supply chain attacks in the JavaScript world.&lt;/p&gt;
-&lt;h2 id="running-gemini-cli"&gt;Running Gemini CLI&lt;/h2&gt;
+&lt;h2 id="running-gemini-cli"&gt;
+ 
+ &lt;a class="heading-anchor" href="#running-gemini-cli" aria-label="Permalink to Running Gemini CLI"&gt;§&lt;/a&gt;
+ 
+ Running Gemini CLI
+&lt;/h2&gt;
 &lt;p&gt;We don&amp;rsquo;t even have to build the &lt;code&gt;gemini-cli&lt;/code&gt; client. We can directly download
 &lt;code&gt;gemini.js&lt;/code&gt; from the &lt;code&gt;gemini-cli&lt;/code&gt;
-&lt;a href="https://github.com/google-gemini/gemini-cli/releases/latest"&gt;release page&lt;/a&gt;:&lt;/p&gt;</description></item><item><title>Self Hosting Gitlab using Quadlets</title><link>/gitlab/</link><pubDate>Sun, 26 Oct 2025 09:27:21 +0530</pubDate><guid>/gitlab/</guid><description>&lt;h3 id="what-are-quadlets"&gt;What are Quadlets?&lt;/h3&gt;
+&lt;a href="https://github.com/google-gemini/gemini-cli/releases/latest"&gt;release page&lt;/a&gt;:&lt;/p&gt;</description></item><item><title>Self Hosting Gitlab using Quadlets</title><link>/gitlab/</link><pubDate>Sun, 26 Oct 2025 09:27:21 +0530</pubDate><guid>/gitlab/</guid><description>&lt;h3 id="what-are-quadlets"&gt;
+ 
+ &lt;a class="heading-anchor" href="#what-are-quadlets" aria-label="Permalink to What are Quadlets?"&gt;§&lt;/a&gt;
+ 
+ What are Quadlets?
+&lt;/h3&gt;
 &lt;p&gt;I self-host most of my services important to me personally. Lately, I have been
 using &lt;a href="https://www.redhat.com/en/blog/quadlet-podman"&gt;Quadlets&lt;/a&gt; for this. I came
 across the concept of Quadlets from Immich.&lt;/p&gt;
@@ -22,12 +32,14 @@ managing packages. So, instead I let pipx manage it&amp;rsquo;s own updates.&lt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Install &lt;code&gt;python3-pip&lt;/code&gt;, with:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ sudo apt install python3-pip
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;$ sudo apt install python3-pip
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Install pipx:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ pip install --user pipx
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Didn&amp;rsquo;t we want avoid that? Yes! We&amp;rsquo;ll clean this up later.&lt;/p&gt;</description></item><item><title>Cross Compiling Rust Binaries with Github Actions</title><link>/cargo-cross/</link><pubDate>Sun, 27 Jun 2021 16:50:00 +0530</pubDate><guid>/cargo-cross/</guid><description>&lt;p&gt;Compiling &lt;em&gt;rust&lt;/em&gt; is slow, specially on low power devices such as a
+&lt;pre&gt;&lt;code class="language-bash"&gt;$ pip install --user pipx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Didn&amp;rsquo;t we want avoid that? Yes! We&amp;rsquo;ll clean this up later.&lt;/p&gt;</description></item><item><title>Cross Compiling Rust Binaries with Github Actions</title><link>/cargo-cross/</link><pubDate>Sun, 27 Jun 2021 16:50:00 +0530</pubDate><guid>/cargo-cross/</guid><description>&lt;p&gt;Compiling &lt;em&gt;rust&lt;/em&gt; is slow, specially on low power devices such as a
 &lt;em&gt;Raspberry Pi&lt;/em&gt;. I build all my rust utilities with my RPi 4 and sync to
 the rest with &lt;a href="https://syncthing.net/"&gt;syncthing&lt;/a&gt;. That was true for
 my project, &lt;a href="https://github.com/crodjer/sysit"&gt;&lt;strong&gt;sysit&lt;/strong&gt;&lt;/a&gt;, as well. I
@@ -39,7 +51,12 @@ workflows, I incorporated a similar flow in sysit.&lt;/p&gt;</description></item
 Use &lt;a href="https://wiki.archlinux.org/title/Fscrypt#Encrypt_a_home_directory"&gt;fscrypt&lt;/a&gt; to encrypt your
 home partition, with a few simple steps.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id="why-encryption"&gt;Why encryption?&lt;/h2&gt;
+&lt;h2 id="why-encryption"&gt;
+ 
+ &lt;a class="heading-anchor" href="#why-encryption" aria-label="Permalink to Why encryption?"&gt;§&lt;/a&gt;
+ 
+ Why encryption?
+&lt;/h2&gt;
 &lt;p&gt;I prefer to encrypt all my (and my family&amp;rsquo;s) storage at rest.
 Encryption is useful in scenarios where someone gains physical access
 to your device. This may save you from any losses other than the
@@ -70,7 +87,12 @@ which turns the fan on/off based on certain threshold temperatures.
 This did work but the idling Pi would always go beyond the threshold
 temperature turning the fan on when. With the threshold at 65°C. I was
 getting 1:10 on:off ratio, which meant fan noise every 10 minutes of
-idle time.&lt;/p&gt;</description></item><item><title>Some Light in the Background</title><link>/light/</link><pubDate>Wed, 15 Apr 2020 09:22:34 +0530</pubDate><guid>/light/</guid><description>&lt;h4 id="tldr"&gt;tl;dr&lt;/h4&gt;
+idle time.&lt;/p&gt;</description></item><item><title>Some Light in the Background</title><link>/light/</link><pubDate>Wed, 15 Apr 2020 09:22:34 +0530</pubDate><guid>/light/</guid><description>&lt;h4 id="tldr"&gt;
+ 
+ &lt;a class="heading-anchor" href="#tldr" aria-label="Permalink to tl;dr"&gt;§&lt;/a&gt;
+ 
+ tl;dr
+&lt;/h4&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Dark backgrounds are the best. But when one accidentally land
 somewhere with a light background with eyes trained for dark, it can
@@ -142,14 +164,24 @@ experience significantly.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Stars. Stars everywhere!&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id="the-telescope"&gt;The Telescope&lt;/h2&gt;
+&lt;h2 id="the-telescope"&gt;
+ 
+ &lt;a class="heading-anchor" href="#the-telescope" aria-label="Permalink to The Telescope"&gt;§&lt;/a&gt;
+ 
+ The Telescope
+&lt;/h2&gt;
 &lt;p&gt;The primary purpose of an (astronomical) telescope, unlike popular belief, is
 not actually magnification. They act as light collectors (think burning a paper
 with a converging lens and sunlight).&lt;/p&gt;</description></item><item><title>Gazing in the night sky</title><link>/sky/</link><pubDate>Wed, 04 May 2016 00:00:00 +0000</pubDate><guid>/sky/</guid><description>&lt;p&gt;About 6 months ago, I picked up a new hobby: Stargazing. Starting off with just
 naked eyes, I quickly realized that there is actually quite a lot to see without
 any optical equipment. &lt;a href="https://play.google.com/store/apps/details?id=com.google.android.stardroid&amp;amp;hl=en"&gt;Sky Map&lt;/a&gt; and &lt;a href="http://stellarium.org/"&gt;Stellarium&lt;/a&gt; are incredibly useful
 applications for a dilettante like me.&lt;/p&gt;
-&lt;h2 id="dark-adjustment"&gt;Dark adjustment&lt;/h2&gt;
+&lt;h2 id="dark-adjustment"&gt;
+ 
+ &lt;a class="heading-anchor" href="#dark-adjustment" aria-label="Permalink to Dark adjustment"&gt;§&lt;/a&gt;
+ 
+ Dark adjustment
+&lt;/h2&gt;
 &lt;p&gt;Before any stargazing session, dark adjustment i.e. dilating the pupils
 completely to improve night vision, is essential. I turn off all kinds of lights
 in the house and listen to podcasts for a while (at least 30 minutes). I go out
@@ -180,34 +212,36 @@ web servers automatically serve &lt;code&gt;/foo/index.html&lt;/code&gt; for the
 &lt;code&gt;cleanRoute&lt;/code&gt;:&lt;/p&gt;</description></item><item><title>Sitemap with Hakyll</title><link>/hakyll-sitemap/</link><pubDate>Sun, 30 Aug 2015 00:00:00 +0000</pubDate><guid>/hakyll-sitemap/</guid><description>&lt;p&gt;Its fairly trivial to configure &lt;a href="http://jaspervdj.be/hakyll/"&gt;Hakyll&lt;/a&gt; to generate
 sitemaps. Sitemaps helps search engines websites. Similar to any
 typical html page, create a template - &lt;code&gt;templates/sitemap.xml&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-xml" data-lang="xml"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;&amp;lt;urlset&lt;/span&gt; &lt;span class="na"&gt;xmlns=&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;http://www.sitemaps.org/schemas/sitemap/0.9&amp;#34;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$for(entries)$
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;url&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;loc&amp;gt;&lt;/span&gt;$host$$url$&lt;span class="nt"&gt;&amp;lt;/loc&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;changefreq&amp;gt;&lt;/span&gt;weekly&lt;span class="nt"&gt;&amp;lt;/changefreq&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; $if(lastmod)$&lt;span class="nt"&gt;&amp;lt;lastmod&amp;gt;&lt;/span&gt;$lastmod$&lt;span class="nt"&gt;&amp;lt;/lastmod&amp;gt;&lt;/span&gt;$endif$
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;priority&amp;gt;&lt;/span&gt;0.8&lt;span class="nt"&gt;&amp;lt;/priority&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nt"&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$endfor$
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nt"&gt;&amp;lt;/urlset&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then, using the templates, create a rule which uses all the pages from
+&lt;pre&gt;&lt;code class="language-xml"&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;urlset xmlns=&amp;quot;http://www.sitemaps.org/schemas/sitemap/0.9&amp;quot;&amp;gt;
+$for(entries)$
+ &amp;lt;url&amp;gt;
+ &amp;lt;loc&amp;gt;$host$$url$&amp;lt;/loc&amp;gt;
+ &amp;lt;changefreq&amp;gt;weekly&amp;lt;/changefreq&amp;gt;
+ $if(lastmod)$&amp;lt;lastmod&amp;gt;$lastmod$&amp;lt;/lastmod&amp;gt;$endif$
+ &amp;lt;priority&amp;gt;0.8&amp;lt;/priority&amp;gt;
+ &amp;lt;/url&amp;gt;
+$endfor$
+&amp;lt;/urlset&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then, using the templates, create a rule which uses all the pages from
 the site as entries. Here is what I do:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-haskell" data-lang="haskell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;sitemap.xml&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;$&lt;/span&gt; &lt;span class="kr"&gt;do&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;route&lt;/span&gt; &lt;span class="n"&gt;idRoute&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;compile&lt;/span&gt; &lt;span class="o"&gt;$&lt;/span&gt; &lt;span class="kr"&gt;do&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;posts&lt;/span&gt; &lt;span class="ow"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;recentFirst&lt;/span&gt; &lt;span class="o"&gt;=&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;loadAll&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;posts/*/*&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;pages&lt;/span&gt; &lt;span class="ow"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;loadAll&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;pages/*&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;let&lt;/span&gt; &lt;span class="n"&gt;allPosts&lt;/span&gt; &lt;span class="ow"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;return&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pages&lt;/span&gt; &lt;span class="o"&gt;++&lt;/span&gt; &lt;span class="n"&gt;posts&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="kr"&gt;let&lt;/span&gt; &lt;span class="n"&gt;sitemapCtx&lt;/span&gt; &lt;span class="ow"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mconcat&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="n"&gt;listField&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;entries&amp;#34;&lt;/span&gt; &lt;span class="n"&gt;pageCtx&lt;/span&gt; &lt;span class="n"&gt;allPosts&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;constField&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;host&amp;#34;&lt;/span&gt; &lt;span class="n"&gt;host&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;defaultContext&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;makeItem&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;=&lt;/span&gt; &lt;span class="n"&gt;loadAndApplyTemplate&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;templates/sitemap.xml&amp;#34;&lt;/span&gt; &lt;span class="n"&gt;sitemapCtx&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;=&lt;/span&gt; &lt;span class="n"&gt;cleanIndexHtmls&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This generates &lt;a href="/sitemap.xml"&gt;/sitemap.xml&lt;/a&gt; which can be submitted to
+&lt;pre&gt;&lt;code class="language-haskell"&gt; create [&amp;quot;sitemap.xml&amp;quot;] $ do
+ route idRoute
+ compile $ do
+ posts &amp;lt;- recentFirst =&amp;lt;&amp;lt; loadAll &amp;quot;posts/*/*&amp;quot;
+ pages &amp;lt;- loadAll &amp;quot;pages/*&amp;quot;
+ let allPosts = (return (pages ++ posts))
+ let sitemapCtx = mconcat
+ [ listField &amp;quot;entries&amp;quot; pageCtx allPosts
+ , constField &amp;quot;host&amp;quot; host
+ , defaultContext
+ ]
+ makeItem &amp;quot;&amp;quot;
+ &amp;gt;&amp;gt;= loadAndApplyTemplate &amp;quot;templates/sitemap.xml&amp;quot; sitemapCtx
+ &amp;gt;&amp;gt;= cleanIndexHtmls
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This generates &lt;a href="/sitemap.xml"&gt;/sitemap.xml&lt;/a&gt; which can be submitted to
 search engines for indexing.&lt;/p&gt;</description></item><item><title>Testing tornado websockets without third party clients</title><link>/ws-test/</link><pubDate>Sat, 22 Aug 2015 00:00:00 +0000</pubDate><guid>/ws-test/</guid><description>&lt;p&gt;Recently, I built an encrypted &lt;a href="http://github.com/crodjer/qotr/"&gt;chat service&lt;/a&gt;, which was based on
 &lt;a href="http://www.tornadoweb.org/"&gt;tornado&lt;/a&gt; and &lt;a href="http://emberjs.com/"&gt;ember.js&lt;/a&gt;. The project itself had grave security issues, so I
 shut it down, but while working on it I learned a few new things and testing
@@ -223,17 +257,18 @@ capture alerts with pulseaudio:&lt;/p&gt;</description></item><item><title>Switc
 change the default route when one goes down. &lt;a href="http://linux.die.net/man/8/ip"&gt;ip&lt;/a&gt; provides you the required
 tooling to do that. I had been doing it so often, that I ended up writing a
 function to do this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;route_to &lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nv"&gt;interface&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nv"&gt;route&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;ip route &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="nv"&gt;$interface&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; sed -r &lt;span class="s1"&gt;&amp;#39;s/\.0\/[[:digit:]]{2,3} /.1 /&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; cut -d &lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt; -f -4&lt;span class="k"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -n &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$route&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; sudo ip route del default &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&amp;gt; /dev/null
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; sudo ip route replace default via &lt;span class="nv"&gt;$route&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;else&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;No routes match: &lt;/span&gt;&lt;span class="nv"&gt;$interface&lt;/span&gt;&lt;span class="s2"&gt;&amp;#34;&lt;/span&gt; &amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;fi&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;With this in available in my shell, I can simply do &lt;code&gt;route_to wlan0&lt;/code&gt; and my
+&lt;pre&gt;&lt;code class="language-bash"&gt;route_to () {
+ interface=$1
+ route=$(ip route | grep $interface | sed -r 's/\.0\/[[:digit:]]{2,3} /.1 /' | cut -d ' ' -f -4)
+ if [ -n &amp;quot;$route&amp;quot; ]; then
+ sudo ip route del default &amp;amp;&amp;gt; /dev/null
+ sudo ip route replace default via $route
+ else
+ echo &amp;quot;No routes match: $interface&amp;quot; &amp;gt;&amp;amp;2
+ fi
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With this in available in my shell, I can simply do &lt;code&gt;route_to wlan0&lt;/code&gt; and my
 system will start using &lt;code&gt;wlan0&lt;/code&gt; as the default interface.&lt;/p&gt;</description></item><item><title>VNC over reverse SSH</title><link>/vnc/</link><pubDate>Sun, 10 May 2015 00:00:00 +0000</pubDate><guid>/vnc/</guid><description>&lt;blockquote&gt;
 &lt;p&gt;Note: My &lt;a href="/jumper"&gt;recent article&lt;/a&gt;, talking about WireGuard is a
 better and more ergonomic approach to achive this, compared to using
@@ -262,11 +297,16 @@ basic support for &lt;code&gt;virtualenvs&lt;/code&gt;. I run &lt;code&gt;pylint
 &lt;code&gt;python-mode&lt;/code&gt;. Here is the code extracted from my
 &lt;a href="https://github.com/crodjer/configs/blob/master/.emacs"&gt;emacs configuration&lt;/a&gt;:&lt;/p&gt;</description></item><item><title>A productive workflow with vim sessions and servers</title><link>/yet-another-vim-productivity-post-server-client/</link><pubDate>Sun, 15 Apr 2012 00:00:00 +0000</pubDate><guid>/yet-another-vim-productivity-post-server-client/</guid><description>&lt;p&gt;You can find lot of posts on the internet which try to tell you how to improve
 the ways in which Vim is used. Well, here is another one.&lt;/p&gt;
-&lt;p&gt;#Vim Server, ZSH and Tiles&lt;/p&gt;
+&lt;h2 id="vim-server-zsh-and-tiles"&gt;
+ 
+ &lt;a class="heading-anchor" href="#vim-server-zsh-and-tiles" aria-label="Permalink to Vim Server, ZSH and Tiles"&gt;§&lt;/a&gt;
+ 
+ Vim Server, ZSH and Tiles
+&lt;/h2&gt;
 &lt;p&gt;A Vim instance behaves as a server in which files can be opened through remote
 applications. Read &lt;code&gt;:help client-server&lt;/code&gt; of Vim to know more about this. I
 generally keep multiple Vim sessions running, described by task they are related
-to.&lt;/p&gt;</description></item><item><title>About</title><link>/about/</link><pubDate>Fri, 19 Feb 2016 02:34:01 +0000</pubDate><guid>/about/</guid><description>&lt;p&gt;Hi, I am Rohan. I read and write code. I frequently read about physics, energy
+to.&lt;/p&gt;</description></item><item><title>About Me</title><link>/about-me/</link><pubDate>Fri, 19 Feb 2016 02:34:01 +0000</pubDate><guid>/about-me/</guid><description>&lt;p&gt;Hi, I am Rohan. I read and write code. I frequently read about physics, energy
 and climate change. After getting depressed enough of the latter, I read fiction
 or annoy my friends with my ideas or just code.&lt;/p&gt;
 &lt;p&gt;I like to play table tennis, cricket and chess. I also bought a harmonica. Keep

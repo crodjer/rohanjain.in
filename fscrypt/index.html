@@ -1,7 +1,8 @@
-<!doctype html><html lang=en-US><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="chrome=1"><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="Encrypting a home in a Raspberry Pi | Rohan's Personal Web Blog."><meta property="og:title" content="Encrypting a home in a Raspberry Pi"><meta property="og:description" content="Encrypting a home in a Raspberry Pi | Rohan's Personal Web Blog."><meta property="og:type" content="article"><meta property="og:url" content="/fscrypt/"><meta property="article:section" content="blog"><meta property="article:published_time" content="2021-05-24T11:22:27+05:30"><meta property="article:modified_time" content="2021-05-24T11:22:27+05:30"><title>Encrypting a home in a Raspberry Pi</title><link rel=canonical href=/fscrypt/><link rel=stylesheet href=/css/pygments.min.42fe0099f9515ec8cb510d96b2ec79b3525dab83b63dc7ca290b29679ae42e97.css integrity="sha256-Qv4AmflRXsjLUQ2Wsux5s1Jdq4O2PcfKKQspZ5rkLpc="><link rel=stylesheet href=/css/main.min.4814e7df4d62d4897e8b69594fb83674fa177090ddec01503f8332c3ba5cb444.css integrity="sha256-SBTn301i1Il+i2lZT7g2dPoXcJDd7AFQP4Myw7pctEQ="><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><section class=header><div class=container><div class=content><a href=/><img class=avatar src=/img/avatar-small.jpg alt=avatar></a>
-<a href=/><div class=name>Rohan Jain</div></a><nav><ul><li class=nav-home><a href=/><span>Home</span></a></li><li class=nav-about><a href=/about/><span>About</span></a></li></ul></nav></div></div></section><section class="main post non-narrow zero-top-spacing"><div class=container><div class=content><div class=front-matter><div class=title-container><div class=page-heading>Encrypting a home in a Raspberry Pi</div><div class=initials><a href=/></a></div></div><div class=meta><div class=date title='Mon May 24 2021 11:22:27 +0530'>May 24, 2021</div><div class=reading-time><div class=middot></div>4 minutes read</div></div></div><div class=markdown><blockquote><p>;tldr
+<!doctype html><html lang=en-US><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer"><meta name=author content="Rohan Jain"><meta name=description content="Encrypting a home in a Raspberry Pi | Rohan's Personal Web Blog."><meta property="og:title" content="Encrypting a home in a Raspberry Pi"><meta property="og:type" content="article"><meta property="article:published_time" content="2021-05-24T11:22:27+05:30"><meta property="article:modified_time" content="2021-05-24T11:22:27+05:30"><title>Encrypting a home in a Raspberry Pi</title><link rel=canonical href=/fscrypt/><link rel=stylesheet href=/css/main.min.97ffe0e39b9819392033e2635f05ec47c705d94936b7483bb66889dbf15d7a90.css><link rel="shortcut icon" href=/img/favicon.ico></head><body lang=en><header><a href=/>The Perpetual Amature</a><nav><ul><li><a href=/>Home</a></li><li><a href=/about/>About</a></li></ul></nav></header><main><article><header><h1>Encrypting a home in a Raspberry Pi</h1><small><time datetime=2021-05-24 title='Mon May 24 2021 11:22:27 +0530'>May 24, 2021</time>
+| 4 minutes read</small></header><blockquote><p>;tldr
 Use <a href=https://wiki.archlinux.org/title/Fscrypt#Encrypt_a_home_directory>fscrypt</a> to encrypt your
-home partition, with a few simple steps.</p></blockquote><h2 id=why-encryption>Why encryption?</h2><p>I prefer to encrypt all my (and my family&rsquo;s) storage at rest.
+home partition, with a few simple steps.</p></blockquote><h2 id=why-encryption><a class=heading-anchor href=#why-encryption aria-label="Permalink to Why encryption?">§</a>
+Why encryption?</h2><p>I prefer to encrypt all my (and my family&rsquo;s) storage at rest.
 Encryption is useful in scenarios where someone gains physical access
 to your device. This may save you from any losses other than the
 material cost of the device. Specially with a Raspberry Pi, it is more
@@ -10,77 +11,84 @@ It is much less likely that you <em>lose</em> your desktop tower. Its
 worrying how many people carry around their portable computing devices
 (phones/laptops/tables) around without encryption at rest.</p><p>This allowed me to safely RMA a failed SD card. If I hadn&rsquo;t encrypted
 the data, I would have had to destroy an expensive SD card. Could as
-easily happen with any other portable device.</p><h2 id=encrypting-the-pi>Encrypting the Pi</h2><p>Both Manjaro or Raspbian do not encrypt by default. To get around
+easily happen with any other portable device.</p><h2 id=encrypting-the-pi><a class=heading-anchor href=#encrypting-the-pi aria-label="Permalink to Encrypting the Pi">§</a>
+Encrypting the Pi</h2><p>Both Manjaro or Raspbian do not encrypt by default. To get around
 that, I have been relying on <a href=https://wiki.archlinux.org/title/ECryptfs#Encrypting_a_home_directory>ecryptfs</a>
 to encrypt my sensitive directories. Recently though, I switched to
 using <a href=https://wiki.archlinux.org/title/Fscrypt#Encrypt_a_home_directory>fscrypt</a>,
 which <code>ext4</code> and <code>f2fs</code> support natively in most recent kernels. The
 goal of this post is to outline the key steps to get usable encryption
-working with the Pi.</p><h3 id=enable-encrypt-feature-flag>Enable <code>encrypt</code> feature flag</h3><p>If you are already on <code>ext4</code> / <code>f2fs</code>, you can simply enable the
-<code>encrypt</code> feature flag:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>tune2fs -O encrypt /dev/mmcblk0p2
-</span></span></code></pre></div><p><code>/dev/mmcblk0p2</code> here is the mount point for my root file system.</p><h3 id=install-fscrypt>Install <code>fscrypt</code></h3><p>To be able to use <code>fscrypt</code>, you&rsquo;ll need to install the userspace
-tools. On Arch/Manjaro:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ pacman -S fscrypt
-</span></span></code></pre></div><p>On Debian/Raspbian:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>$ apt install fscrypt libpam-fscrypt
-</span></span></code></pre></div><h3 id=setup-fscrypt>Setup <code>fscrypt</code></h3><p>To setup fscrypt, I&rsquo;d recommend you to login as <code>root</code>, without any
-session running as your target user (say <code>penguin</code>).</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>root@pi:/home# fscrypt setup
-</span></span><span class=line><span class=cl>Defaulting to policy_version <span class=m>2</span> because kernel supports it.
-</span></span><span class=line><span class=cl>Customizing passphrase hashing difficulty <span class=k>for</span> this system...
-</span></span><span class=line><span class=cl>Created global config file at <span class=s2>&#34;/etc/fscrypt.conf&#34;</span>.
-</span></span><span class=line><span class=cl>Metadata directories created at <span class=s2>&#34;/.fscrypt&#34;</span>.
-</span></span></code></pre></div><h3 id=configure-the-new-home-directory>Configure the new home directory</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>root@pi:/home# mkdir /home/penguin-new-home
-</span></span><span class=line><span class=cl>root@pi:/home# fscrypt encrypt penguin-new-home --user<span class=o>=</span>penguin
-</span></span></code></pre></div><p>When prompted, choose <code>1</code> (pam_passphrase) to decrypt using the login
-password:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>The following protector sources are available:
-</span></span><span class=line><span class=cl><span class=m>1</span> - Your login passphrase <span class=o>(</span>pam_passphrase<span class=o>)</span>
-</span></span><span class=line><span class=cl><span class=m>2</span> - A custom passphrase <span class=o>(</span>custom_passphrase<span class=o>)</span>
-</span></span><span class=line><span class=cl><span class=m>3</span> - A raw 256-bit key <span class=o>(</span>raw_key<span class=o>)</span>
-</span></span><span class=line><span class=cl>Enter the <span class=nb>source</span> number <span class=k>for</span> the new protector <span class=o>[</span><span class=m>2</span> - custom_passphrase<span class=o>]</span>: <span class=m>1</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>IMPORTANT: Before continuing, ensure you have properly <span class=nb>set</span> up your system <span class=k>for</span>
-</span></span><span class=line><span class=cl>           login protectors.  See
-</span></span><span class=line><span class=cl>           https://github.com/google/fscrypt#setting-up-for-login-protectors
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>Enter login passphrase <span class=k>for</span> penguin:
-</span></span><span class=line><span class=cl><span class=s2>&#34;penguin-new-home&#34;</span> is now encrypted, unlocked, and ready <span class=k>for</span> use.
-</span></span></code></pre></div><p>Copy over the contents to the new encrypted directory:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>root@pi:/home# cp -a -T /home/penguin /home/penguin-new-home
-</span></span></code></pre></div><p>Test the encryption 🤞:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>root@pi:/home# <span class=nb>echo</span> foo &gt; penguine-new-home/bar
-</span></span><span class=line><span class=cl>root@pi:/home# fscrypt lock penguin-new-home --user<span class=o>=</span>penguin
-</span></span><span class=line><span class=cl><span class=s2>&#34;penguin-new-home&#34;</span> is now locked.
-</span></span><span class=line><span class=cl>root@pi:/home# ls penguin-new-home/bar
-</span></span><span class=line><span class=cl>ls: cannot access <span class=s1>&#39;penguin-new-home/bar&#39;</span>: No such file or directory
-</span></span><span class=line><span class=cl>root@pi:/home# fscrypt unlock penguin-new-home
-</span></span><span class=line><span class=cl>Enter login passphrase <span class=k>for</span> penguin:
-</span></span><span class=line><span class=cl><span class=s2>&#34;penguin-new-home&#34;</span> is now unlocked and ready <span class=k>for</span> use.
-</span></span><span class=line><span class=cl>root@pi:/home# cat penguin-new-home/bar
-</span></span><span class=line><span class=cl>foo
-</span></span></code></pre></div><p>Great, encryption works!</p><blockquote><p>If you also plan to login directly to your Pi (without SSH), would
+working with the Pi.</p><h3 id=enable-encrypt-feature-flag><a class=heading-anchor href=#enable-encrypt-feature-flag aria-label="Permalink to Enable encrypt feature flag">§</a>
+Enable <code>encrypt</code> feature flag</h3><p>If you are already on <code>ext4</code> / <code>f2fs</code>, you can simply enable the
+<code>encrypt</code> feature flag:</p><pre><code class=language-bash>tune2fs -O encrypt /dev/mmcblk0p2
+</code></pre><p><code>/dev/mmcblk0p2</code> here is the mount point for my root file system.</p><h3 id=install-fscrypt><a class=heading-anchor href=#install-fscrypt aria-label="Permalink to Install fscrypt">§</a>
+Install <code>fscrypt</code></h3><p>To be able to use <code>fscrypt</code>, you&rsquo;ll need to install the userspace
+tools. On Arch/Manjaro:</p><pre><code class=language-bash>$ pacman -S fscrypt
+</code></pre><p>On Debian/Raspbian:</p><pre><code class=language-bash>$ apt install fscrypt libpam-fscrypt
+</code></pre><h3 id=setup-fscrypt><a class=heading-anchor href=#setup-fscrypt aria-label="Permalink to Setup fscrypt">§</a>
+Setup <code>fscrypt</code></h3><p>To setup fscrypt, I&rsquo;d recommend you to login as <code>root</code>, without any
+session running as your target user (say <code>penguin</code>).</p><pre><code class=language-bash>root@pi:/home# fscrypt setup
+Defaulting to policy_version 2 because kernel supports it.
+Customizing passphrase hashing difficulty for this system...
+Created global config file at &quot;/etc/fscrypt.conf&quot;.
+Metadata directories created at &quot;/.fscrypt&quot;.
+</code></pre><h3 id=configure-the-new-home-directory><a class=heading-anchor href=#configure-the-new-home-directory aria-label="Permalink to Configure the new home directory">§</a>
+Configure the new home directory</h3><pre><code class=language-bash>root@pi:/home# mkdir /home/penguin-new-home
+root@pi:/home# fscrypt encrypt penguin-new-home --user=penguin
+</code></pre><p>When prompted, choose <code>1</code> (pam_passphrase) to decrypt using the login
+password:</p><pre><code class=language-bash>The following protector sources are available:
+1 - Your login passphrase (pam_passphrase)
+2 - A custom passphrase (custom_passphrase)
+3 - A raw 256-bit key (raw_key)
+Enter the source number for the new protector [2 - custom_passphrase]: 1
+
+IMPORTANT: Before continuing, ensure you have properly set up your system for
+           login protectors.  See
+           https://github.com/google/fscrypt#setting-up-for-login-protectors
+
+Enter login passphrase for penguin:
+&quot;penguin-new-home&quot; is now encrypted, unlocked, and ready for use.
+</code></pre><p>Copy over the contents to the new encrypted directory:</p><pre><code class=language-bash>root@pi:/home# cp -a -T /home/penguin /home/penguin-new-home
+</code></pre><p>Test the encryption 🤞:</p><pre><code class=language-bash>root@pi:/home# echo foo &gt; penguine-new-home/bar
+root@pi:/home# fscrypt lock penguin-new-home --user=penguin
+&quot;penguin-new-home&quot; is now locked.
+root@pi:/home# ls penguin-new-home/bar
+ls: cannot access 'penguin-new-home/bar': No such file or directory
+root@pi:/home# fscrypt unlock penguin-new-home
+Enter login passphrase for penguin:
+&quot;penguin-new-home&quot; is now unlocked and ready for use.
+root@pi:/home# cat penguin-new-home/bar
+foo
+</code></pre><p>Great, encryption works!</p><blockquote><p>If you also plan to login directly to your Pi (without SSH), would
 recommend using the <a href=https://wiki.archlinux.org/title/Fscrypt#PAM_module>PAM Module</a>
 on <strong>Manjaro/Arch</strong> to automatically unlock the directory. It also
 will allow you to keep your home directory&rsquo;s passphrase in sync with
 changes to the login passphrase.
 On <strong>Debian</strong>, <code>libpam-fscrypt</code> should have already configured PAM.</p><p>You can test this by logging in as <code>penguin</code> on a reboot. Observe
-that the home directory should be decrypted.</p></blockquote><p>Now you may move the encrypted directory as the home.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>root@pi:/home# mv penguin penguin.bk
-</span></span><span class=line><span class=cl>root@pi:/home# mv penguin-new-home penguin
-</span></span></code></pre></div><p>Test if everything in the system works as per your liking and then
+that the home directory should be decrypted.</p></blockquote><p>Now you may move the encrypted directory as the home.</p><pre><code class=language-bash>root@pi:/home# mv penguin penguin.bk
+root@pi:/home# mv penguin-new-home penguin
+</code></pre><p>Test if everything in the system works as per your liking and then
 remove <code>/home/penguin.bk</code>.</p><blockquote><p>Although, if the existing home had data, the content may still be
 recoverable. Would recommend
-<a href=https://wiki.archlinux.org/title/Securely_wipe_disk/Tips_and_tricks#Wipe_free_space>wiping the free space</a>.</p></blockquote><h3 id=remote-access>Remote Access</h3><p>Because the <code>ssh</code> daemon needs access to
+<a href=https://wiki.archlinux.org/title/Securely_wipe_disk/Tips_and_tricks#Wipe_free_space>wiping the free space</a>.</p></blockquote><h3 id=remote-access><a class=heading-anchor href=#remote-access aria-label="Permalink to Remote Access">§</a>
+Remote Access</h3><p>Because the <code>ssh</code> daemon needs access to
 <code>/home/penguin/.ssh/authorized_keys</code>, you will not be able to login
 remotely. To get around this, we have to move our <code>authorized_keys</code>
 file on the unencrypted space. Create a file
-<code>/etc/ssh/sshd_config.d/overrides.conf</code> with the following content:</p><pre tabindex=0><code class=language-sshdconfig data-lang=sshdconfig>AuthorizedKeysFile      .ssh/authorized_keys  /etc/ssh/authorized_keys/%u
+<code>/etc/ssh/sshd_config.d/overrides.conf</code> with the following content:</p><pre><code class=language-sshdconfig>AuthorizedKeysFile      .ssh/authorized_keys  /etc/ssh/authorized_keys/%u
 PasswordAuthentication  no
 </code></pre><p>This adds <code>/etc/ssh/authorized_keys/&lt;user></code> as a file to look for a
 user&rsquo;s authorized keys. You can maintain the authorized keys in
-<code>/etc/ssh/authorized_keys/penguin</code>:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>root@pi:/# mkdir /etc/ssh/authorized_keys
-</span></span><span class=line><span class=cl>root@pi:/# cp /home/penguin/.ssh/authorized_keys /etc/ssh/authorized_keys/penguin
-</span></span><span class=line><span class=cl>root@pi:/# chown penguin /etc/ssh/authorized_keys/penguin
-</span></span><span class=line><span class=cl>root@pi:/# chmod <span class=m>600</span> /etc/ssh/authorized_keys/penguin
-</span></span><span class=line><span class=cl>root@pi:/# ln -sf /etc/ssh/authorized_keys/penguin /home/penguin/.ssh/authorized_keys
-</span></span><span class=line><span class=cl>root@pi:/# systemctl restart sshd
-</span></span></code></pre></div><p>SSH should now work again! If you work with <code>tmux</code>, you can
-automatically decrypt before logging in:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ssh penguin@pi -t -- <span class=s1>&#39;fscrypt unlock /home/penguin; tmux -u new -As pi&#39;</span>
-</span></span></code></pre></div><h2 id=concerns>Concerns</h2><ol><li>Encrypting of files on a Pi can impact the system performance, as
+<code>/etc/ssh/authorized_keys/penguin</code>:</p><pre><code class=language-bash>root@pi:/# mkdir /etc/ssh/authorized_keys
+root@pi:/# cp /home/penguin/.ssh/authorized_keys /etc/ssh/authorized_keys/penguin
+root@pi:/# chown penguin /etc/ssh/authorized_keys/penguin
+root@pi:/# chmod 600 /etc/ssh/authorized_keys/penguin
+root@pi:/# ln -sf /etc/ssh/authorized_keys/penguin /home/penguin/.ssh/authorized_keys
+root@pi:/# systemctl restart sshd
+</code></pre><p>SSH should now work again! If you work with <code>tmux</code>, you can
+automatically decrypt before logging in:</p><pre><code class=language-bash>ssh penguin@pi -t -- 'fscrypt unlock /home/penguin; tmux -u new -As pi'
+</code></pre><h2 id=concerns><a class=heading-anchor href=#concerns aria-label="Permalink to Concerns">§</a>
+Concerns</h2><ol><li>Encrypting of files on a Pi can impact the system performance, as
 encryption/decryption needs the CPU. If you need to do a lot of
 disk IO (eg: build files), I&rsquo;d recommend moving those operations to
 an unencrypted directory or the memory.</li><li>Only the home directory is encrypted, so rest is still vulnerable.
@@ -89,7 +97,7 @@ WireGuard token. Ensure these are on an encrypted directory as much
 as possible. In case of a disk loss, review your backups to
 rotate all the keys.</li><li>This doesn&rsquo;t protect you from an attack in a running machine, so
 use a firewall. I&rsquo;d recommend
-<a href=https://wiki.archlinux.org/title/Uncomplicated_Firewall>ufw</a>.</li></ol><blockquote><p>Ads:</p><p>Learn: <a href=https://amzn.to/3kxb1d0>How Linux Works</a>, <a href=https://amzn.to/3ijmWZ9>The Linux
-Command Line</a><br>Get a <a href=https://amzn.to/3ijRwlA>Raspberry Pi 4</a>, A fast <a href=https://amzn.to/3z9Cjdu>SD Card</a></p></blockquote><br><p class=back-to-posts><a href=/blog>All Posts</a></p></div></div></div></section><section class=icons><div class=container><div class=content><a href=//github.com/crodjer target=_blank rel=noopener>Github</a>
+<a href=https://wiki.archlinux.org/title/Uncomplicated_Firewall>ufw</a>.</li></ol></article></main><footer><a href=/blog>All Posts</a>
+<a href=//github.com/crodjer target=_blank rel=noopener>Github</a>
 <a href=//linkedin.com/in/crodjer target=_blank rel=noopener>Linkedin</a>
-<a href=//twitter.com/__crodjer__ target=_blank rel=noopener>Twitter</a></div></div></section></body></html>
+<a href=//twitter.com/__crodjer__ target=_blank rel=noopener>Twitter</a></footer><script data-goatcounter=https://t.rohanjain.in/count async src=/js/count.min.4e3257a9873dba863f309fe89287c9f6e962d7be1758704f13b2608e58008e5f.js></script><noscript><img src="https://t.rohanjain.in/count?p=%2ffscrypt%2f&t=Encrypting%20a%20home%20in%20a%20Raspberry%20Pi"></noscript></body></html>
