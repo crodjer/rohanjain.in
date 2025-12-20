@@ -6,7 +6,7 @@ languageCode        = "en-US"
 layoutdir           = "layouts"
 publishdir          = "public"
 author              = "Rohan Jain"
-title               = "The Perpetual Amature"
+title               = "The Perpetual Amateur"
 pluralizeListTitles = false
 theme               = "simple"
 
