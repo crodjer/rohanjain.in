@@ -38,3 +38,10 @@
     <img src="{{ .Site.Params.goatCounter }}/count?p={{ .RelPermalink }}&t={{ .Title }}">
 </noscript>
 {{ end }}
+
+{{ if .Site.Params.luksi }}
+<script src="{{ .Site.Params.luksi }}/count.js" defer></script>
+<noscript>
+  <img src="{{ .Site.Params.luksi }}/api/ok.gif?path={{ .RelPermalink }}&title={{ .Title }}" />
+</noscript>
+{{ end }}

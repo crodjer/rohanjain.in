@@ -2,7 +2,7 @@ baseurl             = "/"
 buildDrafts         = false
 canonifyUrls        = true
 contentDir          = "content"
-languageCode        = "en-US"
+locale              = "en-US"
 layoutdir           = "layouts"
 publishdir          = "public"
 author              = "Rohan Jain"
@@ -22,6 +22,7 @@ dateFormFull = "Mon Jan 2 2006 15:04:05 MST"
 description  = "Rohan's Personal Web Blog."
 faviconFile  = "img/favicon.ico"
 goatCounter  = "https://t.rohanjain.in"
+luksi        = "https://luksi.rohanjain.in"
 github       = "//github.com/crodjer"
 linkedin     = "//linkedin.com/in/crodjer"
 twitter      = "//twitter.com/__crodjer__"
@@ -45,7 +46,7 @@ minifyOutput = true
 
 [minify.tdewolff]
   html = { keepQuotes = false }
-  css = { keepCSS2 = true }
+  css = { version = 2 }
   js = { keepVarNames = true }
   json = { keepNumbers = true }
   xml = { keepWhitespace = false }
